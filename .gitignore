@@ -1,2 +1,9 @@
 # macOS
 .DS_Store
+
+.svelte
+node_modules
+/build
+/.svelte-kit
+/package
+.env
