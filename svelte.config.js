@@ -10,8 +10,8 @@ const config = {
 		target: '#svelte',
 		adapter: adapter({
 			// default options are shown
-			pages: 'public',
-			assets: 'public',
+			pages: 'S3',
+			assets: 'S3',
 			fallback: null
 		}),
 		vite: {
