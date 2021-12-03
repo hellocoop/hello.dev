@@ -25,4 +25,3 @@ jobs:
     # - name: Invalidate CloudFront cache for cdn.hello.dev/images
     #   run: aws cloudfront create-invalidation --distribution-id E1YVZECVDL8AHC --paths "/*"
 
-
