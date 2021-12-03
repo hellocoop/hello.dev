@@ -20,10 +20,8 @@ jobs:
         aws-region: us-west-2
 
     - name: Copy files to www.hello.dev website with the AWS CLI
-      run: |
-        aws s3 sync S3/ s3://www-hello-dev
+      run: aws s3 sync S3/ s3://www-hello-dev
 
     - name: Invalidate CloudFront cache for cdn.hello.dev/images
-        run: |
-          aws cloudfront create-invalidation --distribution-id E1YVZECVDL8AHC --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id E1YVZECVDL8AHC --paths "/*"
 
