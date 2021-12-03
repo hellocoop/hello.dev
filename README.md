@@ -8,7 +8,7 @@ npm run dev
 ```
 ## Production
 ```bash
-npm run build
+npm run build #builds to ./S3
 ```
 ---
 
