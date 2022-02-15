@@ -1,33 +1,168 @@
-### Before we begin
+# Introduction
 
-> SvelteKit is in early development, and some things may change before we hit version 1.0. This document is a work-in-progress. If you get stuck, reach out for help in the [Discord chatroom](https://svelte.dev/chat).
->
-> See the [migration guides]() for help upgrading from Sapper.
+Hellō is an [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) Provider that simplifies user registration and login, allowing you to provide all the choices your user's may want in hours instead of days or weeks.
 
-### What is SvelteKit?
+Unlike other providers, Hellō gathers all the information you request about the user. Your users have choice on how they want to authenticate, which profile picture they want to provide you, and which email they want to verify. Hellō also lets you send the user back to Hellō if they want to update their profile at your site -- no need for you to implement email or phone verification, or image uploads.
 
-SvelteKit is a framework for building extremely high-performance web apps. Building an app with all the modern best practices is fiendishly complicated. Those practices include [build optimizations](https://vitejs.dev/guide/features.html#build-optimizations), so that you load only the minimal required code; [offline support](#service-workers); [prefetching](https://kit.svelte.dev/docs#anchor-options-sveltekit-prefetch) pages before the user initiates navigation; and [configurable rendering](#ssr-and-javascript) that allows you to generate HTML [on the server](#ssr-and-javascript-ssr) or [in the browser](#ssr-and-javascript-router) at runtime or [at build-time](#ssr-and-javascript-prerender). SvelteKit does all the boring stuff for you so that you can get on with the creative part.
+Currently, Hellō is ideal for developers building new, green field applications where there is no requirement to integrate with existing user registration and login. In the future, we will have features that provide simple integration points.
 
-And SvelteKit does this all while providing a lightning-fast development experience where changes to your code show up in your browser automatically. We do this by leveraging [Vite](https://vitejs.dev/) with a [Svelte plugin](https://github.com/sveltejs/vite-plugin-svelte), so that [updates are instant and precise without reloading the page or blowing away application state](https://vitejs.dev/guide/features.html#hot-module-replacement).
+You can check out the Hellō user experience with our demo at [GreenFieldDemo.com](https://greenfielddemo.com)
+ 
 
-You don't need to know Svelte to understand the rest of this guide, but it will help. In short, it's a UI framework that compiles your components to highly optimized vanilla JavaScript. Read the [introduction to Svelte blog post](https://svelte.dev/blog/svelte-3-rethinking-reactivity) and the [Svelte tutorial](https://svelte.dev/tutorial) to learn more.
+# Using Hellō
 
-### Getting started
+To use Hellō, you first register your app at [console.hello.coop](https://console.hello.coop). 
 
-The easiest way to start building a SvelteKit app is to run `npm init`:
 
-```bash
-npm init svelte@next my-app
-cd my-app
-npm install
-npm run dev
+## 0. Hellō Buttons
+
+The button to initiate registration / login is either black on white, or white on black. While the `ō` is the Hellō logo -- it is a standard UTF-8 character.
+
+Example log in HTML
+```html
+[ ō Continue with Hellō ]
 ```
 
-The first command will scaffold a new project in the `my-app` directory asking you if you'd like to setup some basic tooling such as TypeScript. See the FAQ for [pointers on setting up additional tooling](https://kit.svelte.dev/faq#integrations). The subsequent commands will then install its dependencies and start a server on [localhost:3000](http://localhost:3000).
+Example update HTML
+```html
+[ ō Update Profile with Hellō ]
+```
 
-There are two basic concepts:
+## 1. Create Request
 
-- Each page of your app is a [Svelte](https://svelte.dev) component
-- You create pages by adding files to the `src/routes` directory of your project. These will be server-rendered so that a user's first visit to your app is as fast as possible, then a client-side app takes over
+The request URL is `https://consent.hello.coop/` and a query with the following parameters
 
-Try editing the files to get a feel for how everything works – you may not need to bother reading the rest of this guide! We recommend using [Visual Studio Code (aka VS Code)](https://code.visualstudio.com/download) with [the Svelte extension](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode), but [support also exists for numerous other editors](https://sveltesociety.dev/tooling#category-Editor%20Extensions).
+- `client_id` - the **client_id** for your app from [console.hello.coop](https://console.hello.coop)
+- `redirect_uri` - one of the **redirect_uri** values you registered for your app
+- `scopes` - one or more scopes from [Hellō Scopes](#scopes)
+- `nonce` - (optional) a unique string that will be included in the ID Token
+- `state` - (optional) a value representing the state of your application that will be returned as a parameter in the response
+- `response_mode` (optional) one of fragment query form_post- defaults to fragment. This is how you would like Hellō will send the response. 
+
+Here is an example request for the Green Field Demo app:
+```
+https://consent.hello.coop/?client_id=greenfielddemo&redirect_uri=https://greenfielddemo.com/&response_mode=fragment&nonce=10708056612481411767&scope=name+nickname+email+picture+openid
+```
+
+There is no difference between a request to register the user, or log in the user. Both will return the same results. If they user has previously released the same request to your app, they will not be prompted to release it again. Including the `profile_update` scope changes this behavior so that users can update their profile.
+
+Hellō only supports the [id_token](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#id_token) response type. The `response_type` parameter is ignored. 
+
+Hellō does not support the [UserInfo endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo). All user information is included in the ID Token.
+
+## 2. Make Request
+Cause the user's browser to load the request URL you created. You can do this as an HTTP 302 redirect from the server, or set `window.location` to the request url in the browser
+
+## 3. Receive Response
+If successful, the user's browser will be redirected back to your app with an `id_token` parameter and the `state` if provided. See [Errors](#errors) for unsuccessful responses.
+
+```
+example ID Token
+```
+
+## 4. Validate ID Token
+
+You can validate the `id_token` with an introspection API call or perform validation yourself per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
+
+Many OpenID Connect libraries will include ID Token validation.
+
+
+### 4.1 Introspection
+
+Hellō provides an introspection API at `https://consent.hello.coop/oauth/introspect` that will validate the ID Token for your app.
+
+
+```javascript
+const client_id     // your apps client_id
+const id_token      // the ID Token received
+const nonce         // the nonce sent in the request
+
+const url = 'https://consent.hello.coop/oauth/introspect'
+const options = {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    headers: {'Content-type':'application/json'},
+    body: JSON.stringify({client_id: client_id, token: token, nonce: nonce})
+}
+const results = await fetch(url,options)
+
+console.log(results.json())
+{
+  "iss": "https://issuer.hello.coop/",
+  "aud": "greenfielddemo",
+  "nonce": "10708056612481411767",
+  "jti": "8bdc9d9a-7fc7-48bf-adf3-5346524ae11a",
+  "pub_id": "greenfielddemo.com",
+  "sub": "ae9aebbc-a28b-4e9d-b0bb-68466b1862ba",
+  "scope": [
+    "name",
+    "nickname",
+    "picture",
+    "email",
+    "openid"
+  ],
+  "name": "Dick Hardt",
+  "nickname": "Dick",
+  "picture": "https://cdn.hello.coop/images/default-picture.png",
+  "email": "dick.hardt@hello.coop",
+  "email_verified": true,
+  "iat": 1644884733,
+  "exp": 1644888333,
+  "active": true
+}
+
+```
+
+### 4.2 Self Validation
+
+Following are details for each ID Token validation step per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
+
+1. N/A - The ID Token is not encrypted
+2. The `iss` value MUST be `https://issuer.hello.coop`
+3. The `aud` value MUST be the `client_id` value provided in the request
+4. N/A - The ID Token will not contain multiple audiences
+5. There will not be an `azp` claim
+6. The ID Token is signed per JWS. The certificates are XXX
+7. The `alg` value will be `RS256`
+8. N/A - the `alg` is always `RS256`
+9. The current time must be before `exp`. Note the time is seconds since the Epoch, not milliseconds. ID Tokens expire after one hour.
+10. The `iat` may be used by the client if the one hour expiry is longer than is desirable by the client.
+11. The `nonce` is included if provided in the request.
+12. The `acr` Claim is not supported at this time.
+13. The `auth_time` Claim is not supported at this time.
+
+### 4.3 Signature Verification Keys
+
+Hellō provides OpenId Provider configuration information per [OpenID Connect Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) at:
+
+      https://issuer.hello.coop/.well-known/open-configuration
+
+The `jwks_uri` property in the configuration file contains the URI for a JSON file containing the public keys in JSON Web Key format ([RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517)) for verifying the signature per step (6) above.
+
+# <a name="scopes"></a>Hellō Scopes 
+
+You include scopes in the request for the information (claims) you would like Hellō to return about the user. Unlike other providers, Hellō will always provide a value for any requested scope.
+
+When requested multiple scopes, separate them with a space. The space will often be converted to a `+` when URL Encoding the parameters.
+
+Following are the scopes currently supported by Hellō. These are standard OpenID Connect scopes/claims with the exception of `profile_update`:
+
+- `openid` - this scope is a no-op, and is always returned. If you don't want any other claims, provide just this one. 
+- `name` - full / legal name
+- `nickname` - preferred name 
+- `given_name` - aka first name
+- `family_name` - aka last name
+- `email` - a verified email address. `email_verified=true` will always be returned 
+- `phone` - a verified phone number. `phone_verified=true` will always be returned
+- `picture` - a URL to a profile picture
+- `profile_update` - indicates the user will be prompted to select new profile information. See the `[ ō Update Profile with Hellō ]` button functionality in the [Green Field Demo](https://greenfielddemo.com)
+
+
+
+# <a name="errors"></a>Errors
+
+## Request Errors
+
+## Introspection Errors
+

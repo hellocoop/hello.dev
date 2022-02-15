@@ -1,33 +1,25 @@
-### Is this a question?
 
-> SvelteKit is in early development, and some things may change before we hit version 1.0. This document is a work-in-progress. If you get stuck, reach out for help in the [Discord chatroom](https://svelte.dev/chat).
->
-> See the [migration guides] for help upgrading from Sapper.
 
-### Is this a question?
+### How much does Hellō cost?
+Hellō is currently free, and will continue to be free until the co-operative decides Hellō has reached a critical mass of adoption. Early adopters of Hellō will be rewarded to minimize or eliminate paying for Hellō in the future.
 
-SvelteKit is a framework for building extremely high-performance web apps. Building an app with all the modern best practices is fiendishly complicated. Those practices include [build optimizations](https://vitejs.dev/guide/features.html#build-optimizations), so that you load only the minimal required code; [offline support](#service-workers); [prefetching](https://kit.svelte.dev/docs#anchor-options-sveltekit-prefetch) pages before the user initiates navigation; and [configurable rendering](#ssr-and-javascript) that allows you to generate HTML [on the server](#ssr-and-javascript-ssr) or [in the browser](#ssr-and-javascript-router) at runtime or [at build-time](#ssr-and-javascript-prerender). SvelteKit does all the boring stuff for you so that you can get on with the creative part.
+### How much will Hellō cost in the future?
+Hellō's business model is to charge developers an interchange fee of a few pennies for each new verified claim a user releases to an application. Hellō will not charge for log in or for active users. As Hellō starts to generate revenue in excess of expenses, Hellō will lower its fees.
 
-And SvelteKit does this all while providing a lightning-fast development experience where changes to your code show up in your browser automatically. We do this by leveraging [Vite](https://vitejs.dev/) with a [Svelte plugin](https://github.com/sveltejs/vite-plugin-svelte), so that [updates are instant and precise without reloading the page or blowing away application state](https://vitejs.dev/guide/features.html#hot-module-replacement).
+### How do I get started using Hellō?
 
-You don't need to know Svelte to understand the rest of this guide, but it will help. In short, it's a UI framework that compiles your components to highly optimized vanilla JavaScript. Read the [introduction to Svelte blog post](https://svelte.dev/blog/svelte-3-rethinking-reactivity) and the [Svelte tutorial](https://svelte.dev/tutorial) to learn more.
+### What types of applications us Hellō suitable for?
 
-### Is this a question?
+Hellō is currently only suitable for new applications. Hellō is for individual users -- it not an enterprise identity solution. 
 
-The easiest way to start building a SvelteKit app is to run `npm init`:
+### Why is Hellō only intended for new applications?
 
-```bash
-npm init svelte@next my-app
-cd my-app
-npm install
-npm run dev
-```
+New applications have no existing user pool to integrate with. Since there is no existing investment in registration and log in, the Hellō value proposition to a new application is very strong. In the future, as Hellō starts to achieve a critical mass of users, we will provide integration features for existing (brown field) applications.
 
-The first command will scaffold a new project in the `my-app` directory asking you if you'd like to setup some basic tooling such as TypeScript. See the FAQ for [pointers on setting up additional tooling](https://kit.svelte.dev/faq#integrations). The subsequent commands will then install its dependencies and start a server on [localhost:3000](http://localhost:3000).
+### What is a publisher?
 
-There are two basic concepts:
+A publisher allows you to have multiple apps, that all receive the same `sub` subject identifier for a given user.
 
-- Each page of your app is a [Svelte](https://svelte.dev) component
-- You create pages by adding files to the `src/routes` directory of your project. These will be server-rendered so that a user's first visit to your app is as fast as possible, then a client-side app takes over
+### What is the difference between development and production redirect URIs?
 
-Try editing the files to get a feel for how everything works – you may not need to bother reading the rest of this guide! We recommend using [Visual Studio Code (aka VS Code)](https://code.visualstudio.com/download) with [the Svelte extension](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode), but [support also exists for numerous other editors](https://sveltesociety.dev/tooling#category-Editor%20Extensions).
+Hellō will only allow a publisher's administrators, developers, and testers to access an application's development URIs. Other users will be denied access. Localhost addresses are not permitted in production URIs.
