@@ -1,7 +1,6 @@
 <script>
 	import { browser } from '$app/env';
 	import { page } from '$app/stores';
-	import content from '/static/copy/components.json';
 
 	const links = [
 		{
@@ -9,11 +8,15 @@
 			link: '/'
 		},
 		{
-			text: content.doc,
+			text: 'Console',
+			link: 'https://console.hello.dev' //TODO: local or prod
+		},
+		{
+			text: 'Documentation',
 			link: '/documentation'
 		},
 		{
-			text: content.faqs,
+			text: 'FAQs',
 			link: '/faqs'
 		}
 	];
