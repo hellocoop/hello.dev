@@ -7,23 +7,23 @@ Unlike other providers, Hellō gathers all the information you request about the
 Currently, Hellō is ideal for developers building new, green field applications where there is no requirement to integrate with existing user registration and login. In the future, we will have features that provide simple integration points.
 
 You can check out the Hellō user experience with our demo at [GreenFieldDemo.com](https://greenfielddemo.com)
- 
 
 # Using Hellō
 
-To use Hellō, you first register your app at [console.hello.coop](https://console.hello.coop). 
-
+To use Hellō, you first register your app at [console.hello.coop](https://console.hello.coop).
 
 ## 0. Hellō Buttons
 
 The button to initiate registration / login is either black on white, or white on black. While the `ō` is the Hellō logo -- it is a standard UTF-8 character.
 
 Example logo in HTML
+
 ```html
 [ ō Continue with Hellō ]
 ```
 
 Example update HTML
+
 ```html
 [ ō Update Profile with Hellō ]
 ```
@@ -37,23 +37,26 @@ The request URL is `https://consent.hello.coop/` and a query with the following 
 - `scopes` - one or more scopes from [Hellō Scopes](#scopes)
 - `nonce` - (optional) a unique string that will be included in the ID Token
 - `state` - (optional) a value representing the state of your application that will be returned as a parameter in the response
-- `response_mode` (optional) one of fragment query form_post- defaults to fragment. This is how you would like Hellō will send the response. 
+- `response_mode` (optional) one of fragment query form_post- defaults to fragment. This is how you would like Hellō will send the response.
 
 Here is an example request for the Green Field Demo app:
+
 ```
 https://consent.hello.coop/?client_id=greenfielddemo&redirect_uri=https://greenfielddemo.com/&response_mode=fragment&nonce=10708056612481411767&scope=name+nickname+email+picture+openid
 ```
 
 There is no difference between a request to register the user, or log in the user. Both will return the same results. If they user has previously released the same request to your app, they will not be prompted to release it again. Including the `profile_update` scope changes this behavior so that users can update their profile.
 
-Hellō only supports the [id_token](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#id_token) response type. The `response_type` parameter is ignored. 
+Hellō only supports the [id_token](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#id_token) response type. The `response_type` parameter is ignored.
 
 Hellō does not support the [UserInfo endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo). All user information is included in the ID Token.
 
 ## 2. Make Request
+
 Cause the user's browser to load the request URL you created. You can do this as an HTTP 302 redirect from the server, or set `window.location` to the request url in the browser
 
 ## 3. Receive Response
+
 If successful, the user's browser will be redirected back to your app with an `id_token` parameter and the `state` if provided. See [Errors](#errors) for unsuccessful responses.
 
 ```
@@ -66,11 +69,9 @@ You can validate the `id_token` with an introspection API call or perform valida
 
 Many OpenID Connect libraries will include ID Token validation.
 
-
 ### 4.1 Introspection
 
 Hellō provides an introspection API at `https://consent.hello.coop/oauth/introspect` that will validate the ID Token for your app.
-
 
 ```javascript
 const client_id     // your apps client_id
@@ -140,7 +141,7 @@ Hellō provides OpenId Provider configuration information per [OpenID Connect Di
 
 The `jwks_uri` property in the configuration file contains the URI for a JSON file containing the public keys in JSON Web Key format ([RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517)) for verifying the signature per step (6) above.
 
-# <a name="scopes"></a>Hellō Scopes 
+# <a name="scopes"></a>Hellō Scopes
 
 You include scopes in the request for the information (claims) you would like Hellō to return about the user. Unlike other providers, Hellō will always provide a value for any requested scope.
 
@@ -148,21 +149,18 @@ When requested multiple scopes, separate them with a space. The space will often
 
 Following are the scopes currently supported by Hellō. These are standard OpenID Connect scopes/claims with the exception of `profile_update`:
 
-- `openid` - this scope is a no-op, and is always returned. If you don't want any other claims, provide just this one. 
+- `openid` - this scope is a no-op, and is always returned. If you don't want any other claims, provide just this one.
 - `name` - full / legal name
-- `nickname` - preferred name 
+- `nickname` - preferred name
 - `given_name` - aka first name
 - `family_name` - aka last name
-- `email` - a verified email address. `email_verified=true` will always be returned 
+- `email` - a verified email address. `email_verified=true` will always be returned
 - `phone` - a verified phone number. `phone_verified=true` will always be returned
 - `picture` - a URL to a profile picture
 - `profile_update` - indicates the user will be prompted to select new profile information. See the `[ ō Update Profile with Hellō ]` button functionality in the [Green Field Demo](https://greenfielddemo.com)
-
-
 
 # <a name="errors"></a>Errors
 
 ## Request Errors
 
 ## Introspection Errors
-

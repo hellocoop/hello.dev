@@ -1,14 +1,16 @@
 ### How much does Hellō cost?
+
 Hellō is currently free, and will continue to be free until the co-operative decides Hellō has reached a critical mass of adoption. Early adopters of Hellō will be rewarded to minimize or eliminate paying for Hellō in the future.
 
 ### How much will Hellō cost in the future?
+
 Hellō's business model is to charge developers an interchange fee of a few pennies for each new verified claim a user releases to an application. Hellō will not charge for log in or for active users. As Hellō starts to generate revenue in excess of expenses, Hellō will lower its fees.
 
 ### How do I get started using Hellō?
 
 ### What types of applications us Hellō suitable for?
 
-Hellō is currently only suitable for new applications. Hellō is for individual users -- it not an enterprise identity solution. 
+Hellō is currently only suitable for new applications. Hellō is for individual users -- it not an enterprise identity solution.
 
 ### Why is Hellō only intended for new applications?
 

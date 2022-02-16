@@ -1,5 +1,5 @@
 <svelte:head>
-	<meta http-equiv="refresh" content="0;url=/documentation" />
+  <meta http-equiv="refresh" content="0;url=/documentation" />
 </svelte:head>
 
 <!-- <main class="py-24 w-full text-center">
