@@ -18,7 +18,7 @@ To use Hellō, you first register your app at [console.hello.coop](https://conso
 
 The button to initiate registration / login is either black on white, or white on black. While the `ō` is the Hellō logo -- it is a standard UTF-8 character.
 
-Example log in HTML
+Example logo in HTML
 ```html
 [ ō Continue with Hellō ]
 ```
