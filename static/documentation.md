@@ -14,38 +14,74 @@ To use Hellō, you first register your app at [console.hello.coop](https://conso
 
 ## 0. Hellō Buttons
 
-The button to initiate registration / login is either black on white, or white on black. While the `ō` is the Hellō logo -- it is a standard UTF-8 character.
+The button to initiate registration / login is either charcoal (#303030) on white, or white on charcoal. While the `ō` is the Hellō logo -- it is a standard UTF-8 character.
 
-Example logo in HTML
-
-```html
-[ ō Continue with Hellō ]
-```
-
-Example update HTML
+#### Continue with Hellō 
 
 ```html
-[ ō Update Profile with Hellō ]
+<button
+  style="background: #303030;
+    border: none;
+    color: white;
+    padding: 0.6rem 2rem;
+    border-radius: 0.4rem;
+    font-size: 500"
+>
+  ō Continue with Hellō 
+</button>
 ```
+
+<button style="background: #303030; border: none; color: white; padding: 0.6rem 1.6rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
+  ō Continue with Hellō 
+</button>
+
+---
+
+#### ō Update Profile with Hellō 
+
+```html
+<button
+  style="background: #303030;
+    border: none;
+    color: white;
+    padding: 0.6rem 2rem;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+    font-weight: 500"
+>
+  ō Update Profile with Hellō 
+</button>
+```
+
+<button style="background: #303030; border: none; color: white; padding: 0.6rem 1.6rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500">
+  Update Profile with Hellō 
+</button>
 
 ## 1. Create Request
 
 The request URL is `https://consent.hello.coop/` and a query with the following parameters
 
-- `client_id` - the **client_id** for your app from [console.hello.coop](https://console.hello.coop)
-- `redirect_uri` - one of the **redirect_uri** values you registered for your app
-- `scopes` - one or more scopes from [Hellō Scopes](#scopes)
-- `nonce` - (optional) a unique string that will be included in the ID Token
-- `state` - (optional) a value representing the state of your application that will be returned as a parameter in the response
-- `response_mode` (optional) one of fragment query form_post- defaults to fragment. This is how you would like Hellō will send the response.
+|Param|Description|
+|---|---|
+|`client_id`|The `client_id` for your app from [console.hello.coop](https://console.hello.coop) |
+|`redirect_uri`|One of the redirect_uri values you registered for your app |
+|`scopes`|One or more scopes from [Hellō Scopes](#scopes)|
+|`nonce` (optional)|A unique string that will be included in the ID Token|
+|`state` (optional)|A value representing the state of your application that will be returned as a parameter in the response|
+|`response_mode` (optional)|One of fragment query form_post- defaults to fragment. This is how you would like Hellō will send the response.|
 
 Here is an example request for the Green Field Demo app:
 
 ```
-https://consent.hello.coop/?client_id=greenfielddemo&redirect_uri=https://greenfielddemo.com/&response_mode=fragment&nonce=10708056612481411767&scope=name+nickname+email+picture+openid
+https://consent.hello.coop/
+?client_id=greenfielddemo
+&redirect_uri=https://greenfielddemo.com/
+&response_mode=fragment
+&nonce=10708056612481411767
+&scope=name+nickname+email+picture+openid
 ```
 
-There is no difference between a request to register the user, or log in the user. Both will return the same results. If they user has previously released the same request to your app, they will not be prompted to release it again. Including the `profile_update` scope changes this behavior so that users can update their profile.
+There is no difference between a request to register the user, or log in the user. Both will return the same results. If the user has previously released the same request to your app, they will not be prompted to release it again. But the `profile_update` scope changes this behavior so that users can update their profile.
 
 Hellō only supports the [id_token](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#id_token) response type. The `response_type` parameter is ignored.
 
@@ -53,7 +89,10 @@ Hellō does not support the [UserInfo endpoint](https://openid.net/specs/openid-
 
 ## 2. Make Request
 
-Cause the user's browser to load the request URL you created. You can do this as an HTTP 302 redirect from the server, or set `window.location` to the request url in the browser
+Cause the user's browser to load the request URL you created. You can do this in the following ways:
+1. As an HTTP 302 redirect from the server
+2. Set `window.location.href = <requestURL>` on click event of button
+3. `<a href="<requestURL>">Continue with Hellō</a>` (You can use the above styling for this link too!)
 
 ## 3. Receive Response
 
@@ -83,12 +122,15 @@ const options = {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
-    headers: {'Content-type':'application/json'},
+    headers: {'Content-type': 'application/json'},
     body: JSON.stringify({client_id: client_id, token: token, nonce: nonce})
 }
-const results = await fetch(url,options)
+const res = await fetch(url, options)
+const results = await results.json()
+```
+#### results
 
-console.log(results.json())
+```json
 {
   "iss": "https://issuer.hello.coop/",
   "aud": "greenfielddemo",
@@ -112,7 +154,6 @@ console.log(results.json())
   "exp": 1644888333,
   "active": true
 }
-
 ```
 
 ### 4.2 Self Validation
@@ -149,15 +190,17 @@ When requested multiple scopes, separate them with a space. The space will often
 
 Following are the scopes currently supported by Hellō. These are standard OpenID Connect scopes/claims with the exception of `profile_update`:
 
-- `openid` - this scope is a no-op, and is always returned. If you don't want any other claims, provide just this one.
-- `name` - full / legal name
-- `nickname` - preferred name
-- `given_name` - aka first name
-- `family_name` - aka last name
-- `email` - a verified email address. `email_verified=true` will always be returned
-- `phone` - a verified phone number. `phone_verified=true` will always be returned
-- `picture` - a URL to a profile picture
-- `profile_update` - indicates the user will be prompted to select new profile information. See the `[ ō Update Profile with Hellō ]` button functionality in the [Green Field Demo](https://greenfielddemo.com)
+|Scope|Description|
+|---|---|
+|`openid`|This scope is a no-op, and is always returned. If you don't want any other claims, provide just this one.|
+|`name`|Full / legal name|
+|`nickname`|Preferred name|
+|`given_name`|AKA First name|
+|`family_name`|AKA Last name|
+|`email`|A verified email address. `email_verified=true` will always be returned.|
+|`phone`|A verified phone number. `phone_verified=true` will always be returned.|
+|`picture`|A URL to a profile picture.|
+|`profile_update`|Indicates the user will be prompted to select new profile information. See the `ō Update Profile with Hellō` button functionality in the [Green Field Demo](https://greenfielddemo.com)|
 
 # <a name="errors"></a>Errors
 
