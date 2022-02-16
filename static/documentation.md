@@ -10,7 +10,7 @@ You can check out the Hellō user experience with our demo at [GreenFieldDemo.co
 
 # Using Hellō
 
-To use Hellō, you first register your app at [console.hello.coop](https://console.hello.coop).
+To use Hellō, you first register your app at [console.hello.dev](https://console.hello.dev/).
 
 ## 0. Hellō Buttons
 
@@ -65,7 +65,7 @@ The request URL is `https://consent.hello.coop/` and a query with the following 
 |---|---|
 |`client_id`|The `client_id` for your app from [console.hello.coop](https://console.hello.coop) |
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
-|`scopes`|One or more scopes from [Hellō Scopes](#scopes)|
+|`scope`|One or more scopes from [Hellō Scopes](#scopes)|
 |`nonce` (optional)|A unique string that will be included in the ID Token|
 |`state` (optional)|A value representing the state of your application that will be returned as a parameter in the response|
 |`response_mode` (optional)|One of fragment query form_post- defaults to fragment. This is how you would like Hellō will send the response.|
@@ -89,7 +89,7 @@ Hellō does not support the [UserInfo endpoint](https://openid.net/specs/openid-
 
 ## 2. Make Request
 
-Cause the user's browser to load the request URL you created. You can do this in the following ways:
+Cause the user's browser to load the request URL you created in `Step 1`. You can do this in the following ways:
 1. As an HTTP 302 redirect from the server
 2. Set `window.location.href = <requestURL>` on click event of button
 3. `<a href="<requestURL>">Continue with Hellō</a>` (You can use the above styling for this link too!)

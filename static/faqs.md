@@ -8,7 +8,7 @@ Hellō's business model is to charge developers an interchange fee of a few penn
 
 ### How do I get started using Hellō?
 
-### What types of applications us Hellō suitable for?
+### What types of applications is Hellō suitable for?
 
 Hellō is currently only suitable for new applications. Hellō is for individual users -- it not an enterprise identity solution.
 

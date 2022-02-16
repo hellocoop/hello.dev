@@ -9,7 +9,7 @@
     },
     {
       text: "Console",
-      link: "https://console.hello.coop", //TODO: local or prod
+      link: "https://console.hello.dev/", //TODO: local or prod
     },
     {
       text: "Documentation",
