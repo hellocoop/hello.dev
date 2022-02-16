@@ -70,7 +70,7 @@
 
 	<main class="py-24 w-full overflow-y-auto" on:scroll={handleScroll}>
 		<div class="container max-w-3xl mx-auto">
-			<div class="prose prose-headings:underline max-w-none">
+			<div class="prose prose-headings:text-charcoal max-w-none">
 				{@html documentation}
 			</div>
 		</div>
