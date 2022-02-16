@@ -1,5 +1,3 @@
-
-
 ### How much does Hellō cost?
 Hellō is currently free, and will continue to be free until the co-operative decides Hellō has reached a critical mass of adoption. Early adopters of Hellō will be rewarded to minimize or eliminate paying for Hellō in the future.
 

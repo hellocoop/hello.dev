@@ -28,8 +28,8 @@
 	let headings = [];
 
 	onMount(() => {
-		for (const h3 of document.querySelectorAll('h3')) {
-			headings = [...headings, { text: h3.textContent, link: h3.id }];
+		for (const h1 of document.querySelectorAll('h1')) {
+			headings = [...headings, { text: h1.textContent, link: h1.id }];
 		}
 
 		current = window.location.hash.substring(1);
@@ -39,9 +39,9 @@
 	$: current && history.replaceState(undefined, undefined, `#${current}`);
 
 	function handleScroll() {
-		for (const h3 of document.querySelectorAll('h3')) {
-			if (h3.getBoundingClientRect().top < 200) {
-				current = h3.id;
+		for (const h1 of document.querySelectorAll('h1')) {
+			if (h1.getBoundingClientRect().top < 200) {
+				current = h1.id;
 			}
 		}
 	}
@@ -70,7 +70,7 @@
 
 	<main class="py-24 w-full overflow-y-auto" on:scroll={handleScroll}>
 		<div class="container max-w-3xl mx-auto">
-			<div class="prose max-w-none">
+			<div class="prose prose-headings:underline max-w-none">
 				{@html documentation}
 			</div>
 		</div>
