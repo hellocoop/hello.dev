@@ -64,7 +64,7 @@
 			{/if}
 		</button>
 		<span class="ml-2 font-medium"
-			>Hellō {browser && links.find((i) => i.link === $page.path).text}</span
+			>Hellō {browser && links.find((i) => i.link === $page.url.pathname).text}</span
 		>
 	</div>
 </nav>
@@ -72,7 +72,7 @@
 {#if showLinks}
 	<ul class="fixed top-12 z-50 bg-charcoal text-white p-4 space-y-4 w-64 inline-block">
 		{#each links as { text, link }}
-			{#if link !== $page.path && link !== '/'}
+			{#if link !== $page.url.pathname && link !== '/'}
 				<li>
 					<a href={link} on:click={() => (showLinks = false)}>{text}</a>
 				</li>
