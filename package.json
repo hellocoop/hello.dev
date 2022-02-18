@@ -4,6 +4,8 @@
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
+    "dev:v2": "cd v2/docs && npm run dev",
+    "build:v2": "cd v2/docs && npm run build",
     "serve": "svelte-kit preview",
     "lint": "prettier --ignore-path .gitignore  --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."

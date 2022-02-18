@@ -2,7 +2,7 @@
 
 To use Hellō, you first register your app at [console.hello.dev](https://console.hello.dev/).
 
-## Hellō Buttons
+## 1. Hellō Buttons
 
 The button to initiate registration / login is either charcoal (#303030) on white, or white on charcoal. While the `ō` is the Hellō logo -- it is a standard UTF-8 character.
 
@@ -47,7 +47,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
   Update Profile with Hellō 
 </button>
 
-## Create Request
+## 1. Create Request
 
 The request URL is `https://consent.hello.coop/` and a query with the following parameters
 
@@ -75,16 +75,16 @@ There is no difference between a request to register the user, or log in the use
 
 Hellō only supports the [id_token](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#id_token) response type. The `response_type` parameter is ignored.
 
-Hellō does not support the [UserInfo endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo). All user information is included in the ID Token.
+Hellō does not support the [`UserInfo endpoint`](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo). All user information is included in the ID Token.
 
-## Make Request
+## 1. Make Request
 
 Cause the user's browser to load the request URL you created in `Step 1`. You can do this in the following ways:
 1. As an HTTP 302 redirect from the server
 2. Set `window.location.href = <requestURL>` on click event of button
 3. `<a href="<requestURL>">Continue with Hellō</a>` (You can use the above styling for this link too!)
 
-## Receive Response
+## 1. Receive Response
 
 If successful, the user's browser will be redirected back to your app with an `id_token` parameter and the `state` if provided. See [Errors](#errors) for unsuccessful responses.
 
@@ -94,7 +94,7 @@ Example ID Token
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjcwMDIvIiwiYXVkIjoiaGVsbG9fY29uX3Rlc3QiLCJub25jZSI6IjM3ODkxNTExNzM1ODkwOTExNzEiLCJqdGkiOiI4YzFjN2NiOS1hMDVkLTQ4MzItOTk2NS0yNTQ1NzE4NzkyN2QiLCJzdWIiOiIxZmRjM2FlMy1hZWVlLTQzMTQtYThjZS05NzM2M2ExNjQwN2QiLCJzY29wZSI6WyJlbWFpbCIsIm9wZW5pZCJdLCJlbWFpbCI6ImpvaG4uc21pdGhAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY0NTAxOTU5NCwiZXhwIjoxNjQ1MDIzMTk0fQ.qFtJ9E9Cv-9WX9NPhnaIyXde9AVZ6KZ1Wo1kCeVPWw4
 ```
 
-## Validate ID Token
+## 1. Validate ID Token
 
 You can validate the `id_token` with an introspection API call or perform validation yourself per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
 
