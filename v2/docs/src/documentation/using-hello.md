@@ -53,7 +53,7 @@ The request URL is `https://consent.hello.coop/` and a query with the following 
 
 |Param|Description|
 |---|---|
-|`client_id`|The `client_id` for your app from [console.hello.coop](https://console.hello.coop) |
+|`client_id`|The `client_id` for your app from [console.hello.dev](https://console.hello.dev) |
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
 |`scope`|One or more scopes from [Hellō Scopes](#scopes)|
 |`nonce` (optional)|A unique string that will be included in the ID Token|
