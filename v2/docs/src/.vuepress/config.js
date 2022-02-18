@@ -54,7 +54,9 @@ module.exports = {
           collapsable: false,
           children: [
             '',
-            'using-vue',
+            'using-hello',
+            'hello-scopes',
+            'errors'
           ]
         }
       ],
