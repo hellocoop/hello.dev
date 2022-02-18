@@ -60,6 +60,12 @@ module.exports = {
           ]
         }
       ],
+      '/faqs/': [
+        {
+          title: 'FAQs',
+          collapsable: false
+        }
+      ],
     }
   },
 
