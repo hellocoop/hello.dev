@@ -44,7 +44,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 ```
 
 <button style="background: #303030; border: none; color: white; padding: 0.6rem 1.6rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500">
-  Update Profile with Hellō 
+  ō Update Profile with Hellō 
 </button>
 
 ## Create Request
@@ -81,8 +81,8 @@ Hellō does not support the [`UserInfo endpoint`](https://openid.net/specs/openi
 
 Cause the user's browser to load the request URL you created in `Step 1`. You can do this in the following ways:
 1. As an HTTP 302 redirect from the server
-2. Set `window.location.href = <requestURL>` on click event of button
-3. `<a href="<requestURL>">Continue with Hellō</a>` (You can use the above styling for this link too!)
+1. Set `window.location.href = <requestURL>` on click event of button
+1. `<a href="<requestURL>">Continue with Hellō</a>` (You can use the above styling for this link too!)
 
 ## Receive Response
 
@@ -153,18 +153,18 @@ const results = await results.json()
 Following are details for each ID Token validation step per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
 
 1. N/A - The ID Token is not encrypted
-2. The `iss` value MUST be `https://issuer.hello.coop`
-3. The `aud` value MUST be the `client_id` value provided in the request
-4. N/A - The ID Token will not contain multiple audiences
-5. There will not be an `azp` claim
-6. The ID Token is signed per JWS. The certificates are XXX
-7. The `alg` value will be `RS256`
-8. N/A - the `alg` is always `RS256`
-9. The current time must be before `exp`. Note the time is seconds since the Epoch, not milliseconds. ID Tokens expire after one hour.
-10. The `iat` may be used by the client if the one hour expiry is longer than is desirable by the client.
-11. The `nonce` is included if provided in the request.
-12. The `acr` Claim is not supported at this time.
-13. The `auth_time` Claim is not supported at this time.
+1. The `iss` value MUST be `https://issuer.hello.coop`
+1. The `aud` value MUST be the `client_id` value provided in the request
+1. N/A - The ID Token will not contain multiple audiences
+1. There will not be an `azp` claim
+1. The ID Token is signed per JWS. The certificates are XXX
+1. The `alg` value will be `RS256`
+1. N/A - the `alg` is always `RS256`
+1. The current time must be before `exp`. Note the time is seconds since the Epoch, not milliseconds. ID Tokens expire after one hour.
+1. The `iat` may be used by the client if the one hour expiry is longer than is desirable by the client.
+1. The `nonce` is included if provided in the request.
+1. The `acr` Claim is not supported at this time.
+1. The `auth_time` Claim is not supported at this time.
 
 ### Signature Verification Keys
 
