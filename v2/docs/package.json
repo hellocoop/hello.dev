@@ -1,0 +1,19 @@
+{
+  "name": "Hellō Dev",
+  "version": "0.0.1",
+  "description": "Hellō is an OpenID Connect Provider that simplifies user registration and login, allowing you to provide all the choices your user&#39;s may want in hours instead of days or weeks.",
+  "main": "index.js",
+  "authors": {
+    "name": "",
+    "email": ""
+  },
+  "repository": "/Hellō Dev",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3"
+  }
+}
