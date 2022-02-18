@@ -1,15 +1,15 @@
 ---
 home: true
-heroImage: https://v1.vuepress.vuejs.org/hero.png
-tagline: Hellō is an OpenID Connect Provider that simplifies user registration and login, allowing you to provide all the choices your user&#39;s may want in hours instead of days or weeks.
+heroImage: https://www.hello.coop/assets/mockup.png
+tagline: Hellō is an OpenID Connect Provider that simplifies user registration and login, allowing you to provide all the choices your user's may want in hours instead of days or weeks.
 actionText: Quick Start →
-actionLink: /guide/
+actionLink: /documentation/
 features:
-- title: Feature 1 Title
+- title: Documentation
   details: Feature 1 Description
-- title: Feature 2 Title
+- title: FAQs
   details: Feature 2 Description
-- title: Feature 3 Title
+- title: Console
   details: Feature 3 Description
-footer: Made by  with ❤️
+footer: Hello Identity Co-op
 ---
