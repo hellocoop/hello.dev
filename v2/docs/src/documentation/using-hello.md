@@ -62,7 +62,7 @@ The request URL is `https://consent.hello.coop/` and a query with the following 
 
 Here is an example request for the Green Field Demo app:
 
-<p style="background: #282c34; color: white; border-radius: 6px; padding:  1.25rem 1.5rem;">
+<p style="background: #282c34; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500;">
   https://consent.hello.coop/<br>
   ?<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">client_id</span>=greenfielddemo<br>
   &<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">redirect_uri</span>=https://greenfielddemo.com/<br>
@@ -90,9 +90,31 @@ If successful, the user's browser will be redirected back to your app with an `i
 
 Example ID Token
 
-```
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjcwMDIvIiwiYXVkIjoiaGVsbG9fY29uX3Rlc3QiLCJub25jZSI6IjM3ODkxNTExNzM1ODkwOTExNzEiLCJqdGkiOiI4YzFjN2NiOS1hMDVkLTQ4MzItOTk2NS0yNTQ1NzE4NzkyN2QiLCJzdWIiOiIxZmRjM2FlMy1hZWVlLTQzMTQtYThjZS05NzM2M2ExNjQwN2QiLCJzY29wZSI6WyJlbWFpbCIsIm9wZW5pZCJdLCJlbWFpbCI6ImpvaG4uc21pdGhAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY0NTAxOTU5NCwiZXhwIjoxNjQ1MDIzMTk0fQ.qFtJ9E9Cv-9WX9NPhnaIyXde9AVZ6KZ1Wo1kCeVPWw4
-```
+<p style="background: #282c34; word-break: break-all; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
+<span style="color: #cc99cd;">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.</span><br>
+<span style="color: #f8c555;">eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjcwMDIvIiwiYXVkIjoiaGVsbG9fY29uX3Rlc3QiLCJub25jZSI6IjM3ODkxNTExNzM1ODkwOTExNzEiLCJqdGkiOiI4YzFjN2NiOS1hMDVkLTQ4MzItOTk2NS0yNTQ1NzE4NzkyN2QiLCJzdWIiOiIxZmRjM2FlMy1hZWVlLTQzMTQtYThjZS05NzM2M2ExNjQwN2QiLCJzY29wZSI6WyJlbWFpbCIsIm9wZW5pZCJdLCJlbWFpbCI6ImpvaG4uc21pdGhAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY0NTAxOTU5NCwiZXhwIjoxNjQ1MDIzMTk0fQ.</span><br>
+<span style="color:  #7ec699">qFtJ9E9Cv-9WX9NPhnaIyXde9AVZ6KZ1Wo1kCeVPWw4</span>
+</p>
+
+Decoded ID Token (Payload)
+
+<pre style="background: #282c34; word-break: break-all; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-size: 0.92rem; color: #f8c555; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
+    {
+      "iss": "http://localhost:7002/",
+      "aud": "hello_con_test",
+      "nonce": "3789151173589091171",
+      "jti": "8c1c7cb9-a05d-4832-9965-25457187927d",
+      "sub": "1fdc3ae3-aeee-4314-a8ce-97363a16407d",
+      "scope": [
+        "email",
+        "openid"
+      ],
+      "email": "john.smith@gmail.com",
+      "email_verified": true,
+      "iat": 1645019594,
+      "exp": 1645023194
+    }
+</pre>
 
 ## Validate ID Token
 
