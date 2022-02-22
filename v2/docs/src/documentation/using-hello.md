@@ -60,7 +60,7 @@ The request URL is `https://consent.hello.coop/` and a query with the following 
 |`state`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A value representing the state of your application that will be returned as a parameter in the response|
 |`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|One of fragment query form_post- defaults to fragment. This is how you would like Hellō will send the response.|
 
-Here is an example request for the Green Field Demo app:
+Here is an example request for the GreenFieldDemo app:
 
 <p style="background: #282c34; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500;">
   https://consent.hello.coop/<br>
