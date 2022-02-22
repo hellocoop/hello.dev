@@ -1,4 +1,4 @@
-# Hellō Dev Static [Doc/FAQ]
+# VuePress [Doc/FAQ]
 
 > **npm install** before proceeding
 
@@ -15,13 +15,3 @@ npm run build #builds to ./S3
 ```
 
 ---
-
-> For previewing the built files (:5000)
->
-> ```bash
-> npm run serve
-> ```
-
-## Editing
-
-To edit documentation and faqs, `./ static/[documentation | faqs].md`
