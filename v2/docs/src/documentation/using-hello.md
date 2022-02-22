@@ -56,9 +56,9 @@ The request URL is `https://consent.hello.coop/` and a query with the following 
 |`client_id`|The `client_id` for your app from [console.hello.dev](https://console.hello.dev) |
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
 |`scope`|One or more scopes from [Hellō Scopes](#scopes)|
-|`nonce` (optional)|A unique string that will be included in the ID Token|
-|`state` (optional)|A value representing the state of your application that will be returned as a parameter in the response|
-|`response_mode` (optional)|One of fragment query form_post- defaults to fragment. This is how you would like Hellō will send the response.|
+|`nonce`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A unique string that will be included in the ID Token|
+|`state`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A value representing the state of your application that will be returned as a parameter in the response|
+|`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|One of fragment query form_post- defaults to fragment. This is how you would like Hellō will send the response.|
 
 Here is an example request for the Green Field Demo app:
 
