@@ -62,14 +62,14 @@ The request URL is `https://consent.hello.coop/` and a query with the following 
 
 Here is an example request for the Green Field Demo app:
 
-```
-https://consent.hello.coop/
-?client_id=greenfielddemo
-&redirect_uri=https://greenfielddemo.com/
-&response_mode=fragment
-&nonce=10708056612481411767
-&scope=name+nickname+email+picture+openid
-```
+<p style="background: #282c34; color: white; border-radius: 6px; padding:  1.25rem 1.5rem;">
+  https://consent.hello.coop/<br>
+  ?<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">client_id</span>=greenfielddemo<br>
+  &<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">redirect_uri</span>=https://greenfielddemo.com/<br>
+  &<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">response_mode</span>=fragment<br>
+  &<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">nonce</span>=10708056612481411767<br>
+  &<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">scope</span>=name+nickname+email+picture+openid
+</p>
 
 There is no difference between a request to register the user, or log in the user. Both will return the same results. If the user has previously released the same request to your app, they will not be prompted to release it again. But the `profile_update` scope changes this behavior so that users can update their profile.
 
