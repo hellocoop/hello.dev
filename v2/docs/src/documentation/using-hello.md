@@ -13,7 +13,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
   style="background: #303030;
     border: none;
     color: white;
-    padding: 0.6rem 1.6rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 0.4rem;
     font-size: 500"
 >
@@ -21,7 +21,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 </button>
 ```
 
-<button style="background: #303030; border: none; color: white; padding: 0.6rem 1.6rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
+<button style="background: #303030; border: none; color: white; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
   ō Continue with Hellō 
 </button>
 
@@ -34,7 +34,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
   style="background: #303030;
     border: none;
     color: white;
-    padding: 0.6rem 1.6rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 0.4rem;
     font-size: 1rem;
     font-weight: 500"
@@ -43,7 +43,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 </button>
 ```
 
-<button style="background: #303030; border: none; color: white; padding: 0.6rem 1.6rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500">
+<button style="background: #303030; border: none; color: white; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500">
   ō Update Profile with Hellō 
 </button>
 
