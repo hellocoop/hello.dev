@@ -80,9 +80,9 @@ Hellō does not support the [`UserInfo endpoint`](https://openid.net/specs/openi
 ## Make Request
 
 Cause the user's browser to load the request URL you created in `Step 1`. You can do this in the following ways:
-1. As an HTTP 302 redirect from the server
-1. Set `window.location.href = <requestURL>` on click event of button
-1. `<a href="<requestURL>">Continue with Hellō</a>` (You can use the above styling for this link too!)
+1. HTTP 302 redirect from the server
+1. Set `window.location.href = <requestURL>` with JavaScript
+1. Add href link to `<a>` tag with JavaScript (`<a href=<requestURL>`) 
 
 ## Receive Response
 
