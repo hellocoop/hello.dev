@@ -16,4 +16,4 @@ Following are the scopes currently supported by Hellō. These are standard OpenI
 |`email`|A verified email address. `email_verified=true` will always be returned.|
 |`phone`|A verified phone number. `phone_verified=true` will always be returned.|
 |`picture`|A URL to a profile picture.|
-|`profile_update`|Indicates the user will be prompted to select new profile information. See the `ō Update Profile with Hellō` button functionality in the [Green Field Demo](https://greenfielddemo.com)|
+|`profile_update`|Indicates the user will be prompted to select new profile information.<br/>See <button style="background-color: #303030; color: white; border: none; font-weight: 500; padding: 0.5rem 0.7rem; font-size: 0.8rem; border-radius: 0.4rem; font-size">ō Update Profile with Hellō</button> functionality in the [Green Field Demo](https://greenfielddemo.com)|
