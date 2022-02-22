@@ -27,7 +27,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
 ---
 
-**ō Update Profile with Hellō**
+**Update Profile with Hellō**
 
 ```html
 <button
