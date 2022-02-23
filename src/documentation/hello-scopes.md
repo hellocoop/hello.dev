@@ -1,8 +1,8 @@
 # Hellō Scopes
 
-You include scopes in the request for the information (claims) you would like Hellō to return about the user. Unlike other providers, Hellō will always provide a value for any requested scope.
+You include scopes in the request for the information (claims) you would like Hellō to return about the user. Unlike other providers, Hellō will always provide a value for any requested scope. Hellō will always gather user consent before releasing information to you. 
 
-When requested multiple scopes, separate them with a space. The space will often be converted to a `+` when URL Encoding the parameters.
+When requesting multiple scopes, separate them with a space. The space will often be converted to a `+` when URL Encoding the parameters.
 
 Following are the scopes currently supported by Hellō. These are standard OpenID Connect scopes/claims with the exception of `profile_update`:
 
@@ -17,3 +17,13 @@ Following are the scopes currently supported by Hellō. These are standard OpenI
 |`phone`|A verified phone number. `phone_verified=true` will always be returned.|
 |`picture`|A URL to a profile picture.|
 |`profile_update`|Indicates the user will be prompted to select new profile information.<br/>See <button style="background-color: #303030; color: white; border: none; font-weight: 500; padding: 0.5rem 0.7rem; font-size: 0.8rem; border-radius: 0.4rem; font-size">ō Update Profile with Hellō</button> functionality in the [GreenFieldDemo.com](https://greenfielddemo.com)|
+
+We are planning to offer the following scopes as well:
+
+|Scope|Description|
+|---|---|
+|`github`|The user's GitHub profile url.|
+|`linkedin`|The user's LinkedIn profile url.|
+|`ethereum` |The user's ethereum address.|
+
+** NOTE -- Let's figure out where we want to have feature discussions **

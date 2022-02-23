@@ -1,12 +1,17 @@
 # Using Hellō
 
-To use Hellō, you first register your app at [console.hello.dev](https://console.hello.dev/).
+## 1. App Registration
 
-## Hellō Buttons
+To use Hellō, register your application at [console.hello.dev](https://console.hello.dev/) You can start developing with just the **Client ID** and the defaults. Provide the **Name**, **Logo**, and URLs for **Terms of Service** & **Privacy Policy** when you are ready. The **Development Redirect URIs** `http://localhost:*` and `http://127.0.0.1:*` are enabled by default. Provide your **Production Redirect URI(s)** when you are ready for public access.
+
+## 2. Hellō Buttons
 
 The button to initiate registration / login is either charcoal (#303030) on white, or white on charcoal. While the `ō` is the Hellō logo -- it is a standard UTF-8 character.
 
-**Continue with Hellō**
+
+<button style="background: #303030; border: none; color: white; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
+  ō Continue with Hellō 
+</button>
 
 ```html
 <button
@@ -21,35 +26,36 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 </button>
 ```
 
-<button style="background: #303030; border: none; color: white; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
+**Rohan - please fix**
+
+<button style="background: white; border: 1px solid; color: #303030; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
   ō Continue with Hellō 
 </button>
 
----
-
-**Update Profile with Hellō**
-
 ```html
 <button
-  style="background: #303030;
-    border: none;
-    color: white;
+  style="background: white;
+    border: 1px solid;
+    color: #303030;
     padding: 0.6rem 1.2rem;
     border-radius: 0.4rem;
-    font-size: 1rem;
-    font-weight: 500"
+    font-size: 500"
 >
-  ō Update Profile with Hellō 
+  ō Continue with Hellō 
 </button>
 ```
 
-<button style="background: #303030; border: none; color: white; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500">
+---
+
+You can let users update their profile at Hellō as well. Don't forget to set the `profile_update` scope which will prompt the user to decide what information to change.
+
+<button style="background: white; border: 1px solid; color: #303030; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
   ō Update Profile with Hellō 
 </button>
 
-## Create Request
+## 3. Create Request URL
 
-The request URL is `https://consent.hello.coop/` and a query with the following parameters
+The **request URL** is `https://consent.hello.coop/` and a query with the following parameters
 
 |Param|Description|
 |---|---|
@@ -62,6 +68,8 @@ The request URL is `https://consent.hello.coop/` and a query with the following 
 
 Here is an example request for the GreenFieldDemo app:
 
+**Rohan: please have this look more like the json colorizing - the current style is for inline code examples - color https://consent.hello.coop/ and `?`,`&`,`=`,`+` white. Color lvalue and rvalue like json rvalue and lvalues **
+
 <p style="background: #282c34; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500;">
   https://consent.hello.coop/<br>
   ?<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">client_id</span>=greenfielddemo<br>
@@ -71,24 +79,26 @@ Here is an example request for the GreenFieldDemo app:
   &<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">scope</span>=name+nickname+email+picture+openid
 </p>
 
-There is no difference between a request to register the user, or log in the user. Both will return the same results. If the user has previously released the same request to your app, they will not be prompted to release it again. But the `profile_update` scope changes this behavior so that users can update their profile.
+There is no difference between a request to register the user, or log in the user. If the user has previously released the same requested scopes to your app, they will not be prompted to release it again. If the requested scopes have changed, or the `profile_update` is provided, the user will be prompted to select what to release.
 
-Hellō only supports the [id_token](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#id_token) response type. The `response_type` parameter is ignored.
+Hellō only supports the [id_token](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#id_token) response type. The `response_type` parameter is ignored if provided.
 
 Hellō does not support the [`UserInfo endpoint`](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo). All user information is included in the ID Token.
 
-## Make Request
+## 4. Make Request
 
-Cause the user's browser to load the request URL you created in `Step 1`. You can do this in the following ways:
-1. HTTP 302 redirect from the server
+Cause the user's browser to load the `request URL` you created in `Step 3`. You can do this in the following ways:
+1. HTTP 302 redirect from the server to `requestURL`
 1. Set `window.location.href = <requestURL>` with JavaScript
-1. Add href link to `<a>` tag with JavaScript (`<a href=<requestURL>`) 
+1. An href link to `<a>` tag  (`<a href=<requestURL>`) 
 
-## Receive Response
+## 5. Receive Response
 
-If successful, the user's browser will be redirected back to your app with an `id_token` parameter and the `state` if provided. See [Errors](#errors) for unsuccessful responses.
+If successful, the user's browser will be redirected back to your app with an `id_token` parameter and the `state` if provided. See [Request Errors](errors.html#request-errors) for unsuccessful responses.
 
 Example ID Token
+
+**Rohan: please remove line breaks. Make `.` white so it is clear they are a separator. Use new ID Token below **
 
 <p style="background: #282c34; word-break: break-all; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
 <span style="color: #cc99cd;">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.</span><br>
@@ -96,9 +106,14 @@ Example ID Token
 <span style="color:  #7ec699">qFtJ9E9Cv-9WX9NPhnaIyXde9AVZ6KZ1Wo1kCeVPWw4</span>
 </p>
 
+```
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImJmZWQzOTBlLThkMmYtNDE3NC1iMTM2LTBhN2U1MmM5MWUxZSJ9.eyJpc3MiOiJodHRwczovL2lzc3Vlci5oZWxsby5jb29wIiwiYXVkIjoiZ3JlZW5maWVsZGRlbW8iLCJub25jZSI6IjE2OWQwMWNmLTNkMGEtNDdkZC1hZjlmLTM0MDhiMTg4NzZkYiIsImp0aSI6IjdlN2YxMzFhLWFhZjgtNGEzZi1hYjVjLWFkZWEzZjBmZThjZSIsInB1Yl9pZCI6ImdyZWVuZmllbGRkZW1vLmNvbSIsInN1YiI6ImY5ZTIxZjBmLTlmMGUtNDFiMC1hNThiLWMyZDYzYmNjN2I0ZiIsInNjb3BlIjpbIm5hbWUiLCJuaWNrbmFtZSIsInBpY3R1cmUiLCJlbWFpbCIsIm9wZW5pZCJdLCJuYW1lIjoiRGljayBIYXJkdCIsIm5pY2tuYW1lIjoiRGljayIsInBpY3R1cmUiOiJodHRwczovL2Nkbi5oZWxsby5jb29wL2ltYWdlcy9kZWZhdWx0LXBpY3R1cmUucG5nIiwiZW1haWwiOiJkaWNrLmhhcmR0QGhlbGxvLmNvb3AiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNjQ1NTg2NjU4LCJleHAiOjE2NDU1OTAyNTh9.uw9eHjBnkoNw0_9vPW4AvuqJPeiipPGcKD39PnXS6bv4uTLqDQ3_r3odClIkCIGCm7bJvSySYbts6rhFO86HsCC-pCMzlAPU6dg8tkAx10FDrS9MHyxN-LF3gOVLdrT48fr33gRX4ng-RVqqiPiP_jUPFMfo58TRavtZJKwHaL6uk1LqqceIRERy-2ly13dWfSUyZjUOjUn262FMwXrEauNLXEd-KaDpc2eAoOCpw4EY4Dx0raQwTpOo0sO4Jj-wZNfNaqM03BKDtutbrzsHIeopomm-wd6udc35u5oxGAy7BKTg0ZRd-YQHGf0SrOtKpi_iGiCE_PmsMzXOaqwOxg
+```
+The <purple> section is the header, the <yellow> section is the payload, and the <green> section is the signature
+
 Decoded ID Token (Payload)
 
-<pre style="background: #282c34; word-break: break-all; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-size: 0.92rem; color: #f8c555; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
+<!-- <pre style="background: #282c34; word-break: break-all; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-size: 0.92rem; color: #f8c555; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
     {
       "iss": "http://localhost:7002/",
       "aud": "hello_con_test",
@@ -114,9 +129,40 @@ Decoded ID Token (Payload)
       "iat": 1645019594,
       "exp": 1645023194
     }
-</pre>
+</pre> -->
+```json
+{
+    "header": {
+        "alg": "RS256",
+        "typ": "JWT",
+        "kid": "bfed390e-8d2f-4174-b136-0a7e52c91e1e"
+    },
+    "payload": {
+        "iss": "https://issuer.hello.coop",
+        "aud": "greenfielddemo",
+        "nonce": "169d01cf-3d0a-47dd-af9f-3408b18876db",
+        "jti": "7e7f131a-aaf8-4a3f-ab5c-adea3f0fe8ce",
+        "pub_id": "greenfielddemo.com",
+        "sub": "f9e21f0f-9f0e-41b0-a58b-c2d63bcc7b4f",
+        "scope": [
+            "name",
+            "nickname",
+            "picture",
+            "email",
+            "openid"
+        ],
+        "name": "Dick Hardt",
+        "nickname": "Dick",
+        "picture": "https://cdn.hello.coop/images/default-picture.png",
+        "email": "dick.hardt@hello.coop",
+        "email_verified": true,
+        "iat": 1645586658,
+        "exp": 1645590258
+    }
+}
+```
 
-## Validate ID Token
+## 6. Validate ID Token
 
 You can validate the `id_token` with an introspection API call or perform validation yourself per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
 
@@ -142,30 +188,32 @@ const options = {
 const res = await fetch(url, options)
 const results = await results.json()
 ```
-#### results
+#### Response
+
+If successfully validated, you will receive the payload with `active:true` to indicate it is an active token. If unsuccessful, you will receive an [Introspection Error](errors.html#introspection-errors)
 
 ```json
 {
-  "iss": "https://issuer.hello.coop/",
-  "aud": "greenfielddemo",
-  "nonce": "10708056612481411767",
-  "jti": "8bdc9d9a-7fc7-48bf-adf3-5346524ae11a",
-  "pub_id": "greenfielddemo.com",
-  "sub": "ae9aebbc-a28b-4e9d-b0bb-68466b1862ba",
-  "scope": [
-    "name",
-    "nickname",
-    "picture",
-    "email",
-    "openid"
-  ],
-  "name": "Dick Hardt",
-  "nickname": "Dick",
-  "picture": "https://cdn.hello.coop/images/default-picture.png",
-  "email": "dick.hardt@hello.coop",
-  "email_verified": true,
-  "iat": 1644884733,
-  "exp": 1644888333,
+    "iss": "https://issuer.hello.coop",
+    "aud": "greenfielddemo",
+    "nonce": "169d01cf-3d0a-47dd-af9f-3408b18876db",
+    "jti": "7e7f131a-aaf8-4a3f-ab5c-adea3f0fe8ce",
+    "pub_id": "greenfielddemo.com",
+    "sub": "f9e21f0f-9f0e-41b0-a58b-c2d63bcc7b4f",
+    "scope": [
+        "name",
+        "nickname",
+        "picture",
+        "email",
+        "openid"
+    ],
+    "name": "Dick Hardt",
+    "nickname": "Dick",
+    "picture": "https://cdn.hello.coop/images/default-picture.png",
+    "email": "dick.hardt@hello.coop",
+    "email_verified": true,
+    "iat": 1645586658,
+    "exp": 1645590258,
   "active": true
 }
 ```
