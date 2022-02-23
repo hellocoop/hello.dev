@@ -68,10 +68,10 @@ Here is an example request for the GreenFieldDemo app:
 
 <p style="background: #282c34; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
   https://consent.hello.coop/<br>
-  ?<span style="color: #f8c555">client_id</span>=<span style="color: #7ec699;">greenfielddemo</span><br>
+  ?<span style="color: #f8c555">client_id</span>=<span style="color: #7ec699;">3574f001-0874-4b20-bffd-8f3e37634274</span><br>
   &<span style="color: #f8c555;">redirect_uri</span>=<span style="color: #7ec699;">https://greenfielddemo.com/</span><br>
   &<span style="color: #f8c555;">response_mode</span>=<span style="color: #7ec699;">fragment</span><br>
-  &<span style="color: #f8c555;">nonce</span>=<span style="color: #7ec699;">10708056612481411767</span><br>
+  &<span style="color: #f8c555;">nonce</span>=<span style="color: #7ec699;">b957cea0-f159-4390-ba48-5c5d7e943ea4</span><br>
   &<span style="color: #f8c555;">scope</span>=<span style="color: #7ec699;">name+nickname+email+picture+openid</span>
 </p>
 
@@ -104,14 +104,10 @@ If successful, the user's browser will be redirected back to your app with an `i
 
 Example ID Token
 
-<!-- <p style="background: #282c34; word-break: break-all; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
-<span style="color: #cc99cd;">eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImJmZWQzOTBlLThkMmYtNDE3NC1iMTM2LTBhN2U1MmM5MWUxZSJ9<span style="color: white;">.</span></span><span style="color: #f8c555;">eyJpc3MiOiJodHRwczovL2lzc3Vlci5oZWxsby5jb29wIiwiYXVkIjoiMzU3NGYwMDEtMDg3NC00YjIwLWJmZmQtOGYzZTM3NjM0Mjc0Iiwibm9uY2UiOiJiOWE4YzFiNC0xMDJiLTQ4ZjUtYTc5OC1kYzlkZjc3MjkzMDMiLCJqdGkiOiIxZDhjMmU0Yy1lZDNiLTRiZGItOTFjMS1kOWFjZmRjNGY2MDYiLCJwdWJfaWQiOiJncmVlbmZpZWxkZGVtby5jb20iLCJzdWIiOiJmOWUyMWYwZi05ZjBlLTQxYjAtYTU4Yi1jMmQ2M2JjYzdiNGYiLCJzY29wZSI6WyJuYW1lIiwibmlja25hbWUiLCJwaWN0dXJlIiwiZW1haWwiLCJvcGVuaWQiXSwibmFtZSI6IkRpY2sgSGFyZHQiLCJuaWNrbmFtZSI6IkRpY2siLCJwaWN0dXJlIjoiaHR0cHM6Ly9jZG4uaGVsbG8uY29vcC9pbWFnZXMvZGVmYXVsdC1waWN0dXJlLnBuZyIsImVtYWlsIjoiZGljay5oYXJkdEBoZWxsby5jb29wIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY0NTYzNzYyNiwiZXhwIjoxNjQ1NjQxMjI2fQ<span style="color: white;">.</span></span><span style="color: #7ec699">p54dK2k8fsDIe2FfXXn2x0RGb0U-VRhapHUtzgCssGsK06M4VyUO7bMGtdfFZ6N5rPbeHgtV_y905hKhr05_TKISZb7cxM6TQYxQwR3JRyl3YSjVDWhRrMncpflf45tYYZToS-R7HcANoarsr8F8Oid146TnhcjuEO7FlC3rujJsnzSwV3cOHYNzCmf_RZw9IOFMXAJyHyPMp7kayKeT7h6Ei7KovtR2lQS5wULzgUHVLWYjMStaB8OXhBsuhbyhgpm15Xj0QgefkM0jK14Pl0PHXYyBVu5MZC7WRCNBjnWAMy2W56LD85aB9G7WHktnH3RL1RKhMNKlKubhxLEiDA</span>
-</p> -->
-
-
 <p style="background: #282c34; word-break: break-all; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
-<span style="color: #cc99cd;">eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImJmZWQzOTBlLThkMmYtNDE3NC1iMTM2LTBhN2U1MmM5MWUxZSJ9<span style="color: white;">.</span></span><span style="color: #f8c555;">eyJpc3MiOiJodHRwczovL2lzc3Vlci5oZWxsby5jb29wIiwiYXVkIjoiMzU3NGYwMDEtMDg3NC00YjIwLWJmZmQtOGYzZTM3NjM0Mjc0Iiwibm9uY2UiOiIxZDQzNGQ1Mi0wMWI0LTRjYTEtODQ2ZC1iMzdkNTk3NjU4MmQiLCJqdGkiOiJmMTFiZTI5YS03YzcxLTQ1M2MtOGRjNC1kYTYwYjQzNjQ5MjMiLCJwdWJfaWQiOiIxNmM1YTY2NC1hYTQ3LTQzNmQtOTAwMi1kZmE1ZTI2NGNhMjUiLCJzdWIiOiJmOWUyMWYwZi05ZjBlLTQxYjAtYTU4Yi1jMmQ2M2JjYzdiNGYiLCJzY29wZSI6WyJuYW1lIiwibmlja25hbWUiLCJwaWN0dXJlIiwiZW1haWwiLCJvcGVuaWQiXSwibmFtZSI6IkRpY2sgSGFyZHQiLCJuaWNrbmFtZSI6IkRpY2siLCJwaWN0dXJlIjoiaHR0cHM6Ly9jZG4uaGVsbG8uY29vcC9pbWFnZXMvZGVmYXVsdC1waWN0dXJlLnBuZyIsImVtYWlsIjoiZGljay5oYXJkdEBoZWxsby5jb29wIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY0NTYzODkzNSwiZXhwIjoxNjQ1NjQyNTM1fQ<span style="color: white;">.</span></span><span style="color: #7ec699">v4-u_JKfUwytxcyhkmUDoUPt6vrWov3Nd5YWMXFDa-bD2G89h4a1LVdpCivCs7OPAXhXLo5-bs7kdMmkjSpDColyIiGCAsi3dVYoH1EuISFtsfRi58APkRY8QnZTAMRxvIv7o-ClyW_nd6yHaKk0CaQRZVkBGs5yKCMqbopkW8_o9oCRQicHter-o0-tFNHoWIoOKq5Ma2ngAIRDQTwTalK5muEqsRjJDUILcd0k5AeUuv4FGQHtUfqhde_iSMhliNX9xyyPDg9bKXp_SlRWmM49jGhC7faCgmXDXdncXcUiU-W3KUKoB9G9eT4ZRKkhyDqf4fkK-vf6ENOnP135ig</span>
+<span style="color: #cc99cd;">eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImJmZWQzOTBlLThkMmYtNDE3NC1iMTM2LTBhN2U1MmM5MWUxZSJ9<span style="color: white;">.</span></span><span style="color: #f8c555;">eyJpc3MiOiJodHRwczovL2lzc3Vlci5oZWxsby5jb29wIiwiYXVkIjoiMzU3NGYwMDEtMDg3NC00YjIwLWJmZmQtOGYzZTM3NjM0Mjc0Iiwibm9uY2UiOiJiOTU3Y2VhMC1mMTU5LTQzOTAtYmE0OC01YzVkN2U5NDNlYTQiLCJqdGkiOiI4YWQxNjdkMS1kMTcwLTQ2YzktYjNjNi00N2RkYTczNWE0ZTMiLCJzdWIiOiJmOWUyMWYwZi05ZjBlLTQxYjAtYTU4Yi1jMmQ2M2JjYzdiNGYiLCJzY29wZSI6WyJuYW1lIiwibmlja25hbWUiLCJwaWN0dXJlIiwiZW1haWwiLCJvcGVuaWQiXSwibmFtZSI6IkRpY2sgSGFyZHQiLCJuaWNrbmFtZSI6IkRpY2siLCJwaWN0dXJlIjoiaHR0cHM6Ly9jZG4uaGVsbG8uY29vcC9pbWFnZXMvZGVmYXVsdC1waWN0dXJlLnBuZyIsImVtYWlsIjoiZGljay5oYXJkdEBoZWxsby5jb29wIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY0NTY0MTI4NywiZXhwIjoxNjQ1NjQ0ODg3fQ<span style="color: white;">.</span></span><span style="color: #7ec699">vppFPOM1kE6qs4s0DbWVGn80P0TOHmE4tmzg78RrJyz4732n5PH4aEgVIqQrKHkSYO8CptA1BhOBW1oRg8YrbWnJP2o8O__tLW8W1j8BzasW1td_Q_zuWqzz1XemqpLbPVKcS5MNZkYbJXLwXUAgmCOyiWgVlsXRV5D2bWhe-MesbmIaW-Rdnhf_WFuLBjNM0FO3HpdeHkJ4-wFuzGQhgyputw1-V9yeUWkyqt-9uW09fJCHN6oE3ATA0BA3uGWoFpPRaMb4JKxNdlQkR7OAkofIe_dCLnM9xR5_zDSdGA8j45ufGaIy1poqbq8PIg52thaWunpwuc8zo9-kiMYuZw</span>
 </p>
+
 
 The <span style="color: #cc99cd; font-weight: 600; background: ;">purple</span> section is the header, the <span style="color: #f8c555; font-weight: 600;">yellow</span> section is the payload, and the <span style="color: #7ec699; font-weight: 600;">green</span> section is the signature
 
@@ -127,9 +123,8 @@ Decoded ID Token (Payload)
     "payload": {
         "iss": "https://issuer.hello.coop",
         "aud": "3574f001-0874-4b20-bffd-8f3e37634274",
-        "nonce": "1d434d52-01b4-4ca1-846d-b37d5976582d",
-        "jti": "f11be29a-7c71-453c-8dc4-da60b4364923",
-        "pub_id": "16c5a664-aa47-436d-9002-dfa5e264ca25",
+        "nonce": "b957cea0-f159-4390-ba48-5c5d7e943ea4",
+        "jti": "8ad167d1-d170-46c9-b3c6-47dda735a4e3",
         "sub": "f9e21f0f-9f0e-41b0-a58b-c2d63bcc7b4f",
         "scope": [
             "name",
@@ -143,8 +138,8 @@ Decoded ID Token (Payload)
         "picture": "https://cdn.hello.coop/images/default-picture.png",
         "email": "dick.hardt@hello.coop",
         "email_verified": true,
-        "iat": 1645638935,
-        "exp": 1645642535
+        "iat": 1645641287,
+        "exp": 1645644887
     }
 }
 ```
@@ -183,9 +178,8 @@ If successfully validated, you will receive the payload with `active:true` to in
 {
   "iss": "https://issuer.hello.coop",
   "aud": "3574f001-0874-4b20-bffd-8f3e37634274",
-  "nonce": "1d434d52-01b4-4ca1-846d-b37d5976582d",
-  "jti": "f11be29a-7c71-453c-8dc4-da60b4364923",
-  "pub_id": "16c5a664-aa47-436d-9002-dfa5e264ca25",
+  "nonce": "b957cea0-f159-4390-ba48-5c5d7e943ea4",
+  "jti": "8ad167d1-d170-46c9-b3c6-47dda735a4e3",
   "sub": "f9e21f0f-9f0e-41b0-a58b-c2d63bcc7b4f",
   "scope": [
       "name",
@@ -199,8 +193,8 @@ If successfully validated, you will receive the payload with `active:true` to in
   "picture": "https://cdn.hello.coop/images/default-picture.png",
   "email": "dick.hardt@hello.coop",
   "email_verified": true,
-  "iat": 1645638935,
-  "exp": 1645642535
+  "iat": 1645641287,
+  "exp": 1645644887
   "active": true
 }
 ```
