@@ -8,6 +8,8 @@ node_modules
 /package
 .env
 
+src/.vuepress/.cache
+src/.vuepress/.temp
 pids
 logs
 node_modules
