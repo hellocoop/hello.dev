@@ -98,27 +98,15 @@ Example ID Token
 <span style="color: #cc99cd;">eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImJmZWQzOTBlLThkMmYtNDE3NC1iMTM2LTBhN2U1MmM5MWUxZSJ9<span style="color: white;">.</span></span><span style="color: #f8c555;">eyJpc3MiOiJodHRwczovL2lzc3Vlci5oZWxsby5jb29wIiwiYXVkIjoiMzU3NGYwMDEtMDg3NC00YjIwLWJmZmQtOGYzZTM3NjM0Mjc0Iiwibm9uY2UiOiJiOWE4YzFiNC0xMDJiLTQ4ZjUtYTc5OC1kYzlkZjc3MjkzMDMiLCJqdGkiOiIxZDhjMmU0Yy1lZDNiLTRiZGItOTFjMS1kOWFjZmRjNGY2MDYiLCJwdWJfaWQiOiJncmVlbmZpZWxkZGVtby5jb20iLCJzdWIiOiJmOWUyMWYwZi05ZjBlLTQxYjAtYTU4Yi1jMmQ2M2JjYzdiNGYiLCJzY29wZSI6WyJuYW1lIiwibmlja25hbWUiLCJwaWN0dXJlIiwiZW1haWwiLCJvcGVuaWQiXSwibmFtZSI6IkRpY2sgSGFyZHQiLCJuaWNrbmFtZSI6IkRpY2siLCJwaWN0dXJlIjoiaHR0cHM6Ly9jZG4uaGVsbG8uY29vcC9pbWFnZXMvZGVmYXVsdC1waWN0dXJlLnBuZyIsImVtYWlsIjoiZGljay5oYXJkdEBoZWxsby5jb29wIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY0NTYzNzYyNiwiZXhwIjoxNjQ1NjQxMjI2fQ<span style="color: white;">.</span></span><span style="color: #7ec699">p54dK2k8fsDIe2FfXXn2x0RGb0U-VRhapHUtzgCssGsK06M4VyUO7bMGtdfFZ6N5rPbeHgtV_y905hKhr05_TKISZb7cxM6TQYxQwR3JRyl3YSjVDWhRrMncpflf45tYYZToS-R7HcANoarsr8F8Oid146TnhcjuEO7FlC3rujJsnzSwV3cOHYNzCmf_RZw9IOFMXAJyHyPMp7kayKeT7h6Ei7KovtR2lQS5wULzgUHVLWYjMStaB8OXhBsuhbyhgpm15Xj0QgefkM0jK14Pl0PHXYyBVu5MZC7WRCNBjnWAMy2W56LD85aB9G7WHktnH3RL1RKhMNKlKubhxLEiDA</span>
 </p>
 
+
+```
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImJmZWQzOTBlLThkMmYtNDE3NC1iMTM2LTBhN2U1MmM5MWUxZSJ9.eyJpc3MiOiJodHRwczovL2lzc3Vlci5oZWxsby5jb29wIiwiYXVkIjoiMzU3NGYwMDEtMDg3NC00YjIwLWJmZmQtOGYzZTM3NjM0Mjc0Iiwibm9uY2UiOiIxZDQzNGQ1Mi0wMWI0LTRjYTEtODQ2ZC1iMzdkNTk3NjU4MmQiLCJqdGkiOiJmMTFiZTI5YS03YzcxLTQ1M2MtOGRjNC1kYTYwYjQzNjQ5MjMiLCJwdWJfaWQiOiIxNmM1YTY2NC1hYTQ3LTQzNmQtOTAwMi1kZmE1ZTI2NGNhMjUiLCJzdWIiOiJmOWUyMWYwZi05ZjBlLTQxYjAtYTU4Yi1jMmQ2M2JjYzdiNGYiLCJzY29wZSI6WyJuYW1lIiwibmlja25hbWUiLCJwaWN0dXJlIiwiZW1haWwiLCJvcGVuaWQiXSwibmFtZSI6IkRpY2sgSGFyZHQiLCJuaWNrbmFtZSI6IkRpY2siLCJwaWN0dXJlIjoiaHR0cHM6Ly9jZG4uaGVsbG8uY29vcC9pbWFnZXMvZGVmYXVsdC1waWN0dXJlLnBuZyIsImVtYWlsIjoiZGljay5oYXJkdEBoZWxsby5jb29wIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY0NTYzODkzNSwiZXhwIjoxNjQ1NjQyNTM1fQ.v4-u_JKfUwytxcyhkmUDoUPt6vrWov3Nd5YWMXFDa-bD2G89h4a1LVdpCivCs7OPAXhXLo5-bs7kdMmkjSpDColyIiGCAsi3dVYoH1EuISFtsfRi58APkRY8QnZTAMRxvIv7o-ClyW_nd6yHaKk0CaQRZVkBGs5yKCMqbopkW8_o9oCRQicHter-o0-tFNHoWIoOKq5Ma2ngAIRDQTwTalK5muEqsRjJDUILcd0k5AeUuv4FGQHtUfqhde_iSMhliNX9xyyPDg9bKXp_SlRWmM49jGhC7faCgmXDXdncXcUiU-W3KUKoB9G9eT4ZRKkhyDqf4fkK-vf6ENOnP135ig
+```
+
 The <span style="color: #cc99cd; font-weight: 600; background: ;">purple</span> section is the header, the <span style="color: #f8c555; font-weight: 600;">yellow</span> section is the payload, and the <span style="color: #7ec699; font-weight: 600;">green</span> section is the signature
 
 Decoded ID Token (Payload)
 
-<!-- <pre style="background: #282c34; word-break: break-all; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-size: 0.92rem; color: #f8c555; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
-    {
-      "iss": "http://localhost:7002/",
-      "aud": "hello_con_test",
-      "nonce": "3789151173589091171",
-      "jti": "8c1c7cb9-a05d-4832-9965-25457187927d",
-      "sub": "1fdc3ae3-aeee-4314-a8ce-97363a16407d",
-      "scope": [
-        "email",
-        "openid"
-      ],
-      "email": "john.smith@gmail.com",
-      "email_verified": true,
-      "iat": 1645019594,
-      "exp": 1645023194
-    }
-</pre> -->
 ```json
 {
     "header": {
@@ -128,10 +116,10 @@ Decoded ID Token (Payload)
     },
     "payload": {
         "iss": "https://issuer.hello.coop",
-        "aud": "greenfielddemo",
-        "nonce": "169d01cf-3d0a-47dd-af9f-3408b18876db",
-        "jti": "7e7f131a-aaf8-4a3f-ab5c-adea3f0fe8ce",
-        "pub_id": "greenfielddemo.com",
+        "aud": "3574f001-0874-4b20-bffd-8f3e37634274",
+        "nonce": "1d434d52-01b4-4ca1-846d-b37d5976582d",
+        "jti": "f11be29a-7c71-453c-8dc4-da60b4364923",
+        "pub_id": "16c5a664-aa47-436d-9002-dfa5e264ca25",
         "sub": "f9e21f0f-9f0e-41b0-a58b-c2d63bcc7b4f",
         "scope": [
             "name",
@@ -145,8 +133,8 @@ Decoded ID Token (Payload)
         "picture": "https://cdn.hello.coop/images/default-picture.png",
         "email": "dick.hardt@hello.coop",
         "email_verified": true,
-        "iat": 1645586658,
-        "exp": 1645590258
+        "iat": 1645638935,
+        "exp": 1645642535
     }
 }
 ```
