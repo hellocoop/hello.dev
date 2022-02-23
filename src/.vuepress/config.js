@@ -2,7 +2,7 @@ const { description } = require('../../package')
 
 module.exports = {
   // theme: 'default-prefers-color-scheme',
-  dest: '../../S3/',
+  dest: './S3/',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
