@@ -1,0 +1,6 @@
+<template><h1 id="introduction" tabindex="-1"><a class="header-anchor" href="#introduction" aria-hidden="true">#</a> Introduction</h1>
+<p>Hellō is an <a href="https://openid.net/specs/openid-connect-core-1_0.html" target="_blank" rel="noopener noreferrer">OpenID Connect<ExternalLinkIcon/></a> Provider that simplifies user registration and login, allowing you to provide all the choices your user's may want in hours instead of days or weeks.</p>
+<p>Unlike other providers, Hellō gathers all the information you request about the user. Your users have choice on how they want to authenticate, which profile picture they want to provide you, and which email they want to verify. Hellō also lets you send the user back to Hellō if they want to update their profile at your site -- no need for you to implement email or phone verification, or image uploads.</p>
+<p>Currently, Hellō is ideal for developers building new, green field applications where there is no requirement to integrate with existing user registration and login. In the future, we will have features that provide simple integration points.</p>
+<p>You can check out the Hellō user experience with our demo at <a href="https://greenfielddemo.com" target="_blank" rel="noopener noreferrer">GreenFieldDemo.com<ExternalLinkIcon/></a></p>
+</template>

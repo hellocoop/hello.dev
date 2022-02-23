@@ -1,4 +1,5 @@
 const { description } = require('../../package')
+const { copyCode } = require("vuepress-plugin-copy-code2");
 
 module.exports = {
   // theme: 'default-prefers-color-scheme',
@@ -30,57 +31,64 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
-    search: false,
+    contributors: false,
+    darkMode: false,
     repo: '',
     editLinks: false,
     docsDir: '',
     editLinkText: '',
     lastUpdated: false,
-    nav: [
-      {
-        text: 'Documentation',
-        link: '/documentation/',
-      },
-      {
-        text: 'FAQs',
-        link: '/faqs/'
-      },
-      {
-        text: 'Console',
-        link: 'https://console.hello.dev'
-      }
-    ],
-    sidebar: {
-      '/documentation/': [
-        {
-          title: 'Documentation',
-          collapsable: false,
-          children: [
-            '',
-            'using-hello',
-            'hello-scopes',
-            'errors'
-          ]
+    locales: {
+      '/': {
+        navbar: [
+          {
+            text: 'Documentation',
+            link: '/documentation/',
+          },
+          {
+            text: 'FAQs',
+            link: '/faqs/'
+          },
+          {
+            text: 'Console',
+            link: 'https://console.hello.dev'
+          }
+        ],
+        sidebar: {
+          '/documentation/': [
+            {
+              text: 'Documentation',
+              collapsible: false,
+              children: [
+                '/documentation/README.md',
+                '/documentation/using-hello.md',
+                '/documentation/hello-scopes.md',
+                '/documentation/errors.md',
+              ],
+            },
+          ],
+          '/faqs/': [
+            {
+              text: 'FAQs',
+              collapsible: false
+            },
+          ],
         }
-      ],
-      '/faqs/': [
-        {
-          title: 'FAQs',
-          collapsable: false
-        }
-      ],
+      },
     }
   },
 
-  /**
-   * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
-   */
   plugins: [
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
-    ['vuepress-plugin-code-copy', {
-      color: 'white',
-      staticIcon: true
-    }]
-  ]
+    copyCode({
+       showInMobile: true
+    })
+  ],
+
+  markdown: {
+    code: {
+      lineNumbers: false
+    }
+  }
 }

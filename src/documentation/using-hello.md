@@ -26,9 +26,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 </button>
 ```
 
-**Rohan - please fix**
-
-<button style="background: white; border: 1px solid; color: #303030; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
+<button style="background: #303030; border: 1px solid; color: white; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
   ō Continue with Hellō 
 </button>
 
@@ -49,7 +47,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
 You can let users update their profile at Hellō as well. Don't forget to set the `profile_update` scope which will prompt the user to decide what information to change.
 
-<button style="background: white; border: 1px solid; color: #303030; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
+<button style="background: #303030; border: 1px solid; color: white; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
   ō Update Profile with Hellō 
 </button>
 
@@ -68,15 +66,13 @@ The **request URL** is `https://consent.hello.coop/` and a query with the follow
 
 Here is an example request for the GreenFieldDemo app:
 
-**Rohan: please have this look more like the json colorizing - the current style is for inline code examples - color https://consent.hello.coop/ and `?`,`&`,`=`,`+` white. Color lvalue and rvalue like json rvalue and lvalues **
-
-<p style="background: #282c34; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500;">
+<p style="background: #282c34; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
   https://consent.hello.coop/<br>
-  ?<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">client_id</span>=greenfielddemo<br>
-  &<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">redirect_uri</span>=https://greenfielddemo.com/<br>
-  &<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">response_mode</span>=fragment<br>
-  &<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">nonce</span>=10708056612481411767<br>
-  &<span style="background: #e7e8e8; padding: 0 0.16rem; border-radius: 4px; color: #303030; font-weight: 600;">scope</span>=name+nickname+email+picture+openid
+  ?<span style="color: #f8c555">client_id</span>=<span style="color: #7ec699;">greenfielddemo</span><br>
+  &<span style="color: #f8c555;">redirect_uri</span>=<span style="color: #7ec699;">https://greenfielddemo.com/</span><br>
+  &<span style="color: #f8c555;">response_mode</span>=<span style="color: #7ec699;">fragment</span><br>
+  &<span style="color: #f8c555;">nonce</span>=<span style="color: #7ec699;">10708056612481411767</span><br>
+  &<span style="color: #f8c555;">scope</span>=<span style="color: #7ec699;">name+nickname+email+picture+openid</span>
 </p>
 
 There is no difference between a request to register the user, or log in the user. If the user has previously released the same requested scopes to your app, they will not be prompted to release it again. If the requested scopes have changed, or the `profile_update` is provided, the user will be prompted to select what to release.
@@ -98,18 +94,14 @@ If successful, the user's browser will be redirected back to your app with an `i
 
 Example ID Token
 
-**Rohan: please remove line breaks. Make `.` white so it is clear they are a separator. Use new ID Token below **
-
 <p style="background: #282c34; word-break: break-all; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
-<span style="color: #cc99cd;">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.</span><br>
-<span style="color: #f8c555;">eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjcwMDIvIiwiYXVkIjoiaGVsbG9fY29uX3Rlc3QiLCJub25jZSI6IjM3ODkxNTExNzM1ODkwOTExNzEiLCJqdGkiOiI4YzFjN2NiOS1hMDVkLTQ4MzItOTk2NS0yNTQ1NzE4NzkyN2QiLCJzdWIiOiIxZmRjM2FlMy1hZWVlLTQzMTQtYThjZS05NzM2M2ExNjQwN2QiLCJzY29wZSI6WyJlbWFpbCIsIm9wZW5pZCJdLCJlbWFpbCI6ImpvaG4uc21pdGhAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY0NTAxOTU5NCwiZXhwIjoxNjQ1MDIzMTk0fQ.</span><br>
-<span style="color:  #7ec699">qFtJ9E9Cv-9WX9NPhnaIyXde9AVZ6KZ1Wo1kCeVPWw4</span>
+<span style="color: #cc99cd;">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9<span style="color: white;">.</span></span><span style="color: #f8c555;">eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjcwMDIvIiwiYXVkIjoiaGVsbG9fY29uX3Rlc3QiLCJub25jZSI6IjM3ODkxNTExNzM1ODkwOTExNzEiLCJqdGkiOiI4YzFjN2NiOS1hMDVkLTQ4MzItOTk2NS0yNTQ1NzE4NzkyN2QiLCJzdWIiOiIxZmRjM2FlMy1hZWVlLTQzMTQtYThjZS05NzM2M2ExNjQwN2QiLCJzY29wZSI6WyJlbWFpbCIsIm9wZW5pZCJdLCJlbWFpbCI6ImpvaG4uc21pdGhAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY0NTAxOTU5NCwiZXhwIjoxNjQ1MDIzMTk0fQ<span style="color: white;">.</span></span><span style="color: #7ec699">qFtJ9E9Cv-9WX9NPhnaIyXde9AVZ6KZ1Wo1kCeVPWw4</span>
 </p>
 
 ```
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImJmZWQzOTBlLThkMmYtNDE3NC1iMTM2LTBhN2U1MmM5MWUxZSJ9.eyJpc3MiOiJodHRwczovL2lzc3Vlci5oZWxsby5jb29wIiwiYXVkIjoiZ3JlZW5maWVsZGRlbW8iLCJub25jZSI6IjE2OWQwMWNmLTNkMGEtNDdkZC1hZjlmLTM0MDhiMTg4NzZkYiIsImp0aSI6IjdlN2YxMzFhLWFhZjgtNGEzZi1hYjVjLWFkZWEzZjBmZThjZSIsInB1Yl9pZCI6ImdyZWVuZmllbGRkZW1vLmNvbSIsInN1YiI6ImY5ZTIxZjBmLTlmMGUtNDFiMC1hNThiLWMyZDYzYmNjN2I0ZiIsInNjb3BlIjpbIm5hbWUiLCJuaWNrbmFtZSIsInBpY3R1cmUiLCJlbWFpbCIsIm9wZW5pZCJdLCJuYW1lIjoiRGljayBIYXJkdCIsIm5pY2tuYW1lIjoiRGljayIsInBpY3R1cmUiOiJodHRwczovL2Nkbi5oZWxsby5jb29wL2ltYWdlcy9kZWZhdWx0LXBpY3R1cmUucG5nIiwiZW1haWwiOiJkaWNrLmhhcmR0QGhlbGxvLmNvb3AiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNjQ1NTg2NjU4LCJleHAiOjE2NDU1OTAyNTh9.uw9eHjBnkoNw0_9vPW4AvuqJPeiipPGcKD39PnXS6bv4uTLqDQ3_r3odClIkCIGCm7bJvSySYbts6rhFO86HsCC-pCMzlAPU6dg8tkAx10FDrS9MHyxN-LF3gOVLdrT48fr33gRX4ng-RVqqiPiP_jUPFMfo58TRavtZJKwHaL6uk1LqqceIRERy-2ly13dWfSUyZjUOjUn262FMwXrEauNLXEd-KaDpc2eAoOCpw4EY4Dx0raQwTpOo0sO4Jj-wZNfNaqM03BKDtutbrzsHIeopomm-wd6udc35u5oxGAy7BKTg0ZRd-YQHGf0SrOtKpi_iGiCE_PmsMzXOaqwOxg
 ```
-The <purple> section is the header, the <yellow> section is the payload, and the <green> section is the signature
+The <span style="color: #cc99cd; font-weight: 600; background: ;">purple</span> section is the header, the <span style="color: #f8c555; font-weight: 600;">yellow</span> section is the payload, and the <span style="color: #7ec699; font-weight: 600;">green</span> section is the signature
 
 Decoded ID Token (Payload)
 
@@ -240,6 +232,6 @@ Following are details for each ID Token validation step per [OpenID Connect 3.1.
 
 Hellō provides OpenId Provider configuration information per [OpenID Connect Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) at:
 
-      https://issuer.hello.coop/.well-known/open-configuration
+`https://issuer.hello.coop/.well-known/open-configuration`
 
 The `jwks_uri` property in the configuration file contains the URI for a JSON file containing the public keys in JSON Web Key format ([RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517)) for verifying the signature per step (6) above.

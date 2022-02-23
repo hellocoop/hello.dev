@@ -1,0 +1,41 @@
+{
+  "hash": "a26d16d0",
+  "browserHash": "d925fb5c",
+  "optimized": {
+    "vue": {
+      "file": "/Users/thoran/hello/www.hello.dev/src/.vuepress/.cache/vue.js",
+      "src": "/Users/thoran/hello/www.hello.dev/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "file": "/Users/thoran/hello/www.hello.dev/src/.vuepress/.cache/vue-router.js",
+      "src": "/Users/thoran/hello/www.hello.dev/node_modules/vue-router/dist/vue-router.esm-bundler.js",
+      "needsInterop": false
+    },
+    "@vue/devtools-api": {
+      "file": "/Users/thoran/hello/www.hello.dev/src/.vuepress/.cache/@vue_devtools-api.js",
+      "src": "/Users/thoran/hello/www.hello.dev/node_modules/@vue/devtools-api/lib/esm/index.js",
+      "needsInterop": false
+    },
+    "@vueuse/core": {
+      "file": "/Users/thoran/hello/www.hello.dev/src/.vuepress/.cache/@vueuse_core.js",
+      "src": "/Users/thoran/hello/www.hello.dev/node_modules/@vueuse/core/index.mjs",
+      "needsInterop": false
+    },
+    "nprogress": {
+      "file": "/Users/thoran/hello/www.hello.dev/src/.vuepress/.cache/nprogress.js",
+      "src": "/Users/thoran/hello/www.hello.dev/node_modules/nprogress/nprogress.js",
+      "needsInterop": true
+    },
+    "@mr-hope/vuepress-shared/lib/client": {
+      "file": "/Users/thoran/hello/www.hello.dev/src/.vuepress/.cache/@mr-hope_vuepress-shared_lib_client.js",
+      "src": "/Users/thoran/hello/www.hello.dev/node_modules/@mr-hope/vuepress-shared/lib/client/index.js",
+      "needsInterop": false
+    },
+    "@vuepress/shared": {
+      "file": "/Users/thoran/hello/www.hello.dev/src/.vuepress/.cache/@vuepress_shared.js",
+      "src": "/Users/thoran/hello/www.hello.dev/node_modules/@vuepress/shared/lib/esm/index.js",
+      "needsInterop": false
+    }
+  }
+}

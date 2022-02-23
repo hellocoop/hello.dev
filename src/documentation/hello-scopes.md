@@ -25,5 +25,3 @@ We are planning to offer the following scopes as well:
 |`github`|The user's GitHub profile url.|
 |`linkedin`|The user's LinkedIn profile url.|
 |`ethereum` |The user's ethereum address.|
-
-** NOTE -- Let's figure out where we want to have feature discussions **
