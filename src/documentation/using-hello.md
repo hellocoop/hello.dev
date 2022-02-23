@@ -6,7 +6,7 @@ To use Hellō, register your application at [console.hello.dev](https://console.
 
 ## 2. Hellō Buttons
 
-The button to initiate registration / login is either charcoal (#303030) on white, or white on charcoal. While the `ō` is the Hellō logo -- it is a standard UTF-8 character.
+The button to initiate registration / login is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is a `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)), the UTF-8 encoding `0xC5 0x8D` or HTML `&omacr`.
 
 
 <button style="background: #303030; border: none; color: white; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
