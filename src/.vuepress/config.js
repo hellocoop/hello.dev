@@ -31,16 +31,19 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
+    docsRepo: 'hellocoop/www.hello.dev',
+    docsBranch: 'main',
+    editLinkPattern: ':repo/edit/:branch/src/:path',
+    lastUpdated: true,
     contributors: false,
     darkMode: false,
     repo: '',
-    editLinks: false,
     docsDir: '',
-    editLinkText: '',
     lastUpdated: false,
     sidebarDepth: 1,
     locales: {
       '/': {
+        editLinkText: 'Edit this page on GitHub',
         navbar: [
           {
             text: 'Documentation',
