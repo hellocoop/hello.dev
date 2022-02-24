@@ -105,7 +105,7 @@ Location: https://consent.hello.coop/?...
 If successful, the user's browser will be redirected back to your app with an `id_token` parameter and the `state` if provided. See [Request Errors](errors.html#request-errors) for unsuccessful responses.
 
 
-An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html) that has claims per [OpenId Connect §2](https://openid.net/specs/openid-connect-core-1_0.html#IDToken). In the following example, the <span style="color: #cc99cd; font-weight: 600; background: ;">purple</span> section is the header, the <span style="color: #f8c555; font-weight: 600;">yellow</span> section is the payload, and the <span style="color: #7ec699; font-weight: 600;">green</span> section is the signature.
+An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html) that has claims per [OpenId Connect §2](https://openid.net/specs/openid-connect-core-1_0.html#IDToken). In the following example, the <span style="color: #cc99cd; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">purple</span> section is the header, the <span style="color: #f8c555; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">yellow</span> section is the payload, and the <span style="color: #7ec699; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">green</span> section is the signature.
 
 **Example ID Token**
 
