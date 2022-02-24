@@ -109,7 +109,7 @@ An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/
 
 **Example ID Token**
 
-<p style="background: #282c34; word-break: break-all; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
+<p style="background: #282c34; overflow-x: auto; color: white; border-radius: 6px; padding:  1.25rem 1.5rem; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
 <span style="color: #cc99cd;">eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImJmZWQzOTBlLThkMmYtNDE3NC1iMTM2LTBhN2U1MmM5MWUxZSJ9<span style="color: white;">.</span></span><span style="color: #f8c555;">eyJpc3MiOiJodHRwczovL2lzc3Vlci5oZWxsby5jb29wIiwiYXVkIjoiMzU3NGYwMDEtMDg3NC00YjIwLWJmZmQtOGYzZTM3NjM0Mjc0Iiwibm9uY2UiOiJiOTU3Y2VhMC1mMTU5LTQzOTAtYmE0OC01YzVkN2U5NDNlYTQiLCJqdGkiOiI4YWQxNjdkMS1kMTcwLTQ2YzktYjNjNi00N2RkYTczNWE0ZTMiLCJzdWIiOiJmOWUyMWYwZi05ZjBlLTQxYjAtYTU4Yi1jMmQ2M2JjYzdiNGYiLCJzY29wZSI6WyJuYW1lIiwibmlja25hbWUiLCJwaWN0dXJlIiwiZW1haWwiLCJvcGVuaWQiXSwibmFtZSI6IkRpY2sgSGFyZHQiLCJuaWNrbmFtZSI6IkRpY2siLCJwaWN0dXJlIjoiaHR0cHM6Ly9jZG4uaGVsbG8uY29vcC9pbWFnZXMvZGVmYXVsdC1waWN0dXJlLnBuZyIsImVtYWlsIjoiZGljay5oYXJkdEBoZWxsby5jb29wIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY0NTY0MTI4NywiZXhwIjoxNjQ1NjQ0ODg3fQ<span style="color: white;">.</span></span><span style="color: #7ec699">vppFPOM1kE6qs4s0DbWVGn80P0TOHmE4tmzg78RrJyz4732n5PH4aEgVIqQrKHkSYO8CptA1BhOBW1oRg8YrbWnJP2o8O__tLW8W1j8BzasW1td_Q_zuWqzz1XemqpLbPVKcS5MNZkYbJXLwXUAgmCOyiWgVlsXRV5D2bWhe-MesbmIaW-Rdnhf_WFuLBjNM0FO3HpdeHkJ4-wFuzGQhgyputw1-V9yeUWkyqt-9uW09fJCHN6oE3ATA0BA3uGWoFpPRaMb4JKxNdlQkR7OAkofIe_dCLnM9xR5_zDSdGA8j45ufGaIy1poqbq8PIg52thaWunpwuc8zo9-kiMYuZw</span>
 </p>
 
