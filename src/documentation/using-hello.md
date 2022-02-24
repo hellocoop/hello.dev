@@ -35,7 +35,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 ```html
 <button
   style="background: white;
-    border: 1px solid;
+    border: 1px solid #303030;
     color: #303030;
     padding: 0.6rem 1.2rem;
     border-radius: 0.4rem;
