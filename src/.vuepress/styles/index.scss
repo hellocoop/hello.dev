@@ -1,6 +1,27 @@
 :root{
   --c-brand: #303030;
   --c-text-accent: var(--c-brand);
+  --c-bg-navbar: var(--c-brand);
+}
+
+.navbar{
+  color: white;
+}
+
+.navbar .site-name{
+  color: white;
+}
+
+.navbar-item > a:hover, .navbar-item > a.router-link-active{
+  border-bottom: 2px solid white;
+}
+
+.navbar-items a:hover, .navbar-items a.router-link-active{
+  color: white;
+}
+
+.navbar-items a:hover, .navbar-items a.router-link-active{
+  color: white;
 }
 
 .home .hero img{
