@@ -39,7 +39,6 @@ module.exports = {
     darkMode: false,
     repo: '',
     docsDir: '',
-    lastUpdated: false,
     sidebarDepth: 1,
     locales: {
       '/': {
