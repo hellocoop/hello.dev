@@ -2,6 +2,11 @@
   --c-brand: #303030;
   --c-text-accent: var(--c-brand);
   --c-bg-navbar: var(--c-brand);
+  --c-text-lightest: #868686;
+}
+
+.header-anchor{
+  display: none;
 }
 
 .navbar{
