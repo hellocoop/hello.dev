@@ -29,3 +29,15 @@ A publisher allows you to have multiple apps, that all receive the same `sub` su
 ## *7. What is the difference between development and production redirect URIs?*
 
 Hellō will only allow a publisher's administrators, developers, and testers to access an application's development URIs. Other users will be denied access. Localhost addresses are not permitted in production URIs.
+
+## *10. Why should I use the `sub` claim to identify my users?*
+
+This identifier is the same for all of a publisher's applications. Each publisher will have a different identifier for the same user.
+
+## *11. What scopes will I receive back?*
+
+XXXXX
+
+## *12. What can I do with the picture URL I receive?*
+
+XXXX
