@@ -8,15 +8,15 @@ Following are the scopes currently supported by Hellō. These are standard OpenI
 
 |Scope|Description|
 |---|---|
-|`openid`|This scope is a no-op, and is always returned. If you don't want any other claims, provide just this one.|
-|`name`|Full / legal name|
-|`nickname`|Preferred name|
-|`given_name`|AKA First name|
-|`family_name`|AKA Last name|
+|`openid`|This scope is a no-op, and is always returned.<br>If you don't want any other claims, provide just this one.|
+|`name`|Full / legal name.|
+|`nickname`|Preferred name.|
+|`given_name`|AKA First name.|
+|`family_name`|AKA Last name.|
 |`email`|A verified email address. `email_verified=true` will always be returned.|
 |`phone`|A verified phone number. `phone_verified=true` will always be returned.|
-|`picture`|A URL to a profile picture.|
-|`profile_update`|Indicates the user will be prompted to select new profile information.<br/>See <button style="background-color: #303030; color: white; border: none; font-weight: 500; padding: 0.5rem 0.7rem; font-size: 0.8rem; border-radius: 0.4rem; font-size">ō Update Profile with Hellō</button> functionality in the [GreenFieldDemo.com](https://greenfielddemo.com)|
+|`picture`|A URL to a profile picture. [See FAQ 12](/faqs/#_12-what-can-i-do-with-the-picture-url-i-receive) for details|
+|`profile_update`|The user will be prompted to release updated profile information.<br> [See FAQ 13](/faqs/#_13-what-does-the-update-profile-scope-do) for details.|
 
 We are exploring offering the following scopes:
 
