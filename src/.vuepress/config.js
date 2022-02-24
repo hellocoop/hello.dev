@@ -25,11 +25,13 @@ module.exports = {
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
   ],
 
-  /**
-   * Theme configuration, here is the default theme configuration for VuePress.
-   *
-   * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
-   */
+  
+  bundler:
+    // specify bundler via environment variable
+    process.env.DOCS_BUNDLER ??
+    // use vite by default
+    '@vuepress/vite',
+    
   themeConfig: {
     docsRepo: 'hellocoop/www.hello.dev',
     docsBranch: 'main',
