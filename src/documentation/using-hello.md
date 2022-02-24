@@ -26,7 +26,9 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 </button>
 ```
 
-<button style="background: #303030; border: 1px solid; color: white; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
+---
+
+<button style="background: white; border: 1px solid #303030; color: #303030; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
   ō Continue with Hellō 
 </button>
 
@@ -47,7 +49,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
 You can let users update their profile at Hellō as well. Don't forget to set the `profile_update` scope which will prompt the user to decide what information to change.
 
-<button style="background: #303030; border: 1px solid; color: white; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
+<button style="background: white; border: 1px solid #303030; color: #303030; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
   ō Update Profile with Hellō 
 </button>
 
