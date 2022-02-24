@@ -72,6 +72,7 @@ tr:nth-child(2n){
   right: 8px !important;
   background: transparent !important;
   color: rgba(255, 255, 255, 0.5) !important;
+  z-index: 10 !important;
 }
 
 .icon-copy-code:hover{
