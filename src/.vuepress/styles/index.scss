@@ -6,6 +6,10 @@
   --c-text-lighter: #757575;
 }
 
+.toggle-sidebar-button .icon span{
+  background: white;
+}
+
 #faqs > h3{
   margin-top: 0;
   margin-bottom: 0.6rem;
@@ -62,4 +66,18 @@ tr:nth-child(2n){
 .copy-code-button{
   margin-right: 20px;
   margin-bottom: 20px;
+}
+
+@media screen and (max-width: 719px){
+  .navbar-item > a:hover, .navbar-item > a.router-link-active{
+    border-bottom: 2px solid #303030;
+  }
+
+  .navbar-items a:hover, .navbar-items a.router-link-active{
+    color: #303030;
+  }
+
+  .navbar-items a:hover, .navbar-items a.router-link-active{
+    color: #303030;
+  }  
 }
