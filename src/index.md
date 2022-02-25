@@ -7,12 +7,12 @@ footer: Copyright © 2022 Hello Identity Co-op
 
 <div class="features">
   <div class="feature">
-    <h2><a href="/documentation/">Documentation</a></h2>
+    <h2><a href="/documentation/index.html">Documentation</a></h2>
     <p>Find user guides, developer guides, API references, tutorials, and more.</p>
   </div>
 
   <div class="feature">
-    <h2><a href="/faqs/">FAQs</a></h2>
+    <h2><a href="/faqs/index.html">FAQs</a></h2>
     <p>Find frequently asked questions about Hellō products and services.</p>
   </div>
 
