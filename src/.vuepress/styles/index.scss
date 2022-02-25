@@ -4,10 +4,15 @@
   --c-bg-navbar: var(--c-brand);
   --c-text-lightest: #868686;
   --c-text-lighter: #757575;
+  --navbar-height: 3rem !important;
 }
 
 .toggle-sidebar-button .icon span{
   background: white;
+}
+
+.navbar .site-name{
+  font-size: 1.18rem !important;
 }
 
 #faqs > h3{
