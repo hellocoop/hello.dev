@@ -68,7 +68,7 @@ The **request URL** is `https://consent.hello.coop/` and a query with the follow
 
 Here is an example request for the GreenFieldDemo app:
 
-<p style="background: #282c34; color: white; overflow-x: auto; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
+<p style="background: #282c34; color: white; word-break: break-all; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
   https://consent.hello.coop/<br>
   ?<span style="color: #f8c555">client_id</span>=<span style="color: #7ec699;">3574f001-0874-4b20-bffd-8f3e37634274</span><br>
   &<span style="color: #f8c555;">redirect_uri</span>=<span style="color: #7ec699;">https://greenfielddemo.com/</span><br>
