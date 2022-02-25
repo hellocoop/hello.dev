@@ -24,9 +24,13 @@ This repo contains the source code and documentation powering [https://hello.dev
 
 ## Contributing
 
+### Discussions
+
+Head over to our (GitHub Discussions)[https://github.com/hellocoop/hello.dev/discussions] page to ask and answer questions, get updates, have open-ended conversations, and follow along on decisions affecting the community's way of working.
+
 ### Guidelines
 
-The documentation is divided into several sections with a different tone and purpose. If you plan to write more than a few sentences, you might find it helpful to get familiar with the [contributing guidelines]() for the appropriate sections.
+The documentation is divided into several sections with a different tone and purpose. If you plan to write more than a few sentences, you might find it helpful to get familiar with the [contributing guidelines]() for the appropriate sections. Also make sure to go through our [Code Of Conduct](https://github.com/hellocoop/hello.dev/blob/main/CODE_OF_CONDUCT.md).
 
 ### Create a branch
 
