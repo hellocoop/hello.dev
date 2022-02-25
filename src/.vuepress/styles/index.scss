@@ -4,22 +4,30 @@
   --c-bg-navbar: var(--c-brand);
   --c-text-lightest: #868686;
   --c-text-lighter: #757575;
+  --navbar-height: 3rem !important;
 }
 
 .toggle-sidebar-button .icon span{
   background: white;
 }
 
-#faqs > h3{
-  margin-top: 0;
-  margin-bottom: 0.6rem;
-  padding: 0;
+.navbar .site-name{
+  font-size: 1.18rem !important;
 }
 
-#faqs > p{
+#faqs > h3{
   margin-top: 0;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0;
   padding: 0;
+  font-size: 1.08rem;
+}
+
+#faqs > p, #faqs > ul{
+  margin-top: 0;
+  margin-bottom: 0.32rem;
+  padding: 0;
+  font-size: 1.08rem;
+  margin-left: 1.4rem;
 }
 
 .header-anchor{
@@ -73,6 +81,11 @@ tr:nth-child(2n){
   background: transparent !important;
   color: rgba(255, 255, 255, 0.5) !important;
   z-index: 10 !important;
+  opacity: 0;
+}
+
+div[class*="language-"]:hover .copy-code-button{
+  opacity: 1;
 }
 
 .icon-copy-code:hover{
@@ -90,5 +103,9 @@ tr:nth-child(2n){
 
   .navbar-items a:hover, .navbar-items a.router-link-active{
     color: #303030;
-  }  
+  } 
+
+  .copy-code-button{
+    opacity: 1
+  } 
 }
