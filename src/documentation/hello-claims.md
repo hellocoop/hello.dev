@@ -1,4 +1,4 @@
-# Hellō Scopes
+# Hellō Claims
 
 You include scopes in the request for the information (claims) you would like Hellō to return about the user. Unlike other providers, Hellō will always provide a value for any requested scope. Hellō will always gather user consent before releasing information to you. 
 

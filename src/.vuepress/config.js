@@ -67,7 +67,7 @@ module.exports = {
               children: [
                 '/documentation/README.md',
                 '/documentation/using-hello.md',
-                '/documentation/hello-scopes.md',
+                '/documentation/hello-claims.md',
                 '/documentation/errors.md',
               ],
             },
