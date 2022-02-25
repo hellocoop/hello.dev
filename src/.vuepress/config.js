@@ -36,7 +36,7 @@ module.exports = {
     docsRepo: 'hellocoop/www.hello.dev',
     docsBranch: 'main',
     editLinkPattern: ':repo/edit/:branch/src/:path',
-    lastUpdated: true,
+    lastUpdated: false,
     contributors: false,
     darkMode: false,
     repo: '',
