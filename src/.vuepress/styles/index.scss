@@ -95,5 +95,9 @@ div[class*="language-"]:hover .copy-code-button{
 
   .navbar-items a:hover, .navbar-items a.router-link-active{
     color: #303030;
-  }  
+  } 
+
+  .copy-code-button{
+    opacity: 1
+  } 
 }
