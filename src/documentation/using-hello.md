@@ -2,7 +2,7 @@
 
 ## 1. App Registration
 
-To use Hellō, register your application at [console.hello.dev](https://console.hello.dev/) You can start developing with just the **Client ID** and the defaults. Provide the **Name**, **Logo**, and URLs for **Terms of Service** & **Privacy Policy** when you are ready to preview what is presented to users. The **Development Redirect URIs** `http://localhost:*` and `http://127.0.0.1:*` are enabled by default. Provide your **Production Redirect URI(s)** when you are ready for public access.
+To use Hellō, register your application at [console.hello.dev](https://console.hello.dev/). You can start developing with just the **Client ID** and the defaults, which includes the **Development Redirect URIs** `http://localhost:*` and `http://127.0.0.1:*`. When you are ready to preview what is presented to users, provide the **Name**, **Logo**, and URLs for **Terms of Service** & **Privacy Policy**.  When you are ready for public access, provide your **Production Redirect URI(s)**.
 
 ## 2. Hellō Buttons
 
@@ -57,14 +57,14 @@ You can let users update their profile at Hellō as well. Don't forget to set th
 
 The **request URL** is `https://consent.hello.coop/` and a query with the following parameters
 
-|Param|Description|
+|Parameter|Description|
 |---|---|
 |`client_id`|The `client_id` for your app from [console.hello.dev](https://console.hello.dev) |
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
 |`scope`|One or more scopes from [Hellō Scopes](#scopes)|
 |`nonce`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A unique string that will be included in the ID Token|
 |`state`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A value representing the state of your application that will be returned as a parameter in the response|
-|`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|One of fragment query form_post- defaults to fragment. This is how you would like Hellō will send the response.|
+|`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|Either `fragment` or `form_post`. Defaults to `fragment`. This parameter tells Hellō how you would like to receive the response.<br>See [5. Receive Response](#_5-receive-response) for details.|
 
 Here is an example request for the GreenFieldDemo app:
 
@@ -79,7 +79,7 @@ Here is an example request for the GreenFieldDemo app:
 
 There is no difference between a request to register the user, or log in the user. If the user has previously released the same requested scopes to your app, they will not be prompted to release it again. If the requested scopes have changed, or the `profile_update` is provided, the user will be prompted to select what to release.
 
-Hellō only supports the [id_token](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#id_token) response type. The `response_type` parameter is ignored if provided.
+Hellō only supports the [`id_token`](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#id_token) response type. The `response_type` parameter is ignored if provided.
 
 Hellō does not support the [`UserInfo endpoint`](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo). All user information is included in the ID Token.
 
@@ -100,10 +100,27 @@ HTTP/1.1 302 Found
 Location: https://consent.hello.coop/?...
 ```
 
+The user will then interact with Hellō, when finished, they will be redirected back to your application with either an ID Token, or an error response.
+
 ## 5. Receive Response
 
-If successful, the user's browser will be redirected back to your app with an `id_token` parameter and the `state` if provided. See [Request Errors](errors.html#request-errors) for unsuccessful responses.
+Your app will receive the response as either fragment query parameters to the provided `redirect_uri` if `response_mode=fragment`, or as in `application/x-www-form-urlencoded` format in an HTTP POST to the provided `redirect_uri` if `response_mode=form_post`. If the user approved the request, the response will contain an `id_token` parameter, and a `state` parameter if provided. See [Request Errors](errors.html#request-errors) for unsuccessful responses.
 
+Fragment Example (`response_mode=fragment`)
+
+```
+redirect URI fragment example
+```
+
+
+Form Post Example (`response_mode=form_post`)
+
+
+```
+HTTP POST example
+```
+
+Note that a `fragment` response is limited to the maximum URL length supported by the user's browser. Using `form_post` does not have that constraint, and a larger ID Token can be returned to your application.
 
 An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html) that has claims per [OpenID Connect §2](https://openid.net/specs/openid-connect-core-1_0.html#IDToken). In the following example, the <span style="color: #cc99cd; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">purple</span> section is the **header**, the <span style="color: #f8c555; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">yellow</span> section is the **payload**, and the <span style="color: #7ec699; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">green</span> section is the **signature**.
 
