@@ -44,7 +44,7 @@ module.exports = {
     sidebarDepth: 1,
     locales: {
       '/': {
-        editLinkText: 'Edit this page on GitHub',
+        editLinkText: 'Propose changes to this page',
         navbar: [
           {
             text: 'Documentation',
