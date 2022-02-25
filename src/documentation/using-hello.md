@@ -115,7 +115,10 @@ https://consent.hello.coop/#/?<span style="color: #f8c555">id_token</span>=<span
 The following sample JavaScript will acquire the `id_token` and `state` from the fragment
 
 ```javascript
-Rohan: please put in example JS
+const query = window.location.hash.split('#/')[1] // ?id_token=eyJh...&state=iOiJ...
+const params = new URLSearchParams(query)
+const id_token = params.get('id_token') // eyJh...
+const state = params.get('state') // iOiJ...
 ```
 
 
