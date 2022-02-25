@@ -66,7 +66,8 @@ The **request URL** is `https://consent.hello.coop/` and a query with the follow
 |`state`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A value representing the state of your application that will be returned as a parameter in the response|
 |`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|Either `fragment` or `form_post`. Defaults to `fragment`. This parameter tells Hellō how you would like to receive the response.<br>See [5. Receive Response](#_5-receive-response) for details.|
 
-Here is an example request for the GreenFieldDemo app:
+**Here is an example request for the GreenFieldDemo app**<br>
+*(line feeds added for readability)*
 
 <p style="background: #282c34; color: white; overflow-x: auto; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
   https://consent.hello.coop/<br>
@@ -107,9 +108,14 @@ The user will then interact with Hellō, when finished, they will be redirected 
 Your app will receive the response as either fragment query parameters to the provided `redirect_uri` if `response_mode=fragment`, or as in `application/x-www-form-urlencoded` format in an HTTP POST to the provided `redirect_uri` if `response_mode=form_post`. If the user approved the request, the response will contain an `id_token` parameter, and a `state` parameter if provided. See [Request Errors](errors.html#request-errors) for unsuccessful responses.
 
 Fragment Example (`response_mode=fragment`)
+<p style="background: #282c34; color: white; overflow-x: auto; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
+https://consent.hello.coop/#/?<span style="color: #f8c555">id_token</span>=<span style="color: #7ec699;">eyJhbGciOiJSUzI1...rest_of_ID_Token</span></p>
 
-```
-redirect URI fragment example
+
+The following sample JavaScript will acquire the `id_token` and `state` from the fragment
+
+```javascript
+Rohan: please put in example JS
 ```
 
 
@@ -117,12 +123,17 @@ Form Post Example (`response_mode=form_post`)
 
 
 ```
-HTTP POST example
+POST / HTTP/1.1
+Host: greenfielddemo.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: XX
+
+id_token=eyJhbGciOiJSUzI1...rest_of_ID_Token
 ```
 
 Note that a `fragment` response is limited to the maximum URL length supported by the user's browser. Using `form_post` does not have that constraint, and a larger ID Token can be returned to your application.
 
-An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html) that has claims per [OpenID Connect §2](https://openid.net/specs/openid-connect-core-1_0.html#IDToken). In the following example, the <span style="color: #cc99cd; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">purple</span> section is the **header**, the <span style="color: #f8c555; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">yellow</span> section is the **payload**, and the <span style="color: #7ec699; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">green</span> section is the **signature**.
+An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html) that has claims per [OpenID Connect §2](https://openid.net/specs/openid-connect-core-1_0.html#IDToken).<br>In the following example of a raw ID Token, <span style="color: #cc99cd; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">purple</span> is the **header** that describes the JWT, <span style="color: #f8c555; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">yellow</span> is the **payload** of the ID Token, and <span style="color: #7ec699; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">green</span> is the **signature** of the JWT.
 
 **Example ID Token**
 
@@ -163,7 +174,7 @@ An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/
     }
 }
 ```
-
+**Payload Explanation**
 |Claim|Description|
 |---|---|
 |`iss`|Issuer of ID Token. Will always be `https://issuer.hello.coop`|
@@ -178,7 +189,7 @@ An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/
 |`email`|The user's email address.|
 |`email_verified`|Indicates email was verified. Will allways be `true` from Hellō|
 |`iat`|The time the ID Token was issued in [Epoch time](https://en.wikipedia.org/wiki/Unix_time)|
-|`exp`|The time the ID Token expires. Currently 5 minutes after `iat`|
+|`exp`|The time the ID Token expires.<br>Hellō sets the expiry to be 5 minutes (3600 seconds) after `iat`|
 
 Your application now has an ID Token for the user, but before using it, you need to ensure it is valid, and not an ID Token an attacker has passed to your application. The ID Token header and signature are part of the validation procedure.
 
