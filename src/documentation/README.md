@@ -12,8 +12,32 @@ Currently, Hellō is ideal for developers building **new**, **green field applic
 
 ## User Experience
 
+
+<button style="background: #303030; border: none; color: white; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
+  ō Continue with Hellō 
+</button>
+
+
+<button style="background: white; border: 1px solid #303030; color: #303030; padding: 0.6rem 1.2rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 500;">
+  ō Update Profile with Hellō 
+</button>
+
+
+
 You can check out the Hellō user experience with our demo at [GreenFieldDemo.com](https://greenfielddemo.com)
 
 
 ## Data Flow
+
+
+
+
+
+Request of Hellō
+
+User interacts with Hellō and other Providers
+
+Hellō Response
+
+Introspection
 
