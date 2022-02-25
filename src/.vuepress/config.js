@@ -1,5 +1,6 @@
 const { description } = require('../../package')
 const { copyCode } = require("vuepress-plugin-copy-code2");
+const path = require('path');
 
 module.exports = {
   // theme: 'default-prefers-color-scheme',
@@ -12,6 +13,7 @@ module.exports = {
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
   description: description,
+  templateBuild: path.join(__dirname, 'templates', 'index.build.html'),
 
   /**
    * Extra tags to be injected to the page HTML `<head>`
