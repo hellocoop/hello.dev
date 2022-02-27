@@ -13,6 +13,7 @@ module.exports = {
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
   description: description,
+  templateDev: path.join(__dirname, 'templates', 'index.build.html'),
   templateBuild: path.join(__dirname, 'templates', 'index.build.html'),
 
   /**
