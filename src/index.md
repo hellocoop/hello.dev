@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: https://www.hello.coop/assets/mockup.png
+heroImage: https://cdn.hello.coop/images/mockup.png
 tagline: Hellō is an OpenID Connect Provider that simplifies user registration and login, allowing you to provide all the choices your user's may want in hours instead of days or weeks.
 ---
 
