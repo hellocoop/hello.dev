@@ -55,7 +55,7 @@ XXXXX
 XXXX - 
 ### *13) What does the `update_profile` scope do?*
 
-<br/>See <button style="background-color: #303030; color: white; border: none; font-weight: 500; padding: 0.5rem 0.7rem; font-size: 0.8rem; border-radius: 0.4rem; font-size">ō Update Profile with Hellō</button> functionality in the [GreenFieldDemo.com](https://greenfielddemo.com)
+<br/>See <button style="display: inline-flex; align-items: center; justify-content: center; background-color: white !important; border: 1px solid #303030; color: #303030; width: 16rem; height: 3rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 600; cursor: pointer;">ō Update Profile with Hellō</button> functionality in the [GreenFieldDemo.com](https://greenfielddemo.com)
 
 ### *14) Why is `update_profile` a scope instead of a XXXXX value?*
 
