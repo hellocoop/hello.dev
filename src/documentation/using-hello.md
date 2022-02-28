@@ -89,6 +89,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
 ```html
 <button
+  onclick="signin()"
   id="hello-signin-btn"
 >
   ō Continue with Hellō 
@@ -109,9 +110,11 @@ The button to initiate registration / login is either charcoal (#303030) on whit
     font-weight: 600;
     cursor: pointer;
   }
+  ... /*Refer to above code block for button disabled and load spinner styles*/
 </style>
-```
 
+... <!-- Refer to above code block for signin() function -->
+```
 ---
 
 You can let users update their profile at Hellō as well. Don't forget to set the `profile_update` scope which will prompt the user to decide what information to change.
