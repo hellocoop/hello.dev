@@ -26,6 +26,10 @@ tagline: Hellō is an OpenID Connect Provider that simplifies user registration 
   </div>
 </div>
 
+<div style="position: absolute; width: 100%; left: 0;">
+  <wc-footer/>
+</div>
+
 <style>
   .feature a:hover{
     border-bottom: 2px solid #303030;
