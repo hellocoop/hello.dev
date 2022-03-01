@@ -14,11 +14,16 @@ If there is an issue with fulfilling the request [(Step 4)](/documentation/using
 |`server_error`| The Hellō server encountered an unexpected condition that prevented it from fulfilling the request. (This error code is equivalent to a 500 Internal Server Error HTTP status code.) |
 |`temporarily_unavailable`| The Hellō server is currently unable to handle the request due to a temporary overloading or maintenance of the server. (This error code is equivalent to a 503 Service Unavailable HTTP status code.) |
 
+Example 
+<p style="background: #282c34; color: white; overflow-x: auto; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
+https://greenfielddemo.com/#/?<span style="color: #f8c555">error</span>=<span style="color: #7ec699;">access_denied</span></p>
+
+
 ***NOTE:** If the request contains an invalid `client_id` or `request_uri`, a response will not be sent and the user will be presented with an error message per [RFC 6749 4.1.2.1](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1)
 
 ## Introspection Errors
 
-Following are the responses from the [(Token Introspection API)](/documentation/using-hello.html#_6-validate-id-token) `https://consent.hello.coop/oauth/introspect`
+Following are the responses from the [Token Introspection API](/documentation/using-hello.html#_6-1-introspection) `https://consent.hello.coop/oauth/introspect`
 
 If the token is invalid in anyway, the API will return `active` set to `false`
 
@@ -27,9 +32,18 @@ If the token is invalid in anyway, the API will return `active` set to `false`
     "active":false
 }
 ```
+If any of the parameters are missing you will receive an error
 
 |Error|Description|
 |---|---|
 |`token_required`| There was `token` parameter. |
 |`client_id_required`| There was `client_id` parameter. |
 |`nonce_required`| There was a nonce in the IT Token, and there was no `nonce` parameter. |
+
+Example
+
+```json
+{
+    "error":"nonce_required"
+}
+```

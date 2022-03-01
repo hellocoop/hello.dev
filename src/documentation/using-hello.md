@@ -125,7 +125,7 @@ Your app will receive the response as either fragment query parameters to the pr
 
 Fragment Example (`response_mode=fragment`)
 <p style="background: #282c34; color: white; overflow-x: auto; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
-https://consent.hello.coop/#/?<span style="color: #f8c555">id_token</span>=<span style="color: #7ec699;">eyJhbGciOiJSUzI1...rest_of_ID_Token</span></p>
+https://greenfielddemo.com/#/?<span style="color: #f8c555">id_token</span>=<span style="color: #7ec699;">eyJhbGciOiJSUzI1...rest_of_ID_Token</span></p>
 
 
 The following sample JavaScript will acquire the `id_token` and `state` from the fragment
@@ -216,8 +216,8 @@ Your application now has an ID Token for the user, but before using it, you need
 ## 6. Validate ID Token
 
 You can validate the `id_token` by:
-1. sending it back to the Hellō introspection API, or 
-2. perform validation yourself per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
+1. Sending it back to the Hellō introspection API; or 
+2. Perform validation yourself per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
 
 
 ### 6.1 Introspection
@@ -294,7 +294,7 @@ If successfully validated, you will receive the ID Token payload with `active:tr
 
 There are many OpenID Connect libraries that include ID Token validation. The OpenID Foundation maintains a list [here](https://openid.net/developers/libraries/). Getting security right is HARD. We recommend you use a proven library and NOT write your own validation. We include the information below for reference.
 
-### Signature Verification Keys
+#### Signature Verification Keys
 
 Hellō provides OpenId Provider configuration information per [OpenID Connect Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) at:
 
@@ -302,7 +302,7 @@ Hellō provides OpenId Provider configuration information per [OpenID Connect Di
 
 The `jwks_uri` property in the configuration file contains the URI for a JSON file containing the public keys in JSON Web Key format ([RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517)) for verifying the signature per step (6) above.
 
-### Signature Verification Steps
+#### Signature Verification Steps
 
 Following are details for each ID Token validation step per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
 
