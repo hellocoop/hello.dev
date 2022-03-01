@@ -82,7 +82,7 @@ The **request URL** is `https://consent.hello.coop/` and a query with the follow
 |`state`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A value representing the state of your application that will be returned as a parameter in the response|
 |`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|Either `fragment` or `form_post`. Defaults to `fragment`. This parameter tells Hellō how you would like to receive the response.<br>See [5. Receive Response](#_5-receive-response) for details.|
 
-**Here is an example request for the GreenFieldDemo app**<br>
+**Here is an example request for the GreenfieldDemo app**<br>
 *(line feeds added for readability)*
 
 <p style="background: #282c34; color: white; word-break: break-all; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
@@ -125,16 +125,14 @@ Your app will receive the response as either fragment query parameters to the pr
 
 Fragment Example (`response_mode=fragment`)
 <p style="background: #282c34; color: white; overflow-x: auto; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
-https://greenfielddemo.com/#/?<span style="color: #f8c555">id_token</span>=<span style="color: #7ec699;">eyJhbGciOiJSUzI1...rest_of_ID_Token</span></p>
+https://greenfielddemo.com/#<span style="color: #f8c555">id_token</span>=<span style="color: #7ec699;">eyJhbGciOiJSUzI1...rest_of_ID_Token</span></p>
 
 
-The following sample JavaScript will acquire the `id_token` and `state` from the fragment
+The following sample JavaScript will acquire the `id_token` from the fragment
 
 ```javascript
-const query = window.location.hash.split('#/')[1] // ?id_token=eyJh...&state=iOiJ...
-const params = new URLSearchParams(query)
-const id_token = params.get('id_token') // eyJh...
-const state = params.get('state') // iOiJ...
+const params = new URLSearchParams(window.location.hash)
+const id_token = params.get('id_token') // eyJhbGciOiJSUzI1...rest_of_ID_Token
 ```
 
 
@@ -152,7 +150,10 @@ id_token=eyJhbGciOiJSUzI1...rest_of_ID_Token
 
 Note that a `fragment` response is limited to the maximum URL length supported by the user's browser. Using `form_post` does not have that constraint, and a larger ID Token can be returned to your application.
 
-An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html) that has claims per [OpenID Connect §2](https://openid.net/specs/openid-connect-core-1_0.html#IDToken).<br>In the following example of a raw ID Token, <span style="color: #cc99cd; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">purple</span> is the **header** that describes the JWT, <span style="color: #f8c555; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">yellow</span> is the **payload** of the ID Token, and <span style="color: #7ec699; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">green</span> is the **signature** of the JWT.
+An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html) that has claims per [OpenID Connect §2](https://openid.net/specs/openid-connect-core-1_0.html#IDToken).<br>In the following example of a raw ID Token:
+- <span style="color: #cc99cd; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">purple</span> is the **header** that describes the JWT; 
+- <span style="color: #f8c555; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">yellow</span> is the **payload** of the ID Token; and 
+- <span style="color: #7ec699; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">green</span> is the **signature** of the JWT.
 
 **Example ID Token**
 

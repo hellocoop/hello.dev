@@ -30,7 +30,7 @@ If the user wants to update their profile, they can click the Update Profile but
 <button class="hello-btn-light">ō Update Profile with Hellō</button>
 
 
-You can check out the Hellō user experience with our demo at [GreenFieldDemo.com](https://greenfielddemo.com)
+You can check out the Hellō user experience with our demo at [GreenfieldDemo.com](https://greenfielddemo.com)
 
 
 ## Data Flow

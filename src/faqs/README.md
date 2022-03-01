@@ -65,7 +65,7 @@ The `update_profile` scope informs Hellō that you would like Hellō to prompt t
 
 <button class="hello-btn-light">ō Update Profile with Hellō</button> 
 
-functionality in the [GreenFieldDemo.com](https://greenfielddemo.com) demo app.
+functionality in the [GreenfieldDemo.com](https://greenfielddemo.com) demo app.
 
 ### *14) Why is `update_profile` a scope instead of a XXXXX value?*
 
