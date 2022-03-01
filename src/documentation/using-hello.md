@@ -129,7 +129,7 @@ The **request URL** is `https://consent.hello.coop/` and a query with the follow
 |---|---|
 |`client_id`|The `client_id` for your app from [console.hello.dev](https://console.hello.dev) |
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
-|`scope`|One or more scopes from [Hellō Scopes](#scopes)|
+|`scope`|One or more scopes listed at [Hellō Claims](/documentation/hello-claims.html)|
 |`nonce`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A unique string that will be included in the ID Token|
 |`state`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A value representing the state of your application that will be returned as a parameter in the response|
 |`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|Either `fragment` or `form_post`. Defaults to `fragment`. This parameter tells Hellō how you would like to receive the response.<br>See [5. Receive Response](#_5-receive-response) for details.|
@@ -146,7 +146,7 @@ The **request URL** is `https://consent.hello.coop/` and a query with the follow
   &<span style="color: #f8c555;">scope</span>=<span style="color: #7ec699;">name+nickname+email+picture+openid</span>
 </p>
 
-There is no difference between a request to register the user, or log in the user. If the user has previously released the same requested scopes to your app, they will not be prompted to release it again. If the requested scopes have changed, or the `profile_update` is provided, the user will be prompted to select what to release.
+There is no difference between a request to register the user, or log in the user. If the user has previously released the same requested scopes to your app, they will not be prompted to release it again. If you have changed with scopes you are requesting, or the `profile_update` is provided, the user will be prompted to select what to release.
 
 Hellō only supports the [`id_token`](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#id_token) response type. The `response_type` parameter is ignored if provided.
 
