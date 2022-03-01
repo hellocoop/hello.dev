@@ -8,118 +8,66 @@ To use Hellō, register your application at [console.hello.dev](https://console.
 
 The button to initiate registration / login is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is a `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr`.
 
-<button style="display: inline-flex; align-items: center; justify-content: center; background: #303030; border: none; color: white; width: 16rem; height: 3rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 600;cursor: pointer;">ō Continue with Hellō</button>
+<button class="hello-btn-dark">ō Continue with Hellō</button>
 
 ```html
+<link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
+
 <button
   id="hello-signin-btn"
+  class="hello-btn-dark"
   onclick="signin()"
 >
   ō Continue with Hellō 
 </button>
 
-<style>
-  #hello-signin-btn{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #303030;
-    border: none;
-    color: white;
-    width: 16rem;
-    height: 3rem;
-    border-radius: 0.4rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  #hello-signin-btn:disabled{
-    opacity: 0.6;
-    cursor: wait;
-  }
-  #spinner {
-    color: #303030;
-    height: 1.6rem;
-    width: 1.6rem;
-    animation: spin 1s linear infinite;
-  }
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-</style>
-
 <script>
-  function signin(){
+  function signin(){ 
     const ref = document.getElementById('hello-signin-btn')
 
     // Disable button and set loading state on click
-    ref.disabled = true;
-    ref.innerHTML = 
-      `<svg
-        id="spinner"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle
-          style="opacity: 1"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="white"
-          stroke-width="3.5"
-        />
-        <path opacity="0.5" d="M2 12C2 6.47715 6.47715 2 12 2" stroke="black" stroke-width="3.5" />
-      </svg>`
+    ref.disabled = true
+    ref.innerHTML = `<img src='https://cdn.hello.coop/images/spinner-light.svg' height="25" width="25">`
+      
+    // See step below to learn how to create a request URL
+    window.location.href = 'https://consent.hello.coop/?...'
    }
-
-   // See step below to learn how to create a request URL
-   window.location.href = 'https://consent.hello.coop/?...'
 </script>
 ```
 
 ---
 
-<button style="display: inline-flex; align-items: center; justify-content: center; background: white; border: 1px solid #303030; color: #303030; width: 16rem; height: 3rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 600; cursor: pointer;">ō Continue with Hellō</button>
+<button class="hello-btn-light">ō Continue with Hellō</button>
 
 ```html
+<link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
+
 <button
-  onclick="signin()"
   id="hello-signin-btn"
+  class="hello-btn-light"
+  onclick="signin()"
 >
   ō Continue with Hellō 
 </button>
 
-<style>
-  #hello-signin-btn{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #303030;
-    border: none;
-    color: white;
-    width: 16rem;
-    height: 3rem;
-    border-radius: 0.4rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  ... /*Refer to above code block for button disabled and load spinner styles*/
-</style>
+<script>
+  function signin(){ 
+    const ref = document.getElementById('hello-signin-btn')
 
-... <!-- Refer to above code block for signin() function -->
+    // Disable button and set loading state on click
+    ref.disabled = true
+    ref.innerHTML = `<img src='https://cdn.hello.coop/images/spinner-dark.svg' height="25" width="25">`
+      
+    // See step below to learn how to create a request URL
+    window.location.href = 'https://consent.hello.coop/?...'
+   }
+</script>
 ```
 ---
 
 You can let users update their profile at Hellō as well. Don't forget to set the `profile_update` scope which will prompt the user to decide what information to change.
 
-<button style="display: inline-flex; align-items: center; justify-content: center; background: white; border: 1px solid #303030; color: #303030; width: 16rem; height: 3rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 600; cursor: pointer;">ō Update Profile with Hellō</button>
+<button class="hello-btn-light">ō Update Profile with Hellō</button>
 
 ## 3. Create Request URL
 

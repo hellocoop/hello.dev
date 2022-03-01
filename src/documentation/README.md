@@ -14,7 +14,7 @@ Currently, Hellō is ideal for developers building **new**, **greenfield applica
 
 1. The user opens your website and sees the Hellō button and clicks on it.
 
-<button style="display: inline-flex; align-items: center; justify-content: center; background: #303030; border: none; color: white; width: 16rem; height: 3rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 600;cursor: pointer;">ō Continue with Hellō</button>
+<button class="hello-btn-dark">ō Continue with Hellō</button>
 
 
 2. The user is redirected to the Hellō consent page where they choose their preferred provider to log in. Popular social log in providers, email, phone, and web3 wallets are offered. The user completes logging in with their preferred provider.
@@ -27,7 +27,7 @@ Currently, Hellō is ideal for developers building **new**, **greenfield applica
 
 If the user wants to update their profile, they can click the Update Profile button, which will take them back to Hellō where they can change the claims to be release to your app, such as a new profile picture or verified eamil
 
-<button style="display: inline-flex; align-items: center; justify-content: center; background: white; border: 1px solid #303030; color: #303030; width: 16rem; height: 3rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 600; cursor: pointer;">ō Update Profile with Hellō</button>
+<button class="hello-btn-light">ō Update Profile with Hellō</button>
 
 
 You can check out the Hellō user experience with our demo at [GreenFieldDemo.com](https://greenfielddemo.com)

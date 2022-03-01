@@ -63,7 +63,7 @@ You can use the picture URL as the user's profile picture. The user may release 
 
 The `update_profile` scope informs Hellō that you would like Hellō to prompt the user to review what claims are released back to your app. Providing a button for the user to update their profile and including the `update_profile` scope in the request allows you to let Hellō obtain new claims for your users when they want to update their profile such as change their verified email or profile picture. To see it in action, see the:
 
-<button style="display: inline-flex; align-items: center; justify-content: center; background-color: white !important; border: 1px solid #303030; color: #303030; width: 16rem; height: 3rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 600; cursor: pointer;">ō Update Profile with Hellō</button> 
+<button class="hello-btn-light">ō Update Profile with Hellō</button> 
 
 functionality in the [GreenFieldDemo.com](https://greenfielddemo.com) demo app.
 
