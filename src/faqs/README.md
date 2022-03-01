@@ -10,6 +10,8 @@ sidebar: auto
 
 ### *1) What is Hellō?* 
 
+Hellō is a service that simplifies registration and log in of your users. Hellō uses OpenId Connect, the same protocol used by Apple, Facebook, and Google in their social log in services. 
+
 ### *2) How much does Hellō cost?*
 
 Hellō is currently free, and will continue to be free until the co-operative decides Hellō has reached a critical mass of adoption. Early adopters of Hellō will be rewarded to minimize or eliminate paying for Hellō in the future.
@@ -19,6 +21,9 @@ Hellō is currently free, and will continue to be free until the co-operative de
 Hellō's business model is to charge developers an interchange fee of a few pennies for each new verified claim a user releases to an application. Hellō will not charge for log in or for active users. As Hellō starts to generate revenue in excess of expenses, Hellō will lower its fees.
 
 ### *4) How do I get started using Hellō?*
+
+Check out the [Using Hellō](/documentation/using-hello.html#_1-app-registration) documentation. 
+
 
 ### *5) What types of applications is Hellō suitable for?*
 
@@ -44,35 +49,39 @@ Hellō will only allow a publisher's administrator, developers, and testers to a
 
 ### *10) Why should I use the `sub` claim to identify my users?*
 
-This identifier is the same for all of a publisher's applications. Each publisher will have a different identifier for the same user.
+The `sub` value is a globally unique identifier that you always receive back for the same user across all of a publisher's applications. Using the `sub` claim rather than an email address allows your users to Each publisher will have a different identifier for the same user.
 
 ### *11) What scopes will I receive back?*
 
-XXXXX
+You will receive back all scopes you requested.
 
 ### *12) What can I do with the picture URL I receive?*
 
-XXXX - 
+You can use the picture URL as the user's profile picture. The user may release a URL that resolves to be a user's social media profile picture, and the returned image will change when the user changes their social media profile picture. 
+
 ### *13) What does the `update_profile` scope do?*
 
-<br/>See <button style="display: inline-flex; align-items: center; justify-content: center; background-color: white !important; border: 1px solid #303030; color: #303030; width: 16rem; height: 3rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 600; cursor: pointer;">ō Update Profile with Hellō</button> functionality in the [GreenFieldDemo.com](https://greenfielddemo.com)
+The `update_profile` scope informs Hellō that you would like Hellō to prompt the user to review what claims are released back to your app. Providing a button for the user to update their profile and including the `update_profile` scope in the request allows you to let Hellō obtain new claims for your users when they want to update their profile such as change their verified email or profile picture. To see it in action, see the:
+
+<button style="display: inline-flex; align-items: center; justify-content: center; background-color: white !important; border: 1px solid #303030; color: #303030; width: 16rem; height: 3rem; border-radius: 0.4rem; font-size: 1rem; font-weight: 600; cursor: pointer;">ō Update Profile with Hellō</button> 
+
+functionality in the [GreenFieldDemo.com](https://greenfielddemo.com) demo app.
 
 ### *14) Why is `update_profile` a scope instead of a XXXXX value?*
 
-Using XXX would be more aligned with the spirit of the OpenID Connect standard, but XXX is not a well supported option in libraries and service providers, but you can set any value in `scope`. We made `update_profile` a scope so that the functionality was broadly available.
+Using the `prompt` parameter would be more aligned with the spirit of the OpenID Connect standard, by setting `prompt` to `consent`, but setting the `prompt` parameter is not a well supported option in libraries and service providers, and the `consent` value is not specified as being an update flow. We chose to offer `update_profile` as scope so that the functionality was broadly available across libraries and service providers.
 
 
-### *XX) What is the ō mean in Hellō?*
+### *15) Why the name Hellō?*
+We wanted a human friendly name rather than a technical term such as **log in** or **sign in**. The word **hello** was popularized in our first virtual interactions — what we said when we answered the phone. It is a globally recognized word with a common meaning — and it is the start of a conversation. When a user clicks Hellō, they are starting a conversation with an application. 
 
-- open
-- international
-- distinctive
+### *16) What does the ō mean in Hellō?*
 
-### *XX) Why the name Hellō?*
+The letter `o` with a macron is symbolic of the open and global nature of Hellō, and makes the name distinctive.
 
-- human friendly name rather than a technical term such as log in or sign in
-- it is a start of a conversation with an application -- the user may or may not want to continue when they understand the require
-- word was popularized in first virtual human interactions -- what you said when you answered the phone
+### *17) What if I don't want to use Hellō sometime in the future?*
+
+We recommend that you request either a verified email or phone for your users. If you decide to stop using Hellō, you can migrate to sending your user's a one time password ([OTP](https://en.wikipedia.org/wiki/One-time_password)) or [magic link](https://postmarkapp.com/blog/magic-links) for them to log in.
 
 <!-- FAQs should be above this -->
 </div>
