@@ -44,7 +44,7 @@ module.exports = {
     darkMode: false,
     repo: '',
     docsDir: '',
-    sidebarDepth: 1,
+    sidebarDepth: 2,
     locales: {
       '/': {
         editLinkText: 'Propose changes to this page',
