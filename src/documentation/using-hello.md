@@ -74,7 +74,6 @@ The button to initiate registration / login is either charcoal (#303030) on whit
     window.location.href = 'https://consent.hello.coop/?...'
    }
 </script>
-
 ```
 
   </CodeGroupItem>
