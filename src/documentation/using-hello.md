@@ -131,7 +131,7 @@ https://greenfielddemo.com/#<span style="color: #f8c555">id_token</span>=<span s
 The following sample JavaScript will acquire the `id_token` from the fragment
 
 ```javascript
-const params = new URLSearchParams(window.location.hash)
+const params = new URLSearchParams(window.location.hash.substring(1))
 const id_token = params.get('id_token') // eyJhbGciOiJSUzI1...rest_of_ID_Token
 ```
 
