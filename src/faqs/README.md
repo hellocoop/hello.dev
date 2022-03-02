@@ -59,17 +59,17 @@ You will receive back all scopes you requested.
 
 You can use the picture URL as the user's profile picture. The user may release a URL that resolves to be a user's social media profile picture, and the returned image will change when the user changes their social media profile picture. 
 
-### *13) What does the `update_profile` scope do?*
+### *13) What does the `profile_update` scope do?*
 
-The `update_profile` scope informs Hellō that you would like Hellō to prompt the user to review what claims are released back to your app. Providing a button for the user to update their profile and including the `update_profile` scope in the request allows you to let Hellō obtain new claims for your users when they want to update their profile such as change their verified email or profile picture. To see it in action, see the:
+The `profile_update` scope informs Hellō that you would like Hellō to prompt the user to review what claims are released back to your app. Providing a button for the user to update their profile and including the `profile_update` scope in the request allows you to let Hellō obtain new claims for your users when they want to update their profile such as change their verified email or profile picture. To see it in action, see the:
 
 <button class="hello-btn-light">ō Update Profile with Hellō</button> 
 
 functionality in the [GreenfieldDemo.com](https://greenfielddemo.com) demo app.
 
-### *14) Why is `update_profile` a scope instead of a XXXXX value?*
+### *14) Why is `profile_update` a scope instead of a XXXXX value?*
 
-Using the `prompt` parameter would be more aligned with the spirit of the OpenID Connect standard, by setting `prompt` to `consent`, but setting the `prompt` parameter is not a well supported option in libraries and service providers, and the `consent` value is not specified as being an update flow. We chose to offer `update_profile` as scope so that the functionality was broadly available across libraries and service providers.
+Using the `prompt` parameter would be more aligned with the spirit of the OpenID Connect standard, by setting `prompt` to `consent`, but setting the `prompt` parameter is not a well supported option in libraries and service providers, and the `consent` value is not specified as being an update flow. We chose to offer `profile_update` as scope so that the functionality was broadly available across libraries and service providers.
 
 
 ### *15) Why the name Hellō?*
