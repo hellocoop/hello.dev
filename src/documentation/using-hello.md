@@ -9,14 +9,18 @@ To use Hellō, register your application at [console.hello.dev](https://console.
 The button to initiate registration / login is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is a `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr`.
 
 <button class="hello-btn-dark">ō Continue with Hellō</button>
+<button class="hello-btn-light" style="margin-left: 0.8rem;">ō Continue with Hellō</button>
+  
+<CodeGroup>
+  <CodeGroupItem title="Dark version" active>
 
 ```html
 <link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
 
 <button
+  onclick="signin()"
   id="hello-signin-btn"
   class="hello-btn-dark"
-  onclick="signin()"
 >
   ō Continue with Hellō 
 </button>
@@ -27,7 +31,11 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
     // Disable button and set loading state on click
     ref.disabled = true
-    ref.innerHTML = `<img src='https://cdn.hello.coop/images/spinner-light.svg' height="25" width="25">`
+    ref.innerHTML = 
+    `<img src='https://cdn.hello.coop/images/spinner-light.svg'
+      height="25"
+      width="25"
+    >`
       
     // See step below to learn how to create a request URL
     window.location.href = 'https://consent.hello.coop/?...'
@@ -35,17 +43,17 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 </script>
 ```
 
----
+  </CodeGroupItem>
 
-<button class="hello-btn-light">ō Continue with Hellō</button>
-
+  <CodeGroupItem title="Light version">
+  
 ```html
 <link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
 
 <button
+  onclick="signin()"
   id="hello-signin-btn"
   class="hello-btn-light"
-  onclick="signin()"
 >
   ō Continue with Hellō 
 </button>
@@ -56,13 +64,22 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
     // Disable button and set loading state on click
     ref.disabled = true
-    ref.innerHTML = `<img src='https://cdn.hello.coop/images/spinner-dark.svg' height="25" width="25">`
+    ref.innerHTML = 
+    `<img src='https://cdn.hello.coop/images/spinner-dark.svg'
+      height="25"
+      width="25"
+    >`
       
     // See step below to learn how to create a request URL
     window.location.href = 'https://consent.hello.coop/?...'
    }
 </script>
+
 ```
+
+  </CodeGroupItem>
+</CodeGroup>
+
 ---
 
 You can let users update their profile at Hellō as well. Don't forget to set the `profile_update` scope which will prompt the user to decide what information to change.

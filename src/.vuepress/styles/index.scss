@@ -96,6 +96,10 @@ div[class*="language-"]:hover .copy-code-button{
   color: white !important;
 }
 
+.code-group__nav-tab-active{
+  border-bottom: white 1px solid;
+}
+
 @media screen and (max-width: 719px){
   .navbar-item > a:hover, .navbar-item > a.router-link-active{
     border-bottom: 2px solid #303030;
