@@ -11,7 +11,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 <CodeGroup>
 <CodeGroupItem title="Dark button" active>
 
-<div style="padding: 1rem 0.5rem; margin-top: 1.8rem; background: rgb(206, 206, 206) none repeat scroll 0% 0%; margin-bottom: -1rem;">
+<div style="padding: 1rem 0.5rem; padding-top: 0.9rem; margin-top: 1.8rem; background: rgb(206, 206, 206) none repeat scroll 0% 0%; margin-bottom: -1rem;">
   <button class="hello-btn-dark">ō Continue with Hellō</button>
 </div>
 
@@ -36,7 +36,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 </CodeGroupItem>
 <CodeGroupItem title="White button">
 
-<div style="padding: 1rem 0.5rem; margin-top: 1.8rem; background: rgb(206, 206, 206) none repeat scroll 0% 0%; margin-bottom: -1rem;">
+<div style="padding: 1rem 0.5rem; padding-top: 0.9rem; margin-top: 1.8rem; background: rgb(206, 206, 206) none repeat scroll 0% 0%; margin-bottom: -1rem;">
   <button class="hello-btn-light">ō Continue with Hellō</button>
 </div>
   
