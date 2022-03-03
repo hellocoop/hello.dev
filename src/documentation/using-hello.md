@@ -8,75 +8,56 @@ To use Hellō, register your application at [console.hello.dev](https://console.
 
 The button to initiate registration / login is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is a `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr`.
 
-<button class="hello-btn-dark">ō Continue with Hellō</button>
-<button class="hello-btn-light" style="margin-left: 0.8rem;">ō Continue with Hellō</button>
-  
 <CodeGroup>
-  <CodeGroupItem title="Dark version" active>
+<CodeGroupItem title="Dark button" active>
+
+<div style="padding: 1rem 0.5rem; margin-top: 1.8rem; background: rgb(206, 206, 206) none repeat scroll 0% 0%; margin-bottom: -1rem;">
+  <button class="hello-btn-dark">ō Continue with Hellō</button>
+</div>
 
 ```html
 <link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
 
-<button
-  onclick="signin()"
-  id="hello-signin-btn"
-  class="hello-btn-dark"
->
+<button onclick="signin()" id="hello-signin-btn" class="hello-btn-dark">
   ō Continue with Hellō 
 </button>
 
 <script>
   function signin(){ 
     const ref = document.getElementById('hello-signin-btn')
-
-    // Disable button and set loading state on click
-    ref.disabled = true
-    ref.innerHTML = 
-    `<img src='https://cdn.hello.coop/images/spinner-light.svg'
-      height="25"
-      width="25"
-    >`
-      
-    // See step below to learn how to create a request URL
-    window.location.href = 'https://consent.hello.coop/?...'
-   }
+    ref.disabled = true // Disable button
+    ref.innerHTML =     // Show spinner
+    `<img src='https://cdn.hello.coop/images/spin-light.svg' height="25" width="25">`
+    window.location.href = 'https://consent.hello.coop/?...' // See step 3 below
+  }
 </script>
 ```
 
-  </CodeGroupItem>
+</CodeGroupItem>
+<CodeGroupItem title="White button">
 
-  <CodeGroupItem title="Light version">
+<div style="padding: 1rem 0.5rem; margin-top: 1.8rem; background: rgb(206, 206, 206) none repeat scroll 0% 0%; margin-bottom: -1rem;">
+  <button class="hello-btn-light">ō Continue with Hellō</button>
+</div>
   
 ```html
 <link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
 
-<button
-  onclick="signin()"
-  id="hello-signin-btn"
-  class="hello-btn-light"
->
+<button onclick="signin()" id="hello-signin-btn" class="hello-btn-light">
   ō Continue with Hellō 
 </button>
 
 <script>
   function signin(){ 
     const ref = document.getElementById('hello-signin-btn')
-
-    // Disable button and set loading state on click
-    ref.disabled = true
-    ref.innerHTML = 
-    `<img src='https://cdn.hello.coop/images/spinner-dark.svg'
-      height="25"
-      width="25"
-    >`
-      
-    // See step below to learn how to create a request URL
-    window.location.href = 'https://consent.hello.coop/?...'
-   }
+    ref.disabled = true // Disable button
+    ref.innerHTML =     // Show spinner
+    `<img src='https://cdn.hello.coop/images/spin-dark.svg' height="25" width="25">`
+    window.location.href = 'https://consent.hello.coop/?...' // See step 3 below
+  }
 </script>
 ```
-
-  </CodeGroupItem>
+</CodeGroupItem>
 </CodeGroup>
 
 ---
