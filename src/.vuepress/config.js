@@ -22,7 +22,7 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/config/#head
    */
   head: [
-    ['link', { rel: 'icon', href: 'https://cdn.hello.coop/images/favicon-dark.png' }],
+    ['link', { rel: 'icon', href: 'https://cdn.hello.coop/images/dev-favicon-dark.png' }],
     ['meta', { name: 'theme-color', content: '#303030' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
