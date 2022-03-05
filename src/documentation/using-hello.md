@@ -296,7 +296,7 @@ There are many OpenID Connect libraries that include ID Token validation. The Op
 
 Hellō provides OpenId Provider configuration information per [OpenID Connect Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) at:
 
-`https://issuer.hello.coop/.well-known/open-configuration`
+[`https://issuer.hello.coop/.well-known/openid-configuration`](https://www.linkedin.com/in/lyndabrownganzert/)
 
 The `jwks_uri` property in the configuration file contains the URI for a JSON file containing the public keys in JSON Web Key format ([RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517)) for verifying the signature per step (6) above.
 
