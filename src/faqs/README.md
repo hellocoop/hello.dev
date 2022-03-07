@@ -67,7 +67,7 @@ The `profile_update` scope informs Hellō that you would like Hellō to prompt t
 
 functionality in the [GreenfieldDemo.com](https://greenfielddemo.com) demo app.
 
-### *14) Why is `profile_update` a scope instead of a XXXXX value?*
+### *14) Why is `profile_update` a scope instead of a `prompt` value?*
 
 Using the `prompt` parameter would be more aligned with the spirit of the OpenID Connect standard, by setting `prompt` to `consent`, but setting the `prompt` parameter is not a well supported option in libraries and service providers, and the `consent` value is not specified as being an update flow. We chose to offer `profile_update` as scope so that the functionality was broadly available across libraries and service providers.
 
