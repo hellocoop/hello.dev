@@ -27,7 +27,7 @@ Check out the [Using Hellō](/documentation/using-hello.html#_1-app-registration
 
 ### *5) What types of applications is Hellō suitable for?*
 
-Hellō is currently only suitable for new applications. Hellō is for individual users -- it not an enterprise identity solution.
+Hellō is currently only suitable for new applications. Hellō is for individual users -- it is not an enterprise identity solution.
 
 ### *6) Why is Hellō only intended for new applications?*
 
