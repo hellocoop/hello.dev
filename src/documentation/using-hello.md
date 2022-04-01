@@ -8,6 +8,13 @@ To use Hellō, register your application at [console.hello.dev](https://console.
 
 The button to initiate registration / login is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is a `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr`.
 
+
+Add this to the `<head>` of your document for button styling.
+
+```html
+<link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
+```
+
 <CodeGroup>
 <CodeGroupItem title="Dark Button" active>
 
@@ -16,8 +23,6 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 </div>
 
 ```html
-<link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
-
 <button onclick="signin()" id="hello-signin-btn" class="hello-btn-dark">
   ō Continue with Hellō 
 </button>
@@ -41,8 +46,6 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 </div>
   
 ```html
-<link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
-
 <button onclick="signin()" id="hello-signin-btn" class="hello-btn-light">
   ō Continue with Hellō 
 </button>
