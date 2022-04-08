@@ -54,6 +54,10 @@ module.exports = {
             link: '/documentation/',
           },
           {
+            text: 'Pricing',
+            link: '/pricing/'
+          },
+          {
             text: 'FAQs',
             link: '/faqs/'
           },
@@ -69,7 +73,9 @@ module.exports = {
               collapsible: false,
               children: [
                 '/documentation/README.md',
-                '/documentation/using-hello.md',
+                '/documentation/getting-started.md',
+                '/documentation/integrating-hello.md',
+                '/documentation/hello-frameworks.md',
                 '/documentation/hello-claims.md',
                 '/documentation/errors.md',
               ],
