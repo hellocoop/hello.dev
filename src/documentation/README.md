@@ -25,7 +25,7 @@ Currently, Hellō is ideal for developers building **new**, **greenfield applica
 
 5. The user is redirected to your app and is now logged in and your app shows the profile information received from Hellō.
 
-If the user wants to update their profile, they can click the Update Profile button, which will take them back to Hellō where they can change the claims to be release to your app, such as a new profile picture or verified eamil
+If the user wants to update their profile, they can click the Update Profile button, which will take them back to Hellō where they can change the claims to be release to your app, such as a new profile picture or verified email.
 
 <button class="hello-btn-light">ō Update Profile with Hellō</button>
 
