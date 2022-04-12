@@ -1,4 +1,3 @@
-
 ---
 sidebar: auto
 ---
