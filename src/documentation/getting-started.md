@@ -24,6 +24,11 @@ To add a Hellō Button to your page:
   <link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
 </head>
 ```
+|Class Name| Description | Preview |
+|---|---|---|
+|.hello-btn-dark|White text on charcoal background|<span>Enabled</span><button class="hello-btn-dark" style="margin-top: 4px">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button><br/><span style="margin-top: 10px; display: block;">Disabled</span><button class="hello-btn-dark" disabled="" style="margin-top: 4px">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>|
+|.hello-btn-light|Charcoal text and border on white background|<span>Enabled</span><button class="hello-btn-light" style="margin-top: 4px">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button><br/><span style="margin-top: 10px; display: block;">Disabled</span><button class="hello-btn-light" disabled="" style="margin-top: 4px">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>|
+|.hover-none|Removes default scale hover effect|<button class="hello-btn-dark hover-none">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>|
 
 2.2 Include the HTML for the Hellō Button in your page:
 
