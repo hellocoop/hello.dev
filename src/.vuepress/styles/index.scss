@@ -104,6 +104,27 @@ div[class*="language-"]:hover .copy-code-button{
   display: none;
 }
 
+.table-no-heading .copy-btn{
+  position: relative;
+  width: 100%;
+  display: block;
+}
+
+.table-no-heading .hover{
+  opacity: 1 !important;
+  top: 2px !important;
+  right: -10px;
+  height: 20px;
+}
+
+.table-no-heading .hover path:last-child{
+  fill: #8e8e8e;
+}
+
+.table-no-heading .success{
+  display: none;
+}
+
 @media screen and (max-width: 719px){
   .navbar-item > a:hover, .navbar-item > a.router-link-active{
     border-bottom: 2px solid #303030;

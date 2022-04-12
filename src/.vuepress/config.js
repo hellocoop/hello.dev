@@ -1,5 +1,4 @@
 const { description } = require('../../package')
-const { copyCode } = require("vuepress-plugin-copy-code2");
 const path = require('path');
 
 module.exports = {
@@ -95,9 +94,13 @@ module.exports = {
   plugins: [
     '@vuepress/plugin-back-to-top',
     '@vuepress/plugin-medium-zoom',
-    copyCode({
-       showInMobile: true
-    })
+    ['vuepress-plugin-vuepress2.x-code-copy', {
+      selector: ['div[class*="language-"] pre', '.copy-btn'],
+      align: 'top',
+      color: 'white',
+      backgroundColor: '#808080',
+      successText: null
+    }]
   ],
 
   markdown: {

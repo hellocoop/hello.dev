@@ -8,14 +8,13 @@ Many platforms have a generic OpenID Connect (OIDC) plug-in / module / configura
 
 |||
 |---|---|
-|`openid-configuration`|https://issuer.hello.coop/.well-known/openid-configuration|
-|`issuer`|https://issuer.hello.coop|
-|`authorization endpoint` |https://consent.hello.coop/|
-|`token endpoint` |https://consent.hello.coop/oauth/token|
-|`userinfo_endpoint` |https://consent.hello.coop/oauth/userinfo|
+|`openid-configuration`|<span class="copy-btn" style="margin-right: 20px;">https://issuer.hello.coop/.well-known/openid-configuration</span>|
+|`issuer`|<span class="copy-btn">https://issuer.hello.coop</span>|
+|`authorization endpoint` |<span class="copy-btn">https://consent.hello.coop/</span>|
+|`token endpoint` |<span class="copy-btn">https://consent.hello.coop/oauth/token</span>|
+|`userinfo_endpoint` |<span class="copy-btn">https://consent.hello.coop/oauth/userinfo</span>|
 
 </div>
-
 
 2. The platform will need the client id from the Hellō console. 
 
