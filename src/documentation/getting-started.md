@@ -24,11 +24,33 @@ To add a Hellō Button to your page:
   <link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
 </head>
 ```
-|Class Name| Description | Preview |
-|---|---|---|
-|.hello-btn-dark|White text on charcoal background|<span>Enabled</span><button class="hello-btn-dark" style="margin-top: 4px">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button><br/><span style="margin-top: 10px; display: block;">Disabled</span><button class="hello-btn-dark" disabled="" style="margin-top: 4px">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>|
-|.hello-btn-light|Charcoal text and border on white background|<span>Enabled</span><button class="hello-btn-light" style="margin-top: 4px">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button><br/><span style="margin-top: 10px; display: block;">Disabled</span><button class="hello-btn-light" disabled="" style="margin-top: 4px">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>|
-|.hover-none|Removes default scale hover effect|<button class="hello-btn-dark hover-none">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>|
+<table>
+   <thead>
+      <tr>
+         <th>Class Name</th>
+         <th>Description</th>
+         <th>Preview</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td style="width: 150px;"><code>.hello-btn-dark</code></td>
+         <td>White text on charcoal background</td>
+         <td><span>Enabled</span><button class="hello-btn-dark" style="margin-top:4px;">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button><br><span style="margin-top:10px;display:block;">Disabled</span><button class="hello-btn-dark" disabled="" style="margin-top:4px;">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button></td>
+      </tr>
+      <tr>
+         <td><code>.hello-btn-light</code></td>
+         <td>Charcoal text and border on white background</td>
+         <td><span>Enabled</span><button class="hello-btn-light" style="margin-top:4px;">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button><br><span style="margin-top:10px;display:block;">Disabled</span><button class="hello-btn-light" disabled="" style="margin-top:4px;">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button></td>
+      </tr>
+      <tr>
+         <td><code>.hover-none</code></td>
+         <td>Removes default scale hover effect</td>
+         <td><span style="display:block;">Dark</span><button class="hello-btn-dark hover-none" style="margin-top:4px;">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button><br><span style="margin-top:10px;display:block;">Light</span><button class="hello-btn-light hover-none" style="margin-top:4px;">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button></td>
+      </tr>
+   </tbody>
+</table>
+
 
 2.2 Include the HTML for the Hellō Button in your page:
 
