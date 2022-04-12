@@ -32,12 +32,12 @@ To add a Hellō Button to your page:
 <CodeGroupItem title="Dark Button" active>
 
 <div style="padding: 1rem 0.5rem; padding-top: 0.9rem; margin-top: 1.8rem; margin-bottom: -1rem;">
-  <button class="hello-btn-dark">ō Continue with Hellō</button>
+  <button class="hello-btn-dark">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>
 </div>
 
 ```html
 <button id="hello-login-btn" class="hello-btn-dark">
-  ō Continue with Hellō 
+  ō&nbsp;&nbsp;&nbsp;Continue with Hellō 
 </button>
 ```
 
@@ -45,12 +45,12 @@ To add a Hellō Button to your page:
 <CodeGroupItem title="White Button">
 
 <div style="padding: 1rem 0.5rem; padding-top: 0.9rem; margin-top: 1.8rem; margin-bottom: -1rem;">
-  <button class="hello-btn-light">ō Continue with Hellō</button>
+  <button class="hello-btn-light">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>
 </div>
   
 ```html
 <button id="hello-login-btn" class="hello-btn-light">
-  ō Continue with Hellō 
+  ō&nbsp;&nbsp;&nbsp;Continue with Hellō 
 </button>
 ```
 </CodeGroupItem>
