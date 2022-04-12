@@ -3,7 +3,7 @@
 Now that you have registered your application at Hellō and added the button to your page, let's complete the integration. 
 
 1. Connect the button click to creating a Request URL
-2. Create a request URL
+2. Create a Request URL
 3. Make the request by redirecting the user's browser to the Request URL
 4. Receive the response
 5. Validate the ID Token
