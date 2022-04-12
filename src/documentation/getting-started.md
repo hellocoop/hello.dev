@@ -16,7 +16,7 @@ To use Hellō, register your application at [console.hello.dev](https://console.
 
 To add a Hellō Button to your page:
 
-2.1 include a link to the Hellō stylesheet in the `<head>` of your document for button styling.
+2.1 Include a link to the Hellō stylesheet in the `<head>` of your document for button styling.
 
 ```html
 <head>
