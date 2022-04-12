@@ -1,23 +1,22 @@
 # Integrating Hellō
 
-## 1. App Registration
+Now that you have registered your application at Hellō and added the button to your page, let's complete the integration. 
 
-To use Hellō, register your application at [console.hello.dev](https://console.hello.dev/). You can start developing with just the **Client ID** and the defaults, which includes the **Development Redirect URIs** `http://localhost:*` and `http://127.0.0.1:*`. When you are ready to preview what is presented to users, provide the **Name**, **Logo**, and URLs for **Terms of Service** & **Privacy Policy**.  When you are ready for public access, provide your **Production Redirect URI(s)**.
+1. Connect the button click to creating a Request URL
+2. Create a request URL
+3. Make the request by redirecting the user's browser to the Request URL
+4. Receive the response
+5. Validate the ID Token
 
-## 2. Hellō Buttons
+At this point, you know which user you are interacting with, and have any of the claims you requested.
+
+## 1. Respond to Button Click
 
 The button to initiate registration / login is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is a `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr`.
 
-<CodeGroup>
-<CodeGroupItem title="Dark Button" active>
 
-<div style="padding: 1rem 0.5rem; padding-top: 0.9rem; margin-top: 1.8rem; background: rgb(206, 206, 206) none repeat scroll 0% 0%; margin-bottom: -1rem;">
-  <button class="hello-btn-dark">ō Continue with Hellō</button>
-</div>
 
 ```html
-<link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
-
 <button onclick="signin()" id="hello-signin-btn" class="hello-btn-dark">
   ō Continue with Hellō 
 </button>
@@ -28,37 +27,11 @@ The button to initiate registration / login is either charcoal (#303030) on whit
     ref.disabled = true // Disable button
     ref.innerHTML =     // Show spinner
     `<img src='https://cdn.hello.coop/images/spin-light.svg' height="25" width="25">`
-    window.location.href = 'https://consent.hello.coop/?...' // See step 3 below
+    const requestURL = await fetch()  // Fetch the request URL from your backend
+    window.location.href = requestURL // See next step for creating request URL
   }
 </script>
 ```
-
-</CodeGroupItem>
-<CodeGroupItem title="White Button">
-
-<div style="padding: 1rem 0.5rem; padding-top: 0.9rem; margin-top: 1.8rem; background: rgb(206, 206, 206) none repeat scroll 0% 0%; margin-bottom: -1rem;">
-  <button class="hello-btn-light">ō Continue with Hellō</button>
-</div>
-  
-```html
-<link href="https://cdn.hello.coop/css/hello-button.css" rel="stylesheet">
-
-<button onclick="signin()" id="hello-signin-btn" class="hello-btn-light">
-  ō Continue with Hellō 
-</button>
-
-<script>
-  function signin(){ 
-    const ref = document.getElementById('hello-signin-btn')
-    ref.disabled = true // Disable button
-    ref.innerHTML =     // Show spinner
-    `<img src='https://cdn.hello.coop/images/spin-dark.svg' height="25" width="25">`
-    window.location.href = 'https://consent.hello.coop/?...' // See step 3 below
-  }
-</script>
-```
-</CodeGroupItem>
-</CodeGroup>
 
 ---
 
@@ -66,7 +39,7 @@ You can let users update their profile at Hellō as well. Don't forget to set th
 
 <button class="hello-btn-light">ō Update Profile with Hellō</button>
 
-## 3. Create Request URL
+## 2. Create Request URL
 
 The **request URL** is `https://consent.hello.coop/` and a query with the following parameters
 
@@ -74,10 +47,11 @@ The **request URL** is `https://consent.hello.coop/` and a query with the follow
 |---|---|
 |`client_id`|The `client_id` for your app from [console.hello.dev](https://console.hello.dev) |
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
-|`scope`|One or more scopes listed at [Hellō Claims](/documentation/hello-claims.html)|
-|`nonce`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A unique string that will be included in the ID Token|
+|`scope`|The `openid` scope and zero or more scopes listed at [Hellō Claims](/documentation/hello-claims.html)|
+|`nonce`<br><span style="margin-top: 16px; display: inline-block;"></span>|A unique string that will be included in the signed ID Token. This links the ID Token to your request|
+|`response_type`|Set this to `id_token`. <br>*While Hellō supports the `code` flow to be compatile with legacy platforms, the `id_token` flow is simpler as it does not require implementing [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)*|
+|`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|Either `fragment` or `form_post`. Defaults to `fragment`. This parameter tells Hellō how you would like to receive the response.<br>See [4. Receive Response](#_5-receive-response) for details|
 |`state`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A value representing the state of your application that will be returned as a parameter in the response|
-|`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|Either `fragment` or `form_post`. Defaults to `fragment`. This parameter tells Hellō how you would like to receive the response.<br>See [5. Receive Response](#_5-receive-response) for details.|
 
 **Here is an example request for the GreenfieldDemo app**<br>
 *(line feeds added for readability)*
@@ -97,7 +71,7 @@ Hellō only supports the [`id_token`](https://openid.net/specs/oauth-v2-multiple
 
 Hellō does not support the [`UserInfo endpoint`](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo). All user information is included in the ID Token.
 
-## 4. Make Request
+## 3. Make Request
 
 Cause the user's browser to load the `request URL` you created in `Step 3`. Here are some examples:
 - Set `window.location.href` with JavaScript
@@ -116,7 +90,7 @@ Location: https://consent.hello.coop/?...
 
 The user will then interact with Hellō, when finished, they will be redirected back to your application with either an ID Token, or an error response.
 
-## 5. Receive Response
+## 4. Receive Response
 
 Your app will receive the response as either fragment query parameters to the provided `redirect_uri` if `response_mode=fragment`, or as in `application/x-www-form-urlencoded` format in an HTTP POST to the provided `redirect_uri` if `response_mode=form_post`. If the user approved the request, the response will contain an `id_token` parameter, and a `state` parameter if provided. See [Request Errors](errors.html#request-errors) for unsuccessful responses.
 
@@ -211,14 +185,14 @@ An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/
 Your application now has an ID Token for the user, but before using it, you need to ensure it is valid, and not an ID Token an attacker has passed to your application. The ID Token header and signature are part of the validation procedure.
 
 
-## 6. Validate ID Token
+## 5. Validate ID Token
 
 You can validate the `id_token` by:
 1. Sending it back to the Hellō introspection API; or 
 2. Perform validation yourself per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
 
 
-### 6.1 Introspection
+### 5.1 Introspection
 
 Hellō provides an introspection API per [RFC 7662](https://www.rfc-editor.org/rfc/rfc7662.html) at`https://consent.hello.coop/oauth/introspect` that will examine the token, ensure it was from Hellō, has not expired, and return the payload. 
 
@@ -288,7 +262,7 @@ If successfully validated, you will receive the ID Token payload with `active:tr
 }
 ```
 
-### 6.2 Self Validation
+### 5.2 Self Validation
 
 There are many OpenID Connect libraries that include ID Token validation. The OpenID Foundation maintains a list [here](https://openid.net/developers/libraries/). Getting security right is HARD. We recommend you use a proven library and NOT write your own validation. We include the information below for reference.
 

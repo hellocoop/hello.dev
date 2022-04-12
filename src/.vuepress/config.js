@@ -75,7 +75,7 @@ module.exports = {
                 '/documentation/README.md',
                 '/documentation/getting-started.md',
                 '/documentation/integrating-hello.md',
-                '/documentation/hello-frameworks.md',
+                '/documentation/hello-platforms.md',
                 '/documentation/hello-claims.md',
                 '/documentation/errors.md',
               ],
