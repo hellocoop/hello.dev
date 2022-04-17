@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+
+.svelte
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+
+src/.vuepress/.cache
+src/.vuepress/.temp
+pids
+logs
+node_modules
+npm-debug.log
+coverage/
+run
+dist
+.DS_Store
+.nyc_output
+.basement
+config.local.js
+basement_dist
