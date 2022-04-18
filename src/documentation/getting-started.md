@@ -28,33 +28,7 @@ To add a Hellō Button to your page:
 <b>2.2</b> Include the HTML for the Hellō Button in your page:
 
 
-<CodeGroup>
-<CodeGroupItem title="Dark Button" active>
-
-<div style="padding: 1rem 0.5rem; padding-top: 0.9rem; margin-top: 1.8rem; margin-bottom: -1rem;">
-  <button class="hello-btn-dark">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>
-</div>
-
-```html
-<button id="hello-login-btn" class="hello-btn-dark">
-  ō&nbsp;&nbsp;&nbsp;Continue with Hellō 
-</button>
-```
-
-</CodeGroupItem>
-<CodeGroupItem title="White Button">
-
-<div style="padding: 1rem 0.5rem; padding-top: 0.9rem; margin-top: 1.8rem; margin-bottom: -1rem;">
-  <button class="hello-btn-light">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>
-</div>
-  
-```html
-<button id="hello-login-btn" class="hello-btn-light">
-  ō&nbsp;&nbsp;&nbsp;Continue with Hellō 
-</button>
-```
-</CodeGroupItem>
-</CodeGroup>
+<hello-btn-explorer v-pre/>
 
 If you don't want to use the Hellō stylesheet, the Hellō button is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is an `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr`.
 
