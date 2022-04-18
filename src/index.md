@@ -31,6 +31,10 @@ tagline: Hellō is an OpenID Connect Provider that simplifies user registration 
 </div>
 
 <style>
+  .features{
+    padding-bottom: 8rem !important;
+  }
+
   .feature{
     padding-bottom: 4rem;
   }
