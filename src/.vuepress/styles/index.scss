@@ -7,6 +7,19 @@
   --navbar-height: 3rem !important;
 }
 
+:root.dark{
+  --c-brand: white;
+  --c-bg-navbar: #303030;
+  --c-bg: #151515;
+  --c-text: #D4D4D4;
+  --c-text-lightest: #D4D4D4;
+  --c-text-lighter: #D4D4D4;
+}
+
+.toggle-dark-button{
+  display: none;
+}
+
 .toggle-sidebar-button .icon span{
   background: white;
 }
@@ -71,8 +84,21 @@ code{
   color: #303030;
 }
 
+.dark code{
+  background: #808080;
+  color: white;
+}
+
 th, td{
   border: 1px solid #acacac;
+}
+
+.dark tr:nth-child(2n){
+  background: #303030;
+}
+
+.dark th, td{
+  border: 1px solid #808080;
 }
 
 tr:nth-child(2n){
