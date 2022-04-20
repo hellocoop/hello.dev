@@ -17,16 +17,14 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
 
 ```html
-<button onclick="signin()" id="hello-signin-btn" class="hello-btn-black-on-light">
+<button onclick="login()" id="hello-login-btn" class="hello-btn-black-on-light">
   ō&nbsp;&nbsp;&nbsp;Continue with Hellō 
 </button>
 
 <script>
-  function signin(){ 
-    const ref = document.getElementById('hello-signin-btn')
+  function login(){ 
+    const ref = document.getElementById('hello-login-btn')
     ref.disabled = true // Disable button
-    ref.innerHTML =     // Show spinner
-    `<img src='https://cdn.hello.coop/images/spin-light.svg' height="25" width="25">`
     const requestURL = await fetch()  // Fetch the request URL from your backend
     window.location.href = requestURL // See next step for creating request URL
   }
