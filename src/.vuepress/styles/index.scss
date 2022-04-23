@@ -110,6 +110,18 @@ tr:nth-child(2n){
   background-color: #f0f0f0;
 }
 
+.dark .navbar-item > a:hover, .navbar-item > a.router-link-active{
+  border-bottom: 2px solid #d4d4d4;
+}
+
+.dark .navbar-items a:hover, .navbar-items a.router-link-active{
+  color: #d4d4d4;
+}
+
+.dark .navbar{
+  color: #d4d4d4;
+}
+
 .dark .feature a:hover{
   border-bottom: 2px solid #D4D4D4;
 }
