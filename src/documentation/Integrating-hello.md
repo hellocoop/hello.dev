@@ -17,7 +17,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
 
 ```html
-<button onclick="login()" id="hello-login-btn" class="hello-btn-black-on-light">
+<button onclick="login()" id="hello-login-btn" class="hello-btn-black-and-static">
   ō&nbsp;&nbsp;&nbsp;Continue with Hellō 
 </button>
 
@@ -35,7 +35,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
 You can let users update their profile at Hellō as well. Don't forget to set the `profile_update` scope which will prompt the user to decide what information to change.
 
-<button class="hello-btn-white-on-light">ō&nbsp;&nbsp;&nbsp;Update Profile with Hellō</button>
+<button class="hello-btn-white-and-static">ō&nbsp;&nbsp;&nbsp;Update Profile with Hellō</button>
 
 ## 2. Create Request URL
 

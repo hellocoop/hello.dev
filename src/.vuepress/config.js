@@ -40,7 +40,7 @@ module.exports = {
     editLinkPattern: ':repo/edit/:branch/src/:path',
     lastUpdated: false,
     contributors: false,
-    darkMode: false,
+    darkMode: true,
     repo: '',
     docsDir: '',
     sidebarDepth: 2,
