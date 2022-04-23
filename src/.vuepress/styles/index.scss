@@ -110,6 +110,10 @@ tr:nth-child(2n){
   background-color: #f0f0f0;
 }
 
+.dark .feature a:hover{
+  border-bottom: 2px solid #D4D4D4;
+}
+
 .copy-code-button{
   top: 8px !important;
   right: 8px !important;
