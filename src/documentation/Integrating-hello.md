@@ -213,16 +213,17 @@ const client_id     // your apps client_id
 const nonce         // the nonce sent in the request
 
 const url = 'https://consent.hello.coop/oauth/introspect'
+const params = {
+  token: id_token,
+  client_id: client_id,
+  nonce: nonce
+}
 const options = {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
-    headers: {'Content-type': 'application/json'},
-    body: JSON.stringify({
-      token: id_token, 
-      client_id: client_id, 
-      nonce: nonce
-    })
+    headers: {'Content-type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(params).toString()
 }
 const response = await fetch(url, options)
 const json = await response.json()
