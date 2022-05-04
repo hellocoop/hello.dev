@@ -47,7 +47,7 @@ The **request URL** is `https://consent.hello.coop/` and a query with the follow
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
 |`scope`|The `openid` scope and zero or more scopes listed at [Hellō Claims](/documentation/hello-claims.html)|
 |`nonce`<br><span style="margin-top: 16px; display: inline-block;"></span>|A unique string that will be included in the signed ID Token. This links the ID Token to your request|
-|`response_type`|Set this to `id_token`. <br>*While Hellō supports the `code` flow to be compatile with legacy platforms, the `id_token` flow is simpler as it does not require implementing [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)*|
+|`response_type`|Set this to `id_token`. <br>*While Hellō supports the `code` flow to be compatible with legacy platforms, the `id_token` flow is simpler as it does not require implementing [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)*|
 |`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|Either `fragment` or `form_post`. Defaults to `fragment`. This parameter tells Hellō how you would like to receive the response.<br>See [4. Receive Response](#_5-receive-response) for details|
 |`state`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A value representing the state of your application that will be returned as a parameter in the response|
 
