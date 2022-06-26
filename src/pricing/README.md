@@ -21,7 +21,7 @@ Hellō verified claims are currently free, and will continue to be **free** unti
 
 ## Hellō Business Model
 
-The Hellō business model is to charge an interchange fee verified claims released by the interchange. We are starting with verified email and phone, and expanding to GitHub, LinkedIn, Twitter as well as Ethereum and Solana addresses. 
+The Hellō business model is to charge an interchange fee for verified claims released by the interchange. We are starting with verified email and phone, and expanding to GitHub, LinkedIn, Twitter as well as Ethereum and Solana addresses. 
 
 The mission is to be a marketplace for any verified claim a user might want to share with an application. While Hellō will acquire verified claims that are free and can be obtained by the user linking providers, vendors of verified claims can offer their claims through Hellō. Claims vendors can set the pricing for their claim, and Hellō will charge a fixed interchange fee for delivering the claim to the developer with the user's consent.
 
