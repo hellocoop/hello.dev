@@ -27,7 +27,7 @@ tagline: Hellō is an OpenID Connect Provider that simplifies user registration 
   </div>
 
   <div style="display: flex; flex-direction: column; margin: 0 auto; align-items: center; justify-content: center;">
-    <p>Interested in talking to others about Hellō?</p>
+    <p style="font-weight: 600;">Interested in talking to others about Hellō?</p>
     <button class="hello-btn-black-and-static">
       Join our Slack Community
     </button>
