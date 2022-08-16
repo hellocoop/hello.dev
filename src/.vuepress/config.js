@@ -22,6 +22,7 @@ module.exports = {
    */
   head: [
     ['link', { rel: 'icon', href: 'https://cdn.hello.coop/images/dev-favicon-dark.png' }],
+    ['script', { href: 'https://cdn.hello.coop/js/join-slack-community.js' }],
     ['meta', { name: 'theme-color', content: '#303030' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
