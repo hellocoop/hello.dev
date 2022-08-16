@@ -58,4 +58,5 @@ If possible, test any visual changes in all latest versions of common browsers, 
 
 
 ## License
-Content submitted to [hello.dev](https://hello.dev/) is xxx, as found in the [LICENSE-DOCS.md]() file.
+
+<a href="LICENSE">![CC0](https://cdn.hello.coop/images/cc-zero.svg)</a>
