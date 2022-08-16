@@ -28,15 +28,23 @@ tagline: Hellō is an OpenID Connect Provider that simplifies user registration 
 
   <div style="display: flex; flex-direction: column; margin: 0 auto; align-items: center; justify-content: center;">
     <p style="font-weight: 600;">Interested in talking to others about Hellō?</p>
-    <button class="hello-btn-black-and-static">
+    <button @click="join" class="hello-btn-black-and-static">
       Join our Slack Community
     </button>
   </div>
 </div>
 
+
 <div style="position: fixed; width: 100%; left: 0; bottom: 0;" v-pre>
   <wc-footer/>
 </div>
+
+<script setup>
+  const join = () => {
+    joinSlackCommunity('hello.dev')
+  }
+</script>
+
 
 <style>
   .features{
