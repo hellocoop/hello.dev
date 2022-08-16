@@ -7,6 +7,10 @@
     "name": "",
     "email": ""
   },
+  "engines" : { 
+    "npm" : ">=7.0.0",
+    "node" : ">=16.0.0"
+  },
   "repository": "/Hellō Dev",
   "scripts": {
     "dev": "vuepress dev src",
