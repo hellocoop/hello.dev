@@ -56,11 +56,11 @@ tagline: Hellō is an OpenID Connect Provider that simplifies user registration 
   }
 
   .hello-btn-black-and-static{
-    line-height: 16px;
-    padding: 16px;
-    margin: 0 auto;
-    font-family: sans-serif;
-    font-weight: 600;
+    line-height: 16px !important;
+    padding: 16px !important;
+    margin: 0 auto !important;
+    font-family: sans-serif !important;
+    font-weight: 600 !important;
   }
 
   @media (max-width: 719px) {
