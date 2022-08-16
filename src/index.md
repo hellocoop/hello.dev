@@ -25,6 +25,10 @@ tagline: Hellō is an OpenID Connect Provider that simplifies user registration 
     </h2>
     <p>Configure and manage your application(s).</p>
   </div>
+
+  <a href="https://join.slack.com/t/hello-community/shared_invite/zt-1eathz2k5-QDlgsN6aULVgJrbJtSKL_g" target="_blank" class="hello-btn-black-and-static">
+    Join our Slack Community
+  </a>
 </div>
 
 <div style="position: fixed; width: 100%; left: 0; bottom: 0;" v-pre>
@@ -38,6 +42,24 @@ tagline: Hellō is an OpenID Connect Provider that simplifies user registration 
 
   .feature{
     padding-bottom: 4rem;
+  }
+
+  .hello-btn-black-and-static{
+    line-height: 16px;
+    padding: 12px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 719px) {
+    .home .feature {
+      padding: 0
+    }
+    .features{
+      padding-bottom: 10rem !important;
+    }
+    .hello-btn-black-and-static{
+      margin: 40px auto;
+    }
   }
 
   .feature a:hover{
