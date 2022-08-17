@@ -10,9 +10,9 @@ Many platforms have a generic OpenID Connect (OIDC) plug-in / module / configura
 |---|---|
 |`openid-configuration`|<CopyComponent url="https://issuer.hello.coop/.well-known/openid-configuration"/>|
 |`issuer`|<CopyComponent url="https://issuer.hello.coop"/>|
-|`authorization_endpoint` |<CopyComponent url="https://consent.hello.coop/"/>|
-|`token_endpoint` |<CopyComponent url="https://consent.hello.coop/oauth/token"/>|
-|`userinfo_endpoint` |<CopyComponent url="https://consent.hello.coop/oauth/userinfo"/>|
+|`authorization_endpoint` |<CopyComponent url="https://wallet.hello.coop/authorize"/>|
+|`token_endpoint` |<CopyComponent url="https://wallet.hello.coop/oauth/token"/>|
+|`userinfo_endpoint` |<CopyComponent url="https://wallet.hello.coop/oauth/userinfo"/>|
 
 </div>
 

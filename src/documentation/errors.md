@@ -23,7 +23,7 @@ https://greenfielddemo.com/#/?<span style="color: #f8c555">error</span>=<span st
 
 ## Introspection Errors
 
-Following are the responses from the [Token Introspection API](/documentation/using-hello.html#_6-1-introspection) `https://consent.hello.coop/oauth/introspect`
+Following are the responses from the [Token Introspection API](/documentation/using-hello.html#_6-1-introspection) `https://wallet.hello.coop/oauth/introspect`
 
 If the token is invalid in anyway, the API will return `active` set to `false`
 

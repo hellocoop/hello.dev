@@ -17,7 +17,7 @@ Currently, Hellō is ideal for developers building **new**, **greenfield applica
 <button class="hello-btn-black-and-static">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>
 
 
-2. The user is redirected to the Hellō consent page where they choose their preferred provider to log in. Popular social log in providers, email, phone, and web3 wallets are offered. The user completes logging in with their preferred provider.
+2. The user is redirected to the Hellō authorize page where they choose their preferred provider to log in. Popular social log in providers, email, phone, and web3 wallets are offered. The user completes logging in with their preferred provider.
 
 3. The user is prompted to provide any claims requested by your application that were not gathered by the provider they chose.
 

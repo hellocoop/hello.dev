@@ -40,7 +40,7 @@ You can let users update their profile at Hellō as well. Don't forget to set th
 
 ## 2. Create Request URL
 
-The **request URL** is `https://consent.hello.coop/` and a query with the following parameters
+The **request URL** is `https://wallet.hello.coop/authorize` and a query with the following parameters
 
 |Parameter|Description|
 |---|---|
@@ -56,7 +56,7 @@ The **request URL** is `https://consent.hello.coop/` and a query with the follow
 *(line feeds added for readability)*
 
 <p style="background: #282c34; color: white; word-break: break-all; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
-  https://consent.hello.coop/<br>
+  https://wallet.hello.coop/authorize<br>
   ?<span style="color: #f8c555">client_id</span>=<span style="color: #7ec699;">3574f001-0874-4b20-bffd-8f3e37634274</span><br>
   &<span style="color: #f8c555;">nonce</span>=<span style="color: #7ec699;">b957cea0-f159-4390-ba48-5c5d7e943ea4</span><br>
   &<span style="color: #f8c555;">redirect_uri</span>=<span style="color: #7ec699;">https://greenfielddemo.com/</span><br>
@@ -74,16 +74,16 @@ Hellō supports [`response_type=id_token`](https://openid.net/specs/oauth-v2-mul
 Cause the user's browser to load the `request URL` you created in `Step 3`. Here are some examples:
 - Set `window.location.href` with JavaScript
 ```javascript
-window.location.href = "https://consent.hello.coop/?..."
+window.location.href = "https://wallet.hello.coop/authorize?..."
 ```
 - An `<a>` tag with an `href` to the `requestURL`  
 ```html
-<a href="https://consent.hello.coop/?..." /> ... </a> 
+<a href="https://wallet.hello.coop/authorize?..." /> ... </a> 
 ```
 - HTTP 302 redirect from the server
 ```
 HTTP/1.1 302 Found
-Location: https://consent.hello.coop/?...
+Location: https://wallet.hello.coop/authorize?...
 ```
 
 The user will then interact with Hellō, when finished, they will be redirected back to your application with either an ID Token, or an error response.
@@ -192,7 +192,7 @@ You can validate the `id_token` by:
 
 ### 5.1 Introspection
 
-Hellō provides an introspection API per [RFC 7662](https://www.rfc-editor.org/rfc/rfc7662.html) at`https://consent.hello.coop/oauth/introspect` that will examine the token, ensure it was from Hellō, has not expired, and return the payload. 
+Hellō provides an introspection API per [RFC 7662](https://www.rfc-editor.org/rfc/rfc7662.html) at`https://wallet.hello.coop/oauth/introspect` that will examine the token, ensure it was from Hellō, has not expired, and return the payload. 
 
 No authentication is required to call the introspection endpoint. You MUST pass your `client_id`, and if you provided a `nonce` in the `request URL`, you MUST provide the nonce. The `token`, `client_id`, and optional `nonce` are sent as JSON.
 
@@ -213,7 +213,7 @@ const id_token      // the ID Token received
 const client_id     // your apps client_id
 const nonce         // the nonce sent in the request
 
-const url = 'https://consent.hello.coop/oauth/introspect'
+const url = 'https://wallet.hello.coop/oauth/introspect'
 const params = {
   token: id_token,
   client_id: client_id,
