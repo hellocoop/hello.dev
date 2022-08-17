@@ -26,14 +26,25 @@ tagline: Hellō is an OpenID Connect Provider that simplifies user registration 
     <p>Configure and manage your application(s).</p>
   </div>
 
-  <a href="https://join.slack.com/t/hello-community/shared_invite/zt-1eathz2k5-QDlgsN6aULVgJrbJtSKL_g" target="_blank" class="hello-btn-black-and-static">
-    Join our Slack Community
-  </a>
+  <div style="display: flex; flex-direction: column; margin: 0 auto; align-items: center; justify-content: center;">
+    <p style="font-weight: 600;">Interested in talking to others about Hellō?</p>
+    <button @click="join" class="hello-btn-black-and-static">
+      Join our Slack Community
+    </button>
+  </div>
 </div>
+
 
 <div style="position: fixed; width: 100%; left: 0; bottom: 0;" v-pre>
   <wc-footer/>
 </div>
+
+<script setup>
+  const join = () => {
+    joinSlackCommunity('hello.dev')
+  }
+</script>
+
 
 <style>
   .features{
@@ -45,9 +56,11 @@ tagline: Hellō is an OpenID Connect Provider that simplifies user registration 
   }
 
   .hello-btn-black-and-static{
-    line-height: 16px;
-    padding: 16px;
-    margin: 0 auto;
+    line-height: 16px !important;
+    padding: 16px !important;
+    margin: 0 auto !important;
+    font-family: sans-serif !important;
+    font-weight: 600 !important;
   }
 
   @media (max-width: 719px) {
