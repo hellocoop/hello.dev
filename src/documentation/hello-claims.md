@@ -19,6 +19,8 @@ Following are the scopes currently supported by Hellō. These are standard OpenI
 |`email`|A verified email address. `email_verified=true` will always be returned.|
 |`phone`|A verified phone number. `phone_verified=true` will always be returned.|
 |`picture`|A URL to a profile picture. [See FAQ 13](/faqs/#_13-what-can-i-do-with-the-picture-url-i-receive) for details|
+| - | non-standard scopes |
+| `ethereum`|A verified ethereum address.|
 |`profile_update`|The user will be prompted to release updated profile information.<br> [See FAQ 14](/faqs/#_14-how-can-users-update-the-profile-information-i-received-from-hello-for-example-the-user-wants-to-change-their-profile-picture-or-email) for details.|
 
 ## Potential Scopes
@@ -28,10 +30,10 @@ We are exploring offering the following scopes:
 |Scope|Description|
 |---|---|
 |`github`|The user's GitHub profile url.|
-|`linkedin`|The user's LinkedIn profile url.|
-|`ethereum` |The user's ethereum address.|
+|`twitter`|The user's Twitter profile url.|
+|`discord` |The user's Discord profile.|
 
-We would prompt the user to link their GitHub, LinkedIn accounts, or their Ethereum Wallet.
+We would prompt the user to link their GitHub, Twitter, or Discover accounts.
 
 Share your thoughts in our [Additional Scopes Discussion](https://github.com/hellocoop/hello.dev/discussions/4)
 
