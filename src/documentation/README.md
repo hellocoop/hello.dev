@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Hellō is an [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) Provider that simplifies user registration and login for you application — allowing you to provide all the choices your users may want in hours instead of days or weeks.
+Hellō is an [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) Provider that simplifies user registration and login for your application — allowing you to provide all the choices your users may want in hours instead of days or weeks.
 
 Unlike other providers, Hellō gathers all the information you request about the user. Your users have choice on how they want to authenticate, which profile picture they want to provide you, and which email they want to verify. Hellō also lets you send the user back to Hellō if they want to update their profile at your site — no need for you to implement email or phone verification, or image uploads.
 
@@ -17,7 +17,7 @@ Currently, Hellō is ideal for developers building **new**, **greenfield applica
 <button class="hello-btn-black-and-static">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>
 
 
-2. The user is redirected to the Hellō consent page where they choose their preferred provider to log in. Popular social log in providers, email, phone, and web3 wallets are offered. The user completes logging in with their preferred provider.
+2. The user is redirected to the Hellō authorize page where they choose their preferred provider to log in. Popular social log in providers, email, phone, and web3 wallets are offered. The user completes logging in with their preferred provider.
 
 3. The user is prompted to provide any claims requested by your application that were not gathered by the provider they chose.
 

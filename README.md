@@ -7,8 +7,7 @@ This repo contains the source code and documentation powering [https://hello.dev
 ### Prerequisites
 
 1. Git
-1. Node: any 12.x version starting with v12.0.0 or greater
-1. npm
+1. Node (>=16.0.0), npm (>=7.0.0)
 1. A fork of the repo (for any contributions)
 1. A clone of the [hello.dev repo](https://github.com/hellocoop/hello.dev) on your local machine
 
@@ -58,4 +57,5 @@ If possible, test any visual changes in all latest versions of common browsers, 
 
 
 ## License
-Content submitted to [hello.dev](https://hello.dev/) is xxx, as found in the [LICENSE-DOCS.md]() file.
+
+<a href="LICENSE">![CC0](https://cdn.hello.coop/images/cc-zero.svg)</a>

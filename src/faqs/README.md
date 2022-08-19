@@ -10,7 +10,7 @@ sidebar: auto
 
 ### *1) What is Hellō?* 
 
-Hellō is a service that simplifies registration and log in of your users. Hellō uses OpenId Connect, the same protocol used by Apple, Facebook, and Google in their social log in services. 
+Hellō is a service that simplifies registration and log in of your users. Hellō uses OpenID Connect, the same protocol used by Apple, Facebook, and Google in their social log in services. 
 
 ### *2) How much does Hellō cost?*
 
