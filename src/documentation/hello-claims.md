@@ -33,7 +33,7 @@ We are exploring offering the following scopes:
 |`twitter`|The user's Twitter profile url.|
 |`discord` |The user's Discord profile.|
 
-We would prompt the user to link their GitHub, Twitter, or Discover accounts.
+We would prompt the user to link their GitHub, Twitter, or Discord accounts.
 
 Share your thoughts in our [Additional Scopes Discussion](https://github.com/hellocoop/hello.dev/discussions/4)
 
