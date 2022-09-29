@@ -47,23 +47,27 @@ A publisher is a group of developers and testers working on one or more applicat
 
 Hellō will only allow a publisher's administrator, developers, and testers to access an application's development URIs. Other users will be denied access. Localhost addresses are not permitted in production URIs.
 
-### *10) What does Hellō provide me to identify my users?*
+### *10) Which OpenID Connect flows does Hellō support?*
+
+Unlike most social providers, Hellō supports all the redirect flows. We recommend the `id_token` flow if that choice is available to you as you will not need to manage a client secret nor implement [PKCE]. Hellō also supports the `code` flow which requires PKCE or a client secret (ideally both). The `code` flow will return both an `id_token` and an `access_token`, the later can be used to call the Hellō `user_info_endpoint` if you are using an integration that only works that way.
+
+### *11) What does Hellō provide me to identify my users?*
 
 We recommend you use the `sub` claim in the ID Token, which is a GUID. The OpenID Connect ID Token specifies the `iss` and `sub` claim identify the user, but as the `sub` claim is a globally unique, the `iss` claim is redundant. 
 
-### *11) Why should I use the `sub` claim to identify my users instead of `email`?*
+### *12) Why should I use the `sub` claim to identify my users instead of `email`?*
 
-The `sub` value is a globally unique identifier that you always receive back for the same user across all of a publisher's applications. The `email` is not guaranteed to be unique between users, as some users share email address. You no longer require the user's email for account recovery as that is managed by Hellō, and your app could be more privacy friendly by not requiring an email, reducing compliance requirements. We believe that the `sub` claim is not PII as it is not shared with any other party -- but you should consult your own compliance counsel.
+The `sub` value is a globally unique identifier that you always receive back for the same user across all of a publisher's applications. The `email` is not guaranteed to be unique between users as some users share email address, and many users have multiple email addresses. You no longer require the user's email for account recovery as that is managed by Hellō, and your app could be more privacy friendly by not requiring an email, reducing compliance requirements. We believe that the `sub` claim is not PII as it is not shared with any other party -- but you should consult your own compliance counsel.
 
-### *12) What scopes will I receive back?*
+### *13) What claims will I receive back?*
 
-You will receive back all scopes you requested.
+You will receive back all claims for all the scopes you requested. We suggest you only ask for what you need, and not until you need it. Hellō makes it easy for you to incrementally request information.
 
-### *13) What can I do with the picture URL I receive?*
+### *14) What can I do with the picture URL I receive?*
 
 You can use the picture URL as the user's profile picture. The user may release a URL that resolves to be a user's social media profile picture, and the returned image will change when the user changes their social media profile picture. 
 
-### *14) How can users update the profile information I received from Hellō? For example, the user wants to change their profile picture or email?*
+### *15) How can users update the profile information I received from Hellō? For example, the user wants to change their profile picture or email?*
 
 You can send the user back to Hellō where the user can select different claims. To see this in action, see the:
 
