@@ -9,17 +9,19 @@ pageClass: home-page-class
   }
 </script>
 
-<h1>Identity in hours instead of days or weeks.</h1>
-<picture id="mockup">
-  <source srcset="https://cdn.hello.coop/images/mockup-light.png" media="(prefers-color-scheme: dark)">
-  <img src="https://cdn.hello.coop/images/mockup.png">
-</picture>
+<div id="hero">
+  <h1>Identity in hours,<br/>not days or weeks.</h1>
+  <picture id="mockup">
+    <source srcset="https://cdn.hello.coop/images/mockup-light.png" media="(prefers-color-scheme: dark)">
+    <img src="https://cdn.hello.coop/images/mockup.png">
+  </picture>
+</div>
 
 <section id="features">
   <div>
-    <h2>Registration and Authentication in a Few Lines of Code</h2>
+    <h3>Registration and Authentication in a Few Lines of Code</h3>
     <p>
-      One free integration gets you any standard profile information you need including verified email and phone. Offer your users their preferred way to login including all the popular social logins, passwordless, crypto wallets, and Passkey.
+      One free integration gets you any standard profile information you need and offers your users their preferred way to login.
     </p>
     <div id="snippet"><pre>{{`
 <div class="hello-container">
@@ -33,14 +35,14 @@ pageClass: home-page-class
     </div>
   </div>
   <div>
-    <h2>Improved Development Workflows</h2>
+    <h3>Improved Development Workflows</h3>
     <p>
       Hellō reduces your application code paths. There’s no need to manage multiple authentication integrations or to support and test different authentication flows, email verification, or phone verification.
     </p>
     <img src="/images/ci-cd.png" style="width: 260px;">
   </div>
   <div>
-    <h2>Show Users You Care About Their Privacy</h2>
+    <h3>Show Users You Care About Their Privacy</h3>
     <p>
       Hellō shows users that you care about their privacy, consent, freedom of choice, and online safety.
     </p>
@@ -49,7 +51,7 @@ pageClass: home-page-class
 </section>
 
 <section id="start-building">
-  <h1>Start building your next app with Hellō...</h1>
+  <h2>Start building your next app with Hellō...</h2>
   <div id="links">
     <div>
       <a href="/documentation/">Documentation</a>
@@ -98,11 +100,24 @@ pageClass: home-page-class
 </div>
 
 <style scoped>
-  h1 {
-    text-align: center;
+  #hero {
+    display: flex;
+    text-align: left;
+    justify-content: space-between;
+    margin: 40px auto;
+  }
+  #hero h1 {
+    text-align: left;
+    margin-top: 50px;
+    font-size: 4rem;
   }
   h2 {
+    text-align: center;
     border-bottom: none;
+    padding-bottom: 0; 
+    font-size: 2.4rem;
+  }
+  h3 {
     font-size: 1.2rem;   
     padding-bottom: 0; 
   }
@@ -112,9 +127,7 @@ pageClass: home-page-class
     line-height: 22px;
   }
   #mockup img {
-    max-width: 360px;
-    margin: 40px auto;
-    display: block;
+    max-width: 420px;
   }
   #features, #links {
     display: flex;
@@ -126,7 +139,7 @@ pageClass: home-page-class
     max-width: 290px;
   }
   #features div p {
-    min-height: 160px;
+    min-height: 150px;
   }
   #snippet pre {
     padding: 10px;
@@ -160,6 +173,9 @@ pageClass: home-page-class
       flex-direction: column;
       gap: 20px 0px;
     }
+    #features {
+      margin-top: 0px;
+    }
     #features div {
       max-width: 100%;
     }
@@ -171,6 +187,23 @@ pageClass: home-page-class
     }
     #mockup img{
       max-width: 100%;
+    }
+    #hero {
+      flex-direction: column;
+      margin-bottom: 0px;
+      margin-top: 10px;
+    }
+    #hero h1{
+      font-size: 2.8rem;
+      margin: 0;
+    }
+    #hero img {
+      max-width: 300px;
+      margin: 40px auto;
+      display: block;
+    }
+    h2 {
+      font-size: 1.8rem;
     }
   }
   @media (prefers-color-scheme: light) {
