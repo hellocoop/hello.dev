@@ -140,6 +140,9 @@ pageClass: custom-page-class
     margin-top: 80px;
     padding-bottom: 60px;
   }
+  a, #join-slack-btn {
+    font-size: 1.2rem;
+  }
   a:hover, a:focus-visible, #join-slack-btn:hover, #join-slack-btn:focus-visible {
     text-decoration: underline;
     text-underline-offset: 8px;
@@ -149,8 +152,21 @@ pageClass: custom-page-class
     background: none;
     border: none;
     cursor: pointer;
-    font-weight: 500;
-    font-size: 16px;
     padding: 0;
+  }
+  @media (max-width: 1000px) {
+    #features, #links {
+      flex-direction: column;
+      gap: 20px 0px;
+    }
+    #features div {
+      max-width: 100%;
+    }
+    #features div p {
+      min-height: auto;
+    }
+    #start-building {
+      margin-top: 40px; 
+    }
   }
 </style>
