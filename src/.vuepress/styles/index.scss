@@ -164,6 +164,10 @@ div[class*="language-"]:hover .copy-code-button{
   display: none;
 }
 
+.theme-container.custom-page-class .theme-default-content:not(.custom) {
+  max-width: 968px !important;
+}
+
 @media screen and (max-width: 719px){
   @media (prefers-color-scheme: dark) {
     .navbar-item > a:hover, .navbar-item > a.router-link-active{
