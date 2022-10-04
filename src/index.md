@@ -169,6 +169,9 @@ pageClass: home-page-class
     #start-building {
       margin-top: 40px; 
     }
+    #mockup img{
+      max-width: 100%;
+    }
   }
   @media (prefers-color-scheme: light) {
     #snippet {
