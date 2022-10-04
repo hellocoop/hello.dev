@@ -1,101 +1,96 @@
 ---
-home: true
-heroImage: https://cdn.hello.coop/images/mockup.png
-heroImageDark: https://cdn.hello.coop/images/mockup-light.png
-tagline: Hellō is an OpenID Connect Provider that simplifies user registration and login, allowing you to provide all the choices your users may want in hours instead of days or weeks.
+editLink: false
 ---
 
-<div class="features">
-  <div class="feature">
-    <h2><a href="/documentation/index.html">Documentation</a></h2>
-    <p>An overview, step-by-step guide, and details on claims.</p>
-  </div>
+<h1>Identity in hours instead of days or weeks.</h1>
+<picture id="mockup">
+  <source srcset="https://cdn.hello.coop/images/mockup-light.png" media="(prefers-color-scheme: dark)">
+  <img src="https://cdn.hello.coop/images/mockup.png">
+</picture>
 
-  <div class="feature">
-    <h2><a href="/faqs/index.html">FAQs</a></h2>
-    <p>Frequently asked developer questions.</p>
+<section id="features">
+  <div>
+    <h2>Registration and Authentication in a Few Lines of Code</h2>
+    <p>
+      One free integration gets you any standard profile information you need including verified email and phone. Offer your users their preferred way to login including all the popular social logins, passwordless, crypto wallets, and Passkey.
+    </p>
   </div>
-
-  <div class="feature">
-    <h2>
-      <a href="https://console.hello.dev">
-        <span>Console</span>
-        <span><svg class="external-link-icon" style="margin-left: 4px; margin-top: 2px;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span>
-      </a>
-    </h2>
-    <p>Configure and manage your application(s).</p>
+  <div>
+    <h2>Improved Development Workflows</h2>
+    <p>
+      Hellō reduces your application code paths. There’s no need to manage multiple authentication integrations or to support and test different authentication flows, email verification, or phone verification.
+    </p>
   </div>
-
-  <div style="display: flex; flex-direction: column; margin: 0 auto; align-items: center; justify-content: center;">
-    <p style="font-weight: 600;">Interested in talking to others about Hellō?</p>
-    <button @click="join" class="hello-btn-black-and-static">
-      Join our Slack Community
-    </button>
+  <div>
+    <h2>Show Users You Care About Their Privacy</h2>
+    <p>
+      Hellō shows users that you care about their privacy, consent, freedom of choice, and online safety.
+    </p>
   </div>
-</div>
+</section>
 
+<section>
+  <h1>Start building your next app with Hellō...</h1>
+  <div id="links">
+    <div>
+      <h2>Documentation</h2>
+      <p>
+        An overview and step-by-step guide.
+      </p>
+    </div>
+    <div>
+      <h2>FAQs</h2>
+      <p>
+        Frequently asked developer questions.
+      </p>
+    </div>
+    <div>
+      <h2>Playground</h2>
+      <p>
+        Explore what you can do with Hellō.
+      </p>
+    </div>
+    <div>
+      <h2>Console</h2>
+      <p>
+        Configure and manage your application(s).
+      </p>
+    </div>
+    <div>
+      <h2>Slack</h2>
+      <p>
+        Join the community to discuss Hellō.
+      </p>
+    </div>
+  </div>
+</section>
 
 <div style="position: fixed; width: 100%; left: 0; bottom: 0;" v-pre>
   <wc-footer/>
 </div>
 
-<script setup>
-  const join = () => {
-    joinSlackCommunity('hello.dev')
-  }
-</script>
-
-
 <style>
-  .features{
-    padding-bottom: 8rem !important;
+  .theme-default-content {
+    max-width: 968px !important;
   }
-
-  .feature{
-    padding-bottom: 4rem;
+  h1 {
+    text-align: center;
   }
-
-  .hello-btn-black-and-static{
-    line-height: 16px !important;
-    padding: 16px !important;
-    margin: 0 auto !important;
-    font-family: sans-serif !important;
-    font-weight: 600 !important;
+  h2 {
+    border-bottom: none;
+    font-size: 1.2rem;
   }
-
-  @media (max-width: 719px) {
-    .home .feature {
-      padding: 0
-    }
-    .features{
-      padding-bottom: 10rem !important;
-    }
-    .hello-btn-black-and-static{
-      margin: 40px auto;
-    }
+  #mockup img {
+    max-width: 360px;
+    margin: 40px auto;
+    display: block;
   }
-
-  .feature a:hover{
-    border-bottom: 2px solid #303030;
-  }
-
-  #links, #copyright, #social-links{
+  #features, #links {
     display: flex;
+    justify-content: space-between;
+    gap: 0px 20px;
   }
-
-  .dark .external-link-icon{
-    color: #d4d4d4;
-  }
-
-  #copyright{
-    margin-top: 0.48rem;
-  }
-
-  #links, #social-links{
-    gap: 0rem 1rem;
-  }
-
-  #social-links{
-    justify-content: end;
+  #features div {
+    max-width: 300px;
   }
 </style>
