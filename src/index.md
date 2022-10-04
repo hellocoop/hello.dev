@@ -1,6 +1,6 @@
 ---
 editLink: false
-pageClass: custom-page-class
+pageClass: home-page-class
 ---
 
 <script setup>
@@ -82,7 +82,7 @@ pageClass: custom-page-class
       </p>
     </div>
     <div>
-      <button id="join-slack-btn" @click="join" href="https://console.hello.dev/">
+      <button id="join-slack-btn" style="font-weight: 500;" @click="join" href="https://console.hello.dev/">
         Slack
         <span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span>
       </button>
@@ -128,13 +128,11 @@ pageClass: custom-page-class
   #features div p {
     min-height: 160px;
   }
-  #snippet {
-    background-color: #303030;
-  }
   #snippet pre {
     padding: 10px;
     font-size: 12px;
     line-height: 16px;
+    font-weight: 600;
   }
   #start-building {
     margin-top: 80px;
@@ -142,6 +140,8 @@ pageClass: custom-page-class
   }
   a, #join-slack-btn {
     font-size: 1.2rem;
+    color: inherit;
+    font-weight: 500 !important;
   }
   a:hover, a:focus-visible, #join-slack-btn:hover, #join-slack-btn:focus-visible {
     text-decoration: underline;
@@ -153,6 +153,7 @@ pageClass: custom-page-class
     border: none;
     cursor: pointer;
     padding: 0;
+    font-family: inherit;
   }
   @media (max-width: 1000px) {
     #features, #links {
@@ -167,6 +168,16 @@ pageClass: custom-page-class
     }
     #start-building {
       margin-top: 40px; 
+    }
+  }
+  @media (prefers-color-scheme: light) {
+    #snippet {
+      background-color: #d4d4d4;
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    #snippet {
+      background-color: #303030;
     }
   }
 </style>
