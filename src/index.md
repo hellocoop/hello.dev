@@ -208,10 +208,10 @@ tagline: #leave empty
     #hero {
       flex-direction: column;
       margin-bottom: 0px;
-      margin-top: 10px;
+      margin-top: 24px;
     }
     #hero h1{
-      font-size: 2.8rem;
+      font-size: 2.4rem;
       margin: 0;
     }
     #hero img {
