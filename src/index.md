@@ -23,15 +23,11 @@ pageClass: home-page-class
     <p>
       One free integration gets you any standard profile information you need and offers your users their preferred way to login.
     </p>
-    <div id="snippet"><pre>{{`
-<div class="hello-container">
-  <button
-    class="hello-btn-black-on-light"
-  />
-  <button
-    class="hello-about"
-  />
-</div>`}}</pre>
+    <div id="snippet"><pre>
+<span style="opacity: 0.6;">&lt;div</span> <span style="font-weight: 600;">class=<span style="opacity: 0.8;">"hello-container"</span></span><span style="opacity: 0.6;">&gt;</span>
+  <span class="snippet-border-left" style="opacity: 0.6;">&lt;button</span> <span style="font-weight: 600;">class=<span style="opacity: 0.8;">"hello-btn"</span></span><span style="opacity: 0.6;">/&gt;</span>
+  <span style="opacity: 0.6;">&lt;button</span> <span style="font-weight: 600;">class=<span style="opacity: 0.8;">"hello-about"</span></span><span style="opacity: 0.6;">/&gt;</span>
+<span style="opacity: 0.6;">&lt;/div&gt;</span></pre>
     </div>
   </div>
   <div>
@@ -51,7 +47,7 @@ pageClass: home-page-class
 </section>
 
 <section id="start-building">
-  <h2>Start building your next app with Hellō...</h2>
+  <h2>Start building your next app with Hellō ...</h2>
   <div id="links">
     <div>
       <a href="/documentation/">Documentation</a>
@@ -109,7 +105,7 @@ pageClass: home-page-class
   #hero h1 {
     text-align: left;
     margin-top: 50px;
-    font-size: 4rem;
+    font-size: 4.6rem;
   }
   h2 {
     text-align: center;
@@ -127,7 +123,17 @@ pageClass: home-page-class
     line-height: 22px;
   }
   #mockup img {
-    max-width: 420px;
+    max-width: 300px;
+    animation: float 5s infinite;
+  }
+  @keyframes float {
+      0%,
+      100% {
+          transform: translatey(0px);
+      }
+      50% {
+          transform: translatey(-10px);
+      }
   }
   #features, #links {
     display: flex;
@@ -142,10 +148,21 @@ pageClass: home-page-class
     min-height: 150px;
   }
   #snippet pre {
-    padding: 10px;
-    font-size: 12px;
-    line-height: 16px;
-    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    margin-top: 45px;
+    padding: 0;
+    color: white;
+    position: relative;
+  }
+  .snippet-border-left::before {
+    content: '';
+    height: 45px;
+    width: 1.5px;
+    background-color: #d4d4d4;
+    opacity: 0.3;
+    position: absolute;
+    left: 0;
   }
   #start-building {
     margin-top: 80px;
@@ -206,14 +223,9 @@ pageClass: home-page-class
       font-size: 1.8rem;
     }
   }
-  @media (prefers-color-scheme: light) {
-    #snippet {
-      background-color: #d4d4d4;
-    }
-  }
   @media (prefers-color-scheme: dark) {
-    #snippet {
-      background-color: #303030;
+    h1, h2, h3, a, #join-slack-btn {
+      color: white;
     }
   }
 </style>
