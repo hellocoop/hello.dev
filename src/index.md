@@ -21,21 +21,21 @@ tagline: #leave empty
 
 <section id="features">
   <div>
-    <h3>Registration and Authentication in a Few Lines of Code</h3>
+    <h3>Registration and Login with a Few Lines of Code - For Free</h3>
     <p>
-      One free integration gets you any standard profile information you need and offers your users their preferred way to login.
+      With one integration you get any standard profile information you request and offer your users their preferred way to login.
     </p>
     <div id="snippet"><pre>
-<span style="opacity: 0.6;">&lt;div</span> <span style="font-weight: 600;">class=<span style="opacity: 0.8;">"hello-container"</span></span><span style="opacity: 0.6;">&gt;</span>
+<span style="opacity: 0.6;">&lt;div</span> <span style="opacity: 0.4;">class=</span><span style="opacity: 0.8; font-weight: 600;" >"hello-container"</span><span style="opacity: 0.6;">&gt;</span>
   <span class="snippet-border-left" style="opacity: 0.6;">&lt;button</span> <span style="font-weight: 600;">class=<span style="opacity: 0.8;">"hello-btn"</span></span><span style="opacity: 0.6;">/&gt;</span>
   <span style="opacity: 0.6;">&lt;button</span> <span style="font-weight: 600;">class=<span style="opacity: 0.8;">"hello-about"</span></span><span style="opacity: 0.6;">/&gt;</span>
 <span style="opacity: 0.6;">&lt;/div&gt;</span></pre>
     </div>
   </div>
   <div>
-    <h3>Improved Development Workflows</h3>
+    <h3>Improve Your Development and Testing Workflows</h3>
     <p>
-      Hellō reduces your application code paths. There’s no need to manage multiple authentication integrations or to support and test different authentication flows, email verification, or phone verification.
+   Unlike social login providers, Hellō lets you develop on localhost. Fully automate registration and login for complete end-to-end test coverage.
     </p>
     <img src="/images/ci-cd.png" style="width: 260px;">
   </div>
