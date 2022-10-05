@@ -24,7 +24,7 @@ module.exports = {
     ['link', { rel: 'icon', href: 'https://cdn.hello.coop/images/dev-favicon-dark.png' }],
     ['link', { rel: 'stylesheet', href: 'https://cdn.hello.coop/css/hello-button.css' }],
     ['script', { src: 'https://cdn.hello.coop/js/join-slack-community.js' }],
-    ['script', { src: 'https://cdn.hello.coop/js/wc-footer.js' }],
+    ['script', { src: 'https://cdn.hello.coop/js/hello-dev-wc-footer.js' }],
     ['meta', { name: 'theme-color', content: '#303030' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]

@@ -221,6 +221,7 @@ pageClass: home-page-class
     }
     h2 {
       font-size: 1.8rem;
+      text-align: left;
     }
   }
   @media (prefers-color-scheme: dark) {
