@@ -26,9 +26,9 @@ tagline: #leave empty
       With one integration you get any standard profile information you request and offer your users their preferred way to login.
     </p>
     <div id="snippet"><pre>
-<span style="opacity: 0.6;">&lt;div</span> <span style="opacity: 0.4;">class=</span><span style="opacity: 0.8; font-weight: 600;" >"hello-container"</span><span style="opacity: 0.6;">&gt;</span>
-  <span class="snippet-border-left" style="opacity: 0.6;">&lt;button</span> <span style="font-weight: 600;">class=<span style="opacity: 0.8;">"hello-btn"</span></span><span style="opacity: 0.6;">/&gt;</span>
-  <span style="opacity: 0.6;">&lt;button</span> <span style="font-weight: 600;">class=<span style="opacity: 0.8;">"hello-about"</span></span><span style="opacity: 0.6;">/&gt;</span>
+<span style="opacity: 0.6;">&lt;div</span> <span style="opacity: 0.4;">class=</span><span>"hello-container"</span><span style="opacity: 0.6;">&gt;</span>
+  <span class="snippet-border-left" style="opacity: 0.6;">&lt;button</span> <span style="opacity: 0.4;">class=</span><span>"hello-btn"</span><span style="opacity: 0.6;">/&gt;</span>
+  <span style="opacity: 0.6;">&lt;button</span> <span style="opacity: 0.4;">class=</span><span>"hello-about"</span><span style="opacity: 0.6;">/&gt;</span>
 <span style="opacity: 0.6;">&lt;/div&gt;</span></pre>
     </div>
   </div>
