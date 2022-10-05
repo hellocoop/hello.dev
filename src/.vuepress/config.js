@@ -21,7 +21,6 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/config/#head
    */
   head: [
-    ['link', { rel: 'icon', href: 'https://cdn.hello.coop/images/dev-favicon-dark.png' }],
     ['link', { rel: 'stylesheet', href: 'https://cdn.hello.coop/css/hello-button.css' }],
     ['script', { src: 'https://cdn.hello.coop/js/join-slack-community.js' }],
     ['script', { src: 'https://cdn.hello.coop/js/hello-dev-wc-footer.js' }],
