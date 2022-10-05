@@ -24,7 +24,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 <script>
   function login(){ 
     const ref = document.getElementById('hello-login-btn')
-    ref.classList.add('hello-btn-loader) // Show spinner
+    ref.classList.add('hello-btn-loader') // Show spinner
     ref.disabled = true // Disable button
     const requestURL = await fetch()  // Fetch the request URL from your backend
     window.location.href = requestURL // See next step for creating request URL
