@@ -164,19 +164,23 @@ div[class*="language-"]:hover .copy-code-button{
   display: none;
 }
 
-@media screen and (max-width: 719px){
-  @media (prefers-color-scheme: dark) {
-    .navbar-item > a:hover, .navbar-item > a.router-link-active{
-      border-bottom: 2px solid #d4d4d4;
-    }
-  }
-  
-  @media (prefers-color-scheme: light) {
-    .navbar-item > a:hover, .navbar-item > a.router-link-active{
-      border-bottom: 2px solid #303030;
-    }
-  }
+.theme-container.home-page-class .theme-default-content:not(.custom) {
+  max-width: 968px !important;
+}
 
+.navbar-item > a:hover, .navbar-item > a.router-link-active{
+  border-bottom: 2px solid #d4d4d4;
+  color: white;
+}
+
+@media (prefers-color-scheme: light) {
+  .navbar-item > a:hover, .navbar-item > a.router-link-active {
+    color: #303030;
+    border-bottom: 2px solid #303030;
+  }
+}
+
+@media screen and (max-width: 719px){
   .copy-code-button{
     opacity: 1
   } 
