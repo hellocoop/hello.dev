@@ -1,6 +1,8 @@
 ---
-editLink: false
+home: true
 pageClass: home-page-class
+heroText: #leave empty
+tagline: #leave empty
 ---
 
 <script setup>
@@ -164,7 +166,7 @@ pageClass: home-page-class
   }
   #start-building {
     margin-top: 80px;
-    padding-bottom: 60px;
+    padding-bottom: 130px;
   }
   a, #join-slack-btn {
     font-size: 1.2rem;
