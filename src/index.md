@@ -152,14 +152,12 @@ pageClass: home-page-class
     line-height: 22px;
     margin-top: 45px;
     padding: 0;
-    color: white;
     position: relative;
   }
   .snippet-border-left::before {
     content: '';
     height: 45px;
     width: 1.5px;
-    background-color: #d4d4d4;
     opacity: 0.3;
     position: absolute;
     left: 0;
@@ -224,9 +222,23 @@ pageClass: home-page-class
       text-align: left;
     }
   }
+  @media (prefers-color-scheme: light) {
+    #snippet pre {
+      color: black;
+    }
+    .snippet-border-left::before {
+      background-color: black;
+    }
+  }
   @media (prefers-color-scheme: dark) {
     h1, h2, h3, a, #join-slack-btn {
       color: white;
+    }
+    #snippet pre {
+      color: white;
+    }
+    .snippet-border-left::before {
+      background-color: #d4d4d4;
     }
   }
 </style>
