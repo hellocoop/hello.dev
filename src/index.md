@@ -26,9 +26,9 @@ tagline: #leave empty
       With one integration you get any standard profile information you request and offer your users their preferred way to login.
     </p>
     <div id="snippet"><pre>
-<span style="opacity: 0.6;">&lt;div</span> <span style="opacity: 0.4;">class=</span><span>"hello-container"</span><span style="opacity: 0.6;">&gt;</span>
-  <span class="snippet-border-left" style="opacity: 0.6;">&lt;button</span> <span style="opacity: 0.4;">class=</span><span>"hello-btn"</span><span style="opacity: 0.6;">/&gt;</span>
-  <span style="opacity: 0.6;">&lt;button</span> <span style="opacity: 0.4;">class=</span><span>"hello-about"</span><span style="opacity: 0.6;">/&gt;</span>
+<span style="opacity: 0.6;">&lt;div</span> <span class="class-opacity">class=</span><span>"hello-container"</span><span style="opacity: 0.6;">&gt;</span>
+  <span class="snippet-border-left" style="opacity: 0.6;">&lt;button</span> <span class="class-opacity">class=</span><span>"hello-btn"</span><span style="opacity: 0.6;">/&gt;</span>
+  <span style="opacity: 0.6;">&lt;button</span> <span class="class-opacity">class=</span><span>"hello-about"</span><span style="opacity: 0.6;">/&gt;</span>
 <span style="opacity: 0.6;">&lt;/div&gt;</span></pre>
     </div>
   </div>
@@ -224,6 +224,11 @@ tagline: #leave empty
       text-align: left;
     }
   }
+  @media (max-width: 400px) {
+    #hero h1 {
+      font-size: 9.5vW;
+    }
+  }
   @media (max-width: 320px) {
     #snippet pre {
       font-size: 4.4vW;
@@ -236,6 +241,9 @@ tagline: #leave empty
     .snippet-border-left::before {
       background-color: black;
     }
+    .class-opacity {
+      opacity: 0.45;
+    }
   }
   @media (prefers-color-scheme: dark) {
     h1, h2, h3, a, #join-slack-btn {
@@ -246,6 +254,9 @@ tagline: #leave empty
     }
     .snippet-border-left::before {
       background-color: #d4d4d4;
+    }
+    .class-opacity {
+      opacity: 0.4;
     }
   }
 </style>
