@@ -224,6 +224,11 @@ tagline: #leave empty
       text-align: left;
     }
   }
+  @media (max-width: 320px) {
+    #snippet pre {
+      font-size: 4.4vW;
+    }
+  }
   @media (prefers-color-scheme: light) {
     #snippet pre {
       color: black;
