@@ -18,13 +18,15 @@ To add a Hellō Button to your page:
 
 <b>2.1</b> Include a link to the Hellō stylesheet for button styling and Hellō JavaScript file for displaying the Hellō about text in the `<head>` of your document.  
 
+<pre id="head-tags-snippet-top">
+<code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+  <span class="token comment">&lt;!-- ... --&gt;</span></code></pre>
 ```html
-<head>
-  <!-- ... -->
   <link href="https://cdn.hello.coop/css/hello-btn.css" rel="stylesheet">
   <script src="https://cdn.hello.coop/js/hello-btn.js"></script>
-</head>
 ```
+<pre id="head-tags-snippet-bottom">
+<code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>/head</span><span class="token punctuation">&gt;</span></span></code></pre>
 
 <b>2.2</b> Include the HTML for the Hellō Button in your page:
 

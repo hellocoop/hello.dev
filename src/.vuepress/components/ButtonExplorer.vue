@@ -255,7 +255,7 @@ watch(hover, () => {
   display: flex;
   color: black;
   justify-content: center;
-  padding: 10px;
+  padding: 16px 10px;
   align-items: center;
   font-size: 14px;
   gap: 16px;
@@ -305,7 +305,7 @@ watch(hover, () => {
   padding-top: 20px;
 }
 #button-explorer-dark {
-  background-color: black;
+  background-color: #151515;
   height: 100%;
   box-sizing: border-box;
 }

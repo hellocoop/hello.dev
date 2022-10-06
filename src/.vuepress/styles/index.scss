@@ -177,6 +177,22 @@ svg.hover{
   border-bottom: 2px solid white;
 }
 
+#head-tags-snippet-top, #head-tags-snippet-bottom {
+  background: #282C34;
+  position: relative;
+  z-index: 10;
+}
+
+#head-tags-snippet-top{
+  padding-bottom: 0;
+  margin-bottom: -32px;
+}
+
+#head-tags-snippet-bottom{
+  padding-top: 0;
+  margin-top: -32px;
+}
+
 @media (prefers-color-scheme: light) {
   .sidebar .navbar-item > a:hover, .navbar-item > a.router-link-active{
     border-bottom: 2px solid #303030;
