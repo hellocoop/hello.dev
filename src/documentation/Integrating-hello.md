@@ -17,10 +17,10 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
 
 ```html
-<button onclick="login()" class="hello-btn hello-btn-black-on-light" />
+<button onclick="login(event)" class="hello-btn hello-btn-black-on-light" />
 
 <script>
-  async function login(){ 
+  async function login(event){ 
     event.target.classList.add('hello-btn-loader') // Show spinner
     event.target.disabled = true // Disable button
     const requestURL = await fetch()  // Fetch the request URL from your backend
@@ -33,7 +33,9 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
 You can let users update their profile at Hellō as well. Don't forget to set the `profile_update` scope which will prompt the user to decide what information to change.
 
-<button class="hello-btn hello-btn-white-and-static"/>
+<button class="hello-btn hello-btn-white-and-static">
+  ō&nbsp;&nbsp;&nbsp;Update Profile with Hellō
+</button>
 
 ## 2. Create Request URL
 
