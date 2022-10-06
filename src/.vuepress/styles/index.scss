@@ -135,6 +135,10 @@ div[class*="language-"]:hover .copy-code-button{
   color: white !important;
 }
 
+svg.hover{
+  opacity: 0.75 !important;
+}
+
 .code-group__nav-tab-active{
   border-bottom: white 1px solid;
 }
