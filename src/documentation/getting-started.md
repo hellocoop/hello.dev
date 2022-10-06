@@ -12,15 +12,15 @@ In the future we will have plug-ins for popular platforms that will simplify usi
 
 To use Hellō, register your application at [console.hello.dev](https://console.hello.dev/). You can start developing with just the **Client ID** and the defaults, which includes the **Development Redirect URIs** `http://localhost:*` and `http://127.0.0.1:*`. When you are ready to preview what is presented to users, provide the **Name**, **Logo**, and URLs for **Terms of Service** & **Privacy Policy**.  When you are ready for public access, provide your **Production Redirect URI(s)**.
 
-## 2. Hellō Buttons
+## 2. Standard Hellō Buttons
 
 To add a Hellō Button to your page:
 
-<b>2.1</b> Include a link to the Hellō stylesheet in the `<head>` of your document for button styling.
+<b>2.1</b> Include a link to the Hellō stylesheet for button styling and Hellō JavaScript file for displaying the Hellō about text in the `<head>` of your document.  
 
 ```html
 <head>
-  ...
+  <!-- ... -->
   <link href="https://cdn.hello.coop/css/hello-btn.css" rel="stylesheet">
   <script src="https://cdn.hello.coop/js/hello-btn.js"></script>
 </head>
@@ -28,9 +28,11 @@ To add a Hellō Button to your page:
 
 <b>2.2</b> Include the HTML for the Hellō Button in your page:
 
-<div style="width: 100%; overflow-x: auto;">
+<ButtonExplorer/>
+
+<!-- <div style="width: 100%; overflow-x: auto;">
   <hello-btn-explorer v-pre/>
-</div>
+</div> -->
 
 If you don't want to use the Hellō stylesheet, the Hellō button is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is an `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr`.
 
