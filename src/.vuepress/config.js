@@ -21,9 +21,6 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/config/#head
    */
   head: [
-    ['link', { rel: 'stylesheet', href: 'https://cdn.hello.coop/css/hello-button.css' }],
-    ['script', { src: 'https://cdn.hello.coop/js/join-slack-community.js' }],
-    ['script', { src: 'https://cdn.hello.coop/js/hello-dev-wc-footer.js' }],
     ['meta', { name: 'theme-color', content: '#303030' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]

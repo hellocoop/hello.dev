@@ -71,7 +71,7 @@ You can use the picture URL as the user's profile picture. The user may release 
 
 You can send the user back to Hellō where the user can select different claims. To see this in action, see the:
 
-<button class="hello-btn-white-and-static">ō&nbsp;&nbsp;&nbsp;Update Profile with Hellō</button> 
+<button class="hello-btn hello-btn-white-and-static">ō&nbsp;&nbsp;&nbsp;Update Profile with Hellō</button> 
 
 functionality in the [GreenfieldDemo.com](https://greenfielddemo.com) demo app.
 
