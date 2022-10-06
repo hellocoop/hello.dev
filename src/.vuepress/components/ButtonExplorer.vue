@@ -5,10 +5,11 @@
     const about = ref(true)
     const hover = ref('default')
     const theme = ref('light')
+    const isDefaultStyle = ref(true)
     const cssMap = {
         color: {
-            black: 'hello-btn-black',
-            white: 'hello-btn-white',
+            black: ' hello-btn-black',
+            white: ' hello-btn-white',
         },
         theme: {
             light: '-on-light',
@@ -23,9 +24,13 @@
             none: " hello-btn-hover-none"
         }
     }
-    watch(hover, () => {
-    
-    })
+    watch([color, theme], () => {
+        if (color.value === "black" && theme.value === "light") {
+            isDefaultStyle.value = true
+        } else {
+            isDefaultStyle.value = false
+        }
+    })  
 </script>
 
 <template>
@@ -136,7 +141,7 @@
             <pre v-if="about" id="snippet">
 {{`<div id="hello-container">
     <button
-        class="hello-btn ${cssMap.color[color]}${cssMap.theme[theme]}${cssMap.hover[hover]}${loading ? " hello-btn-loader" : ""}"
+        class="hello-btn${!isDefaultStyle ? cssMap.color[color] : ""}${!isDefaultStyle ? cssMap.theme[theme] : ""}${cssMap.hover[hover]}${loading ? " hello-btn-loader" : ""}"
     />
     <button class="hello-about"/>
 </div>`}}</pre>
