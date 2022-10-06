@@ -1,9 +1,10 @@
 <script setup>
     import { ref, watch, onMounted } from 'vue'
-    let color = ref('black')
-    let loading = ref(false)
-    let hover = ref('default')
-    let theme = ref('light')
+    const color = ref('black')
+    const loading = ref(false)
+    const about = ref(true)
+    const hover = ref('default')
+    const theme = ref('light')
     const cssMap = {
         color: {
             black: 'hello-btn-black',
@@ -29,7 +30,7 @@
 
 <template>
     <div id="button-explorer-container">
-        <div id="control-center">
+        <div class="control-center" style="border-radius: 6px 6px 0px 0px;">
             <div class="group">
                 <span>Color</span>
                 <div class="btn-group">
@@ -78,14 +79,6 @@
                     }">None</button>
                 </div>
             </div>
-            <div class="group">
-                <span>State</span>
-                <div class="btn-group">
-                    <button @click="loading = !loading" :class="{
-                        'btn-active': loading
-                    }">Loading</button>
-                </div>
-            </div>
         </div>
         <div id="button-explorer">
             <div id="button-explorer-light">
@@ -119,35 +112,59 @@
                 </div>
             </div>
         </div>
+        <div class="control-center" style="border-radius: 0px 0px 6px 6px; justify-content: center;">
+            <div class="group" style="display: flex; gap: 0px 20px;">
+                <div class="btn-group">
+                    <button @click="loading = !loading" :class="{
+                        'btn-active': loading
+                    }">Loading State</button>
+                </div>
+                <div class="btn-group">
+                    <button @click="about = !about" :class="{
+                        'btn-active': about
+                    }">About Hellō</button>
+                </div>
+                <div class="btn-group">
+                    <button @click="about = !about" :class="{
+                        'btn-active': about
+                    }">Browser Language</button>
+                </div>
+            </div>
+        </div>
+        
         <div>
-        <pre id="snippet">
+            <pre v-if="about" id="snippet">
 {{`<div id="hello-container">
-  <button
-    class="hello-btn ${cssMap.color[color]}${cssMap.theme[theme]}${cssMap.hover[hover]}${loading ? " hello-btn-loader" : ""}"
-  />
-  <button class="hello-about"/>
+    <button
+        class="hello-btn ${cssMap.color[color]}${cssMap.theme[theme]}${cssMap.hover[hover]}${loading ? " hello-btn-loader" : ""}"
+    />
+    <button class="hello-about"/>
 </div>`}}</pre>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="hover" data-v-75ef7d1b=""><path fill="none" d="M0 0h24v24H0z" data-v-75ef7d1b=""></path><path fill="white" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm-1 4l6 6v10c0 1.1-.9 2-2 2H7.99C6.89 23 6 22.1 6 21l.01-14c0-1.1.89-2 1.99-2h7zm-1 7h5.5L14 6.5V12z" data-v-75ef7d1b=""></path></svg>
-</div>
-</div>
+            <pre v-else id="snippet">
+{{`<div id="hello-container">
+    <button
+        class="hello-btn ${cssMap.color[color]}${cssMap.theme[theme]}${cssMap.hover[hover]}${loading ? " hello-btn-loader" : ""}"
+    />
+</div>`}}</pre>
+        </div>
+    </div>
 </template>
 
 <style>
-    #control-center {
+    .control-center {
         height: 80px;
         background: #d4d4d4;
         display: flex;
         color: black;
-        justify-content: space-between;
+        justify-content: space-around;
         padding: 0 10px;
         align-items: center;
         font-size: 14px;
-        border-radius: 6px 6px 0px 0px;
     }
     #snippet {
-        margin: 0;
-        background-color: #303030;
-        padding: 20px 10px;
+        margin-top: 16px;
+        background-color: #282C34;
+        padding: 20px 25px;
         font-size: 13px;
         font-weight: 600;
         font-family: monospace;
