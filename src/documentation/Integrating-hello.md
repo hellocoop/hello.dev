@@ -22,7 +22,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 </button>
 
 <script>
-  function login(){ 
+  async function login(){ 
     const ref = document.getElementById('hello-login-btn')
     ref.classList.add('hello-btn-loader') // Show spinner
     ref.disabled = true // Disable button
