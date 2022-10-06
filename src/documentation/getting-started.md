@@ -22,7 +22,7 @@ To add a Hellō Button to your page:
 <head>
   ...
   <link href="https://cdn.hello.coop/css/hello-btn.css" rel="stylesheet">
-  <script src="https://cdn.hello.coop/css/hello-btn.js"></script>
+  <script src="https://cdn.hello.coop/js/hello-btn.js"></script>
 </head>
 ```
 
