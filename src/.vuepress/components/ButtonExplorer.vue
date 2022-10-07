@@ -26,14 +26,7 @@ const cssMap = {
         none: " hello-btn-hover-none"
     }
 }
-watch([color, theme], () => {
-    if (color.value === "black" && theme.value === "light") {
-        isDefaultStyle.value = true
-    } else {
-        isDefaultStyle.value = false
-    }
-})
-watch(hover, () => {
+watch([color, theme, hover], () => {
     lightPreviewButton.value.focus()
     setTimeout(()=>{
         lightPreviewButton.value.blur()
@@ -42,6 +35,11 @@ watch(hover, () => {
             darkPreviewButton.value.blur()
         }, 250);
     }, 250)
+    if (color.value === "black" && theme.value === "light") {
+        isDefaultStyle.value = true
+    } else {
+        isDefaultStyle.value = false
+    }
 })
 </script>
 
@@ -260,409 +258,269 @@ watch(hover, () => {
 </template>
 
 <style>
-.control-center {
-     background: #d4d4d4;
-     display: flex;
-     color: black;
-     justify-content: center;
-     padding: 16px 10px;
-     align-items: center;
-     font-size: 14px;
-     gap: 16px;
-     flex-wrap: wrap;
+  .control-center{
+    background:#d4d4d4;
+    display:flex;
+    color:#000;
+    justify-content:center;
+    padding:16px 10px;
+    align-items:center;
+    font-size:14px;
+    gap:16px;
+    flex-wrap:wrap
 }
- #snippet {
-     margin-top: 16px;
-     background-color: #282c34;
-     padding: 20px 25px;
-     font-size: 13px;
-     font-weight: 600;
-     font-family: monospace;
+#snippet{
+    margin-top:16px;
+    background-color:#282c34;
+    padding:20px 25px;
+    font-size:13px;
+    font-weight:600;
+    font-family:monospace
 }
- .group {
-     text-align: center;
+.group{
+    text-align:center
 }
- .btn-group {
-     border: 1px solid #303030;
-     padding: 2px;
-     border-radius: 2px;
+.btn-group{
+    border:1px solid #303030;
+    padding:2px;
+    border-radius:2px
 }
- .btn-group button {
-     background: none;
-     border: none;
-     cursor: pointer;
-     padding: 6px 12px;
-     border-radius: 2px;
-     color: #303030;
+.btn-group button{
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:6px 12px;
+    border-radius:2px;
+    color:#303030
 }
- .btn-group .btn-active {
-     background-color: #303030;
-     color: white;
+.btn-group .btn-active{
+    background-color:#303030;
+    color:#fff
 }
- #button-explorer {
-     background: white;
-     display: flex;
-     justify-content: center;
-     align-items: flex-start;
-     height: 190px;
+#button-explorer{
+    background:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    height:190px
 }
- #button-explorer-light, #button-explorer-dark {
-     width: 50%;
-     display: flex;
-     justify-content: flex-start;
-     flex-direction: column;
-     padding-top: 20px;
+#button-explorer-light,#button-explorer-dark{
+    width:50%;
+    display:flex;
+    justify-content:flex-start;
+    flex-direction:column;
+    padding-top:20px
 }
- #button-explorer-dark {
-     background-color: #151515;
-     height: 100%;
-     box-sizing: border-box;
+#button-explorer-dark{
+    background-color:#151515;
+    height:100%;
+    box-sizing:border-box
 }
- select{
-     background: transparent;
-     border: none;
-     border: 1px solid #303030;
-     color: #303030;
-     border-radius: 2px;
-     height: 33px;
+select{
+    background:transparent;
+    border:none;
+    border:1px solid #303030;
+    color:#303030;
+    border-radius:2px;
+    height:33px
 }
- select:focus {
-     outline: none;
+select:focus{
+    outline:none
 }
- .label {
-     display: inline-block;
-     margin-bottom: 6px;
+.label{
+    display:inline-block;
+    margin-bottom:6px
 }
- @media (max-width: 920px) {
-     #button-explorer {
-         flex-direction: column;
-         height: auto;
+@media (max-width: 920px){
+    #button-explorer{
+        flex-direction:column;
+        height:auto
     }
-     #button-explorer-light, #button-explorer-dark {
-         width: 100%;
-         height: 180px;
-         box-sizing: border-box;
+    #button-explorer-light,#button-explorer-dark{
+        width:100%;
+        height:180px;
+        box-sizing:border-box
     }
 }
-/* @media (prefers-color-scheme: dark) {
-     */
-     #button-explorer-dark .hello-btn-black-and-static {
-         background: rgb(48, 48, 48);
-         color: rgb(212, 212, 212);
-         box-shadow: 0 0 0 2px rgb(88, 88, 88);
-    }
-     #button-explorer-dark .hello-btn-black-and-static:disabled {
-         color: rgb(212, 212, 212);
-    }
-     #button-explorer-dark .hello-btn-white-and-static {
-         background: rgb(212, 212, 212);
-         color: rgb(48, 48, 48);
-         box-shadow: 0 0 0 1px rgb(212, 212, 212);
-    }
-     #button-explorer-dark .hello-btn-white-and-static:disabled {
-         color: rgb(48, 48, 48);
-    }
-     #button-explorer-dark .hello-btn-white-and-static.hello-btn-loader::after {
-         background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(48,48,48);
-         ' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;
-         %7D @keyframes spin %7B from %7B transform: rotate(0deg);
-         %7D to %7B transform: rotate(360deg);
-         %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
-    }
-    /* 
+#button-explorer-dark .hello-btn-black-and-static{
+    background:#303030;
+    color:#d4d4d4;
+    box-shadow:0 0 0 2px #585858
 }
- */
-/* @media (prefers-color-scheme: light) {
-     */
-     #button-explorer-light .hello-btn-black-and-static {
-         background: rgb(48, 48, 48);
-         color: white;
-         box-shadow: 0 0 0 1px rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-black-and-static:disabled {
-         color: white;
-    }
-     #button-explorer-light .hello-btn-white-and-static {
-         background: white;
-         color: rgb(48, 48, 48);
-         box-shadow: 0 0 0 1px rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-white-and-static:disabled {
-         color: rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-black-and-static.hello-btn-loader::after {
-         background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(255,255,255);
-         ' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;
-         %7D @keyframes spin %7B from %7B transform: rotate(0deg);
-         %7D to %7B transform: rotate(360deg);
-         %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
-    }
-    /* 
+#button-explorer-dark .hello-btn-black-and-static:disabled{
+    color:#d4d4d4
 }
- */
-/* @media (prefers-color-scheme: dark) {
-     */
-     #button-explorer-dark .hello-btn-black-and-invert {
-         background: rgba(212, 212, 212);
-         color: rgb(48, 48, 48);
-         box-shadow: 0 0 0 1px rgb(212, 212, 212);
-    }
-     #button-explorer-dark .hello-btn-black-and-invert:disabled {
-         color: rgb(48, 48, 48);
-    }
-     #button-explorer-dark .hello-btn-white-and-invert {
-         background: rgba(48, 48, 48);
-         color: rgb(212, 212, 212);
-         box-shadow: 0 0 0 2px rgb(88, 88, 88);
-    }
-     #button-explorer-dark .hello-btn-white-and-invert:disabled {
-         color: rgb(212, 212, 212);
-    }
-     #button-explorer-dark .hello-btn-white-and-invert.hello-btn-loader::after {
-         background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(212,212,212);
-         ' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;
-         %7D @keyframes spin %7B from %7B transform: rotate(0deg);
-         %7D to %7B transform: rotate(360deg);
-         %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
-    }
-    /* 
+#button-explorer-dark .hello-btn-white-and-static{
+    background:#d4d4d4;
+    color:#303030;
+    box-shadow:0 0 0 1px #d4d4d4
 }
- */
-/* @media (prefers-color-scheme: light) {
-     */
-     #button-explorer-light .hello-btn-black-and-invert {
-         background: rgb(48, 48, 48);
-         color: white;
-         box-shadow: 0 0 0 1px rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-black-and-invert:disabled {
-         color: white;
-    }
-     #button-explorer-light .hello-btn-white-and-invert {
-         background: white;
-         color: rgb(48, 48, 48);
-         box-shadow: 0 0 0 1px rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-white-and-invert:disabled {
-         color: rgb(48, 48, 48);
-    }
-     .hello-btn-white-and-invert.hello-btn-loader::after {
-         background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(48,48,48);
-         ' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;
-         %7D @keyframes spin %7B from %7B transform: rotate(0deg);
-         %7D to %7B transform: rotate(360deg);
-         %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
-    }
-    /* 
+#button-explorer-dark .hello-btn-white-and-static:disabled{
+    color:#303030
 }
- */
-/* @media (prefers-color-scheme: dark) {
-     */
-     #button-explorer-dark .hello-btn-black-and-invert:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 2px rgb(212, 212, 212);
-    }
-     #button-explorer-dark .hello-btn-white-and-invert:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 3px rgb(88, 88, 88);
-    }
-    /* 
+#button-explorer-dark .hello-btn-white-and-static.hello-btn-loader::after {
+    background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(48,48,48);' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;%7D @keyframes spin %7B from %7B transform: rotate(0deg); %7D to %7B transform: rotate(360deg); %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
 }
- */
-/* @media (prefers-color-scheme: light) {
-     */
-     #button-explorer-light .hello-btn-black-and-invert:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 2px rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-white-and-invert:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 2px rgb(88, 88, 88);
-    }
-    /* 
+#button-explorer-light .hello-btn-black-and-static{
+    background:#303030;
+    color:#fff;
+    box-shadow:0 0 0 1px #303030
 }
- */
-/* @media (prefers-color-scheme: dark) {
-     */
-     #button-explorer-dark .hello-btn-white-and-invert.hello-btn-hover-glow:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 3px 3px rgba(128, 128, 128, 0.7);
-    }
-     #button-explorer-dark .hello-btn-white-and-static.hello-btn-hover-glow:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 3px 3px rgba(212, 212, 212, 0.7);
-    }
-     #button-explorer-dark .hello-btn-black-and-static.hello-btn-hover-glow:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 3px 3px rgba(128, 128, 128, 0.7);
-    }
-     #button-explorer-dark .hello-btn-black-and-invert.hello-btn-hover-glow:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 3px 3px rgba(212, 212, 212, 0.7);
-    }
-     #button-explorer-dark .hello-btn-black-and-invert.hello-btn-loader::after {
-         background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(48,48,48);
-         ' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;
-         %7D @keyframes spin %7B from %7B transform: rotate(0deg);
-         %7D to %7B transform: rotate(360deg);
-         %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
-    }
-    /* 
+#button-explorer-light .hello-btn-black-and-static:disabled{
+    color:#fff
 }
- */
-/* @media (prefers-color-scheme: light) {
-     */
-     #button-explorer-light .hello-btn-black-and-invert.hello-btn-hover-glow:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 3px 3px rgba(128, 128, 128, 0.7);
-    }
-     #button-explorer-light .hello-btn-white-and-invert.hello-btn-hover-glow:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 3px 3px rgba(128, 128, 128, 0.7);
-    }
-     #button-explorer-light .hello-btn-black-and-static.hello-btn-hover-glow:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 3px 3px rgba(128, 128, 128, 0.7);
-    }
-     #button-explorer-light .hello-btn-white-and-static.hello-btn-hover-glow:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 3px 3px rgba(128, 128, 128, 0.7);
-    }
-    /* 
+#button-explorer-light .hello-btn-white-and-static{
+    background:#fff;
+    color:#303030;
+    box-shadow:0 0 0 1px #303030
 }
- */
-/* @media (prefers-color-scheme: dark) {
-     */
-     #button-explorer-dark .hello-btn-black-and-static:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 3px rgb(88, 88, 88);
-    }
-     #button-explorer-dark .hello-btn-white-and-static:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 2px rgb(212, 212, 212);
-    }
-    /* 
+#button-explorer-light .hello-btn-white-and-static:disabled{
+    color:#303030
 }
- */
-/* @media (prefers-color-scheme: light) {
-     */
-     #button-explorer-light .hello-btn-black-and-static:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 2px rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-white-and-static:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 2px rgb(48, 48, 48);
-    }
-    /* 
+#button-explorer-light .hello-btn-black-and-invert.hello-btn-loader::after {
+    background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: white;' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;%7D @keyframes spin %7B from %7B transform: rotate(0deg); %7D to %7B transform: rotate(360deg); %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
 }
- */
-/* @media (prefers-color-scheme: dark) {
-     */
-     #button-explorer-dark .hello-btn-black-and-invert.hello-btn-hover-flare:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(212, 212, 212);
-    }
-     #button-explorer-dark .hello-btn-black-and-static.hello-btn-hover-flare:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 2px rgb(88, 88, 88);
-    }
-     #button-explorer-dark .hello-btn-white-and-invert.hello-btn-hover-flare:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(88, 88, 88);
-    }
-     #button-explorer-dark .hello-btn-white-and-static.hello-btn-hover-flare:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(212, 212, 212);
-    }
-    /* 
+#button-explorer-light .hello-btn-black-and-static.hello-btn-loader::after {
+    background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: white;' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;%7D @keyframes spin %7B from %7B transform: rotate(0deg); %7D to %7B transform: rotate(360deg); %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
 }
- */
-/* @media (prefers-color-scheme: light) {
-     */
-     #button-explorer-light .hello-btn-black-and-invert.hello-btn-hover-flare:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-black-and-static.hello-btn-hover-flare:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-white-and-invert.hello-btn-hover-flare:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-white-and-static.hello-btn-hover-flare:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(48, 48, 48);
-    }
-    /* 
+#button-explorer-dark .hello-btn-black-and-invert{
+    background:#d4d4d4;
+    color:#303030;
+    box-shadow:0 0 0 1px #d4d4d4
 }
- */
-/* @media (prefers-color-scheme: dark) {
-     */
-     #button-explorer-dark .hello-btn-black-and-invert:after {
-         background: rgb(212, 212, 212);
-    }
-     #button-explorer-dark .hello-btn-black-and-static:after {
-         background: rgb(48, 48, 48);
-    }
-     #button-explorer-dark .hello-btn-white-and-invert:after {
-         background: rgb(48, 48, 48);
-    }
-     #button-explorer-dark .hello-btn-white-and-static:after {
-         background: rgb(212, 212, 212);
-    }
-     #button-explorer-dark .hello-btn-black-and-static.hello-btn-loader::after {
-         background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(212,212,212);
-         ' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;
-         %7D @keyframes spin %7B from %7B transform: rotate(0deg);
-         %7D to %7B transform: rotate(360deg);
-         %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
-    }
-    /* 
+#button-explorer-dark .hello-btn-black-and-invert:disabled{
+    color:#303030
 }
- */
-/* @media (prefers-color-scheme: light) {
-     */
-     #button-explorer-light .hello-btn-black-and-invert:after {
-         background: rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-black-and-static:after {
-         background: rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-white-and-static:after {
-         background: white;
-    }
-     #button-explorer-light .hello-btn-white-and-invert:after {
-         background: white;
-    }
-     #button-explorer-light .hello-btn-white-and-static.hello-btn-loader::after {
-         background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(48,48,48);
-         ' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;
-         %7D @keyframes spin %7B from %7B transform: rotate(0deg);
-         %7D to %7B transform: rotate(360deg);
-         %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
-    }
-     #button-explorer-light .hello-btn-black-and-invert.hello-btn-loader::after {
-         background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(255,255,255);
-         ' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;
-         %7D @keyframes spin %7B from %7B transform: rotate(0deg);
-         %7D to %7B transform: rotate(360deg);
-         %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
-    }
-    /* 
+#button-explorer-dark .hello-btn-white-and-invert{
+    background:#303030;
+    color:#d4d4d4;
+    box-shadow:0 0 0 2px #585858
 }
- */
-/* @media (prefers-color-scheme: dark) {
-     */
-     #button-explorer-dark .hello-btn-black-and-invert.hello-btn-hover-none:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(212, 212, 212);
-    }
-     #button-explorer-dark .hello-btn-white-and-invert.hello-btn-hover-none:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 2px rgb(88, 88, 88);
-    }
-     #button-explorer-dark .hello-btn-white-and-static.hello-btn-hover-none:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(212, 212, 212);
-    }
-    /* 
+#button-explorer-dark .hello-btn-white-and-invert:disabled{
+    color:#d4d4d4
 }
- */
-/* @media (prefers-color-scheme: light) {
-     */
-     #button-explorer-light .hello-btn-black-and-invert.hello-btn-hover-none:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-black-and-static.hello-btn-hover-none:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-black-and-static.hello-btn-hover-none:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(88, 88, 88);
-    }
-     #button-explorer-light .hello-btn-white-and-invert.hello-btn-hover-none:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(48, 48, 48);
-    }
-     #button-explorer-light .hello-btn-white-and-static.hello-btn-hover-none:is(:hover, :active, :focus):not(:disabled) {
-         box-shadow: 0 0 0 1px rgb(48, 48, 48);
-    }
-    /* 
+#button-explorer-light .hello-btn-black-and-invert{
+    background:#303030;
+    color:#fff;
+    box-shadow:0 0 0 1px #303030
 }
- */
-
+#button-explorer-light .hello-btn-black-and-invert:disabled{
+    color:#fff
+}
+#button-explorer-light .hello-btn-white-and-invert{
+    background:#fff;
+    color:#303030;
+    box-shadow:0 0 0 1px #303030
+}
+#button-explorer-light .hello-btn-white-and-invert:disabled{
+    color:#303030
+}
+#button-explorer-dark .hello-btn-black-and-invert:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 2px #d4d4d4
+}
+#button-explorer-dark .hello-btn-white-and-invert:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 3px #585858
+}
+#button-explorer-light .hello-btn-black-and-invert:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 2px #303030
+}
+#button-explorer-light .hello-btn-white-and-invert:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 2px #585858
+}
+#button-explorer-dark .hello-btn-white-and-invert.hello-btn-hover-glow:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 3px 3px rgba(128,128,128,0.7)
+}
+#button-explorer-dark .hello-btn-white-and-static.hello-btn-hover-glow:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 3px 3px rgba(212,212,212,0.7)
+}
+#button-explorer-dark .hello-btn-black-and-static.hello-btn-hover-glow:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 3px 3px rgba(128,128,128,0.7)
+}
+#button-explorer-dark .hello-btn-black-and-invert.hello-btn-hover-glow:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 3px 3px rgba(212,212,212,0.7)
+}
+#button-explorer-light .hello-btn-white-and-invert.hello-btn-loader::after {
+    background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(48,48,48);' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;%7D @keyframes spin %7B from %7B transform: rotate(0deg); %7D to %7B transform: rotate(360deg); %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
+}
+#button-explorer-dark .hello-btn-white-and-invert.hello-btn-loader::after {
+    background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(212,212,212);' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;%7D @keyframes spin %7B from %7B transform: rotate(0deg); %7D to %7B transform: rotate(360deg); %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
+}
+#button-explorer-dark .hello-btn-black-and-invert.hello-btn-loader::after {
+    background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(48,48,48);' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;%7D @keyframes spin %7B from %7B transform: rotate(0deg); %7D to %7B transform: rotate(360deg); %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
+}
+#button-explorer-light .hello-btn-black-and-invert.hello-btn-hover-glow:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 3px 3px rgba(128,128,128,0.7)
+}
+#button-explorer-light .hello-btn-white-and-invert.hello-btn-hover-glow:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 3px 3px rgba(128,128,128,0.7)
+}
+#button-explorer-light .hello-btn-black-and-static.hello-btn-hover-glow:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 3px 3px rgba(128,128,128,0.7)
+}
+#button-explorer-light .hello-btn-white-and-static.hello-btn-hover-glow:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 3px 3px rgba(128,128,128,0.7)
+}
+#button-explorer-dark .hello-btn-white-and-static:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 2px #d4d4d4
+}
+#button-explorer-light .hello-btn-black-and-static:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 2px #303030
+}
+#button-explorer-light .hello-btn-white-and-static:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 2px #303030
+}
+#button-explorer-dark .hello-btn-black-and-invert.hello-btn-hover-flare:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 1px #d4d4d4
+}
+#button-explorer-dark .hello-btn-black-and-static.hello-btn-hover-flare:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 2px #585858
+}
+#button-explorer-dark .hello-btn-white-and-invert.hello-btn-hover-flare:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 1px #585858
+}
+#button-explorer-dark .hello-btn-white-and-static.hello-btn-hover-flare:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 1px #d4d4d4
+}
+#button-explorer-light .hello-btn-black-and-invert.hello-btn-hover-flare:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 1px #303030
+}
+#button-explorer-light .hello-btn-black-and-static.hello-btn-hover-flare:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 1px #303030
+}
+#button-explorer-light .hello-btn-white-and-invert.hello-btn-hover-flare:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 1px #303030
+}
+#button-explorer-light .hello-btn-white-and-static.hello-btn-hover-flare:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 1px #303030
+}
+#button-explorer-dark .hello-btn-black-and-invert::after{
+    background:#d4d4d4
+}
+#button-explorer-dark .hello-btn-black-and-static::after{
+    background:#303030
+}
+#button-explorer-dark .hello-btn-white-and-invert::after{
+    background:#303030
+}
+#button-explorer-dark .hello-btn-white-and-static::after{
+    background:#d4d4d4
+}
+#button-explorer-dark .hello-btn-black-and-static.hello-btn-loader::after {
+    background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(212,212,212);' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;%7D @keyframes spin %7B from %7B transform: rotate(0deg); %7D to %7B transform: rotate(360deg); %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
+}
+#button-explorer-light .hello-btn-black-and-invert::after{
+    background:#303030
+}
+#button-explorer-light .hello-btn-black-and-static::after{
+    background:#303030
+}
+#button-explorer-light .hello-btn-white-and-static::after{
+    background:#fff
+}
+#button-explorer-light .hello-btn-white-and-invert::after{
+    background:#fff
+}
+#button-explorer-light .hello-btn-white-and-static.hello-btn-loader::after {
+    background-image: url("data:image/svg+xml,%3Csvg class='animate-spin' style='color: rgb(48,48,48);' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cstyle%3E .animate-spin%7Banimation: spin 1s linear infinite;%7D @keyframes spin %7B from %7B transform: rotate(0deg); %7D to %7B transform: rotate(360deg); %7D %7D %3C/style%3E%3Ccircle style='opacity: 0.25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3E%3C/circle%3E%3Cpath class='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3E%3C/path%3E%3C/svg%3E");
+}
 </style>
