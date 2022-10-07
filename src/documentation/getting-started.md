@@ -34,9 +34,13 @@ To add a Hellō Button to your page:
 
 Don't see a locale? [Send us a PR](https://github.com/hellocoop/wallet-i18n)
 
+## 3. Self-Managed Hellō Buttons
+
 If you don't want to use the Hellō stylesheet, the Hellō button is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is an `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr`.
 
-## 3. Select Claims
+The source for the Standard Hellō Buttons can be found [here]().
+
+## 4. Select Claims
 
 You request claims from Hellō by including a scope for that claim in your request. Any claims you request from Hellō are required claims, IE the user will need to provide a value. Hellō only supports verified email and phone claims. Unverified email and phone are not supported. [Hellō Claims](/documentation/hello-claims.html) provides a full list of supported scopes and associated claims. 
 
@@ -44,7 +48,7 @@ Hellō will always return the `sub` claim, a globally unique identifier in the f
 
 Note that it is best practice to only request the claims you require. For example, you may only need a preferred name to address the user initially, and a verified email address when they would like a notification. Hellō makes it easy to do incremental consent and request additional claims once you need them.
 
-## 4. Add Hellō to your application
+## 5. Add Hellō to your application
 
 If you are writing your own application, see [Integrating Hellō](/documentation/Integrating-hello.html). If you are configuring Hellō in a platform, see [Hellō & Platforms](/documentation/hello-platforms.html)
 
