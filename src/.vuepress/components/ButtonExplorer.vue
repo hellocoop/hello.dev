@@ -57,14 +57,14 @@ async function copy(){
   let copyText
   if(about.value){
     copyText = `  
-  <div class="hello-container">
-    <button class="${`hello-btn${!isDefaultStyle ? cssMap.color[color] : ""}${!isDefaultStyle ? cssMap.theme[theme] : ""}${cssMap.hover[hover]}${loading ? " hello-btn-loader" : ""}`}"/>
+  <div class="hello-container"${lang.value ? ` lang="${lang.value}"` : ""}>
+    <button class="${`hello-btn${!isDefaultStyle.value ? cssMap.color[color] : ""}${!isDefaultStyle.value ? cssMap.theme[theme] : ""}${hover.value ? cssMap.hover[hover.value] : ""}${loading.value ? " hello-btn-loader" : ""}`}"/>
     <button class="hello-about"/>
   </div>`
   } else {
     copyText = `  
-  <div class="hello-container">
-    <button class="${`hello-btn${!isDefaultStyle ? cssMap.color[color] : ""}${!isDefaultStyle ? cssMap.theme[theme] : ""}${cssMap.hover[hover]}${loading ? " hello-btn-loader" : ""}`}"/>
+  <div class="hello-container"${lang.value ? ` lang="${lang.value}"` : ""}>
+    <button class="${`hello-btn${!isDefaultStyle.value ? cssMap.color[color] : ""}${!isDefaultStyle.value ? cssMap.theme[theme] : ""}${hover.value ? cssMap.hover[hover.value] : ""}${loading.value ? " hello-btn-loader" : ""}`}"/>
   </div>`
   }
   await navigator.clipboard.writeText(copyText)
@@ -263,7 +263,7 @@ async function copy(){
           v-if="about"
           class="language-html code-copy-added"
           style=""
-        ><code ref="snippet"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token attr-name"> class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hello-container<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        ><code ref="snippet"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token attr-name"> class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hello-container<span class="token punctuation">"</span></span><span v-if="lang"><span class="token attr-name"> lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{{lang}}<span class="token punctuation">"</span></span></span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
     <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{{`hello-btn${!isDefaultStyle ? cssMap.color[color] : ""}${!isDefaultStyle ? cssMap.theme[theme] : ""}${cssMap.hover[hover]}${loading ? " hello-btn-loader" : ""}`}}<span class="token punctuation">"</span></span>
   <span class="token punctuation">/&gt;</span></span>
