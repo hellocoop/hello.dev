@@ -177,9 +177,9 @@ async function copy(){
         </div>
       </div>
     </div>
-    <div id="button-explorer" :lang="lang">
+    <div id="button-explorer">
       <div id="button-explorer-light">
-        <div class="hello-container">
+        <div class="hello-container" :lang="lang">
           <button
             ref="lightPreviewButton"
             class="hello-btn"
@@ -200,8 +200,8 @@ async function copy(){
           <button v-if="about" class="hello-about" style="color: black" />
         </div>
       </div>
-      <div id="button-explorer-dark" :lang="lang">
-        <div class="hello-container">
+      <div id="button-explorer-dark">
+        <div class="hello-container" :lang="lang">
           <button
             ref="darkPreviewButton"
             class="hello-btn"

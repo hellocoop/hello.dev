@@ -32,9 +32,7 @@ To add a Hellō Button to your page:
 
 <ButtonExplorer/>
 
-<!-- <div style="width: 100%; overflow-x: auto;">
-  <hello-btn-explorer v-pre/>
-</div> -->
+Don't see a locale? [Send us a PR](https://github.com/hellocoop/wallet-i18n)
 
 If you don't want to use the Hellō stylesheet, the Hellō button is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is an `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr`.
 
