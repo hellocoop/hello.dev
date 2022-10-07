@@ -10,6 +10,7 @@ const lightPreviewButton = ref(null)
 const darkPreviewButton = ref(null)
 const copiedText = ref(null)
 const snippet = ref(null)
+const lang = ref(null)
 const cssMap = {
     color: {
         black: ' hello-btn-black',
@@ -27,6 +28,14 @@ const cssMap = {
         flare: " hello-btn-hover-flare",
         none: " hello-btn-hover-none"
     }
+}
+const langMap = {
+  "Browser Language": null,
+  "English (English)": "en",
+  "हिंदी (Hindi)": "hi",
+  "العربية (Arabic)": "ar",
+  "Français (French)": "fr",
+  "Deutsch (German)": "de"
 }
 watch([color, theme, hover], () => {
     lightPreviewButton.value.focus()
@@ -168,7 +177,7 @@ async function copy(){
         </div>
       </div>
     </div>
-    <div id="button-explorer">
+    <div id="button-explorer" :lang="lang">
       <div id="button-explorer-light">
         <div class="hello-container">
           <button
@@ -191,7 +200,7 @@ async function copy(){
           <button v-if="about" class="hello-about" style="color: black" />
         </div>
       </div>
-      <div id="button-explorer-dark">
+      <div id="button-explorer-dark" :lang="lang">
         <div class="hello-container">
           <button
             ref="darkPreviewButton"
@@ -243,13 +252,8 @@ async function copy(){
             </div>
         </div>
         <div>
-            <select>
-                <option>Browser Language</option>
-                <option>English (English)</option>
-                <option>हिंदी (Hindi)</option>
-                <option>العربية (Arabic)</option>
-                <option>Français (French)</option>
-                <option>Deutsch (German)</option>
+            <select v-model="lang">
+                <option v-for="(value, key) in langMap" :value="value">{{key}}</option>
             </select>
         </div>
     </div>
