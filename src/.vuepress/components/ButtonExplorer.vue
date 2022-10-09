@@ -197,7 +197,7 @@ async function copy(){
                 'hello-btn-hover-none': hover === 'none',
             }"
           />
-          <button v-if="about" class="hello-about" style="color: black" />
+          <button v-if="about" class="hello-about" />
         </div>
       </div>
       <div id="button-explorer-dark">
@@ -219,7 +219,7 @@ async function copy(){
                 'hello-btn-hover-none': hover === 'none',
             }"
           />
-          <button v-if="about" class="hello-about" style="color: white" />
+          <button v-if="about" class="hello-about" />
         </div>
       </div>
     </div>
@@ -369,6 +369,14 @@ select:focus{
         box-sizing:border-box
     }
 }
+#button-explorer-light .hello-about-container {
+    color: #303030;
+}
+
+#button-explorer-dark .hello-about-container {
+    color: #d4d4d4;
+}
+
 #button-explorer-dark .hello-btn-black-and-static{
     background:#303030;
     color:#d4d4d4;
