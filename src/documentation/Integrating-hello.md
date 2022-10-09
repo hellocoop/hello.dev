@@ -71,7 +71,7 @@ Hellō supports [`response_type=id_token`](https://openid.net/specs/oauth-v2-mul
 
 ## 3. Make Request
 
-Cause the user's browser to load the `request URL` you created in `Step 3`. Here are some examples:
+Cause the user's browser to load the `request URL` you created in `Step 2`. Here are some examples:
 - Set `window.location.href` with JavaScript
 ```javascript
 window.location.href = "https://wallet.hello.coop/authorize?..."
