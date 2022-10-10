@@ -30,7 +30,7 @@ const cssMap = {
     }
 }
 const langMap = {
-  "Browser Language": null,
+  "Browser Locale": null,
   "English (English)": "en",
   "हिंदी (Hindi)": "hi",
   "العربية (Arabic)": "ar",
