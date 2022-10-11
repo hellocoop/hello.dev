@@ -31,11 +31,20 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
 ---
 
-You can let users update their profile at Hellō as well. Don't forget to set the `profile_update` scope which will prompt the user to decide what information to change.
+You can let users update their profile at Hellō as well. To overwrite the default "Continue with Hellō" button text, pass a custom string to the `data-label` attribute of the button like this:
+```html
+  <button
+    class="hello-btn hello-btn-white-and-static"
+    data-label="Update Profile with Hellō"
+  />
+  <!--
+    The "ō" symbol would be prepended or appended
+    automatically depending on language direction.
+  -->
+```
+Don't forget to set the `profile_update` scope which will prompt the user to decide what information to change.
 
-<button class="hello-btn hello-btn-white-and-static">
-  ō&nbsp;&nbsp;&nbsp;Update Profile with Hellō
-</button>
+<button class="hello-btn hello-btn-white-and-static" data-label="Update Profile with Hellō"/>
 
 ## 2. Create Request URL
 

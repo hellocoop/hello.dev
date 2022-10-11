@@ -36,7 +36,7 @@ Don't see your locale? We encourage you to create a translation for your locale 
 
 ## 3. Self-Managed Hellō Buttons
 
-If you are concerned with including a script from Hellō, you can find the source code at [hellocoop/btn](https://github.com/hellocoop/btn). You can use this as a reference to create your own buttons.
+If you are concerned with including a script from Hellō, you can find the source code at [hellocoop/button](https://github.com/hellocoop/button). You can use this as a reference to create your own buttons.
 
 If you don't want to use the Hellō stylesheet, the Hellō button is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is an `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr`.
 
