@@ -32,7 +32,7 @@ To add a Hellō Button to your page:
 
 <ButtonExplorer/>
 
-Don't see your locale? We encourage you to create a translation for your locale per [hellocoop/wallet-i18n](https://github.com/hellocoop/wallet-i18n) and submit a pull request for review.
+Don't see your locale? We encourage you to create a translation for your locale per<br/>[hellocoop/wallet-i18n](https://github.com/hellocoop/wallet-i18n) and submit a pull request for review.
 
 ## 3. Custom Button Label
 
