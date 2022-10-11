@@ -135,6 +135,10 @@ div[class*="language-"]:hover .copy-code-button{
   color: white !important;
 }
 
+svg.hover{
+  opacity: 0.75 !important;
+}
+
 .code-group__nav-tab-active{
   border-bottom: white 1px solid;
 }
@@ -171,6 +175,30 @@ div[class*="language-"]:hover .copy-code-button{
 .navbar-item > a:hover, .navbar-item > a.router-link-active {
   color: white;
   border-bottom: 2px solid white;
+}
+
+#head-tags-snippet-top, #head-tags-snippet-bottom {
+  // background: #282C34;
+  position: relative;
+  z-index: 10;
+}
+
+#head-tags-snippet-top + .language-html pre {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+#head-tags-snippet-top{
+  padding-bottom: 0;
+  margin-bottom: -74px;
+  margin-top: 20px;
+  width: 200px;
+}
+
+#head-tags-snippet-bottom{
+  padding-top: 0;
+  margin-top: -50px;
+  margin-bottom: 30px;
 }
 
 @media (prefers-color-scheme: light) {
