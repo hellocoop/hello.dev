@@ -58,13 +58,13 @@ async function copy(){
   if(about.value){
     copyText = `  
   <div class="hello-container"${lang.value ? ` lang="${lang.value}"` : ""}>
-    <button class="${`hello-btn${!isDefaultStyle.value ? cssMap.color[color] : ""}${!isDefaultStyle.value ? cssMap.theme[theme] : ""}${hover.value ? cssMap.hover[hover.value] : ""}${loading.value ? " hello-btn-loader" : ""}`}"/>
-    <button class="hello-about"/>
+    <button class="${`hello-btn${!isDefaultStyle.value ? cssMap.color[color] : ""}${!isDefaultStyle.value ? cssMap.theme[theme] : ""}${hover.value ? cssMap.hover[hover.value] : ""}${loading.value ? " hello-btn-loader" : ""}`}"></button>
+    <button class="hello-about"></button>
   </div>`
   } else {
     copyText = `  
   <div class="hello-container"${lang.value ? ` lang="${lang.value}"` : ""}>
-    <button class="${`hello-btn${!isDefaultStyle.value ? cssMap.color[color] : ""}${!isDefaultStyle.value ? cssMap.theme[theme] : ""}${hover.value ? cssMap.hover[hover.value] : ""}${loading.value ? " hello-btn-loader" : ""}`}"/>
+    <button class="${`hello-btn${!isDefaultStyle.value ? cssMap.color[color] : ""}${!isDefaultStyle.value ? cssMap.theme[theme] : ""}${hover.value ? cssMap.hover[hover.value] : ""}${loading.value ? " hello-btn-loader" : ""}`}"></button>
   </div>`
   }
   await navigator.clipboard.writeText(copyText)
@@ -266,8 +266,8 @@ async function copy(){
         ><code ref="snippet"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token attr-name"> class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hello-container<span class="token punctuation">"</span></span><span v-if="lang"><span class="token attr-name"> lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{{lang}}<span class="token punctuation">"</span></span></span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
     <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{{`hello-btn${!isDefaultStyle ? cssMap.color[color] : ""}${!isDefaultStyle ? cssMap.theme[theme] : ""}${cssMap.hover[hover]}${loading ? " hello-btn-loader" : ""}`}}<span class="token punctuation">"</span></span>
-  <span class="token punctuation">/&gt;</span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hello-about<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+  <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span></span><span class="token punctuation">&gt;</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hello-about<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span></span><span class="token punctuation">&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
 </code><div data-v-app=""><div class="code-copy" data-v-75ef7d1b=""><button @click="copy" style="background: none; border: none; position: absolute; right: 0; top: 0;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="hover" data-v-75ef7d1b="" style="top: 7.5px;"><path fill="none" d="M0 0h24v24H0z" data-v-75ef7d1b=""></path><path fill="white" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm-1 4l6 6v10c0 1.1-.9 2-2 2H7.99C6.89 23 6 22.1 6 21l.01-14c0-1.1.89-2 1.99-2h7zm-1 7h5.5L14 6.5V12z" data-v-75ef7d1b=""></path></svg></button><span ref="copiedText" class="" data-v-75ef7d1b="" style="top: 7.5px;">Copied!</span></div></div></pre>
         <pre
@@ -277,7 +277,7 @@ async function copy(){
           ><code ref="snippet"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token attr-name"> class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hello-container<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
     <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>{{`hello-btn${!isDefaultStyle ? cssMap.color[color] : ""}${!isDefaultStyle ? cssMap.theme[theme] : ""}${cssMap.hover[hover]}${loading ? " hello-btn-loader" : ""}`}}<span class="token punctuation">"</span></span>
-  <span class="token punctuation">/&gt;</span></span>
+  <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span></span><span class="token punctuation">&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
 </code><div data-v-app=""><div class="code-copy" data-v-75ef7d1b=""><button @click="copy" style="background: none; border: none; position: absolute; right: 0; top: 0;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="hover" data-v-75ef7d1b="" style="top: 7.5px;"><path fill="none" d="M0 0h24v24H0z" data-v-75ef7d1b=""></path><path fill="white" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm-1 4l6 6v10c0 1.1-.9 2-2 2H7.99C6.89 23 6 22.1 6 21l.01-14c0-1.1.89-2 1.99-2h7zm-1 7h5.5L14 6.5V12z" data-v-75ef7d1b=""></path></svg></button><span ref="copiedText" data-v-75ef7d1b="" style="top: 7.5px;">Copied!</span></div></div></pre>
       </div>
