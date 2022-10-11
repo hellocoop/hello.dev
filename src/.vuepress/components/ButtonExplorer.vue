@@ -284,7 +284,7 @@ async function copy(){
     </div>
 </template>
 
-<style>
+<style scoped>
   .control-center{
     background:#d4d4d4;
     display:flex;
@@ -325,7 +325,7 @@ async function copy(){
     color:#fff
 }
 #button-explorer{
-    background:#fff;
+    background: #f8f8f8;
     display:flex;
     justify-content:center;
     align-items:flex-start;
@@ -349,7 +349,9 @@ select{
     border:1px solid #303030;
     color:#303030;
     border-radius:2px;
-    height:33px
+    height:33px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 select:focus{
     outline:none
@@ -369,11 +371,11 @@ select:focus{
         box-sizing:border-box
     }
 }
-#button-explorer-light .hello-about-container {
+#button-explorer-light .hello-about {
     color: #303030;
 }
 
-#button-explorer-dark .hello-about-container {
+#button-explorer-dark .hello-about {
     color: #d4d4d4;
 }
 
