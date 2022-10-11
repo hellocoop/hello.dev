@@ -36,7 +36,7 @@ Don't see your locale? We encourage you to create a translation for your locale 
 
 ## 3. Custom Button Label
 
-You can overwrite the default "Continue with Hellō" button text by passing the custom text to the<br/> `data-label` attribute of the button like this:
+You can override the default "Continue with Hellō" button text by setting the<br/> `data-label` attribute of the button like this:
 ```html
   <button
     class="hello-btn hello-btn-white-and-static"
