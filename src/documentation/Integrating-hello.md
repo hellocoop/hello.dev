@@ -17,7 +17,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 
 
 ```html
-<button onclick="login(event)" class="hello-btn hello-btn-black-on-light" />
+<button onclick="login(event)" class="hello-btn hello-btn-black-on-light"></button>
 
 <script>
   async function login(event){ 
@@ -64,7 +64,7 @@ You can let users update their profile at Hellō as well by setting the `profile
 
 ## 3. Make Request
 
-Cause the user's browser to load the `request URL` you created in `Step 3`. Here are some examples:
+Cause the user's browser to load the `request URL` you created in `Step 2`. Here are some examples:
 - Set `window.location.href` with JavaScript
 ```javascript
 window.location.href = "https://wallet.hello.coop/authorize?..."
