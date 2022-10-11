@@ -29,23 +29,6 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 </script>
 ```
 
----
-
-You can let users update their profile at Hellō as well. To overwrite the default "Continue with Hellō" button text, pass a custom string to the `data-label` attribute of the button like this:
-```html
-  <button
-    class="hello-btn hello-btn-white-and-static"
-    data-label="Update Profile with Hellō"
-  />
-  <!--
-    The "ō" symbol would be prepended or appended
-    automatically depending on language direction.
-  -->
-```
-Don't forget to set the `profile_update` scope which will prompt the user to decide what information to change.
-
-<button class="hello-btn hello-btn-white-and-static" data-label="Update Profile with Hellō"/>
-
 ## 2. Create Request URL
 
 The **request URL** is `https://wallet.hello.coop/authorize` and a query with the following parameters
@@ -76,6 +59,8 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 There is no difference between a request to register the user, or log in the user. If the user has previously released the same requested scopes to your app, they will not be prompted to release it again. If you have changed with scopes you are requesting, or the `profile_update` is provided, the user will be prompted to select what to release.
 
 Hellō supports [`response_type=id_token`](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#id_token) and [`response_type=code`](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.1).
+
+You can let users update their profile at Hellō as well by setting the `profile_update` scope which will prompt the user to decide what information to change.
 
 ## 3. Make Request
 
