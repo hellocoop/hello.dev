@@ -190,6 +190,9 @@ tagline: #leave empty
       flex-direction: column;
       gap: 20px 0px;
     }
+    #links p {
+      margin-top: 8px;
+    }
     #features {
       margin-top: 0px;
     }
