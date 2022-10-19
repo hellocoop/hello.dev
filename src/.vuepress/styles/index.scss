@@ -32,26 +32,6 @@
   font-size: 1.18rem !important;
 }
 
-#faqs > h3{
-  margin-top: 0;
-  margin-bottom: 0;
-  padding: 0;
-  font-size: 1.08rem;
-  color: #303030;
-}
-
-.dark #faqs > h3{
-  color: white;
-}
-
-#faqs > p, #faqs > ul{
-  margin-top: 0;
-  margin-bottom: 0.32rem;
-  padding: 0;
-  font-size: 1.08rem;
-  margin-left: 1.4rem;
-}
-
 .header-anchor{
   display: none;
 }
@@ -170,6 +150,26 @@ svg.hover{
 
 .theme-container.home-page-class .theme-default-content:not(.custom) {
   max-width: 968px !important;
+}
+
+.theme-container.faqs-page-class .theme-default-content h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.08rem;
+  color: #303030;
+}
+
+.dark .theme-container.faqs-page-class .theme-default-content h3 {
+  color: white;
+  margin-top: calc(-1 * (1rem + var(--navbar-height)));
+}
+
+.theme-container.faqs-page-class .theme-default-content p,
+.theme-container.faqs-page-class .theme-default-content ul{
+  margin-top: 0;
+  margin-bottom: 0.7rem;
+  font-size: 1.08rem;
+  margin-left: 1.4rem;
 }
 
 .navbar-item > a:hover, .navbar-item > a.router-link-active {

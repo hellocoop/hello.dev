@@ -1,12 +1,9 @@
 ---
 sidebar: auto
+pageClass: faqs-page-class
 ---
 
 # FAQs
-
-<div id="faqs">
-<!-- FAQs should be below this -->
-
 
 ### *1) What is Hellō?* 
 
@@ -91,7 +88,3 @@ The letter `o` with a macron is symbolic of the open and global nature of Hellō
 ### *18) What if I don't want to use Hellō sometime in the future?*
 
 If you are worried that you may not want to use Hellō in the future, we recommend that you request either a verified email or phone for your users. If you decide to stop using Hellō, you can migrate to sending your user's a one time password ([OTP](https://en.wikipedia.org/wiki/One-time_password)) or [magic link](https://postmarkapp.com/blog/magic-links) for them to log in.
-
-
-<!-- FAQs should be above this -->
-</div>
