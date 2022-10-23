@@ -169,7 +169,7 @@ An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/
 |`nickname`|The user's preferred name, nickname, or username.|
 |`picture`|A user's profile picture URL. [See FAQ 12](/faqs/#_12-what-can-i-do-with-the-picture-url-i-receive) for details.|
 |`email`|The user's email address.|
-|`email_verified`|Indicates email was verified. Will allways be `true` from Hellō|
+|`email_verified`|Indicates email was verified. Will always be `true` from Hellō|
 |`iat`|The time the ID Token was issued in [Epoch time](https://en.wikipedia.org/wiki/Unix_time)|
 |`exp`|The time the ID Token expires.<br>Hellō sets the expiry to be 5 minutes (3600 seconds) after `iat`|
 
