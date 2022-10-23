@@ -24,7 +24,8 @@ const sendEvent = async() => {
   }
 }
 
-export default defineClientAppEnhance(({ app, router, siteData }) => {
+export default defineClientAppEnhance(({ router }) => {
+  if(__VUEPRESS_SSR__) return
   router.afterEach((toPage) => {
     if(toPage.hash) return // ignore anchor links
     sendEvent()

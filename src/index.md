@@ -131,10 +131,10 @@ tagline: #leave empty
   @keyframes float {
       0%,
       100% {
-          transform: translatey(0px);
+          transform: translateY(0px);
       }
       50% {
-          transform: translatey(-10px);
+          transform: translateY(-10px);
       }
   }
   #features, #links {

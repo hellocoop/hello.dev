@@ -249,7 +249,7 @@ If successfully validated, you will receive the ID Token payload with `active:tr
   "email": "dick.hardt@hello.coop",
   "email_verified": true,
   "iat": 1645641287,
-  "exp": 1645644887
+  "exp": 1645644887,
   "active": true
 }
 ```
