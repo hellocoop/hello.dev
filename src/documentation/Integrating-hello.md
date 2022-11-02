@@ -35,7 +35,7 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 
 |Parameter|Description|
 |---|---|
-|`client_id`|The `client_id` for your app from [console.hello.dev](https://console.hello.dev) |
+|`client_id`|The `client_id` for your app from [console.hello.coop](https://console.hello.coop) |
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
 |`scope`|The `openid` scope and zero or more scopes listed at [Hellō Claims](/documentation/hello-claims.html)|
 |`nonce`<br><span style="margin-top: 16px; display: inline-block;"></span>|A unique string that will be included in the signed ID Token. This links the ID Token to your request|
