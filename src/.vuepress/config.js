@@ -61,7 +61,7 @@ module.exports = {
           },
           {
             text: 'Console',
-            link: 'https://console.hello.dev'
+            link: 'https://console.hello.coop'
           },
           {
             text: 'Playground',
