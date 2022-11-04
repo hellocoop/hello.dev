@@ -14,18 +14,16 @@ The [Quickstart SPA ](https://quickstart.hello.coop) (Single Page App) is launch
 
 **You can load the [Quickstart App ](https://quickstart.hello.coop/) with the following query parameters:**
 
-|Parameter|Description|
-|---|---|
-|`response_uri` *|The URI that Quickstart will redirect to with the `client_id` query parameter|
-|`suffix`|A string that will be appended to the suggested name (eg: John's + suffix) for an app to be created. Defaults to "Application"|
-|`name`|Name of the application (`suffix` param is ignored)|
-|`tos_uri`|Terms of Service link|
-|`pp_uri`|Privacy Policy link|
-|`image_uri`|App logo link|
-|`dark_image_uri`|App logo link for dark theme|
-|`redirect_uri`|One or more OAuth space separated `redirect_uri` values to be added to the Developer Redirect URIs|
-
-\* required
+|Name||Description|
+|---|---|---|
+|`response_uri`|Required|URI that Quickstart will redirect to with the `client_id` query parameter|
+|`suffix`|Optional|String that will be appended to the suggested name (eg: John's + suffix) for an app to be created. Defaults to "Application"|
+|`name`|Optional|Name of the application (`suffix` param is ignored)|
+|`tos_uri`|Optional|URI to the Terms of Service|
+|`pp_uri`|Optional|URI to the Privacy Policy|
+|`image_uri`|Optional|URI to the app logo|
+|`dark_image_uri`|Optional|URI to the app logo for dark theme|
+|`redirect_uri`|Optional|One or more OAuth space separated `redirect_uri` values to be added to the Developer Redirect URIs|
 
 **An example URL with params to quickstart will look like this:**<br/>
 *(line feeds added & URL decoded for readability)*
@@ -47,7 +45,7 @@ On completion, the Quickstart app will load the `response_uri` with `client_id` 
 
 <p style="background: #282c34; color: white; word-break: break-all; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
   https://example.com/quickstart<br>
-  ?<span style="color: #f8c555">client_id</span>=<span style="color: #7ec699;">client_id=9ca12f47-f310-413b-b70f-4428d9448e8d</span>
+  ?<span style="color: #f8c555">client_id</span>=<span style="color: #7ec699;">ca12f47-f310-413b-b70f-4428d9448e8d</span>
 </p>
 
 [Go to Quickstart App ](https://quickstart.hello.coop/)
