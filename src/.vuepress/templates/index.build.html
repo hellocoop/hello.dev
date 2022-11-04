@@ -22,15 +22,19 @@
       media="(prefers-color-scheme: dark)"
     />
     <style>
+      header.navbar{
+        border-bottom: 1px solid #3e4c5a;
+      }
       @media (prefers-color-scheme: dark) {
-        html, body {
+        html, body, aside.sidebar{
           background-color: #151515;
+          color: #d4d4d4;
         }
       }
-
       @media (prefers-color-scheme: light) {
-        html, body {
+        html, body, aside.sidebar{
           background-color: white;
+          color: #303030;
         }
       }
     </style>
