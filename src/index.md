@@ -12,7 +12,10 @@ tagline: #leave empty
 </script>
 
 <div id="hero">
-  <h1>Identity in hours,<br/>not days or weeks.</h1>
+  <div>
+    <h1>Identity in hours,<br/>not days or weeks*</h1>
+    <h2 id="compare-text">* compared with Auth0 or other solutions - <a href="">see comparison</a></h2>
+  </div>
   <picture id="mockup">
     <source srcset="https://cdn.hello.coop/images/mockup-light.png" media="(prefers-color-scheme: dark)">
     <img src="https://cdn.hello.coop/images/mockup.png">
@@ -123,6 +126,13 @@ tagline: #leave empty
     padding-top: 0;
     opacity: 0.8;
     line-height: 22px;
+  }
+  #compare-text{
+    text-align: left;
+    font-size: 1.44rem;  
+  }
+  #compare-text a {
+    font-size: inherit;
   }
   #mockup img {
     max-width: 300px;
