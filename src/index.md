@@ -14,7 +14,7 @@ tagline: #leave empty
 <div id="hero">
   <div>
     <h1>Identity in hours,<br/>not days or weeks*</h1>
-    <h2 id="compare-text">* compared with Auth0 or other solutions - <a href="">see comparison</a></h2>
+    <h2 id="compare-text">* compared with Auth0 or other solutions - <a href="/comparison/">see comparison</a></h2>
   </div>
   <picture id="mockup">
     <source srcset="https://cdn.hello.coop/images/mockup-light.png" media="(prefers-color-scheme: dark)">
