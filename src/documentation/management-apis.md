@@ -1,10 +1,14 @@
+---
+sidebarDepth: 1
+---
+
 # Management APIs
 
 ## Quickstart
 
-Quickstart accelerates getting up and running with Hellō. It will read an existing `client_id`, or create one.
+[Quickstart ](https://quickstart.hello.coop) accelerates getting up and running with Hellō. It will read an existing `client_id`, or create one.
 
-The Quickstart SPA (Single Page App) is launched by sample apps to acquire a `client_id`. The developer will log into Hellō and authorize Quickstart to create / read publisher / apps.
+The [Quickstart SPA ](https://quickstart.hello.coop) (Single Page App) is launched by sample apps to acquire a `client_id`. The developer will log into Hellō and authorize Quickstart to create / read publisher / apps.
 
 ### Launching Quickstart 
 
@@ -14,7 +18,7 @@ The Quickstart SPA (Single Page App) is launched by sample apps to acquire a `cl
 |---|---|
 |`response_uri` *|The URI that Quickstart will redirect to with the `client_id` query parameter|
 |`suffix`|A string that will be appended to the suggested name (eg: John's + suffix) for an app to be created. Defaults to "Application"|
-|`name`|Name of the application (`suffix` param is ignored).|
+|`name`|Name of the application (`suffix` param is ignored)|
 |`tos_uri`|Terms of Service link|
 |`pp_uri`|Privacy Policy link|
 |`image_uri`|App logo link|
