@@ -21,7 +21,7 @@ Following are the scopes currently supported by Hellō. These are standard OpenI
 |`picture`|A URL to a profile picture. [See FAQ 14](/faqs/#_14-what-can-i-do-with-the-picture-url-i-receive) for details|
 | - | non-standard scopes |
 | `ethereum`|A verified ethereum address.|
-|`profile_update`|The user will be prompted to release updated profile information.<br> [See FAQ 14](/faqs/#_14-how-can-users-update-the-profile-information-i-received-from-hello-for-example-the-user-wants-to-change-their-profile-picture-or-email) for details.|
+|`profile_update`|The user will be prompted to release updated profile information.<br> [See FAQ 15](/faqs/#_15-how-can-users-update-the-profile-information-i-received-from-hello-for-example-the-user-wants-to-change-their-profile-picture-or-email) for details.|
 
 ## Potential Scopes
 
