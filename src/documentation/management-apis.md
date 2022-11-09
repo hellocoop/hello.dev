@@ -4,7 +4,7 @@ sidebarDepth: 1
 
 # Management APIs
 
-## Quickstart
+## Quickstart API
 
 [Quickstart ](https://quickstart.hello.coop) accelerates getting up and running with Hellō. It will read an existing `client_id`, or create one.
 
@@ -50,7 +50,7 @@ On completion, the Quickstart app will load the `response_uri` with `client_id` 
 
 [Go to Quickstart App ](https://quickstart.hello.coop/)
 
-## Admin
+## Admin API
 
 Manage your Hellō Publishers & Applications.
 
