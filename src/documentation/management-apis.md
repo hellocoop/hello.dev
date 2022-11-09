@@ -54,4 +54,4 @@ On completion, the Quickstart app will load the `response_uri` with `client_id` 
 
 Manage your Hellō Publishers & Applications.
 
-[Explore Admin API ](https://example.com/)
+<a href="/admin-api-explorer.html" target="_blank">Explore Admin API</a>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hellō Admin API Documentation</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn.hello.coop/images/dev-console-icon-192x192.png">
+    <script src="./assets/index.js"></script>
+    <link rel="stylesheet" href="./assets/index.css">
+
+    <style>
+        @media (max-width: 1280px) { 
+            body {
+                padding: 12px;
+            }
+        }
+    </style>
+  </head>
+  <body>
+
+    <elements-api
+      id="docs"
+      apiDescriptionUrl="https://admin.hello-sandbox.net/documentation/json"
+      router="hash"
+    />
+    <!-- apiDescriptionUrl="https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/ghes-3.0/ghes-3.0.json" -->
+
+    <script>
+        const doc = document.getElementById('docs');
+        const updateLayout = () => {
+            doc.layout = window.innerWidth >= 1280 ? 'sidebar' : 'stacked';
+        }
+        updateLayout();
+
+        window.onresize = updateLayout;
+    </script>
+  </body>
+</html>
