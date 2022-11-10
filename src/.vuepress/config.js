@@ -79,8 +79,7 @@ module.exports = {
                 '/documentation/integrating-hello.md',
                 '/documentation/hello-platforms.md',
                 '/documentation/hello-claims.md',
-                '/documentation/errors.md',
-                '/documentation/management-apis.md',
+                '/documentation/errors.md'
               ],
             },
           ],
