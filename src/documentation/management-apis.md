@@ -6,24 +6,26 @@ sidebarDepth: 1
 
 ## Quickstart API
 
-[Quickstart ](https://quickstart.hello.coop) accelerates getting up and running with Hellō. It will read an existing `client_id`, or create one.
+[Quickstart](https://quickstart.hello.coop) accelerates getting you getting up and running with Hellō. 
 
-The [Quickstart SPA ](https://quickstart.hello.coop) (Single Page App) is launched by sample apps to acquire a `client_id`. The developer will log into Hellō and authorize Quickstart to create / read publisher / apps.
+Software supporting Hellō Quickstart redirects the browser to the The [Quickstart SPA ](https://quickstart.hello.coop) (Single Page App) passing configuration parameters for the application. You then log into Quickstart with your Hellō Wallet (creating one if you don't have one) and confirm the name of your new application or select an existing one. Quickstart then provisions or updates your application and returns the client_id your application can use with Hellō.
+
+You can add Hellō Quickstart to a sample application, plug-in, or other software module with the web redirect API below.
 
 ### Launching Quickstart 
 
-**You can load the [Quickstart App ](https://quickstart.hello.coop/) with the following query parameters:**
+**You  load the [Quickstart App ](https://quickstart.hello.coop/) with the following query parameters:**
 
 |Name||Description|
 |---|---|---|
 |`response_uri`|Required|URI that Quickstart will redirect to with the `client_id` query parameter|
 |`suffix`|Optional|String that will be appended to the suggested name (eg: John's + suffix) for an app to be created. Defaults to "Application"|
-|`name`|Optional|Name of the application (`suffix` param is ignored)|
+|`name`|Optional|Name of the application (`suffix` param is ignored if `name` param is provided)|
 |`tos_uri`|Optional|URI to the Terms of Service|
 |`pp_uri`|Optional|URI to the Privacy Policy|
 |`image_uri`|Optional|URI to the app logo|
-|`dark_image_uri`|Optional|URI to the app logo for dark theme|
-|`redirect_uri`|Optional|One or more OAuth space separated `redirect_uri` values to be added to the Developer Redirect URIs|
+|`dark_image_uri`|Optional|URI to the dark theme app logo, which is shown if dark theme is detected in the browser|
+|`redirect_uri`|Optional|One or more space separated OAuth `redirect_uri` values to be added to the Production Redirect URIs. `http:\\localhost:*` and `http:\\127.0.0.1` Development Redirect URIs are enabled by default|
 
 **An example URL with params to quickstart will look like this:**<br/>
 *(line feeds added & URL decoded for readability)*
@@ -52,6 +54,6 @@ On completion, the Quickstart app will load the `response_uri` with `client_id` 
 
 ## Admin API
 
-Manage your Hellō Publishers & Applications.
+This API is used by [Console](https://console.hello.coop) and [Quickstart](https://quickstart.hello.coop) to manage Hellō Publishers & Applications. Please contact us if you would like to integrate Hellō Admin APIs into your management console.
 
 [Explore Admin API ](https://admin.hello-sandbox.net/documentation/explorer/)
