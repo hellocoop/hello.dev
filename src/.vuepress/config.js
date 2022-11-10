@@ -80,6 +80,7 @@ module.exports = {
                 '/documentation/hello-platforms.md',
                 '/documentation/hello-claims.md',
                 '/documentation/errors.md',
+                '/documentation/management-apis.md',
               ],
             },
           ],
