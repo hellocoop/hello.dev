@@ -6,9 +6,9 @@ sidebarDepth: 1
 
 ## Quickstart API
 
-[Quickstart](https://quickstart.hello.coop) accelerates getting you getting up and running with Hellō. 
+[Quickstart](https://quickstart.hello.coop) accelerates getting you up and running with Hellō. 
 
-Software supporting Hellō Quickstart redirects the browser to the The [Quickstart SPA ](https://quickstart.hello.coop) (Single Page App) passing configuration parameters for the application. You then log into Quickstart with your Hellō Wallet (creating one if you don't have one) and confirm the name of your new application or select an existing one. Quickstart then provisions or updates your application and returns the client_id your application can use with Hellō.
+Software supporting Hellō Quickstart redirects the browser to the the Quickstart SPA (Single Page App) passing configuration parameters for the application. You then log into Quickstart with your Hellō Wallet (creating a wallet if you don't have one) and then confirm the name of your new application or select an existing one. Quickstart then provisions or updates your application and returns the client_id your application can use with Hellō.
 
 You can add Hellō Quickstart to a sample application, plug-in, or other software module with the web redirect API below.
 
