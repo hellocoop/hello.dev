@@ -26,6 +26,7 @@ You can add Hellō Quickstart to a sample application, plug-in, or other softwar
 |`image_uri`|Optional|URI to the app logo|
 |`dark_image_uri`|Optional|URI to the dark theme app logo, which is shown if dark theme is detected in the browser|
 |`redirect_uri`|Optional|One or more space separated OAuth `redirect_uri` values to be added to the Production Redirect URIs. `http:\\localhost:*` and `http:\\127.0.0.1` Development Redirect URIs are enabled by default|
+|`integration`|Optional|How the application is created. Defaults to `quickstart`|
 
 **An example URL with params to quickstart will look like this:**<br/>
 *(line feeds added & URL decoded for readability)*
@@ -38,7 +39,8 @@ You can add Hellō Quickstart to a sample application, plug-in, or other softwar
   &<span style="color: #f8c555;">pp_uri</span>=<span style="color: #7ec699;">https://example.com/privacy-policy.html</span><br>
   &<span style="color: #f8c555;">image_uri</span>=<span style="color: #7ec699;">https://example.com/logo.png</span><br>
   &<span style="color: #f8c555;">dark_image_uri</span>=<span style="color: #7ec699;">https://example.com/logo-dark.png</span><br>
-  &<span style="color: #f8c555;">redirect_uri</span>=<span style="color: #7ec699;">https://example.com/response</span>
+  &<span style="color: #f8c555;">redirect_uri</span>=<span style="color: #7ec699;">https://example.com/response</span><br>
+  &<span style="color: #f8c555;">integration</span>=<span style="color: #7ec699;">wordpress</span>
 </p>
 
 ### Quickstart Response
