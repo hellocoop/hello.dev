@@ -25,8 +25,8 @@ You can add Hellō Quickstart to a sample application, plug-in, or other softwar
 |`pp_uri`|Optional|URI to the Privacy Policy|
 |`image_uri`|Optional|URI to the app logo|
 |`dark_image_uri`|Optional|URI to the dark theme app logo, which is shown if dark theme is detected in the browser|
-|`redirect_uri`|Optional|One or more space separated OAuth `redirect_uri` values to be added to the Production Redirect URIs. `http:\\localhost:*` and `http:\\127.0.0.1` Development Redirect URIs are enabled by default|
-|`integration`|Optional|How the application is created. Defaults to `quickstart`|
+|`redirect_uri`|Optional|One or more space separated OAuth `redirect_uri` values to be added to the Production Redirect URIs `http:\\localhost:*` and `http:\\127.0.0.1` Development Redirect URIs are enabled by default|
+|`integration`|Optional|Name of integration using Quickstart|
 
 **An example URL with params to quickstart will look like this:**<br/>
 *(line feeds added & URL decoded for readability)*
