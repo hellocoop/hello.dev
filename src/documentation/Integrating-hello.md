@@ -171,7 +171,7 @@ An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/
 |`email`|The user's email address.|
 |`email_verified`|Indicates email was verified. Will always be `true` from Hellō|
 |`iat`|The time the ID Token was issued in [Epoch time](https://en.wikipedia.org/wiki/Unix_time)|
-|`exp`|The time the ID Token expires.<br>Hellō sets the expiry to be 5 minutes (3600 seconds) after `iat`|
+|`exp`|The time the ID Token expires.<br>Hellō sets the expiry to be 60 minutes (3600 seconds) after `iat`|
 
 Your application now has an ID Token for the user, but before using it, you need to ensure it is valid, and not an ID Token an attacker has passed to your application. The ID Token header and signature are part of the validation procedure.
 
