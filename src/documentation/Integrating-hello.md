@@ -1,6 +1,6 @@
 # Integrating Hellō
 
-Now that you have registered your application at Hellō and added the button to your page, let's complete the integration. 
+Now that you have registered your application at Hellō and added the button to your page, let's complete the integration.
 
 1. Connect the button click to creating a Request URL
 2. Create a Request URL
@@ -20,7 +20,7 @@ The button to initiate registration / login is either charcoal (#303030) on whit
 <button onclick="login(event)" class="hello-btn hello-btn-black-on-light"></button>
 
 <script>
-  async function login(event){ 
+  async function login(event){
     event.target.classList.add('hello-btn-loader') // Show spinner
     event.target.disabled = true // Disable button
     const requestURL = await fetch()  // Fetch the request URL from your backend
@@ -69,9 +69,9 @@ Cause the user's browser to load the `request URL` you created in `Step 2`. Here
 ```javascript
 window.location.href = "https://wallet.hello.coop/authorize?..."
 ```
-- An `<a>` tag with an `href` to the `requestURL`  
+- An `<a>` tag with an `href` to the `requestURL`
 ```html
-<a href="https://wallet.hello.coop/authorize?..." /> ... </a> 
+<a href="https://wallet.hello.coop/authorize?..." /> ... </a>
 ```
 - HTTP 302 redirect from the server
 ```
@@ -113,8 +113,8 @@ id_token=eyJhbGciOiJSUzI1...rest_of_ID_Token
 Note that a `fragment` response is limited to the maximum URL length supported by the user's browser. Using `form_post` does not have that constraint, and a larger ID Token can be returned to your application.
 
 An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html) that has claims per [OpenID Connect §2](https://openid.net/specs/openid-connect-core-1_0.html#IDToken).<br>In the following example of a raw ID Token:
-- <span style="color: #cc99cd; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">purple</span> is the **header** that describes the JWT; 
-- <span style="color: #f8c555; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">yellow</span> is the **payload** of the ID Token; and 
+- <span style="color: #cc99cd; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">purple</span> is the **header** that describes the JWT;
+- <span style="color: #f8c555; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">yellow</span> is the **payload** of the ID Token; and
 - <span style="color: #7ec699; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">green</span> is the **signature** of the JWT.
 
 **Example ID Token**
@@ -171,7 +171,7 @@ An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/
 |`email`|The user's email address.|
 |`email_verified`|Indicates email was verified. Will always be `true` from Hellō|
 |`iat`|The time the ID Token was issued in [Epoch time](https://en.wikipedia.org/wiki/Unix_time)|
-|`exp`|The time the ID Token expires.<br>Hellō sets the expiry to be 5 minutes (3600 seconds) after `iat`|
+|`exp`|The time the ID Token expires.<br>Hellō sets the expiry to be 5 minutes (300 seconds) after `iat`|
 
 Your application now has an ID Token for the user, but before using it, you need to ensure it is valid, and not an ID Token an attacker has passed to your application. The ID Token header and signature are part of the validation procedure.
 
@@ -179,13 +179,13 @@ Your application now has an ID Token for the user, but before using it, you need
 ## 5. Validate ID Token
 
 You can validate the `id_token` by:
-1. Sending it back to the Hellō introspection API; or 
+1. Sending it back to the Hellō introspection API; or
 2. Perform validation yourself per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
 
 
 ### 5.1 Introspection
 
-Hellō provides an introspection API per [RFC 7662](https://www.rfc-editor.org/rfc/rfc7662.html) at`https://wallet.hello.coop/oauth/introspect` that will examine the token, ensure it was from Hellō, has not expired, and return the payload. 
+Hellō provides an introspection API per [RFC 7662](https://www.rfc-editor.org/rfc/rfc7662.html) at`https://wallet.hello.coop/oauth/introspect` that will examine the token, ensure it was from Hellō, has not expired, and return the payload.
 
 No authentication is required to call the introspection endpoint. You MUST pass your `client_id`, and if you provided a `nonce` in the `request URL`, you MUST provide the nonce. The `token`, `client_id`, and optional `nonce` are sent as JSON.
 
