@@ -151,8 +151,8 @@ An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/
         "picture": "https://cdn.hello.coop/images/default-picture.png",
         "email": "dick.hardt@hello.coop",
         "email_verified": true,
-        "iat": 1645641287,
-        "exp": 1645644887
+        "iat": 1669399110,
+        "exp": 1669399410
     }
 }
 ```
@@ -248,8 +248,8 @@ If successfully validated, you will receive the ID Token payload with `active:tr
   "picture": "https://cdn.hello.coop/images/default-picture.png",
   "email": "dick.hardt@hello.coop",
   "email_verified": true,
-  "iat": 1645641287,
-  "exp": 1645644887,
+  "iat": 1669399110,
+  "exp": 1669399410,
   "active": true
 }
 ```
