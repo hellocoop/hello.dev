@@ -58,4 +58,4 @@ On completion, the Quickstart app will load the `response_uri` with `client_id` 
 
 This API is used by [Console](https://console.hello.coop) and [Quickstart](https://quickstart.hello.coop) to manage Hellō Publishers & Applications. Please contact us if you would like to integrate Hellō Admin APIs into your management console.
 
-[Explore Admin API ](https://admin.hello-sandbox.net/documentation/explorer/)
+<!-- [Explore Admin API ](https://admin.hello-sandbox.net/documentation/explorer/) -->
