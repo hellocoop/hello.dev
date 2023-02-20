@@ -26,13 +26,13 @@ module.exports = {
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
   ],
 
-  
+
   bundler:
     // specify bundler via environment variable
     process.env.DOCS_BUNDLER ??
     // use vite by default
     '@vuepress/vite',
-    
+
   themeConfig: {
     docsRepo: 'hellocoop/www.hello.dev',
     docsBranch: 'main',
@@ -79,7 +79,8 @@ module.exports = {
                 '/documentation/integrating-hello.md',
                 '/documentation/hello-platforms.md',
                 '/documentation/hello-claims.md',
-                '/documentation/errors.md'
+                '/documentation/errors.md',
+                '/documentation/management-apis.md',
               ],
             },
           ],
