@@ -14,7 +14,7 @@ tagline: #leave empty
 
   onMounted(() => {
     (async function(){
-      const RSS_URL = "https://blog.hello.coop/feed";
+      const RSS_URL = "/rss.xml"
       try {
           const res = await fetch(RSS_URL)
           const txt = await res.text()
@@ -28,9 +28,10 @@ tagline: #leave empty
               const rawDescription = post.querySelector("description")?.textContent
               const descriptionPlaceholder = document.createElement("div");
               descriptionPlaceholder.innerHTML = rawDescription
-              const description = descriptionPlaceholder.textContent
+              const description = descriptionPlaceholder.textContent.split(". ")
+              const shortDescription = description.slice(0, 2).join(". ") + "."
               const url = post.querySelector("link")?.textContent
-              const image = post.querySelector("content")?.getAttribute("url")
+              const image = post.querySelector("cover_image")?.textContent
               let date = post.querySelector("pubDate")?.textContent
               date = date.split(" ").slice(0, 4).join(" ")
               const li = `
@@ -46,7 +47,7 @@ tagline: #leave empty
                                   </svg>
                               </h3>
                               <p class="opacity-90 mt-1 text-base font-normal non-italic" style="margin-bottom: 0;">
-                                  ${description}
+                                  ${shortDescription}
                               </p>
                           </div>
                       </a>
@@ -352,6 +353,7 @@ tagline: #leave empty
   }
   .post {
     display: flex;
+    align-items: flex-start;
     gap: 0px 20px;
   }
   @media (prefers-color-scheme: dark) {
