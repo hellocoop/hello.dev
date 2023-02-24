@@ -1,8 +1,8 @@
 # Provider Hint
 
-When Hellō does not know the user's preferred provider (new user or new browser), they are presented with a recommended list of providers to choose from, with the option to show all the other supported providers. New users are not overwhelmed with the choices, while still providing choice.
+When Hellō does not know the user's preferred provider (new user or new browser), they are presented with a recommended list of providers to choose from, with the option to show all the other supported providers. This minimizes the risk that a new user is overwhelmed by all the available options, while still providing choice.
 
-You can control which providers are recommended by passing the `provider_hint` parameter.  You can add providers by providing one or more space separated slugs: 
+If would like to change which providers are recommended to better align with your users' preferences, you can pass a `provider_hint` query parameter in your authorization request.  You add providers by providing one or more space separated slugs: 
 
 <p style="background: #282c34; color: white; word-break: break-all; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
   https://wallet.hello.coop/authorize<br>
@@ -10,7 +10,7 @@ You can control which providers are recommended by passing the `provider_hint` p
   &<span style="color: #f8c555;">provider_hint</span>=<span style="color: #7ec699;">discord github</span>
 </p>
 
-You can also demote the a default provider fold by suffixing the slug with `--`.
+You can demote a default provider by suffixing the slug with `--`.
 
 <p style="background: #282c34; color: white; word-break: break-all; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
   https://wallet.hello.coop/authorize<br>
@@ -18,7 +18,7 @@ You can also demote the a default provider fold by suffixing the slug with `--`.
   &<span style="color: #f8c555;">provider_hint</span>=<span style="color: #7ec699;">google--</span>
 </p>
 
-Defaults:
+## Recommended Provider Defaults 
 
 | Platform      | Default provider_hint values |
 | ----------- | ----------- |
