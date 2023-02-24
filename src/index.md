@@ -429,10 +429,10 @@ tagline: #leave empty
   .h-4 {
     height: 1rem;
   }
-  .mb-0.5 {
+  .mb-0\.5 {
     margin-bottom: 0.125rem;
   }
-  .ml-0.5 {
+  .ml-0\.5 {
     margin-left: 0.125rem;
   }
   .inline-block {
