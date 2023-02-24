@@ -28,8 +28,7 @@ tagline: #leave empty
               const rawDescription = post.querySelector("description")?.textContent
               const descriptionPlaceholder = document.createElement("div");
               descriptionPlaceholder.innerHTML = rawDescription
-              const description = descriptionPlaceholder.textContent.split(". ")
-              const shortDescription = description.slice(0, 2).join(". ") + "."
+              const description = descriptionPlaceholder.textContent.trim().slice(0, 250) + "..."
               const url = post.querySelector("link")?.textContent
               const image = post.querySelector("cover_image")?.textContent
               let date = post.querySelector("pubDate")?.textContent
@@ -47,7 +46,7 @@ tagline: #leave empty
                                   </svg>
                               </h3>
                               <p class="opacity-90 mt-1 text-base font-normal non-italic" style="margin-bottom: 0;">
-                                  ${shortDescription}
+                                  ${description}
                               </p>
                           </div>
                       </a>
