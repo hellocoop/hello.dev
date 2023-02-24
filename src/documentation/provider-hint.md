@@ -32,4 +32,4 @@ You can demote a default provider by suffixing the slug with `--`.
 ` twitch twitter mastodon microsoft line yahoo `<br/>
 `email phone ethereum`
 
-You can see how the `provider_hint` functionality works in the [Hellō Playground](https://playground.hello.dev)
+You can see how the `provider_hint` functionality works in the <a href="https://playground.hello.dev" target="_blank">Hellō Playground</a>
