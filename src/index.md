@@ -6,9 +6,60 @@ tagline: #leave empty
 ---
 
 <script setup>
+  import { onMounted } from 'vue'
+
   const join = () => {
     joinSlackCommunity('hello.dev')
   }
+
+  onMounted(() => {
+    (async function(){
+      const RSS_URL = "/rss.xml"
+      try {
+          const res = await fetch(RSS_URL)
+          const txt = await res.text()
+          const xml = new window.DOMParser().parseFromString(txt, "text/xml")
+          const posts = xml.querySelectorAll("item")
+          const postsRef = document.querySelector("#posts")
+          for (let i = 0; i < 3; i++) {
+              if (!posts[i]) continue;
+              const post = posts[i]
+              const title = post.querySelector("title")?.textContent
+              const rawDescription = post.querySelector("description")?.textContent
+              const descriptionPlaceholder = document.createElement("div");
+              descriptionPlaceholder.innerHTML = rawDescription
+              const description = descriptionPlaceholder.textContent.split(". ")
+              const shortDescription = description.slice(0, 2).join(". ") + "."
+              const url = post.querySelector("link")?.textContent
+              const image = post.querySelector("cover_image")?.textContent
+              let date = post.querySelector("pubDate")?.textContent
+              date = date.split(" ").slice(0, 4).join(" ")
+              const li = `
+                  <li>
+                      <a href="${url}" target="_blank" class="post group">
+                          <img src="${image}"/>
+                          <div class="py-2">
+                              <span class="text-sm font-normal opacity-70">${date}</span>
+                              <h3 class="group-hover:underline my-1">
+                                  <span>${title}</span>
+                                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 mb-0.5 ml-0.5 inline-block invisible flex-shrink-0">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                  </svg>
+                              </h3>
+                              <p class="opacity-90 mt-1 text-base font-normal non-italic" style="margin-bottom: 0;">
+                                  ${shortDescription}
+                              </p>
+                          </div>
+                      </a>
+                  </li>
+              `
+              postsRef.insertAdjacentHTML("beforeend", li)
+          }
+      } catch (err) {
+          console.error(err)
+      }
+    })()
+  })
 </script>
 
 <div id="hero">
@@ -93,11 +144,31 @@ tagline: #leave empty
   </div>
 </section>
 
+<section id="blog-rss" style="padding-bottom: 180px;">
+  <h2>Latest Blog Posts</h2>
+  <ul id="posts" class="text-xl font-bold space-y-10 list-inside"></ul>
+  <a href="https://blog.hello.dev/" target="_blank" id="more-posts-cta" class="mt-6 font-bold" style="display: inline-block; font-size: 1.35rem;">
+      <span>Read more at blog.hello.dev</span>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 ml-1">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25">
+        </path>
+      </svg>
+  </a>
+</section>
+
 <div style="position: fixed; width: 100%; left: 0; bottom: 0;" v-pre>
   <wc-footer/>
 </div>
 
 <style scoped>
+  #posts {
+    padding-left: 0;
+    list-style: none;
+  }
+  #more-posts-cta {
+    margin-left: 286px;
+  }
   #hero {
     display: flex;
     text-align: left;
@@ -110,7 +181,7 @@ tagline: #leave empty
     font-size: 4.6rem;
   }
   h2 {
-    text-align: center;
+    text-align: left;
     border-bottom: none;
     padding-bottom: 0; 
     font-size: 2.4rem;
@@ -164,14 +235,14 @@ tagline: #leave empty
     position: absolute;
     left: 0;
   }
-  #start-building {
+  #start-building, #blog-rss {
     margin-top: 80px;
-    padding-bottom: 130px;
+    /* padding-bottom: 130px; */
   }
   a, #join-slack-btn {
     font-size: 1.2rem;
     color: inherit;
-    font-weight: 500 !important;
+    font-weight: 500;
   }
   a:hover, a:focus-visible, #join-slack-btn:hover, #join-slack-btn:focus-visible {
     text-decoration: underline;
@@ -190,6 +261,9 @@ tagline: #leave empty
       flex-direction: column;
       gap: 20px 0px;
     }
+    #more-posts-cta {
+      margin-left: 0;
+    }
     #links p {
       margin-top: 8px;
     }
@@ -202,7 +276,7 @@ tagline: #leave empty
     #features div p {
       min-height: auto;
     }
-    #start-building {
+    #start-building, #blog-rss {
       margin-top: 40px; 
     }
     #mockup img{
@@ -261,5 +335,113 @@ tagline: #leave empty
     .class-opacity {
       opacity: 0.4;
     }
+  }
+</style>
+
+<style>
+  @media (max-width: 1000px) {
+    .post {
+      flex-direction: column;
+    }
+  }
+  .post:hover h3 {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+  }
+  .post:hover svg {
+    visibility: visible;
+  }
+  .post {
+    display: flex;
+    align-items: flex-start;
+    gap: 0px 20px;
+  }
+  @media (prefers-color-scheme: dark) {
+    .post svg {
+      color: #d4d4d4;
+    }
+  }
+  @media (prefers-color-scheme: light) {
+    .post svg {
+      color: #303030;
+    }
+  }
+  .flex {
+    display: flex;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .font-semibold {
+    font-weight: 600;
+  }
+  .post img {
+    width: 266px;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .mt-6 {
+    margin-top: 1.5rem;
+  }
+  .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  .font-bold {
+    font-weight: 700;
+  }
+  .opacity-70 {
+    opacity: 0.7;
+  }
+  .font-normal {
+    font-weight: 400;
+  }
+  .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  .ml-1 {
+    margin-left: 0.25rem;
+  }
+  .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .opacity-90 {
+    opacity: 0.9;
+  }
+  .text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  .my-1 {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem
+  }
+  .mt-1 {
+    margin-top: 0.25rem;
+  }
+  .w-4 {
+    width: 1rem;
+  }
+  .h-4 {
+    height: 1rem;
+  }
+  .mb-0.5 {
+    margin-bottom: 0.125rem;
+  }
+  .ml-0.5 {
+    margin-left: 0.125rem;
+  }
+  .inline-block {
+    display: inline-block;
+  }
+  .invisible {
+    visibility: hidden;
+  }
+  .space-y-10 > * + * {
+    margin-top: 2.5rem; /* 40px */
   }
 </style>
