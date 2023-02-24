@@ -36,7 +36,7 @@ tagline: #leave empty
               const li = `
                   <li>
                       <a href="${url}" target="_blank" class="post group">
-                          <img src="${image}"/>
+                          <img src="${image}" style="border: 0.5px solid #808080"/>
                           <div class="py-2">
                               <span class="text-sm font-normal opacity-70">${date}</span>
                               <h3 class="group-hover:underline my-1">
