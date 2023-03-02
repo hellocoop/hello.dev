@@ -31,8 +31,7 @@ tagline: #leave empty
               const description = descriptionPlaceholder.textContent.trim().slice(0, 250) + "..."
               const url = post.querySelector("link")?.textContent
               const image = post.querySelector("cover_image")?.textContent
-              let date = post.querySelector("pubDate")?.textContent
-              date = date.split(" ").slice(0, 4).join(" ")
+              const date = dayjs(post.querySelector("pubDate")?.textContent).format('ddd, DD MMM YYYY')
               const li = `
                   <li>
                       <a href="${url}" target="_blank" class="post group">
