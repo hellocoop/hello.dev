@@ -29,7 +29,7 @@ You can demote a default provider by suffixing the slug with `--`.
 ## Possible slug values
 
 `apple google discord facebook github gitlab`<br/>
-` twitch twitter mastodon microsoft line yahoo `<br/>
+` twitch twitter tumblr mastodon microsoft line wordpress yahoo `<br/>
 `email phone ethereum`
 
 You can see how the `provider_hint` functionality works in the <a href="https://playground.hello.dev" target="_blank">Hellō Playground</a>
