@@ -60,6 +60,10 @@ module.exports = {
             link: '/pricing/'
           },
           {
+            text: 'Blog',
+            link: 'https://blog.hello.dev'
+          },
+          {
             text: 'Console',
             link: 'https://console.hello.coop'
           },
@@ -79,6 +83,7 @@ module.exports = {
                 '/documentation/integrating-hello.md',
                 '/documentation/hello-platforms.md',
                 '/documentation/hello-claims.md',
+                '/documentation/provider-hint.md',
                 '/documentation/errors.md',
                 '/documentation/management-apis.md',
               ],
