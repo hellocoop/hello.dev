@@ -8,8 +8,8 @@
     "email": ""
   },
   "engines": {
-    "npm": ">=7.0.0",
-    "node": ">=16.0.0"
+    "node": "~18",
+    "npm": "~9"
   },
   "repository": "/Hellō Dev",
   "scripts": {
