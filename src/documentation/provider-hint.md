@@ -20,16 +20,18 @@ You can demote a default provider by suffixing the slug with `--`.
 
 ## Recommended Provider Defaults 
 
-| Platform      | Default provider_hint values |
-| ----------- | ----------- |
-| Default      | `google email`       |
-| macOS/iOS   | `apple google email`        |
-| Windows   | `microsoft google email`        |
+| Platform     | Default provider_hint values  |
+| -----------  | ----------------------------- |
+| Default      | `google email passkey¹`       |
+| macOS/iOS    | `apple google email passkey¹` |
+| Windows      | `microsoft google email`      |
+
+¹ Mobile devices where passkey is supported
 
 ## Possible slug values
 
 `apple google discord facebook github gitlab`<br/>
 ` twitch twitter tumblr mastodon microsoft line qrcode wordpress yahoo `<br/>
-`email phone ethereum`
+`email phone ethereum passkey`
 
 You can see how the `provider_hint` functionality works in the <a href="https://playground.hello.dev" target="_blank">Hellō Playground</a>
