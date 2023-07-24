@@ -4,7 +4,7 @@ Following are errors returned by the Hellō server when making a request, or whe
 
 ## Request Errors
 
-If there is an issue with fulfilling the request [(Step 4)](/documentation/using-hello.html#_4-make-request), the response [(Step 5)](/documentation/using-hello.html#_5-receive-response) will have an `error` query parameter set to one of the following string:
+If there is an issue with fulfilling the request [(Step 3)](/documentation/Integrating-hello.html#_3-make-request), the response [(Step 4)](/documentation/Integrating-hello.html#_4-receive-response) will have an `error` query parameter set to one of the following string:
 
 |Error|Description|
 |---|---|
