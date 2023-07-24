@@ -19,7 +19,7 @@ Hellō's business model is to charge developers an interchange fee of a few penn
 
 ### *4) How do I get started using Hellō?*
 
-Check out the [Using Hellō](/documentation/using-hello.html#_1-app-registration) documentation. 
+Check out the [Using Hellō](/documentation/getting-started.html#_1-app-registration) documentation. 
 
 
 ### *5) What types of applications is Hellō suitable for?*
