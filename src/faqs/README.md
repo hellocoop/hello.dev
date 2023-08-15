@@ -11,11 +11,11 @@ Hellō is a service that simplifies registration and log in of your users. Hell�
 
 ### *2) How much does Hellō cost?*
 
-Hellō is currently free, and will continue to be free until the co-operative decides Hellō has reached a critical mass of adoption. Early adopters of Hellō will be rewarded to minimize or eliminate paying for Hellō in the future.
+Login, verified email, and self declared claims such as name, nickname, and picture are free, for unlimited monthly active users. Verified phone numbers are currently free, but it may be a premium claim in the future. Unlike traditional CIAM products, there is no limit to how many monthly active users you can have using the free claims.
 
-### *3) How much will Hellō cost in the future?*
+### *3) What is Hellō's business model?*
 
-Hellō's business model is to charge developers an interchange fee of a few pennies for each new verified claim a user releases to an application. Hellō will not charge for log in or for active users. As Hellō starts to generate revenue in excess of expenses, Hellō will lower its fees.
+Hellō has a freemium business model where we provide free and premium verified claims. In the future we will offer premium claims such as verified name, age, citizenship, residency, affiliations, and entitlements.
 
 ### *4) How do I get started using Hellō?*
 
@@ -24,7 +24,7 @@ Check out the [Using Hellō](/documentation/getting-started.html#_1-app-registra
 
 ### *5) What types of applications is Hellō suitable for?*
 
-Hellō is currently only suitable for new applications wanting to sign up individual users. Hellō is not an enterprise identity solution where an enterprise wants to manage which applications are available to users.
+Hellō can be used with any application that can perform an OpenID Connect flow. Hellō is currently best suitable for new applications wanting to sign up individual users. We are working on adding enterprise federation features for B2B applications.
 
 ### *6) Why is Hellō only intended for new applications?*
 
@@ -32,39 +32,34 @@ New applications have no existing user pool to integrate with. Since there is no
 
 ### *7) What is a publisher?*
 
-A publisher is a group of developers and testers working on one or more applications managed by an administrator. The publisher abstraction allows you to have multiple apps that all receive the same `sub` subject identifier for a given user, so that you can provide user's a holistic experience across all of your apps if desired.
+A publisher is a group of administrators and testers working on one or more applications. The publisher abstraction allows you to have multiple apps that all receive the same `sub` subject identifier for a given user, so that you can provide user's a holistic experience across all of your apps if desired. *(Currently you are not yet able to invite others to your application -- coming soon!)*
 
-### *8) What is the difference between the administrator, developers, and testers?*
 
-- The administrator can invite and delete developers and testers, create and delete applications, and update applications. You can be an administrator of only one publisher.
-- Developers can invite and delete testers, and can update applications.
-- Testers can access development redirect URIs so they can test applications. The administrator and developers also have access to development redirect URIs.
-
-### *9) What is the difference between development and production redirect URIs?*
+### *8) What is the difference between development and production redirect URIs?*
 
 Hellō will only allow a publisher's administrator, developers, and testers to access an application's development URIs. Other users will be denied access. Localhost addresses are not permitted in production URIs.
 
-### *10) Which OpenID Connect flows does Hellō support?*
+### *9) Which OpenID Connect flows does Hellō support?*
 
 Unlike most social providers, Hellō supports all the redirect flows. We recommend the `id_token` flow if that choice is available to you as you will not need to manage a client secret nor implement [PKCE]. Hellō also supports the `code` flow which requires PKCE or a client secret (ideally both). The `code` flow will return both an `id_token` and an `access_token`, the later can be used to call the Hellō `user_info_endpoint` if you are using an integration that only works that way.
 
-### *11) What does Hellō provide me to identify my users?*
+### *10) What does Hellō provide me to identify my users?*
 
 We recommend you use the `sub` claim in the ID Token, which is a GUID. The OpenID Connect ID Token specifies the `iss` and `sub` claim identify the user, but as the `sub` claim is a globally unique, the `iss` claim is redundant. 
 
-### *12) Why should I use the `sub` claim to identify my users instead of `email`?*
+### *11) Why should I use the `sub` claim to identify my users instead of `email`?*
 
 The `sub` value is a globally unique identifier that you always receive back for the same user across all of a publisher's applications. The `email` is not guaranteed to be unique between users as some users share email address, and many users have multiple email addresses. You no longer require the user's email for account recovery as that is managed by Hellō, and your app could be more privacy friendly by not requiring an email, reducing compliance requirements. We believe that the `sub` claim is not PII as it is not shared with any other party -- but you should consult your own compliance counsel.
 
-### *13) What claims will I receive back?*
+### *12) What claims will I receive back?*
 
 You will receive back all claims for all the scopes you requested. We suggest you only ask for what you need, and not until you need it. Hellō makes it easy for you to incrementally request information.
 
-### *14) What can I do with the picture URL I receive?*
+### *13) What can I do with the picture URL I receive?*
 
-You can use the picture URL as the user's profile picture. The user may release a URL that resolves to be a user's social media profile picture, and the returned image will change when the user changes their social media profile picture. 
+You can use the picture URL as the user's profile picture using the Hellō CDN, or you can download the image and store it on your own infrastructure. 
 
-### *15) How can users update the profile information I received from Hellō? For example, the user wants to change their profile picture or email?*
+### *14) How can users update the profile information I received from Hellō? For example, the user wants to change their profile picture or email?*
 
 You can send the user back to Hellō where the user can select different claims. To see this in action, see the:
 
@@ -87,4 +82,4 @@ The letter `o` with a macron is symbolic of the open and global nature of Hellō
 
 ### *18) What if I don't want to use Hellō sometime in the future?*
 
-If you are worried that you may not want to use Hellō in the future, we recommend that you request either a verified email or phone for your users. If you decide to stop using Hellō, you can migrate to sending your user's a one time password ([OTP](https://en.wikipedia.org/wiki/One-time_password)) or [magic link](https://postmarkapp.com/blog/magic-links) for them to log in.
+If you are worried that you may not want to use Hellō in the future, we recommend that you request a verified email for your users. If you decide to stop using Hellō, you can migrate to sending your user's a one time password ([OTP](https://en.wikipedia.org/wiki/One-time_password)) or [magic link](https://postmarkapp.com/blog/magic-links) for them to log in.
