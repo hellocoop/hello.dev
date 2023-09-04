@@ -1,0 +1,46 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Upload to Amazon S3
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: get role name
+        run: ROLE_NAME=${GITHUB_REPOSITORY#*/}-repo
+
+      - name: Install modules
+        run: npm install
+
+# TODO - cache the install?
+
+      - name: Configure web-sync AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        permissions:
+          id-token: write
+          contents: read
+        with:
+          audience: sts.amazonaws.com.cn
+          role-to-assume: arn:aws:iam::510094580976:role/${ROLE_NAME}
+          aws-region: us-west-2
+
+      - name: get context
+        run: |
+          DISTRIBUTION_ID=$(aws iam list-role-tags --role-name $ROLE_NAME --query "Tags[?Key=='$distributionID'].Value" --output text)
+          BUCKET_NAME=$(aws iam list-role-tags --role-name $ROLE_NAME --query "Tags[?Key=='$bucketName'].Value" --output text)
+          echo ROLE=${ROLE}
+          echo DISTRIBUTION_ID=${DISTRIBUTION_ID}
+          echo BUCKET_NAME=${BUCKET_NAME}
+
+      # - name: Build content
+      #   run: npm run build
+
+      # - name: Copy docs dir to S3 bucket with the AWS CLI
+      #   run: aws s3 sync docs/ s3://${BUCKET_NAME}/
+
+      # - name: Invalidate CloudFront cache
+      #   run: aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
