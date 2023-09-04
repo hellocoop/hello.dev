@@ -14,8 +14,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: get role name
+        env:
+          ROLE_NAME: ${GITHUB_REPOSITORY#*/}-repo
         run: |
-          ROLE_NAME=${GITHUB_REPOSITORY#*/}-repo
           echo ROLE_NAME=${ROLE_NAME}
 
       - name: Install modules
@@ -37,9 +38,10 @@ jobs:
 
       - name: get context
         run: |
+          echo ROLE_NAME=${ROLE_NAME}
           DISTRIBUTION_ID=$(aws iam list-role-tags --role-name $ROLE_NAME --query "Tags[?Key=='$distributionID'].Value" --output text)
           BUCKET_NAME=$(aws iam list-role-tags --role-name $ROLE_NAME --query "Tags[?Key=='$bucketName'].Value" --output text)
-          echo ROLE=${ROLE}
+          echo ROLE_NAME=${ROLE_NAME}
           echo DISTRIBUTION_ID=${DISTRIBUTION_ID}
           echo BUCKET_NAME=${BUCKET_NAME}
 
