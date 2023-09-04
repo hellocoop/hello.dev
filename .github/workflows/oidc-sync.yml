@@ -14,12 +14,19 @@ jobs:
         uses: actions/checkout@v2
 
       - name: get role name
-        run: ROLE_NAME=${GITHUB_REPOSITORY#*/}-repo
+        run: |
+          ROLE_NAME=${GITHUB_REPOSITORY#*/}-repo
+          echo ROLE_NAME=${ROLE_NAME}
 
       - name: Install modules
         run: npm install
 
 # TODO - cache the install?
+
+      - name: check out role ARN
+        run: |
+          ARN = arn:aws:iam::510094580976:role/${ROLE_NAME}
+          echo ARN=${ARN}
 
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
