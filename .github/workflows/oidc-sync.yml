@@ -25,7 +25,7 @@ jobs:
 
       - name: check out role ARN
         run: |
-          ARN = arn:aws:iam::510094580976:role/${ROLE_NAME}
+          ARN=arn:aws:iam::510094580976:role/${ROLE_NAME}
           echo ARN=${ARN}
 
       - name: Configure web-sync AWS credentials
