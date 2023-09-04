@@ -19,6 +19,8 @@ jobs:
           echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
           ROLE_NAME="${REPO_NAME}-repo"
           echo "ROLE_NAME=${ROLE_NAME}" >> $GITHUB_ENV
+          ROLE_ARN="arn:aws:iam::510094580976:role/${ROLE_NAME}"
+          echo "ROLE_ARN=${ROLE_ARN}" >> $GITHUB_ENV
 
       # - name: Install modules
       #   run: npm install
@@ -33,8 +35,8 @@ jobs:
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          audience: sts.amazonaws.com.cn
-          role-to-assume: arn:aws:iam::510094580976:role/hello.dev-repo
+          audience: sts.amazonaws.com
+          role-to-assume: ${ROLE_ARN}
           aws-region: us-west-2
 
       - name: get context
