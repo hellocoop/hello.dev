@@ -5,6 +5,9 @@ jobs:
   deploy:
     name: Upload to Amazon S3
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Checkout
@@ -20,9 +23,6 @@ jobs:
 
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
-        permissions:
-          id-token: write
-          contents: read
         with:
           audience: sts.amazonaws.com.cn
           role-to-assume: arn:aws:iam::510094580976:role/${ROLE_NAME}
