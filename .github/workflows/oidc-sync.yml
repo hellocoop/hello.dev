@@ -36,7 +36,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v3
         with:
           # audience: sts.amazonaws.com
-          role-to-assume: ${role_arn}
+          role-to-assume: arn:aws:iam::510094580976:role/hello.dev-repo
           aws-region: us-west-2
 
       - name: get context
