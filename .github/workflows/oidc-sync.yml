@@ -15,12 +15,12 @@ jobs:
 
       - name: get role name
         run: |
-          REPO_NAME="${GITHUB_REPOSITORY#*/}"
-          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
-          ROLE_NAME="${REPO_NAME}-repo"
-          echo "ROLE_NAME=${ROLE_NAME}" >> $GITHUB_ENV
-          ROLE_ARN="arn:aws:iam::510094580976:role/${ROLE_NAME}"
-          echo "ROLE_ARN=${ROLE_ARN}" >> $GITHUB_ENV
+          repo_name="${GITHUB_REPOSITORY#*/}"
+          echo "repo_name=${repo_name}" >> $GITHUB_ENV
+          role_name="${repo_name}-repo"
+          echo "role_name=${role_name}" >> $GITHUB_ENV
+          role_arn="arn:aws:iam::510094580976:role/${role_name}"
+          echo "role_arn=${role_arn}" >> $GITHUB_ENV
 
       # - name: Install modules
       #   run: npm install
@@ -29,22 +29,22 @@ jobs:
 
       - name: check out role ARN
         run: |
-          ARN=arn:aws:iam::510094580976:role/${ROLE_NAME}
+          ARN=arn:aws:iam::510094580976:role/${role_name}
           echo ARN=${ARN}
 
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          audience: sts.amazonaws.com
-          role-to-assume: ${ROLE_ARN}
+          # audience: sts.amazonaws.com
+          role-to-assume: ${role_arn}
           aws-region: us-west-2
 
       - name: get context
         run: |
-          echo ROLE_NAME=${ROLE_NAME}
-          DISTRIBUTION_ID=$(aws iam list-role-tags --role-name $ROLE_NAME --query "Tags[?Key=='$distributionID'].Value" --output text)
-          BUCKET_NAME=$(aws iam list-role-tags --role-name $ROLE_NAME --query "Tags[?Key=='$bucketName'].Value" --output text)
-          echo ROLE_NAME=${ROLE_NAME}
+          echo role_name=${role_name}
+          DISTRIBUTION_ID=$(aws iam list-role-tags --role-name $role_name --query "Tags[?Key=='$distributionID'].Value" --output text)
+          BUCKET_NAME=$(aws iam list-role-tags --role-name $role_name --query "Tags[?Key=='$bucketName'].Value" --output text)
+          echo role_name=${role_name}
           echo DISTRIBUTION_ID=${DISTRIBUTION_ID}
           echo BUCKET_NAME=${BUCKET_NAME}
 
