@@ -14,13 +14,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: get role name
-        env:
-          ROLE_NAME: ${GITHUB_REPOSITORY#*/}-repo
         run: |
-          echo ROLE_NAME=${ROLE_NAME}
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
+          ROLE_NAME="${REPO_NAME}-repo"
+          echo "ROLE_NAME=${ROLE_NAME}" >> $GITHUB_ENV
 
-      - name: Install modules
-        run: npm install
+      # - name: Install modules
+      #   run: npm install
 
 # TODO - cache the install?
 
@@ -33,7 +34,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v3
         with:
           audience: sts.amazonaws.com.cn
-          role-to-assume: arn:aws:iam::510094580976:role/${ROLE_NAME}
+          role-to-assume: arn:aws:iam::510094580976:role/hello.dev-repo
           aws-region: us-west-2
 
       - name: get context
