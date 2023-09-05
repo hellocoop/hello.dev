@@ -2,6 +2,9 @@ on:
   workflow_dispatch:
 
 jobs:
+  env:
+    STACK: WwwDevStack
+    ROLE: arn:aws:iam::510094580976:role/hello.dev-repo
   deploy:
     name: Upload to Amazon S3
     runs-on: ubuntu-latest
@@ -12,47 +15,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: get role name
-        run: |
-          repo_name="${GITHUB_REPOSITORY#*/}"
-          echo "repo_name=${repo_name}" >> $GITHUB_ENV
-          role_name="${repo_name}-repo"
-          echo "role_name=${role_name}" >> $GITHUB_ENV
-          role_arn="arn:aws:iam::510094580976:role/${role_name}"
-          echo "role_arn=${role_arn}" >> $GITHUB_ENV
-
-      # - name: Install modules
-      #   run: npm install
+      - name: Install modules
+        run: npm install
 
 # TODO - cache the install?
-
-      - name: check out role ARN
-        run: |
-          ARN=arn:aws:iam::510094580976:role/${role_name}
-          echo ARN=${ARN}
 
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          # audience: sts.amazonaws.com
-          role-to-assume: arn:aws:iam::510094580976:role/hello.dev-repo
+          role-to-assume: $ROLE
           aws-region: us-west-2
 
-      - name: get context
+      - name: Build content
+        run: npm run build
+
+      - name: Copy docs dir to S3 bucket with the AWS CLI
         run: |
-          echo role_name=${role_name}
-          DISTRIBUTION_ID=$(aws iam list-role-tags --role-name $role_name --query "Tags[?Key=='$distributionID'].Value" --output text)
-          BUCKET_NAME=$(aws iam list-role-tags --role-name $role_name --query "Tags[?Key=='$bucketName'].Value" --output text)
-          echo role_name=${role_name}
-          echo DISTRIBUTION_ID=${DISTRIBUTION_ID}
-          echo BUCKET_NAME=${BUCKET_NAME}
+          BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name $STACK --query 'Stacks[0].Outputs[?OutputKey==`BucketNameOutput`].OutputValue' --output text)
+          aws s3 sync docs/ s3://${BUCKET_NAME}/
 
-      # - name: Build content
-      #   run: npm run build
-
-      # - name: Copy docs dir to S3 bucket with the AWS CLI
-      #   run: aws s3 sync docs/ s3://${BUCKET_NAME}/
-
-      # - name: Invalidate CloudFront cache
-      #   run: aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
+      - name: Invalidate CloudFront cache
+        run: |
+          DISTRIBUTION_ID=$(aws cloudformation describe-stacks --stack-name $STACK --query 'Stacks[0].Outputs[?OutputKey==`DistributionIdOutput`].OutputValue' --output text)
+          aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
