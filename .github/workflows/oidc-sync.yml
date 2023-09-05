@@ -1,9 +1,9 @@
 on:
   workflow_dispatch:
 
-  env:
-    STACK: WwwDevStack
-    ROLE: arn:aws:iam::510094580976:role/hello.dev-repo
+env:
+  STACK: WwwDevStack
+  ROLE: arn:aws:iam::510094580976:role/hello.dev-repo
 
 jobs:
   deploy:
