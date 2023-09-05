@@ -1,11 +1,17 @@
+#
+# Copying instructions
+#
+# the STACK must be the cloud formation stack that created the S3 bucket and distribution
+#
+# The role-to-assume must be the role created for the STACK which is the `${REPO_NAME}-repo`
+#
+
+
 on:
   workflow_dispatch:
 
 env:
-  STACK: WwwDevStack
-  ROLE: "arn:aws:iam::510094580976:role/hello.dev-repo"
-  ROLE2: "hello.dev-repo"
-
+  STACK: WwwDevStack #make sure this is the right stack value
 
 jobs:
   deploy:
@@ -16,13 +22,17 @@ jobs:
       contents: read
 
     steps:
+      - name: Install modules and cache
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' # Choose the Node.js version you're using
+          cache: 'npm' # Specify the cache key
+
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install modules
-        run: npm install
 
-# TODO - cache the install?
-
+      - name: Restore npm cache
+        run: npm ci
 
       - name: Debug ROLE
         run: echo $ROLE
@@ -33,7 +43,7 @@ jobs:
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::510094580976:role/hello.dev-repo
+          role-to-assume: arn:aws:iam::510094580976:role/hello.dev-repo # make sure it is correct AWS account ID and role
           aws-region: us-west-2
 
       - name: Build content
