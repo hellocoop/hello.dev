@@ -1,10 +1,11 @@
 on:
   workflow_dispatch:
 
-jobs:
   env:
     STACK: WwwDevStack
     ROLE: arn:aws:iam::510094580976:role/hello.dev-repo
+
+jobs:
   deploy:
     name: Upload to Amazon S3
     runs-on: ubuntu-latest
