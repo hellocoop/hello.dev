@@ -3,7 +3,7 @@ on:
 
 env:
   STACK: WwwDevStack
-  ROLE: arn:aws:iam::510094580976:role/hello.dev-repo
+  ROLE: "arn:aws:iam::510094580976:role/hello.dev-repo"
 
 jobs:
   deploy:
