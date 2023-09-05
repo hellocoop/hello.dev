@@ -34,12 +34,6 @@ jobs:
       - name: Restore npm cache
         run: npm ci
 
-      - name: Debug ROLE
-        run: echo $ROLE
-
-      - name: Debug ROLE2
-        run: echo $ROLE2
-
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
