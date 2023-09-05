@@ -4,6 +4,8 @@ on:
 env:
   STACK: WwwDevStack
   ROLE: "arn:aws:iam::510094580976:role/hello.dev-repo"
+  ROLE2: "hello.dev-repo"
+
 
 jobs:
   deploy:
@@ -21,10 +23,18 @@ jobs:
 
 # TODO - cache the install?
 
+
+      - name: Debug ROLE
+        run: echo $ROLE
+
+      - name: Debug ROLE2
+        run: echo $ROLE2
+
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: $ROLE
+          role-to-assume: $ROLE2
+          source-aws-account-id: 510094580976
           aws-region: us-west-2
 
       - name: Build content
