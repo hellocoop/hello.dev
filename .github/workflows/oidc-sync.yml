@@ -33,7 +33,7 @@ jobs:
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: ${ROLE}
+          role-to-assume: arn:aws:iam::510094580976:role/hello.dev-repo
           aws-region: us-west-2
 
       - name: Build content
