@@ -16,7 +16,7 @@
     "postinstall": "node scripts/pre-requisites.mjs",
     "dev": "vuepress dev src",
     "build": "vuepress build src",
-    "test": "npm run build && linkinator ./docs --config linkinator.config.json",
+    "test": "linkinator ./S3 --config linkinator.config.json",
     "review": "./scripts/review.mjs"
   },
   "license": "MIT",

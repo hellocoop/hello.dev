@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   // theme: 'default-prefers-color-scheme',
-  dest: './docs/',
+  dest: './S3/',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
