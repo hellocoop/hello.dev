@@ -12,8 +12,7 @@ on:
 
 env:
   STACK: WwwDevStack #make sure this is the right stack value
-  AWS_ACCOUNT: "510094580976"
-  REPO: "hello.dev"
+  AWS_ACCOUNT: ${{ vars.HELLO_PROD_AWS }}
 jobs:
   deploy:
     name: Upload to Amazon S3
