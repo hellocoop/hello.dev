@@ -14,11 +14,12 @@ env:
   STACK: WwwDevStack #make sure this is the right stack value
   AWS_ACCOUNT: "510094580976"
   REPO: "hello.dev"
-  ROLE: "arn:aws:iam::${{ env.AWS_ACCOUNT }}:role/${{ env.REPO }}-repo"
 jobs:
   deploy:
     name: Upload to Amazon S3
     runs-on: ubuntu-latest
+    env:
+        ROLE: "arn:aws:iam::${{ env.AWS_ACCOUNT }}:role/${{ env.REPO }}-repo"
     permissions:
       id-token: write
       contents: read
@@ -38,7 +39,7 @@ jobs:
 
       - name: debug
         run: echo $ROLE
-
+        
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
