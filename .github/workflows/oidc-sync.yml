@@ -3,8 +3,6 @@
 #
 # the STACK must be the cloud formation stack that created the S3 bucket and distribution
 #
-# The role-to-assume must be the role created for the STACK which is the `${REPO_NAME}-repo`
-#
 
 
 on:
@@ -12,7 +10,7 @@ on:
 
 env:
   STACK: WwwDevStack #make sure this is the right stack value
-  AWS_ACCOUNT: ${{ vars.HELLO_PROD_AWS }}
+  AWS_ACCOUNT: ${{ vars.HELLO_PROD_AWS }} # set at org level 
 jobs:
   deploy:
     name: Upload to Amazon S3
@@ -42,27 +40,21 @@ jobs:
           # Set the environment variable for future steps
           echo "ROLE_NAME=${ROLE_NAME}" >> $GITHUB_ENV
 
-      - name: debug
-        run: echo $ROLE_NAME
-
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume:  ${{ env.ROLE_NAME }} 
           aws-region: us-west-2
 
+      - name: Build content
+        run: npm run build
 
-      - name: debug2
-        run: echo $ROLE
-      # - name: Build content
-      #   run: npm run build
+      - name: Copy docs dir to S3 bucket with the AWS CLI
+        run: |
+          BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name $STACK --query 'Stacks[0].Outputs[?OutputKey==`BucketNameOutput`].OutputValue' --output text)
+          aws s3 sync docs/ s3://${BUCKET_NAME}/
 
-      # - name: Copy docs dir to S3 bucket with the AWS CLI
-      #   run: |
-      #     BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name $STACK --query 'Stacks[0].Outputs[?OutputKey==`BucketNameOutput`].OutputValue' --output text)
-      #     aws s3 sync docs/ s3://${BUCKET_NAME}/
-
-      # - name: Invalidate CloudFront cache
-      #   run: |
-      #     DISTRIBUTION_ID=$(aws cloudformation describe-stacks --stack-name $STACK --query 'Stacks[0].Outputs[?OutputKey==`DistributionIdOutput`].OutputValue' --output text)
-      #     aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
+      - name: Invalidate CloudFront cache
+        run: |
+          DISTRIBUTION_ID=$(aws cloudformation describe-stacks --stack-name $STACK --query 'Stacks[0].Outputs[?OutputKey==`DistributionIdOutput`].OutputValue' --output text)
+          aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
