@@ -61,7 +61,7 @@ tagline: #leave empty
 </script>
 
 <div id="hero">
-  <!-- test-run-3 -->
+  <!-- test-run-4 -->
   <h1>Identity in hours,<br/>not days or weeks.</h1>
   <picture id="mockup">
     <source srcset="https://cdn.hello.coop/images/mockup-light.png" media="(prefers-color-scheme: dark)">
