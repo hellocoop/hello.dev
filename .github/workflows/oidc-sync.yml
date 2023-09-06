@@ -18,9 +18,6 @@ jobs:
   deploy:
     name: Upload to Amazon S3
     runs-on: ubuntu-latest
-    env:
-        ROLE: arn:aws:iam::${{ env.AWS_ACCOUNT }}:role/${{ env.REPO }}-repo
-
     permissions:
       id-token: write
       contents: read
