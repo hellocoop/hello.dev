@@ -12,7 +12,9 @@ on:
 
 env:
   STACK: WwwDevStack #make sure this is the right stack value
-
+  AWS_ACCOUNT: "510094580976"
+  REPO: "hello.dev"
+  ROLE: "arn:aws:iam::${{ AWS_ACCOUNT }}:${{ REPO }}-repo"
 jobs:
   deploy:
     name: Upload to Amazon S3
@@ -37,18 +39,21 @@ jobs:
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::510094580976:role/hello.dev-repo # make sure it is correct AWS account ID and role
+          role-to-assume: ${{ ROLE }} 
           aws-region: us-west-2
 
-      - name: Build content
-        run: npm run build
 
-      - name: Copy docs dir to S3 bucket with the AWS CLI
-        run: |
-          BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name $STACK --query 'Stacks[0].Outputs[?OutputKey==`BucketNameOutput`].OutputValue' --output text)
-          aws s3 sync docs/ s3://${BUCKET_NAME}/
+      - name: debug
+        run: echo $ROLE
+      # - name: Build content
+      #   run: npm run build
 
-      - name: Invalidate CloudFront cache
-        run: |
-          DISTRIBUTION_ID=$(aws cloudformation describe-stacks --stack-name $STACK --query 'Stacks[0].Outputs[?OutputKey==`DistributionIdOutput`].OutputValue' --output text)
-          aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
+      # - name: Copy docs dir to S3 bucket with the AWS CLI
+      #   run: |
+      #     BUCKET_NAME=$(aws cloudformation describe-stacks --stack-name $STACK --query 'Stacks[0].Outputs[?OutputKey==`BucketNameOutput`].OutputValue' --output text)
+      #     aws s3 sync docs/ s3://${BUCKET_NAME}/
+
+      # - name: Invalidate CloudFront cache
+      #   run: |
+      #     DISTRIBUTION_ID=$(aws cloudformation describe-stacks --stack-name $STACK --query 'Stacks[0].Outputs[?OutputKey==`DistributionIdOutput`].OutputValue' --output text)
+      #     aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*"
