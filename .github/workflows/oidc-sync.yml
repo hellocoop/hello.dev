@@ -14,7 +14,7 @@ env:
   STACK: WwwDevStack #make sure this is the right stack value
   AWS_ACCOUNT: "510094580976"
   REPO: "hello.dev"
-  ROLE: "arn:aws:iam::${{ AWS_ACCOUNT }}:${{ REPO }}-repo"
+  ROLE: "arn:aws:iam::${AWS_ACCOUNT}:${REPO}-repo"
 jobs:
   deploy:
     name: Upload to Amazon S3
