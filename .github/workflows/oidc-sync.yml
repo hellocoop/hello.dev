@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
         ROLE: arn:aws:iam::${{ env.AWS_ACCOUNT }}:role/${{ env.REPO }}-repo
+
     permissions:
       id-token: write
       contents: read
@@ -37,13 +38,21 @@ jobs:
       - name: Restore npm cache
         run: npm ci
 
+      - name: build role name
+        run: |
+          # Use shell string manipulation to extract the repository name
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          ROLE_NAME="arn:aws:iam::${AWS_ACCOUNT}:role/${REPO_NAME}-repo"
+          # Set the environment variable for future steps
+          echo "ROLE_NAME=${ROLE_NAME}" >> $GITHUB_ENV
+
       - name: debug
-        run: echo $ROLE
+        run: echo $ROLE_NAME
 
       - name: Configure web-sync AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume:  ${{ env.ROLE }} 
+          role-to-assume:  ${{ env.ROLE_NAME }} 
           aws-region: us-west-2
 
 
