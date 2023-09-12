@@ -26,10 +26,10 @@ Following are the scopes currently supported by Hellō. These are standard OpenI
 ## Profile Update
 You can update existing claims by including the `profile_update` scope in your authorization request.
 The `profile_update` scope can be utilized under the following conditions:
-- You must already have one of the following scopes: `email`, `phone`, `picture`, or `ethereum` to update.
-- The scope you intend to update should have been included in a previous release.
+- You can only update a claim you have already received
+- You can only update `email`, `phone`, `picture`, or `ethereum`
 
-Please note that only one claim can be updated at a time. For instance, if a user wishes to update their email, you can achieve this by specifying `scope=openid email profile_update` in your authorization request.
+For instance, if a user wishes to update their email, you can achieve this by specifying `scope=openid email profile_update` in your authorization request.
 
 ## Potential Scopes
 
