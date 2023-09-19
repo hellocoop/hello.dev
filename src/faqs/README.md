@@ -70,7 +70,7 @@ functionality in the [GreenfieldDemo.com](https://greenfielddemo.com) demo app.
 
 ### *15) How do I tell Hellō the user wants to update the profile they have at my application?*
 
-You include the parameter `prompt` set to `consent`, or include `profile_update` as an additional scope. Although using the `prompt` parameter is more aligned with the OpenID Connect standard, many libraries and service providers do not support setting the `prompt` parameter, but most support arbitrary scopes.
+You include `profile_update` as an additional scope. See [Profile Update](/documentation/hello-claims.html#profile-update) for more information.
 
 
 ### *16) Why the name Hellō?*
