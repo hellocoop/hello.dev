@@ -1,6 +1,5 @@
 import { execSync } from "child_process"
 
-// TBD: Check zx as well or use npx to run this file
 const requiredPackages = ['gh', 'git']
 
 for (const pkg of requiredPackages) {
@@ -11,5 +10,3 @@ for (const pkg of requiredPackages) {
         process.exit(1)
     }
 }
-
-//TBD: Check version of requiredPackages + node and npm
