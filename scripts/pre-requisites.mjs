@@ -10,3 +10,5 @@ for (const pkg of requiredPackages) {
         process.exit(1)
     }
 }
+
+//TBD: Check version of requiredPackages + node and npm
