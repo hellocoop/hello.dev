@@ -40,11 +40,11 @@ You can override the default "Continue with Hellō" button text by setting the `
 ```html
   <button
     class="hello-btn hello-btn-white-and-static"
-    data-label="ō&nbsp;&nbsp;&nbsp;Update Profile with Hellō"
+    data-label="ō&nbsp;&nbsp;&nbsp;Update Email with Hellō"
   ></button>
 ```
 
-<button class="hello-btn hello-btn-white-and-static" data-label="ō&nbsp;&nbsp;&nbsp;Update Profile with Hellō"/>
+<button class="hello-btn hello-btn-white-and-static" data-label="ō&nbsp;&nbsp;&nbsp;Update Email with Hellō"/>
 
 
 ## 4. Self-Managed Hellō Buttons
