@@ -148,7 +148,7 @@ async function copy(){
                 'btn-active': hover === 'default'
             }"
           >
-            Default
+            Pop
           </button>
           <button
             @click="hover = 'glow'"
