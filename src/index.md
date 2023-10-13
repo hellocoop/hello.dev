@@ -16,11 +16,13 @@ tagline: #leave empty
     (async function(){
       const RSS_URL = "/rss.xml"
       try {
+          const postsRef = document.querySelector("#posts")
+          if(postsRef?.children?.length) //check if we already fetched the feed
+            return
           const res = await fetch(RSS_URL)
           const txt = await res.text()
           const xml = new window.DOMParser().parseFromString(txt, "text/xml")
           const posts = xml.querySelectorAll("item")
-          const postsRef = document.querySelector("#posts")
           for (let i = 0; i < 3; i++) {
               if (!posts[i]) continue;
               const post = posts[i]
