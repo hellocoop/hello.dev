@@ -20,30 +20,26 @@ Following are the scopes currently supported by Hellō. These are standard OpenI
 |`phone`|A verified phone number. `phone_verified=true` will always be returned.|
 |`picture`|A URL to a profile picture. [See FAQ 13](/faqs/#_13-what-can-i-do-with-the-picture-url-i-receive) for details|
 | - | non-standard scopes |
-| `ethereum`|A verified ethereum address.|
+|`discord`|A verified Discord username and id.|
+|`github`|A verified GitHub username and id.|
+|`gitlab`|A verified GitLab username and id.|
+|`twitter`|A verified Twitter username and id.|
+|`ethereum`|A verified ethereum address.|
 |`profile_update`|The user will be prompted to release updated profile information.<br> [See FAQ 14](/faqs/#_14-how-can-users-update-the-profile-information-i-received-from-hello-for-example-the-user-wants-to-change-their-profile-picture-or-email) for details.|
+
 
 ## Profile Update
 You can update existing claims by including the `profile_update` scope in your authorization request.
 The `profile_update` scope can be utilized under the following conditions:
 - You can only update a claim you have already received
-- You can only update `email`, `phone`, `picture`, or `ethereum`
+- You can only update `email`, `phone`, `picture`, `discord`, `github`, `gitlab`, `twitter` or `ethereum`
 
-For instance, if a user wishes to update their email, you can achieve this by specifying `scope=openid email profile_update` in your authorization request.
+For instance, to enable a user to update their email, you set `scope=openid email profile_update` in your authorization request.
 
-## Potential Scopes
+## Other Scopes?
 
-We are exploring offering the following scopes:
-
-|Scope|Description|
-|---|---|
-|`github`|The user's GitHub profile url.|
-|`twitter`|The user's Twitter profile url.|
-|`discord` |The user's Discord profile.|
-
-We would prompt the user to link their GitHub, Twitter, or Discord accounts.
-
-Share your thoughts in our [Additional Scopes Discussion](https://github.com/hellocoop/hello.dev/discussions/4)
+If you would like us to offer other scopes, let us know 
+ in our [Additional Scopes Discussion](https://github.com/hellocoop/hello.dev/discussions/4)
 
 ## Incremental Consent
 
