@@ -38,8 +38,7 @@ For instance, to enable a user to update their email, you set `scope=openid emai
 
 ## Other Scopes?
 
-If you would like us to offer other scopes, let us know 
- in our [Additional Scopes Discussion](https://github.com/hellocoop/hello.dev/discussions/4)
+If you would like us to offer other scopes, let us know in our [Additional Scopes Discussion](https://github.com/hellocoop/hello.dev/discussions/4)
 
 ## Incremental Consent
 
