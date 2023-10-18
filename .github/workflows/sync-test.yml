@@ -1,15 +1,12 @@
-name: Sync with S3
+name: Sync with S3 Test
 
 on:
-  workflow_dispatch:
-  pull_request_target:
-    types: [ closed ]
+  push:
     branches: [ main ]
+  workflow_dispatch:
     
 jobs: 
   sync:
-    #PR merged with main                            #Manually triggered workflow
-    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     uses: hellocoop/tools/.github/workflows/content-sync.yml@main
     # GitHub-Slack app sends a workflow status message with live updates to #content-updates channel
     with:
