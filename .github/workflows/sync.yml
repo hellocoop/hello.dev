@@ -5,11 +5,15 @@ on:
   pull_request_target:
     types: [ closed ]
     branches: [ main ]
+  push:
+    branches: [ main ]
     
 jobs: 
   sync:
-    #PR merged with main                            #Manually triggered workflow
-    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    if: |
+        github.event_name == 'workflow_dispatch' ||
+        github.event.pull_request.merged == true ||
+        github.event_name == 'push'
     uses: hellocoop/tools/.github/workflows/content-sync.yml@main
     # GitHub-Slack app sends a workflow status message with live updates to #content-updates channel
     with:
