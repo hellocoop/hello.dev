@@ -10,7 +10,7 @@ In the future we will have plug-ins for popular platforms that will simplify usi
 
 ## 1. App Registration
 
-To use Hellō, register your application at [console.hello.coop](https://console.hello.coop/). You can start developing with just the **Client ID** and the defaults, which includes the **Development Redirect URIs** `http://localhost:*` and `http://127.0.0.1:*`. When you are ready to preview what is presented to users, provide the **Name**, **Logo**, and URLs for **Terms of Service** & **Privacy Policy**.  When you are ready for public access, provide your **Production Redirect URI(s)**.
+To use Hellō, register your application at [console.hello.coop](https://console.hello.coop/). You can start developing locally with just the **Client ID** and the defaults, which includes the **Development Redirect URIs** `http://localhost:*` and `http://127.0.0.1:*`. When you are ready to preview what is presented to users, provide the **Name**, **Logo**, and URLs for **Terms of Service** & **Privacy Policy**.  When you are ready for public access, provide your **Production Redirect URI(s)**.
 
 ## 2. Standard Hellō Buttons
 
@@ -40,11 +40,11 @@ You can override the default "Continue with Hellō" button text by setting the `
 ```html
   <button
     class="hello-btn hello-btn-white-and-static"
-    data-label="ō&nbsp;&nbsp;&nbsp;Update Profile with Hellō"
+    data-label="ō&nbsp;&nbsp;&nbsp;Update Email with Hellō"
   ></button>
 ```
 
-<button class="hello-btn hello-btn-white-and-static" data-label="ō&nbsp;&nbsp;&nbsp;Update Profile with Hellō"/>
+<button class="hello-btn hello-btn-white-and-static" data-label="ō&nbsp;&nbsp;&nbsp;Update Email with Hellō"/>
 
 
 ## 4. Self-Managed Hellō Buttons

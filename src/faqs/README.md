@@ -61,16 +61,16 @@ You can use the picture URL as the user's profile picture using the Hellō CDN, 
 
 ### *14) How can users update the profile information I received from Hellō? For example, the user wants to change their profile picture or email?*
 
-You can send the user back to Hellō where the user can select different claims. To see this in action, see the:
+You can send the user back to Hellō where the user can update a claim. To see this in action, see the:
 
-<button class="hello-btn hello-btn-white-and-static" data-label="ō&nbsp;&nbsp;&nbsp;Update Profile with Hellō"></button> 
+<button class="hello-btn hello-btn-white-and-static" data-label="ō&nbsp;&nbsp;&nbsp;Update with Hellō"></button> 
 
 functionality in the [GreenfieldDemo.com](https://greenfielddemo.com) demo app.
 
 
 ### *15) How do I tell Hellō the user wants to update the profile they have at my application?*
 
-You include the parameter `prompt` set to `consent`, or include `profile_update` as an additional scope. Although using the `prompt` parameter is more aligned with the OpenID Connect standard, many libraries and service providers do not support setting the `prompt` parameter, but most support arbitrary scopes.
+You include `profile_update` as an additional scope. See [Profile Update](/documentation/hello-claims.html#profile-update) for more information.
 
 
 ### *16) Why the name Hellō?*

@@ -148,7 +148,7 @@ async function copy(){
                 'btn-active': hover === 'default'
             }"
           >
-            Default
+            Pop
           </button>
           <button
             @click="hover = 'glow'"
@@ -451,6 +451,9 @@ select:focus{
 }
 #button-explorer-light .hello-btn-white-and-invert:disabled{
     color:#303030
+}
+#button-explorer-dark .hello-btn-black-and-static:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
+    box-shadow:0 0 0 3px #585858
 }
 #button-explorer-dark .hello-btn-black-and-invert:is(:hover,:active,:focus):not(:disabled):not(.hello-btn-hover-none):not(.hello-btn-loader){
     box-shadow:0 0 0 2px #d4d4d4

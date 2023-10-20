@@ -1,30 +1,20 @@
+name: Sync with S3
+
 on:
   workflow_dispatch:
-
-jobs:
-  deploy:
-    name: Upload to Amazon S3
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Configure web-sync AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.S3_SYNC_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.S3_SYNC_SECRET_ACCESS_KEY }}
-          aws-region: us-west-2
-
-      - name: Install modules
-        run: npm install
-
-      - name: Build content
-        run: npm run build
-
-      - name: Copy docs dir to S3 bucket with the AWS CLI
-        run: aws s3 sync docs/ s3://${{ secrets.BUCKET_NAME }}/
-
-      - name: Invalidate CloudFront cache
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.DISTRIBUTION_ID }} --paths "/*"
+  pull_request_target:
+    types: [ closed ]
+    branches: [ main ]
+  push:
+    branches: [ main ]
+    
+jobs: 
+  sync:
+    if: |
+        github.event_name == 'workflow_dispatch' ||
+        github.event.pull_request.merged == true ||
+        github.event_name == 'push'
+    uses: hellocoop/tools/.github/workflows/content-sync.yml@main
+    # GitHub-Slack app sends a workflow status message with live updates to #content-updates channel
+    with:
+      STACK: WwwDevStack #make sure this is the right stack value
