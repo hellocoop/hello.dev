@@ -39,8 +39,9 @@ Hellō vs ___
     Comparison
 Roadmap
     Quickstarts & SDKs
-    Invites
+    App Invitations
     Delegated Access
+    Emergency Override
     B2B Federation
     Mock Server
 
