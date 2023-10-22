@@ -1,4 +1,6 @@
-# Provider Hint
+# UX Reference
+
+## Provider Hint
 
 When Hellō does not know the user's preferred provider (new user or new browser), they are presented with a recommended list of providers to choose from, with the option to show all the other supported providers. This minimizes the risk that a new user is overwhelmed by all the available options, while still providing choice.
 

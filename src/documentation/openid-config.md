@@ -1,4 +1,4 @@
-# Hellō & Platforms
+# OpenID Config
 
 Many platforms have a generic OpenID Connect (OIDC) plug-in / module / configuration. To use Hellō with these platforms you will need to copy and paste configuration information between Hellō and the platform. We suggest having browser windows open with the Hellō console and the platform administrative console.
 

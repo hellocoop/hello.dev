@@ -1,4 +1,6 @@
-# Errors
+# SDK Reference
+
+## Errors
 
 Following are errors returned by the Hellō server when making a request, or when calling the introspection API.
 

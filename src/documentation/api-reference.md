@@ -2,7 +2,7 @@
 sidebarDepth: 1
 ---
 
-# Management APIs
+# API Reference
 
 ## Quickstart API
 
