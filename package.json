@@ -25,8 +25,7 @@
   "devDependencies": {
     "@vuepress/plugin-register-components": "^2.0.0-beta.38",
     "linkinator": "^4.0.3",
-    "vuepress": "^2.0.0-beta.35",
-    "zx": "^7.2.3"
+    "vuepress": "^2.0.0-beta.35"
   },
   "dependencies": {
     "vue-code-highlight": "^0.7.8",
