@@ -7,7 +7,7 @@ When requesting multiple scopes, separate them with a space. The space will ofte
 
 ## Current Scopes
 
-Following are the scopes currently supported by Hellō. These are standard OpenID Connect scopes/claims with the exception of `profile_update`:
+Following are the scopes currently supported by Hellō. At the top are the standard OpenID Connect scopes supported by Hellō.
 
 |Scope|Description|
 |---|---|
@@ -25,16 +25,16 @@ Following are the scopes currently supported by Hellō. These are standard OpenI
 |`gitlab`|A verified GitLab username and id.|
 |`twitter`|A verified Twitter username and id.|
 |`ethereum`|A verified ethereum address.|
-|`profile_update`|The user will be prompted to release updated profile information.<br> [See FAQ 14](/faqs/#_14-how-can-users-update-the-profile-information-i-received-from-hello-for-example-the-user-wants-to-change-their-profile-picture-or-email) for details.|
+|`profile_update`|The user will be prompted to release updated profile information.<br> See below for details.|
 
 
 ## Profile Update
-You can update existing claims by including the `profile_update` scope in your authorization request.
+You can update a claim a user has already provided you by creating a request including the `open_id` and`profile_update` claims with the scope for the claim the user would like to update an authorization request.
 The `profile_update` scope can be utilized under the following conditions:
 - You can only update a claim you have already received
 - You can only update `email`, `phone`, `picture`, `discord`, `github`, `gitlab`, `twitter` or `ethereum`
 
-For instance, to enable a user to update their email, you set `scope=openid email profile_update` in your authorization request.
+For instance, to enable a user to update their email, you would set `scope=openid email profile_update` in your authorization request.
 
 ## Other Scopes?
 
@@ -43,3 +43,5 @@ If you would like us to offer other scopes, let us know in our [Additional Scope
 ## Incremental Consent
 
 Per the [2nd Law of Identity](https://www.identityblog.com/?p=352), Minimal Disclosure, we recommend you not request claims that are not required until they are needed. Hellō makes it easy to send the user back to Hellō to acquire additional claims by including additional scopes in a new request.
+
+

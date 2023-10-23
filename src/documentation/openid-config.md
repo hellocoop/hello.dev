@@ -1,6 +1,6 @@
 # OpenID Config
 
-Many platforms have a generic OpenID Connect (OIDC) plug-in / module / configuration. To use Hellō with these platforms you will need to copy and paste configuration information between Hellō and the platform. We suggest having browser windows open with the Hellō console and the platform administrative console.
+Many platforms have a generic OpenID Connect (OIDC) plug-in / module / configuration. To use Hellō with these platforms you will need to copy and paste configuration information between Hellō and the platform. We suggest having browser windows open with both the Hellō console and the platform administrative console.
 
 1. The platform will need the Hellō configuration. Some platforms will retrieve the configuration from the Hellō [`openid-configuration`](https://issuer.hello.coop/.well-known/openid-configuration) file, or you may need to enter the values in: 
 
@@ -18,7 +18,7 @@ Many platforms have a generic OpenID Connect (OIDC) plug-in / module / configura
 
 2. The platform will need the client id from the Hellō console. 
 
-3. If the platform does not support the `id_token` flow, then the platform will require a client secret, that you can generate on the Hellō console.
+3. Most platforms will require a client secret. You can generate one or more in the Hellō console.
 
 4. Hellō will need the redirect URI from the platform. This is where Hellō will redirect the user after interacting at Hellō.
 

@@ -1,14 +1,19 @@
 # Integrating Hellō
 
-Now that you have registered your application at Hellō and added the button to your page, let's complete the integration.
+Now that you have registered your application at Hellō and added the button to your page, let's complete the integration. 
 
 1. Connect the button click to creating a Request URL
 2. Create a Request URL
 3. Make the request by redirecting the user's browser to the Request URL
 4. Receive the response
 5. Process the response
+6. Process the ID Token
 
-At this point, you know which user you are interacting with, and have any of the claims you requested.
+At this point, you know which user you are interacting with, and have any of the claims you requested that the user consented to releasing to you.
+
+All of the details in this document are standard [OAuth 2.0]() and [OpenID Connect 1.0](). We provide a complete guide here so that you have a single reference. 
+
+There are many libraries that will abstract away the details. 
 
 ## 1. Respond to Button Click
 
@@ -58,12 +63,19 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 |`response_type`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>| `id_token` flow or<p/> `code` flow (default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)). |
 |`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|if `id_token` flow `fragment` or `form_post` (default) <p/>if `code` flow `fragment`, `form_post`, or `query` (default)|
 |`state`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A value representing the state of your application that will be returned as a parameter in the response|
-|`code_challenge`|REQUIRED if `code` flow|
-|`code_challenge_method`|REQUIRED if `code` flow<p/>MUST have value of `S256`|
+|`code_challenge`|REQUIRED if `code` flow and not using a client secret to authenticate to the token endpoint.|
+|`code_challenge_method`|May be provided if `code_challenge` is included.<p/>MUST have value of `S256`|
 
 ### PKCE Code
-TBD - explain code_verifier and code_challenge
-Allows an app to not have to manage a client secret
+
+> [RFC 7636](https://datatracker.ietf.org/doc/html/rfc7636) *(Proof Key for Code Exchange by OAuth Public Clients)* enables your application to prove it made the authorization request that received the authorization code when it calls the token endpoint. 
+>
+>
+> This is done by generating a random `code_verifier` and then a `code_challenge` which is a SHA256 cryptographic hash `code_verifier`.
+>
+>
+>The `code_challenge` is part of the authorization request, and the `code_verifier` is presented with the `code` to Hellō which verifies the `code` was requested with the `code_challenge`. This allows an application to not have to manage a client secret when using a `code` flow.
+
 
 **Here is a sample `id_token` flow request from the[ GreenfieldDemo](https://greenfielddemo.com) app**<br>
 *(line feeds added for readability)*
@@ -159,9 +171,142 @@ if (code)
 
 ## 5. Process Response
 
+Both the `code` and `id_token` responses require further processing to complete authenticating your user. 
+
 ### `code`
 
+You retrieve the ID Token for the user by doing an HTTP `POST` with `Content-Type: application/x-www-form-urlencoded` to `https://wallet.hello.coop/oauth/token` with the `client_id`,`code`, and `redirect_uri` parameters. If using PKCE, then the `code_verifier` is also included. Otherwise the `client_secret` is passed.
+
+**Sample code to call token endpoint**
+
+```javascript
+const url = 'https://wallet.hello.coop/oauth/token'
+const params = {
+  client_id,    // your apps client_id
+  code,         // the authorization code your received
+  redirect_uri, // the redirect_uri you used when making the request
+  code_verifier // the code_verifier used to generate the code_challenge
+
+}
+const options = {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    headers: {'Content-type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(params).toString()
+}
+const response = await fetch(url, options)
+const { id_token, error } = await response.json()
+```
+
+Assuming no errors, you now have an ID Token in compact JWT format.
+
+There is no requirement to validate the ID Token returned from the token endpoint as your application received it directly from Hellō. Of course, if your application provides the ID Token to another system, then it can independently verify the token.
+
+You will need to parse the ID Token to access the user info contained. See the [ID Token](#6-id-token) section for details on the contents of an ID Token. 
+
+The `@hellocoop/core` Node.js SDK provides the `parseToken()` helper function to parse the ID Token for you.
+
 ### `id_token`
+
+Your application has an ID Token for the user, but before using it, you need to ensure it is valid, and not an ID Token an attacker has passed to your application.
+
+You can validate the `id_token` by:
+1. Sending it back to the Hellō introspection API; or
+2. Perform validation yourself per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
+
+
+#### Hellō Introspection API
+
+Hellō provides an introspection API per [RFC 7662](https://www.rfc-editor.org/rfc/rfc7662.html) at`https://wallet.hello.coop/oauth/introspect` that will examine the token, ensure it was from Hellō, has not expired, and return the payload.
+
+No authentication is required to call the introspection endpoint. You MUST pass your `client_id`, and if you provided a `nonce` in the `request URL`, you MUST provide the nonce. The `token`, `client_id`, and optional `nonce` are sent as JSON.
+
+
+**Sample code to make Introspection API call**
+
+```javascript
+const url = 'https://wallet.hello.coop/oauth/introspect'
+const params = {
+  token,        // the ID Token received
+  client_id,    // your apps client_id
+  nonce,        // the nonce sent in the request
+}
+const options = {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    headers: {'Content-type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(params).toString()
+}
+const response = await fetch(url, options)
+const json = await response.json()
+```
+
+#### Response JSON
+
+If successfully validated, you will receive the ID Token payload with `active:true` to indicate it is an active token. If unsuccessful, you will receive an [Introspection Error](errors.html#introspection-errors).
+
+**Sample Introspection Response**
+
+```json
+{
+  "iss": "https://issuer.hello.coop",
+  "aud": "3574f001-0874-4b20-bffd-8f3e37634274",
+  "nonce": "b957cea0-f159-4390-ba48-5c5d7e943ea4",
+  "jti": "8ad167d1-d170-46c9-b3c6-47dda735a4e3",
+  "sub": "f9e21f0f-9f0e-41b0-a58b-c2d63bcc7b4f",
+  "scope": [
+      "name",
+      "nickname",
+      "picture",
+      "email",
+      "openid"
+  ],
+  "name": "Dick Hardt",
+  "nickname": "Dick",
+  "picture": "https://cdn.hello.coop/images/default-picture.png",
+  "email": "dick.hardt@hello.coop",
+  "email_verified": true,
+  "iat": 1669399110,
+  "exp": 1669399410,
+  "active": true
+}
+```
+
+#### Self Validation
+
+There are many OpenID Connect and JSON Web Token libraries that include ID Token validation. The OpenID Foundation maintains a list [here](https://openid.net/developers/libraries/). Getting security right is HARD. We recommend you use a proven library and NOT write your own validation. We include the information below for reference.
+
+#### Signature Verification Keys
+
+Hellō provides OpenId Provider configuration information per [OpenID Connect Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) at:
+
+[`https://issuer.hello.coop/.well-known/openid-configuration`](https://issuer.hello.coop/.well-known/openid-configuration)
+
+The `jwks_uri` property in the configuration file contains the URI for a JSON file containing the public keys in JSON Web Key format ([RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517)) for verifying the signature per step (6) above.
+
+#### Signature Verification Steps
+
+Following are details for each ID Token validation step per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
+
+1. N/A - The ID Token is not encrypted
+1. The `iss` value MUST be `https://issuer.hello.coop`
+1. The `aud` value MUST be the `client_id` value provided in the request
+1. N/A - The ID Token will not contain multiple audiences
+1. There will not be an `azp` claim
+1. The ID Token is signed per JWS. The certificates are XXX
+1. The `alg` value will be `RS256`
+1. N/A - the `alg` is always `RS256`
+1. The current time must be before `exp`. Note the time is seconds since the Epoch, not milliseconds. ID Tokens expire after one hour.
+1. The `iat` may be used by the client if the one hour expiry is longer than is desirable by the client.
+1. The `nonce` is included if provided in the request.
+1. The `acr` Claim is not supported at this time.
+1. The `auth_time` Claim is not supported at this time.
+
+
+
+## 6. ID Token
 
 An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html) that has claims per [OpenID Connect §2](https://openid.net/specs/openid-connect-core-1_0.html#IDToken).<br>In the following example of a raw ID Token:
 - <span style="color: #cc99cd; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">purple</span> is the **header** that describes the JWT;
@@ -223,115 +368,4 @@ An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/
 |`email_verified`|Indicates email was verified. Will always be `true` from Hellō|
 |`iat`|The time the ID Token was issued in [Epoch time](https://en.wikipedia.org/wiki/Unix_time)|
 |`exp`|The time the ID Token expires.<br>Hellō sets the expiry to be 5 minutes (300 seconds) after `iat`|
-
-Your application now has an ID Token for the user, but before using it, you need to ensure it is valid, and not an ID Token an attacker has passed to your application. The ID Token header and signature are part of the validation procedure.
-
-
-### Validate ID Token
-
-You can validate the `id_token` by:
-1. Sending it back to the Hellō introspection API; or
-2. Perform validation yourself per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
-
-
-#### Introspection
-
-Hellō provides an introspection API per [RFC 7662](https://www.rfc-editor.org/rfc/rfc7662.html) at`https://wallet.hello.coop/oauth/introspect` that will examine the token, ensure it was from Hellō, has not expired, and return the payload.
-
-No authentication is required to call the introspection endpoint. You MUST pass your `client_id`, and if you provided a `nonce` in the `request URL`, you MUST provide the nonce. The `token`, `client_id`, and optional `nonce` are sent as JSON.
-
-**Example Introspection JSON for earlier ID Token**
-
-```json
-{
-  "token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImJmZWQzOTBlLThkMmYtNDE3NC1iMTM2LTBhN2U1MmM5MWUxZSJ9.eyJpc3MiOiJodHRwczovL2lzc3Vlci5oZWxsby5jb29wIiwiYXVkIjoiMzU3NGYwMDEtMDg3NC00YjIwLWJmZmQtOGYzZTM3NjM0Mjc0Iiwibm9uY2UiOiJiOTU3Y2VhMC1mMTU5LTQzOTAtYmE0OC01YzVkN2U5NDNlYTQiLCJqdGkiOiI4YWQxNjdkMS1kMTcwLTQ2YzktYjNjNi00N2RkYTczNWE0ZTMiLCJzdWIiOiJmOWUyMWYwZi05ZjBlLTQxYjAtYTU4Yi1jMmQ2M2JjYzdiNGYiLCJzY29wZSI6WyJuYW1lIiwibmlja25hbWUiLCJwaWN0dXJlIiwiZW1haWwiLCJvcGVuaWQiXSwibmFtZSI6IkRpY2sgSGFyZHQiLCJuaWNrbmFtZSI6IkRpY2siLCJwaWN0dXJlIjoiaHR0cHM6Ly9jZG4uaGVsbG8uY29vcC9pbWFnZXMvZGVmYXVsdC1waWN0dXJlLnBuZyIsImVtYWlsIjoiZGljay5oYXJkdEBoZWxsby5jb29wIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY0NTY0MTI4NywiZXhwIjoxNjQ1NjQ0ODg3fQ.vppFPOM1kE6qs4s0DbWVGn80P0TOHmE4tmzg78RrJyz4732n5PH4aEgVIqQrKHkSYO8CptA1BhOBW1oRg8YrbWnJP2o8O__tLW8W1j8BzasW1td_Q_zuWqzz1XemqpLbPVKcS5MNZkYbJXLwXUAgmCOyiWgVlsXRV5D2bWhe-MesbmIaW-Rdnhf_WFuLBjNM0FO3HpdeHkJ4-wFuzGQhgyputw1-V9yeUWkyqt-9uW09fJCHN6oE3ATA0BA3uGWoFpPRaMb4JKxNdlQkR7OAkofIe_dCLnM9xR5_zDSdGA8j45ufGaIy1poqbq8PIg52thaWunpwuc8zo9-kiMYuZw",
-  "client_id":"3574f001-0874-4b20-bffd-8f3e37634274",
-  "nonce":"b957cea0-f159-4390-ba48-5c5d7e943ea4"
-}
-```
-
-**Sample code to make API call**
-
-```javascript
-const id_token      // the ID Token received
-const client_id     // your apps client_id
-const nonce         // the nonce sent in the request
-
-const url = 'https://wallet.hello.coop/oauth/introspect'
-const params = {
-  token: id_token,
-  client_id: client_id,
-  nonce: nonce
-}
-const options = {
-    method: 'POST',
-    mode: 'cors',
-    cache: 'no-cache',
-    headers: {'Content-type': 'application/x-www-form-urlencoded'},
-    body: new URLSearchParams(params).toString()
-}
-const response = await fetch(url, options)
-const json = await response.json()
-```
-
-#### Response JSON
-
-If successfully validated, you will receive the ID Token payload with `active:true` to indicate it is an active token. If unsuccessful, you will receive an [Introspection Error](errors.html#introspection-errors).
-
-**Sample Introspection Response**
-
-```json
-{
-  "iss": "https://issuer.hello.coop",
-  "aud": "3574f001-0874-4b20-bffd-8f3e37634274",
-  "nonce": "b957cea0-f159-4390-ba48-5c5d7e943ea4",
-  "jti": "8ad167d1-d170-46c9-b3c6-47dda735a4e3",
-  "sub": "f9e21f0f-9f0e-41b0-a58b-c2d63bcc7b4f",
-  "scope": [
-      "name",
-      "nickname",
-      "picture",
-      "email",
-      "openid"
-  ],
-  "name": "Dick Hardt",
-  "nickname": "Dick",
-  "picture": "https://cdn.hello.coop/images/default-picture.png",
-  "email": "dick.hardt@hello.coop",
-  "email_verified": true,
-  "iat": 1669399110,
-  "exp": 1669399410,
-  "active": true
-}
-```
-
-#### Self Validation
-
-There are many OpenID Connect libraries that include ID Token validation. The OpenID Foundation maintains a list [here](https://openid.net/developers/libraries/). Getting security right is HARD. We recommend you use a proven library and NOT write your own validation. We include the information below for reference.
-
-#### Signature Verification Keys
-
-Hellō provides OpenId Provider configuration information per [OpenID Connect Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) at:
-
-[`https://issuer.hello.coop/.well-known/openid-configuration`](https://issuer.hello.coop/.well-known/openid-configuration)
-
-The `jwks_uri` property in the configuration file contains the URI for a JSON file containing the public keys in JSON Web Key format ([RFC 7517](https://datatracker.ietf.org/doc/html/rfc7517)) for verifying the signature per step (6) above.
-
-#### Signature Verification Steps
-
-Following are details for each ID Token validation step per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
-
-1. N/A - The ID Token is not encrypted
-1. The `iss` value MUST be `https://issuer.hello.coop`
-1. The `aud` value MUST be the `client_id` value provided in the request
-1. N/A - The ID Token will not contain multiple audiences
-1. There will not be an `azp` claim
-1. The ID Token is signed per JWS. The certificates are XXX
-1. The `alg` value will be `RS256`
-1. N/A - the `alg` is always `RS256`
-1. The current time must be before `exp`. Note the time is seconds since the Epoch, not milliseconds. ID Tokens expire after one hour.
-1. The `iat` may be used by the client if the one hour expiry is longer than is desirable by the client.
-1. The `nonce` is included if provided in the request.
-1. The `acr` Claim is not supported at this time.
-1. The `auth_time` Claim is not supported at this time.
 
