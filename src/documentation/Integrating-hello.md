@@ -6,7 +6,7 @@ Now that you have registered your application at Hellō and added the button to 
 2. Create a Request URL
 3. Make the request by redirecting the user's browser to the Request URL
 4. Receive the response
-5. Validate the ID Token
+5. Process the response
 
 At this point, you know which user you are interacting with, and have any of the claims you requested.
 
@@ -114,14 +114,28 @@ Location: https://wallet.hello.coop/authorize?...
 
 The user will then interact with Hellō. When finished they will be redirected back to your application with either an ID Token, an authorization code, or an error response.
 
-## 4. ID Token Response
+## 4. Receive Response
 
-Your app will receive the response as either fragment query parameters to the provided `redirect_uri` if `response_mode=fragment`, or in `application/x-www-form-urlencoded` format in an HTTP POST to the provided `redirect_uri` if `response_mode=form_post`. If the user approved the request, the response will contain an `id_token` parameter, and a `state` parameter if provided. See [Request Errors](errors.html#request-errors) for unsuccessful responses.
+If the user consents to your request, you will receive either a `code` or an `id_token` based on the value you set in `response_type`. If an error occurred, you will receive an `error` parameter instead. See the [Error](./api-reference#errors) section of API reference for error response details.
 
-Fragment Example (`response_mode=fragment`)
-<p style="background: #282c34; color: white; overflow-x: auto; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
-https://greenfielddemo.com/#<span style="color: #f8c555">id_token</span>=<span style="color: #7ec699;">eyJhbGciOiJSUzI1...rest_of_ID_Token</span></p>
+How you receive the response is determined by the value of `response_mode`:
 
+### `query`
+
+This `response_mode` is only for the `code` flow. Not allowing `id_token` prevents the token and associated PII from being in web server logs.
+
+Sample Node.js code for getting code (or possible error)
+```javascript
+const { code, error } = req.query
+if (error)
+  // process error
+if (code)
+  // exchange code for id_token - see below
+```
+
+### `fragment`
+
+This `response_mode` is for client side processing of the response such as a single page app as the the fragment is only available to the browser. 
 
 The following sample JavaScript will acquire the `id_token` from the fragment
 
@@ -130,20 +144,24 @@ const params = new URLSearchParams(window.location.hash.substring(1))
 const id_token = params.get('id_token') // eyJhbGciOiJSUzI1...rest_of_ID_Token
 ```
 
+### `form_post`
 
-Form Post Example (`response_mode=form_post`)
+To provide this `response_mode`, Hellō sends a page to the browser that contains JavaScript that posts the response to the `redirect_uri`. Note this is NOT a JSON object, but has `Content-Type: application/x-www-form-urlencoded`
 
-
+Sample Node.js code for getting code (or possible error)
+```javascript
+const { code, error } = req.body
+if (error)
+  // process error
+if (code)
+  // exchange code for id_token - see below
 ```
-POST / HTTP/1.1
-Host: greenfielddemo.com
-Content-Type: application/x-www-form-urlencoded
-Content-Length: XX
 
-id_token=eyJhbGciOiJSUzI1...rest_of_ID_Token
-```
+## 5. Process Response
 
-Note that a `fragment` response is limited to the maximum URL length supported by the user's browser. Using `form_post` does not have that constraint, and a larger ID Token can be returned to your application.
+### `code`
+
+### `id_token`
 
 An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html) that has claims per [OpenID Connect §2](https://openid.net/specs/openid-connect-core-1_0.html#IDToken).<br>In the following example of a raw ID Token:
 - <span style="color: #cc99cd; font-weight: 600; background: #282c34; padding: 2px 5px; border-radius: 4px;">purple</span> is the **header** that describes the JWT;

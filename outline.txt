@@ -21,6 +21,7 @@ SDK Reference
     Next.js
     Core
     Quickstart
+
     SvelteKit
     Express
     Fastify
@@ -50,4 +51,11 @@ Comparison
 
 local dev
 custom UX
-Cost
+Pricing
+User Pool 
+
+Auth Methods
+    Password
+    Passkeys
+    
+
