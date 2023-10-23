@@ -3,11 +3,15 @@
 
 ## Introduction
 
-Hellō is an [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) Provider that simplifies user registration and login for your application — allowing you to provide all the choices your users may want in hours instead of days or weeks.
+Hellō is an that simplifies user registration and login for your application — allowing you to provide all the choices your users may want in minutes instead of hours, days or weeks.
 
-Unlike other providers, Hellō gathers all the information you request about the user. Your users have choice on how they want to authenticate, which profile picture they want to provide you, and which email they want to verify. Hellō also lets you send the user back to Hellō if they want to update their profile at your site — no need for you to implement email or phone verification, or image uploads.
+To your application, Hellō is an [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) Provider using the same protocol as social login providers such as Apple, Facebook, Google, and Microsoft. Unlike social login providers, Hellō gathers all the information you request about the user. Your users have choice on how they want to authenticate, which profile picture they want to provide you, and which email they want to verify. Hellō also lets you send the user back to Hellō if they want to update or add to their information. No need for you to implement email or phone verification, or image uploads.
 
 Currently, Hellō is ideal for developers building **new**, **greenfield applications** where there is no requirement to integrate with existing user registration and login. In the future, we will have features that provide simple integration points.
+
+Login providers include: Apple, Discord, Facebook, Google, GitHub, GitLab, Tumbler, Twitch, Line, Mastodon, MetaMask, Microsoft, WordPress.com, Yahoo!, WalletConnect. We also support OTP over email and phone, and QR codes for logging into a desktop with your phone. Mobile devices will prompt the user to register a Passkey for a streamlined experience on their return. 
+
+Hellō currently supports Arabic `ar`, English `en`, French `fr`, German `de`, Hindi `hi`, Spanish `es`, & Portuguese `pt`. We welcome [translations](https://github.com/hellocoop/wallet-i18n)!
 
 
 ## User Experience
@@ -29,7 +33,7 @@ If the user wants to update their profile, they can click the Update button, whi
 <button class="hello-btn hello-btn-white-and-static" data-label="ō&nbsp;&nbsp;&nbsp;Update Email with Hellō"/>
 
 
-You can check out the Hellō user experience with our demo at [GreenfieldDemo.com](https://greenfielddemo.com)
+You can check out the Hellō user experience with our demo at [GreenfieldDemo.com](https://greenfielddemo.com) or our [Next.js Starter](https://hello-nextjs-starter.vercel.app/).
 
 
 ## Data Flow

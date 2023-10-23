@@ -15,7 +15,7 @@ At this point, you know which user you are interacting with, and have any of the
 The button to initiate registration / login is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is a `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr;`.
 
 
-
+### Client side redirection
 ```html
 <button onclick="login(event)" class="hello-btn hello-btn-black-on-light"></button>
 
@@ -28,10 +28,26 @@ The button to initiate registration / login is either charcoal (#303030) on whit
   }
 </script>
 ```
+### Server side redirection
+
+```html
+<button onclick="login(event)" class="hello-btn hello-btn-black-on-light"></button>
+
+<script>
+  async function login(event){
+    event.target.classList.add('hello-btn-loader') // Show spinner
+    event.target.disabled = true // Disable button
+    window.location.href = LOGIN_ENDPOINT // The server endpoint does the redirect
+  }
+</script>
+```
+
 
 ## 2. Create Request URL
 
-The **request URL** is `https://wallet.hello.coop/authorize` and a query with the following parameters
+*The [`@hellocoop/core`](https://www.npmjs.com/package/@hellocoop/nextjs) npm package has a `createAuthRequest()` function that simplifies creating an authorization request URL, including the PKCE code_verifier and code_challenge*
+
+The **request URL** is `https://wallet.hello.coop/authorize` and a query with the following standard [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) parameters:
 
 |Parameter|Description|
 |---|---|
@@ -39,28 +55,45 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
 |`scope`|The `openid` scope and zero or more scopes listed at [Hellō Claims](/documentation/hello-claims.html)|
 |`nonce`<br><span style="margin-top: 16px; display: inline-block;"></span>|A unique string that will be included in the signed ID Token. This links the ID Token to your request|
-|`response_type`|Set this to `id_token`. <br>*While Hellō supports the `code` flow to be compatible with legacy platforms, the `id_token` flow is simpler as it does not require implementing [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)*|
-|`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|Either `fragment` or `form_post`. Defaults to `fragment`. This parameter tells Hellō how you would like to receive the response.<br>See [4. Receive Response](#_5-receive-response) for details|
+|`response_type`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>| `id_token` flow or<p/> `code` flow (default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)). |
+|`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|if `id_token` flow `fragment` or `form_post` (default) <p/>if `code` flow `fragment`, `form_post`, or `query` (default)|
 |`state`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A value representing the state of your application that will be returned as a parameter in the response|
+|`code_challenge`|REQUIRED if `code` flow|
+|`code_challenge_method`|REQUIRED if `code` flow<p/>MUST have value of `S256`|
 
-**Here is the request used by the GreenfieldDemo app**<br>
+### PKCE Code
+TBD - explain code_verifier and code_challenge
+Allows an app to not have to manage a client secret
+
+**Here is a sample `id_token` flow request from the[ GreenfieldDemo](https://greenfielddemo.com) app**<br>
 *(line feeds added for readability)*
 
 <p style="background: #282c34; color: white; word-break: break-all; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
   https://wallet.hello.coop/authorize<br>
-  ?<span style="color: #f8c555">client_id</span>=<span style="color: #7ec699;">3574f001-0874-4b20-bffd-8f3e37634274</span><br>
-  &<span style="color: #f8c555;">nonce</span>=<span style="color: #7ec699;">b957cea0-f159-4390-ba48-5c5d7e943ea4</span><br>
+  ?<span style="color: #f8c555;">client_id</span>=<span style="color: #7ec699;">3574f001-0874-4b20-bffd-8f3e37634274</span><br>
   &<span style="color: #f8c555;">redirect_uri</span>=<span style="color: #7ec699;">https://greenfielddemo.com/</span><br>
+  &<span style="color: #f8c555;">scope</span>=<span style="color: #7ec699;">name+nickname+email+picture+openid</span><br>
+  &<span style="color: #f8c555;">nonce</span>=<span style="color: #7ec699;">b957cea0-f159-4390-ba48-5c5d7e943ea4</span><br>
   &<span style="color: #f8c555;">response_mode</span>=<span style="color: #7ec699;">fragment</span><br>
-  &<span style="color: #f8c555;">response_type</span>=<span style="color: #7ec699;">id_token</span><br>
-  &<span style="color: #f8c555;">scope</span>=<span style="color: #7ec699;">name+nickname+email+picture+openid</span>
 </p>
 
-There is no difference between a request to register the user, or log in the user. If the user has previously released the same requested scopes to your app, they will not be prompted to release it again. If you have changed with scopes you are requesting, or the `profile_update` is provided, the user will be prompted to select what to release.
+**Here is a sample `code` flow request from the[ Hellō Next.js Starter](https://hello-nextjs-starter.vercel.app/) app**<br>
+*(line feeds added for readability)*
 
-Hellō supports [`response_type=id_token`](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#id_token) and [`response_type=code`](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.1).
+<p style="background: #282c34; color: white; word-break: break-all; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
+  https://wallet.hello.coop/authorize<br>
+  ?<span style="color: #f8c555;">client_id</span>=<span style="color: #7ec699;">db4ad0b8-c589-4328-8094-f2d0e2cd3aaa</span><br>
+  &<span style="color: #f8c555;">redirect_uri</span>=<span style="color: #7ec699;">https://hello-nextjs-starter.netlify.app/api/hellocoop</span><br>
+  &<span style="color: #f8c555;">scope</span>=<span style="color: #7ec699;">openid+name+email+picture</span><br>
+  &<span style="color: #f8c555;">nonce</span>=<span style="color: #7ec699;">ecc855c9-41e3-46a0-a99a-d1fa3e3c1d3f</span><br>
+  &<span style="color: #f8c555;">response_type</span>=<span style="color: #7ec699;">code</span><br>
+  &<span style="color: #f8c555;">response_mode</span>=<span style="color: #7ec699;">query</span><br>
+  &<span style="color: #f8c555;">code_challenge</span>=<span style="color: #7ec699;">F_xW4_XNddm_XXZgMQAnHBWZRAtc3ZXxb-kcL_rvDns</span><br>
+  &<span style="color: #f8c555;">code_challenge_method</span>=<span style="color: #7ec699;">S256</span><br>
+</p>
 
-You can let users update their profile at Hellō as well by setting the `profile_update` scope which will prompt the user to decide what information to change.
+### Advanced Features
+See the [Authorization Request](./api-reference.md) reference for additional functionality including how to change the recommended providers.
 
 ## 3. Make Request
 
@@ -79,9 +112,9 @@ HTTP/1.1 302 Found
 Location: https://wallet.hello.coop/authorize?...
 ```
 
-The user will then interact with Hellō, when finished, they will be redirected back to your application with either an ID Token, or an error response.
+The user will then interact with Hellō. When finished they will be redirected back to your application with either an ID Token, an authorization code, or an error response.
 
-## 4. Receive Response
+## 4. ID Token Response
 
 Your app will receive the response as either fragment query parameters to the provided `redirect_uri` if `response_mode=fragment`, or in `application/x-www-form-urlencoded` format in an HTTP POST to the provided `redirect_uri` if `response_mode=form_post`. If the user approved the request, the response will contain an `id_token` parameter, and a `state` parameter if provided. See [Request Errors](errors.html#request-errors) for unsuccessful responses.
 
@@ -176,14 +209,14 @@ An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/
 Your application now has an ID Token for the user, but before using it, you need to ensure it is valid, and not an ID Token an attacker has passed to your application. The ID Token header and signature are part of the validation procedure.
 
 
-## 5. Validate ID Token
+### Validate ID Token
 
 You can validate the `id_token` by:
 1. Sending it back to the Hellō introspection API; or
 2. Perform validation yourself per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)
 
 
-### 5.1 Introspection
+#### Introspection
 
 Hellō provides an introspection API per [RFC 7662](https://www.rfc-editor.org/rfc/rfc7662.html) at`https://wallet.hello.coop/oauth/introspect` that will examine the token, ensure it was from Hellō, has not expired, and return the payload.
 
@@ -254,7 +287,7 @@ If successfully validated, you will receive the ID Token payload with `active:tr
 }
 ```
 
-### 5.2 Self Validation
+#### Self Validation
 
 There are many OpenID Connect libraries that include ID Token validation. The OpenID Foundation maintains a list [here](https://openid.net/developers/libraries/). Getting security right is HARD. We recommend you use a proven library and NOT write your own validation. We include the information below for reference.
 
