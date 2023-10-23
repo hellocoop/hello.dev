@@ -13,11 +13,13 @@
   },
   "repository": "/Hellō Dev",
   "scripts": {
-    "postinstall": "node scripts/pre-requisites.mjs",
+    "postinstall": "./scripts/pre-requisites.sh",
     "dev": "vuepress dev src",
     "build": "vuepress build src",
     "test": "linkinator ./S3 --config linkinator.config.json",
-    "review": "./scripts/review.mjs"
+    "pr": "./scripts/pr.sh",
+    "rebase": "git pull origin main --rebase",
+    "review": "npm run rebase && npm run test && npm run pr"
   },
   "license": "MIT",
   "devDependencies": {
