@@ -59,12 +59,12 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 |`client_id`|The `client_id` for your app from [console.hello.coop](https://console.hello.coop) |
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
 |`scope`|The `openid` scope and zero or more scopes listed at [Hellō Claims](/documentation/hello-claims.html)|
-|`nonce`<br><span style="margin-top: 16px; display: inline-block;"></span>|A unique string that will be included in the signed ID Token. This links the ID Token to your request|
-|`response_type`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>| `id_token` flow or<p/> `code` flow (default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)). |
-|`response_mode`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|if `id_token` flow `fragment` or `form_post` (default) <p/>if `code` flow `fragment`, `form_post`, or `query` (default)|
-|`state`<br><span style="margin-top: 16px; display: inline-block;">(optional)</span>|A value representing the state of your application that will be returned as a parameter in the response|
+|`nonce`|A unique string that will be included in the signed ID Token. This links the ID Token to your request|
+|`response_type`<br><span style="margin-top: 10px; display: inline-block;">(optional)</span>| `id_token` flow or<br><span style="margin-top: 12px; display: inline-block;">`code` flow (default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)).</span> |
+|`response_mode`<br><span style="margin-top: 10px; display: inline-block;">(optional)</span>|if `id_token` flow `fragment` or `form_post` (default) <br>if `code` flow `fragment`, `form_post`, or `query` (default)|
+|`state`<br><span style="margin-top: 10px; display: inline-block;">(optional)</span>|A value representing the state of your application that will be returned as a parameter in the response|
 |`code_challenge`|REQUIRED if `code` flow and not using a client secret to authenticate to the token endpoint.|
-|`code_challenge_method`|May be provided if `code_challenge` is included.<p/>MUST have value of `S256`|
+|`code_challenge_method`|May be provided if `code_challenge` is included.<br>MUST have value of `S256`|
 
 ### PKCE Code
 
