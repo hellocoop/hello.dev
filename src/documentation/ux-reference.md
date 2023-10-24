@@ -6,10 +6,25 @@ You can use [standard, Hellō styled buttons](./getting-started#2-standard-hell�
 
 You can [style your buttons](./getting-started#3-custom-button-label). or use [standard, Hellō styled buttons](./getting-started#2-standard-hellō-buttons) that include a button explorer to show the different styles, hover effects, and locales.
 
-## @rohanharikr: 
-- the button height looks to change with different locales, and the Portuguese is not included in the locales.
+| Button style classes           | Description                                             | 
+| ------------------------------ | ------------------------------------------------------- | 
+| `.hello-btn-black-on-dark`     | Black button with dark borders for dark backgrounds                       | 
+| `.hello-btn-black-and-invert`  | Dynamic black/gray button for light and dark themes     |
+| `.hello-btn-black-and-static`  | Black button with a dark border on dark theme, and without a border on a light theme              |
+| `.hello-btn-white-on-light`    | White button with dark border for light and dark themes |
+| `.hello-btn-white-on-dark`     | Gray button for both light and dark themes              |
+| `.hello-btn-white-and-invert`  | Dynamic white/black button with dark borders for light and dark themes |
+| `.hello-btn-white-and-static`  | White button with dark border on light theme, gray button on dark theme  |
 
-- please include table(s) for the different classes and a short description
+| Hover style classes     | Description                                    |
+| ----------------------- | ---------------------------------------------- |
+| `.hello-btn-hover-glow` | Subtle glowing effect on hover         |
+| `.hello-btn-hover-flare`| Captivating flare effect when hovered over |
+| `.hello-btn-hover-none` | No hover effect applied                        |
+
+| Button state classes    | Description                                    |
+| ----------------------- | ---------------------------------------------- |
+| `.hello-btn-loader`     | Adds a loading spinner respecting button style and hover classes         |
 
 ## Logos
 
