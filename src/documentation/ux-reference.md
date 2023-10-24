@@ -2,13 +2,13 @@
 
 ## Buttons
 
-You can use [standard, Hellō styled buttons](./getting-started#2-standard-hellō-buttons), or 
+You can [style your buttons](./getting-started#3-custom-button-label), or use the [standard, Hellō styled buttons](./getting-started#2-standard-hellō-buttons) that include a button explorer to show the different styles, hover effects, and locales.
 
-You can [style your buttons](./getting-started#3-custom-button-label). or use [standard, Hellō styled buttons](./getting-started#2-standard-hellō-buttons) that include a button explorer to show the different styles, hover effects, and locales.
+Use these style classes to customize the appearance of your buttons for different design scenarios.
 
 | Button style classes           | Description                                             | 
 | ------------------------------ | ------------------------------------------------------- | 
-| `.hello-btn-black-on-dark`     | Black button with dark borders for dark backgrounds                       | 
+| <span style="width: 240px; display: block;">`.hello-btn-black-on-dark`</span>     | Black button with dark borders for dark backgrounds                       | 
 | `.hello-btn-black-and-invert`  | Dynamic black/gray button for light and dark themes     |
 | `.hello-btn-black-and-static`  | Black button with a dark border on dark theme, and without a border on a light theme              |
 | `.hello-btn-white-on-light`    | White button with dark border for light and dark themes |
@@ -16,11 +16,15 @@ You can [style your buttons](./getting-started#3-custom-button-label). or use [s
 | `.hello-btn-white-and-invert`  | Dynamic white/black button with dark borders for light and dark themes |
 | `.hello-btn-white-and-static`  | White button with dark border on light theme, gray button on dark theme  |
 
+Enhance user experience by adding interactive hover effects to your buttons.
+
 | Hover style classes     | Description                                    |
 | ----------------------- | ---------------------------------------------- |
 | `.hello-btn-hover-glow` | Subtle glowing effect on hover         |
 | `.hello-btn-hover-flare`| Captivating flare effect when hovered over |
 | `.hello-btn-hover-none` | No hover effect applied                        |
+
+Clearly indicate when buttons are in a loading state with a spinner for a user-friendly experience.
 
 | Button state classes    | Description                                    |
 | ----------------------- | ---------------------------------------------- |
