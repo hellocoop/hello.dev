@@ -11,7 +11,7 @@ Currently, Hellō is ideal for developers building **new**, **greenfield applica
 
 Login providers include: Apple, Discord, Facebook, Google, GitHub, GitLab, Tumbler, Twitch, Line, Mastodon, MetaMask, Microsoft, WordPress.com, Yahoo!, WalletConnect. We also support OTP over email and phone, and QR codes for logging into a desktop with your phone. Mobile devices will prompt the user to register a Passkey for a streamlined experience on their return. 
 
-Hellō currently supports Arabic `ar`, English `en`, French `fr`, German `de`, Hindi `hi`, Spanish `es`, & Portuguese `pt`. We welcome [translations](https://github.com/hellocoop/wallet-i18n)!
+Hellō currently supports Arabic `ar`, English `en`, French `fr`, German `de`, Hindi `hi`, & Spanish `es`. We welcome [translations](https://github.com/hellocoop/wallet-i18n)!
 
 
 ## User Experience
