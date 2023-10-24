@@ -7,9 +7,6 @@ on:
     
 jobs: 
   sync:
-    if: |
-        github.event_name == 'workflow_dispatch' ||
-        github.event_name == 'push'
     uses: hellocoop/tools/.github/workflows/content-sync.yml@main
     # GitHub-Slack app sends a workflow status message with live updates to #content-updates channel
     with:
