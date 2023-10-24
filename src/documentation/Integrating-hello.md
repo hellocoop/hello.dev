@@ -16,10 +16,8 @@ All of the details in this document are standard [OAuth 2.0]() and [OpenID Conne
 There are many libraries that will abstract away the details. 
 
 ## 1. Respond to Button Click
-@dickahrdt I don't find the below paragraph relevant here + we are already covering this in Getting Started -> Self-Managed Hellō Buttons section.
 
-The button to initiate registration / login is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is a `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr;`.
-
+The user clicks the button, we disable and show a loader, and get the request URL
 
 ### Client side redirection
 ```html
