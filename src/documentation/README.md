@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Hellō is an that simplifies user registration and login for your application — allowing you to provide all the choices your users may want in minutes instead of hours, days or weeks.
+Hellō simplifies user registration and login for your application — allowing you to provide all the choices your users may want in minutes instead of hours, days or weeks.
 
 To your application, Hellō is an [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) Provider using the same protocol as social login providers such as Apple, Facebook, Google, and Microsoft. Unlike social login providers, Hellō gathers all the information you request about the user. Your users have choice on how they want to authenticate, which profile picture they want to provide you, and which email they want to verify. Hellō also lets you send the user back to Hellō if they want to update or add to their information. No need for you to implement email or phone verification, or image uploads.
 

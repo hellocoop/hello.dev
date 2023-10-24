@@ -2,9 +2,9 @@
 
 To use Hellō in your app, you will need to register your app, and add a Hellō button. 
 
-If you are writing your own application, integrating Hellō is straight forward and does not require any frameworks or third party libraries.
+If you are writing your own application, integrating Hellō is straightforward and does not require any frameworks or third party libraries.
 
-If you are configuring a platform to use Hellō, you will need to copy and paste values between the Hellō console and the platforms administrative console.
+If you are configuring a platform to use Hellō, you will need to copy and paste values between the Hellō console and the platform's administrative console.
 
 In the future we will have plug-ins for popular platforms that will simplify using Hellō. If you are interested in writing a plug-in, please reach out [contact@hello.coop](mailto:contact@hello.coop?subject=Hellō+Plug-in+Inquiry).
 
@@ -63,6 +63,6 @@ Note that it is best practice to only request the claims you require. For exampl
 
 ## 6. Add Hellō to your application
 
-If you are writing your own application, see [Integrating Hellō](/documentation/Integrating-hello.html). If you are configuring Hellō in a platform, see [Hellō & Platforms](/documentation/hello-platforms.html)
+If you are writing your own application, see [Integrating Hellō](/documentation/Integrating-hello.html). If you are configuring Hellō in a platform, see [Hellō & Platforms](/documentation/hello-platforms.html).
 
 ---
