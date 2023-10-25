@@ -10,7 +10,7 @@ Building on our Next.js SDK and Hellō Next.js Starter, a Hellō SveltKit Starte
 
 ## Mock Server
 
-This would be headless mock service and docker image that would return fixtured user info or errors for development end to end automated testing.
+This would be headless mock service and docker image that would return test user info or errors for development end to end automated testing.
 
 ## App Invitations
 
