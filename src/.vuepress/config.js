@@ -49,7 +49,7 @@ module.exports = {
         navbar: [
           {
             text: 'Documentation',
-            link: '/documentation/',
+            link: '/docs/',
           },
           {
             text: 'FAQs',
@@ -87,9 +87,9 @@ module.exports = {
                 {
                   text: 'SDK References',
                   collapsible: false,
+                  sidebarDepth: 0,
                   children: [
-                    '/docs/sdks/quickstart.md',
-                    '/docs/sdks/nextjs.md',
+                    '/docs/sdks/quickstarts.md',
                   ]
                 },
                 '/docs/ux-reference.md',
