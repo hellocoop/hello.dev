@@ -10,11 +10,11 @@ Building on our Next.js SDK and Hellō Next.js Starter, a Hellō SveltKit Starte
 
 ## Mock Server
 
-This would be headless mock service and docker image that would return test user info or errors for development end to end automated testing.
+This would be a headless mock service and a Docker image that would return test user info or errors for end-to-end automated development testing.
 
 ## App Invitations
 
-This will be a Web App that you send your users to for them to invite other user's to your app. In time, we expect the user will grant Hellō access to their address book, that will simplify the experience for users to invite others.
+This will be a Web App that you send your users to for them to invite other users to your app. In time, we expect the user will grant Hellō access to their address book, that will simplify the experience for users to invite others.
 
 We are adding this functionality to the Hellō Developer Console and the Hellō Login WordPress Plug-in initially.
 

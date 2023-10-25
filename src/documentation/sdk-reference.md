@@ -226,9 +226,9 @@ const {
 #### Get Server Side Properties 
 `getServerSideProps()`
 
-`<HelloProvider auth=({auth})> </HelloProvider`
+`<HelloProvider auth={auth}> </HelloProvider>`
 
-If you want to get the auth object from the auth cookie sever side, export `getServerSideProps()` and wrap your content in `<HelloProvider auth=({auth})>`
+If you want to get the auth object from the auth cookie sever side, export `getServerSideProps()` and wrap your content in `<HelloProvider auth={auth}>`
 
 ```ts
 // MyPage.tsx
