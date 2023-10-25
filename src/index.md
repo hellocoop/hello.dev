@@ -64,7 +64,7 @@ tagline: #leave empty
 
 <div id="hero">
   <div>
-    <h1>Identity in hours,<br/>not days or weeks<span style="opacity: 0.8;">*</span></h1>
+    <h1>Identity in minutes,<br/>not hours or days<span style="opacity: 0.8;">*</span></h1>
     <h2 id="compare-text"><span style="opacity: 0.8;">* compared with</span> <span style="font-weight: bold;">Auth0</span> <span style="opacity: 0.8;">or other solutions</span> - <a href="/documentation/comparison/" id="see-comparison-link">see comparison</a></h2>
   </div>
   <picture id="mockup">

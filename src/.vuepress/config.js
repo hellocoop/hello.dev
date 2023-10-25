@@ -73,22 +73,30 @@ module.exports = {
           }
         ],
         sidebar: {
-          '/documentation/': [
+          '/docs/': [
             {
               text: 'Documentation',
               collapsible: false,
               children: [
-                '/documentation/README.md',
-                '/documentation/quickstarts.md',
-                '/documentation/getting-started.md',
-                '/documentation/integrating-hello.md',
-                '/documentation/openid-config.md',
-                '/documentation/hello-claims.md',
-                '/documentation/ux-reference.md',
-                '/documentation/sdk-reference.md',
-                '/documentation/api-reference.md',
-                '/documentation/comparison.md',
-                '/documentation/roadmap.md',
+                '/docs/README.md',
+                '/docs/quickstarts.md',
+                '/docs/getting-started.md',
+                '/docs/integrating-hello.md',
+                '/docs/openid-config.md',
+                '/docs/hello-claims.md',
+                {
+                  text: 'SDK References',
+                  collapsible: false,
+                  children: [
+                    '/docs/sdks/quickstart.md',
+                    '/docs/sdks/nextjs.md',
+                  ]
+                },
+                '/docs/ux-reference.md',
+                '/docs/sdk-reference.md',
+                '/docs/api-reference.md',
+                '/docs/comparison.md',
+                '/docs/roadmap.md',
               ],
             },
           ],
