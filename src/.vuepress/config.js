@@ -87,7 +87,6 @@ module.exports = {
                 {
                   text: 'SDK References',
                   collapsible: false,
-                  sidebarDepth: 0,
                   children: [
                     '/docs/sdks/quickstarts.md',
                   ]
