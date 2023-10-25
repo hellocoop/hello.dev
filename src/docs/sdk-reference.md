@@ -19,7 +19,7 @@ npm install @hellocoop/nextjs
 #### 2) Create or update your `.env` with:
 
 ```sh
-npx @hellocoop/quickstart -s -w -f '.env' -x 'Next.js Starter' -p 'github gitlab google email--' -i 'hello-nextjs-starter'
+npx @hellocoop/quickstart --nextjs
  ```
 If not already installed, this will prompt to temporarily install the `@hellocoop/quickstart` package, and then launch the Hellō Quickstart web app with Next.js parameters. 
 
