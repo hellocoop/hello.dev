@@ -19,16 +19,17 @@ npm install @hellocoop/nextjs
 #### 2) Create or update your `.env` with:
 
 ```sh
-npm run quickstart
-```
+npx @hellocoop/quickstart -s -w -f '.env' -x 'Next.js Starter' -p 'github gitlab google email--' -i 'hello-nextjs-starter'
+ ```
+If not already installed, this will prompt to temporarily install the `@hellocoop/quickstart` package, and then launch the Hellō Quickstart web app with Next.js parameters. 
 
-This will launch the Hellō Quickstart web app. After logging into Hellō you will create or select an application, and the application's`client_id` and a generated secret for encrypting cookies will be added to the local `.env` file as `HELLO_CLIENT_ID` and `HELLO_COOKIE_SECRET`. 
+After logging into Hellō you will create or select an application, and then the application's `client_id` and a generated secret for encrypting cookies will be added to the local `.env` file as `HELLO_CLIENT_ID` and `HELLO_COOKIE_SECRET`. 
 
 > You will need to add the `HELLO_CLIENT_ID` and a new `HELLO_COOKIE_SECRET` that can be generated with 
-```sh
-npm run secret
-``` 
-to your deployed environments.
+> ```sh
+> node -e console.log(crypto.randomBytes(32).toString('hex'))
+> ``` 
+> to your deployed environments.
 
 #### 3) Add Hellō stylesheet
 
@@ -69,7 +70,7 @@ You will need to add them to the environment of a deployed app.
 - `HELLO_COOKIE_SECRET` a random 64 char hex string (32 bytes). Should be unique for each environment. Generate a secret with:
 
 ```sh
-npm run secret
+node -e console.log(crypto.randomBytes(32).toString('hex'))
 ```
 
 **Variables that may be needed**
@@ -419,7 +420,53 @@ try {
 
 ## Quickstart
 
+### CLI
+
+You can run the following command to create or retrieve the `client_id` for a Hellō Application. 
+```sh
+npx @hellocoop/quickstart@latest
+```
+
+This will open up a browser window, where you will need to login with Hellō, and then choose to create a new app, or return the `client_id`.
+
+#### Options
+
+- --provider_hint (-p) - space separated string of provider_hint 
+- --suffix (-x) - suffix to add to generated app name
+- --integration (-i) - integration name shown in console
+- --file (-f) - file to write out HELLO_CLIENT_ID
+- --secret (-s) - boolean to generate a HELLO_COOKIE_SECRET value
+- --wildcard (-w) - boolean to set the wildcard domain Development Redirect URI
+- --debug (-d) - output debug info
+
+
+### API
+`quickstart(config)`
+
+You can incorporate Quickstart in a Node.js script as part of your installer
+
+To install in another package
+
+```sh
+npm i --save-dev @hellocoop/quickstart
+```
+
+You can then use call Quickstart from a configuration script, example:
+```typescript
+// typescript
+import quickstart from '@hellocoop/quickstart';
+
+...
+const config = {
+    response_uri: 'http://localhost:8080',
+
+}
+
+const client_id = await quickstart(config)
+```
+All the options are strings that are passed as query parameters to the Quickstart Web App. See the [Quickstart API](./api-reference#quickstart-api) for details.
+
 
 ## Future?
 
-See our [Roadmap | Quickstarts & SDKs] for what is next and to let us know what you would like to see next.
+See our [Roadmap | Quickstarts & SDKs](./roadmap#quickstarts--sdks) for what is next and to let us know what you would like to see next.

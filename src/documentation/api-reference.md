@@ -4,6 +4,8 @@
 
 ## Quickstart API
 
+> This documenation is for the URL based API. For the Node.js CLI and SDK see [SDK Reference | Quickstart](./sdk-reference#quickstart)
+
 [Quickstart](https://quickstart.hello.coop) accelerates getting a developer up and running with apps that use Hellō. The [Hellō Login](https://wordpress.org/plugins/hello-login/) WordPress plug-in and [Hellō Next.js Starter](https://hello-nextjs-starter.vercel.app) app use Hellō Quickstart.
 
 > The [`@hellocoop/quickstart`](https://www.npmjs.com/package/@hellocoop/quickstart) NPM package is a Node.js CLI and SDK that starts a local web server to launch the Quickstart SPA and provides additional functionality to configure an application using Hellō. See [SDK Reference | Quickstart](./api-reference#quickstart-api) for details. 
@@ -15,7 +17,7 @@ You can add Hellō Quickstart to a sample application, plug-in, or other softwar
 
 ### Launching Quickstart 
 
-**You  load the [Quickstart App ](https://quickstart.hello.coop/) with the following query parameters:**
+**You load the [Quickstart App ](https://quickstart.hello.coop/) with the following query parameters:**
 
 |Name||Description|
 |---|---|---|
@@ -28,8 +30,8 @@ You can add Hellō Quickstart to a sample application, plug-in, or other softwar
 |`dark_image_uri`|Optional|URI to the dark theme app logo, which is shown if dark theme is detected in the browser|
 |`redirect_uri`|Optional|One or more space separated OAuth `redirect_uri` values to be added to the Production Redirect URIs `http:\\localhost:*` and `http:\\127.0.0.1` Development Redirect URIs are enabled by default|
 |`integration`|Optional|Application that started Quickstart, shown in console, defaults to `quickstart`|
-|`wildcard_domain`|OPTIONAL|a boolean value indicating if wildcard domains are enabled in Development Redirect URIs|
-|`provider_hint`|OPTIONAL|a space separated list of recommended providers per [provider_hint](./ux-reference#provider-hint)|
+|`wildcard_domain`|Optional|a boolean value indicating if wildcard domains are enabled in Development Redirect URIs|
+|`provider_hint`|Optional|a space separated list of recommended providers per [provider_hint](./ux-reference#provider-hint)|
 
 **An example URL with params to quickstart will look like this:**<br/>
 *(line feeds added & URL decoded for readability)*
