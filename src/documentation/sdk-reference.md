@@ -429,7 +429,6 @@ npm install @hellocoop/client
 **Usage** 
 ```typescript
 import { createAuthRequest, fetchToken, parseToken, validateToken } from '@hellocoop/client'
-
 ```
 
 ### createAuthRequest
