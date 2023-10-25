@@ -70,7 +70,7 @@ functionality in the [GreenfieldDemo.com](https://greenfielddemo.com) demo app.
 
 ### *15) How do I tell Hellō the user wants to update the profile they have at my application?*
 
-You include `profile_update` as an additional scope. See [Profile Update](/documentation/hello-claims.html#profile-update) for more information.
+You include `profile_update` as an additional scope. See [Profile Update](/documentation/hello-scopes.html#profile-update) for more information.
 
 
 ### *16) Why the name Hellō?*

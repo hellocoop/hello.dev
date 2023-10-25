@@ -83,17 +83,18 @@ module.exports = {
                 '/docs/getting-started.md',
                 '/docs/integrating-hello.md',
                 '/docs/openid-config.md',
-                '/docs/hello-claims.md',
+                '/docs/hello-scopes.md',
+                '/docs/ux-reference.md',
                 {
                   text: 'SDK References',
                   collapsible: false,
                   children: [
-                    '/docs/sdks/quickstarts.md',
+                    '/docs/sdks/nextjs.md',
+                    '/docs/sdks/core-client.md',
+                    '/docs/sdks/quickstart.md',
+                    '/docs/sdks/errors.md'
                   ]
                 },
-                '/docs/ux-reference.md',
-                '/docs/sdk-reference.md',
-                '/docs/api-reference.md',
                 '/docs/comparison.md',
                 '/docs/roadmap.md',
               ],

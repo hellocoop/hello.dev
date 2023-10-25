@@ -57,7 +57,7 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 |---|---|
 |`client_id`|The `client_id` for your app from [console.hello.coop](https://console.hello.coop) |
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
-|`scope`|The `openid` scope and zero or more scopes listed at [Hellō Claims](/documentation/hello-claims.html)|
+|`scope`|The `openid` scope and zero or more scopes listed at [Hellō Claims](/documentation/hello-scopes.html)|
 |`nonce`|A unique string that will be included in the signed ID Token. This links the ID Token to your request|
 |`response_type`<br><span style="margin-top: 10px; display: inline-block;">(optional)</span>| `id_token` flow or<br><span style="margin-top: 12px; display: inline-block;">`code` flow (default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)).</span> |
 |`response_mode`<br><span style="margin-top: 10px; display: inline-block;">(optional)</span>|if `id_token` flow `fragment` or `form_post` (default) <br>if `code` flow `fragment`, `form_post`, or `query` (default)|
@@ -242,7 +242,7 @@ const response = await fetch(url, options)
 const json = await response.json()
 ```
 
-#### Response JSON
+### Introspection Response
 
 If successfully validated, you will receive the ID Token payload with `active:true` to indicate it is an active token. If unsuccessful, you will receive an [Introspection Error](errors.html#introspection-errors).
 

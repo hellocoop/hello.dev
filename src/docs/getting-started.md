@@ -55,7 +55,7 @@ If you don't want to use the Hellō stylesheet, the Hellō button is either char
 
 ## 5. Select Claims
 
-You request claims from Hellō by including a scope for that claim in your request. Any claims you request from Hellō are required claims, IE the user will need to provide a value. Hellō only supports verified email and phone claims. Unverified email and phone are not supported. [Hellō Claims](/documentation/hello-claims.html) provides a full list of supported scopes and associated claims. 
+You request claims from Hellō by including a scope for that claim in your request. Any claims you request from Hellō are required claims, IE the user will need to provide a value. Hellō only supports verified email and phone claims. Unverified email and phone are not supported. [Hellō Claims](/documentation/hello-scopes.html) provides a full list of supported scopes and associated claims. 
 
 Hellō will always return the `sub` claim, a globally unique identifier in the form of a GUID, that you can use to identify the user across any apps under your publisher. The `sub` claim is unique to your publisher for a given user. Other publishers will receive a different `sub` claim for the user.
 

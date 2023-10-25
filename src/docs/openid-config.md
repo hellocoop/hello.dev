@@ -18,11 +18,11 @@ Many platforms have a generic OpenID Connect (OIDC) plug-in / module / configura
 
 2. The platform will need the client id from the Hellō console. 
 
-3. Most platforms will require a client secret. You can generate one or more in the Hellō console.
+3. Most platforms will require a client secret. You can generate one or more in the [Hellō console](https://console.hello.coop).
 
 4. Hellō will need the redirect URI from the platform. This is where Hellō will redirect the user after interacting at Hellō.
 
-5. The platform will have a place to specify the scopes that you would like to request from the user. See [Hellō Claims](/documentation/hello-claims.html) for supported scopes.
+5. The platform will have a place to specify the scopes that you would like to request from the user. See [Hellō Claims](/documentation/hello-scopes.html) for supported scopes.
 
 6. There will be some mechanism for the Hellō button to initiate the authentication flow.
 

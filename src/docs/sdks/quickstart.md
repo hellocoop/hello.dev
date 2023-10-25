@@ -1,0 +1,122 @@
+# Quickstart
+
+[Quickstart](https://quickstart.hello.coop) accelerates getting a developer up and running with apps that use Hellō. It returns a `client_id` by creating a new app with defaults, or selecting an existing Hellō app.
+
+The [Hellō Login](https://wordpress.org/plugins/hello-login/) WordPress plug-in and [Hellō Next.js Starter](https://hello-nextjs-starter.vercel.app) app use Hellō Quickstart.
+
+
+There are three mechanisms to invoke Quickstart:
+
+1. Load `https://quickstart.hello.coop` with query parameters. This can be used by any configuration script.
+2. Run the Quickstart CLI with `npx @hellocoop/quickstart` passing command line parameters. This requires the developer to have Node.js installed. The CLI can generate a `HELLO_COOKIE_SECRET` and write it and `HELLO_CLIENT_ID` to a `.env` file. 
+3. Import the `@hellocoop/quickstart` npm package into a Node.js script and use the module.
+
+(2) and (3) both start a local web server on an unused port and launch the default web browser to load the Quickstart Web App.
+
+
+## Querystring API
+
+You can add Hellō Quickstart to a sample application, plug-in, or other software module with the web redirect API below.
+
+### Launching Quickstart 
+
+You load https://quickstart.hello.coop/ with the following query parameters:
+
+|Name||Description|
+|---|---|---|
+|`response_uri`|Optional|URI that Quickstart will redirect to with the `client_id` query parameter|
+|`suffix`|Optional|String that will be appended to the suggested name (eg: John's + suffix) for an app to be created. Defaults to "Application"|
+|`integration`|Optional|Application that started Quickstart, shown in console, defaults to `quickstart`|
+|`name`|Optional|Name of the application (`suffix` param is ignored if `name` param is provided)|
+|`tos_uri`|Optional|URI to the Terms of Service|
+|`pp_uri`|Optional|URI to the Privacy Policy|
+|`image_uri`|Optional|URI to the app logo|
+|`dark_image_uri`|Optional|URI to the dark theme app logo, which is shown if dark theme is detected in the browser|
+|`redirect_uri`|Optional|One or more space separated OAuth `redirect_uri` values to be added to the Production Redirect URIs<br/>`http:\\localhost:*` and `http:\\127.0.0.1` Development Redirect URIs are enabled by default|
+|`wildcard_domain`|Optional|a boolean value indicating if wildcard domains are enabled in Development Redirect URIs|
+|`provider_hint`|Optional|a space separated list of recommended providers per [provider_hint](./ux-reference#provider-hint) that will be presented when logging in new users to Quickstart|
+
+**An example URL with params to quickstart will look like this:**<br/>
+*(line feeds added & URL decoded for readability)*
+
+<p style="background: #282c34; color: white; word-break: break-all; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
+  https://quickstart.hello.coop/<br>
+  ?<span style="color: #f8c555">response_uri</span>=<span style="color: #7ec699;">https://example.com/quickstart</span><br>
+  &<span style="color: #f8c555;">name</span>=<span style="color: #7ec699;">Hello World</span><br>
+  &<span style="color: #f8c555;">tos_uri</span>=<span style="color: #7ec699;">https://example.com/terms-of-service.html</span><br>
+  &<span style="color: #f8c555;">pp_uri</span>=<span style="color: #7ec699;">https://example.com/privacy-policy.html</span><br>
+  &<span style="color: #f8c555;">image_uri</span>=<span style="color: #7ec699;">https://example.com/logo.png</span><br>
+  &<span style="color: #f8c555;">dark_image_uri</span>=<span style="color: #7ec699;">https://example.com/logo-dark.png</span><br>
+  &<span style="color: #f8c555;">redirect_uri</span>=<span style="color: #7ec699;">https://example.com/response</span><br>
+  &<span style="color: #f8c555;">integration</span>=<span style="color: #7ec699;">wordpress</span>
+</p>
+
+### Quickstart Response
+
+On completion, the Quickstart app will load the `response_uri` with `client_id` query parameter set to the Hellō Client ID. 
+
+<p style="background: #282c34; color: white; word-break: break-all; border-radius: 6px; padding:  1.25rem 1.5rem; font-weight: 500; font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;">
+  https://example.com/quickstart<br>
+  ?<span style="color: #f8c555">client_id</span>=<span style="color: #7ec699;">ca12f47-f310-413b-b70f-4428d9448e8d</span>
+</p>
+
+Try out the [Quickstart App ](https://quickstart.hello.coop/)
+
+## CLI Parameters
+
+You can run the following command to create or retrieve the `client_id` for a Hellō Application. 
+```sh
+npx @hellocoop/quickstart@latest
+```
+
+This will open up a browser window, where you will need to login with Hellō, and then choose to create a new app, or return the `client_id`.
+
+#### Options
+
+- --provider_hint (-p) - space separated string of provider_hint 
+- --suffix (-x) - suffix to add to generated app name
+- --integration (-i) - integration name shown in console
+- --file (-f) - file to write out HELLO_CLIENT_ID
+- --secret (-s) - boolean to generate a HELLO_COOKIE_SECRET value
+- --wildcard (-w) - boolean to set the wildcard domain Development Redirect URI
+- --debug (-d) - output debug info
+
+## `@hellocoop/quickstart` API
+`quickstart(config)`
+
+You can incorporate Quickstart in a Node.js script as part of your installer
+
+To install in a project:
+
+```sh
+npm install -D @hellocoop/quickstart
+```
+or
+```sh
+yarn add -D @hellocoop/quickstart
+```
+or
+```sh
+pnpm add -D @hellocoop/quickstart
+```
+
+You can then use call Quickstart from a configuration script, example:
+```typescript
+// typescript
+import quickstart from '@hellocoop/quickstart';
+
+...
+const config = {
+    response_uri: 'http://localhost:8080',
+    name: 'Acme Demo App'
+    // ... other config parameters
+}
+
+const client_id = await quickstart(config)
+```
+All the options are strings that are passed as query parameters to the Quickstart Web App. See the [Quickstart API](#querystring-api) for details.
+
+## Admin API
+
+This API is used by [Console](https://console.hello.coop) and [Quickstart](https://quickstart.hello.coop) to manage Hellō Publishers & Applications. Please contact us if you would like to integrate Hellō Admin APIs directly into your management console.
+
