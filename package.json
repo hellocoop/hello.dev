@@ -13,18 +13,19 @@
   },
   "repository": "/Hellō Dev",
   "scripts": {
-    "postinstall": "node scripts/pre-requisites.mjs",
+    "postinstall": "./scripts/pre-requisites.sh",
     "dev": "vuepress dev src",
     "build": "vuepress build src",
     "test": "linkinator ./S3 --config linkinator.config.json",
-    "review": "./scripts/review.mjs"
+    "pr": "./scripts/pr.sh",
+    "rebase": "git pull origin main --rebase",
+    "review": "npm run rebase && npm run build && npm run test && npm run pr"
   },
   "license": "MIT",
   "devDependencies": {
     "@vuepress/plugin-register-components": "^2.0.0-beta.38",
     "linkinator": "^4.0.3",
-    "vuepress": "^2.0.0-beta.35",
-    "zx": "^7.2.3"
+    "vuepress": "^2.0.0-beta.35"
   },
   "dependencies": {
     "vue-code-highlight": "^0.7.8",
