@@ -1,3 +1,5 @@
+import { Tabs } from 'nextra/components'
+
 # Core / Client
 
 A collection of Node.js helper functions for integrating Hellō.
@@ -10,45 +12,61 @@ The APIs are the same except where noted.
 ## Installation
 
 #### Node.js
-```sh
-npm install @hellocoop/core
-```
-or
-```sh
-yarn add @hellocoop/core
-```
-or
-```sh
-pnpm add @hellocoop/core
-```
+
+<Tabs items={['npm', 'yarn', 'pnpm']}>
+  <Tabs.Tab>
+    ```sh
+    npm install @hellocoop/core
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```sh
+    yarn add @hellocoop/core
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```sh
+    pnpm add @hellocoop/core
+    ```
+  </Tabs.Tab>
+</Tabs>
+
 #### Browser 
 
-```sh
-npm install @hellocoop/client
-```
-or
-```sh
-yarn add @hellocoop/client
-```
-or
-```sh
-pnpm add @hellocoop/client
-```
-
+<Tabs items={['npm', 'yarn', 'pnpm']}>
+  <Tabs.Tab>
+    ```sh
+    npm install @hellocoop/client
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```sh
+    yarn add @hellocoop/client
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```sh
+    pnpm add @hellocoop/client
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 ## Usage
 
 #### Node.js
 
-```typescript
-// typescript
-import { createAuthRequest, fetchToken, parseToken } from '@hellocoop/core'
-```
-or
-```javascript
-// javascript
-const { createAuthRequest, fetchToken, parseToken } = require('@hellocoop/core')
-```
+<Tabs items={['TypeScript', 'JavaScript']}>
+  <Tabs.Tab>
+    ```sh
+    import { createAuthRequest, fetchToken, parseToken } from '@hellocoop/core'
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```sh
+    const { createAuthRequest, fetchToken, parseToken } = require('@hellocoop/core')
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 #### Browser
 ```typescript

@@ -1,6 +1,12 @@
+import { Steps } from 'nextra/components'
+import { Tabs } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
 # Next.js
 
-> Check out our [Hellō Next.js Starter](https://github.com/hellocoop/hello-nextjs-starter) where you will be logging in with [Hellō](https://hello.coop/) in less than a minute.
+<Callout type="info" emoji="">
+    Check out our [Hellō Next.js Starter](https://github.com/hellocoop/hello-nextjs-starter) where you will be logging in with [Hellō](https://hello.coop/) in less than a minute.
+</Callout>
 
 This package provides all the endpoints your application needs to use Hellō. The login result is stored in an encrypted cookie, the contents are retrieved client side with `useAuth()` and server side with `getAuth()`. 
 
@@ -8,23 +14,28 @@ This package provides all the endpoints your application needs to use Hellō. Th
 
 To add Hellō to your Next.js application, in your project directory:
 
-### 1) Install the package
+<Steps>
+### Install the package
 
-```sh
-npm install @hellocoop/nextjs
-```
-or
+<Tabs items={['npm', 'yarn', 'pnpm']}>
+  <Tabs.Tab>
+    ```sh
+    npm install @hellocoop/nextjs
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```sh
+    yarn add @hellocoop/nextjs
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```sh
+    pnpm add @hellocoop/nextjs
+    ```
+  </Tabs.Tab>
+</Tabs>
 
-```sh
-yarn add @hellocoop/nextjs
-```
-or
-
-```sh
-pnpm add @hellocoop/nextjs
-```
-
-### 2) Create or update `.env`
+### Create or update `.env`
 
 ```sh
 npx @hellocoop/quickstart --nextjs
@@ -33,7 +44,7 @@ If not already installed, this will prompt to temporarily install the `@hellocoo
 
 After logging into Hellō you will create or select an application, and then the application's `client_id` and a generated secret for encrypting cookies will be added to the local `.env` file as `HELLO_CLIENT_ID` and `HELLO_COOKIE_SECRET`. 
 
-### 3) Add Hellō stylesheet
+### Add Hellō stylesheet
 
 To provide the button styling, add the below code to the `<Head>` section of the `_document`:
 
@@ -46,11 +57,11 @@ See [hello-nextjs-starter _document.tsx](https://github.com/hellocoop/hello-next
 > To ensure the button styles are available, client-side rendered buttons check if the stylesheet has been included in the document head, and if not the stylesheet is injected. Injecting into the head is [not recommended](https://nextjs.org/docs/messages/no-stylesheets-in-head-component) and creates a button rendering glitch.
 
 
-### 4) Create API route
+### Create API route
 
 Create a `hellocoop.js` file in the `/pages/api` directory that contains:
 
-```typescript
+```typescript filename="/pages/api/hellocoop.js"
 import { pageAuth } from '@hellocoop/nextjs'
 export default pageAuth({})
 ```
@@ -68,36 +79,46 @@ node -e console.log(crypto.randomBytes(32).toString('hex'))
 ``` 
 to your deployed environment(s)
 
-
+</Steps>
 
 ## Components
 
-typescript
-```typescript
-import { // only import buttons used
-    ContinueButton, 
-    LoginButton, 
-    UpdateEmailButton, 
-    UpdatePictureButton,
-    UpdateDiscordButton,
-    UpdateTwitterButton,
-    UpdateGitHubButton,
-    UpdateGitLabButton
-} from '@hellocoop/nextjs'
-```
-javascript
-```javascript
-const { // only import buttons used
-    ContinueButton, 
-    LoginButton, 
-    UpdateEmailButton, 
-    UpdatePictureButton,
-    UpdateDiscordButton,
-    UpdateTwitterButton,
-    UpdateGitHubButton,
-    UpdateGitLabButton
-} = require('@hellocoop/nextjs')
-```
+<Tabs items={['TypeScript', 'JavaScript']}>
+  <Tabs.Tab>
+    ```typescript
+    import { // only import buttons used
+        ContinueButton, 
+        LoginButton, 
+        UpdateEmailButton, 
+        UpdatePictureButton,
+        UpdateDiscordButton,
+        UpdateTwitterButton,
+        UpdateGitHubButton,
+        UpdateGitLabButton
+    } from '@hellocoop/nextjs'
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```javascript
+    const { // only import buttons used
+        ContinueButton, 
+        LoginButton, 
+        UpdateEmailButton, 
+        UpdatePictureButton,
+        UpdateDiscordButton,
+        UpdateTwitterButton,
+        UpdateGitHubButton,
+        UpdateGitLabButton
+    } = require('@hellocoop/nextjs')
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```sh
+    pnpm add @hellocoop/nextjs
+    ```
+  </Tabs.Tab>
+</Tabs>
+
 ### `<ContinueButton/>`
 
 `<ContinueButton/>` - provides \[ ō Continue with Hellō \]
@@ -133,27 +154,32 @@ Explore styling with the [button playground](./getting-started.html#_2-standard-
 
 Components to display content based on logged in state
 
-.tsx
-```tsx
-import { LoggedIn, LoggedOut } from '@hellocoop/nextjs'
-```
-.jsx
-```jsx
-const { LoggedIn, LoggedOut } = require('@hellocoop/nextjs')
-```
-In .tsx or .jsx file
-
-```html
-<LoggedIn>
-    <b>content displayed if logged in</b>
-</LoggedIn>
-```
-
-```html
-<LoggedOut>
-    <i>content displayed if logged out</i>
-</LoggedOut>
-```
+<Tabs items={['.tsx', '.jsx']}>
+  <Tabs.Tab>
+    ```typescript
+    import { LoggedIn, LoggedOut } from '@hellocoop/nextjs'
+    
+    <LoggedIn>
+        <b>content displayed if logged in</b>
+    </LoggedIn>
+    <LoggedOut>
+        <i>content displayed if logged out</i>
+    </LoggedOut>
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```javascript
+    const { LoggedIn, LoggedOut } = require('@hellocoop/nextjs')
+    
+    <LoggedIn>
+        <b>content displayed if logged in</b>
+    </LoggedIn>
+    <LoggedOut>
+        <i>content displayed if logged out</i>
+    </LoggedOut>
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 ### `<HelloProvider/>`
 
@@ -167,7 +193,6 @@ Wrapping component for passing context to all children components. See [`getServ
 
 ```typescript
 import { useAuth } from '@hellocoop/nextjs'
-
 
 const {
     isLoading,      // useSWR response, true if still loading call to 
@@ -210,7 +235,6 @@ const {
 If you want to get the auth object from the auth cookie sever side, export `getServerSideProps()` and wrap your content in `<HelloProvider auth={auth}>`
 
 ```ts
-// MyPage.tsx
 import { HelloProvider, LoggedIn, LoggedOut, ContinueButton } from '@hellocoop/nextjs'
 export default function MyPage = ({auth}) {
     const { name } = auth
@@ -240,8 +264,7 @@ This is a callback you provide in the `pageAuth()` config that can do any logic 
 - Process the page yourself
 - Add roles or other properties to the `auth` cookie
 
-```typescript
-// src/your-logged-in-logic.ts
+```typescript filename="src/your-logged-in-logic.ts"
 import type { LoggedInParams, LoggedInResponse } from '@hellocoop/nextjs'
 
 export default async loggedInCallback ({ 
@@ -323,8 +346,7 @@ node -e console.log(crypto.randomBytes(32).toString('hex'))
 
 ### `pageAuth()` Config
 
-```typescript
-// /api/hellocoop.ts
+```typescript filename="/api/hellocoop.ts"
 import loggedInCallback from '@/src/your-logged-in-logic' 
 
 import pageAuth from '@hellocoop/nextjs'
