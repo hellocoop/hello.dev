@@ -4,17 +4,13 @@ Many platforms have a generic OpenID Connect (OIDC) plug-in / module / configura
 
 1. The platform will need the Hellō configuration. Some platforms will retrieve the configuration from the Hellō [`openid-configuration`](https://issuer.hello.coop/.well-known/openid-configuration) file, or you may need to enter the values in: 
 
-<div class="table-no-heading">
-
-| Name | Url |
-|---|---|
-|`openid-configuration`|https://issuer.hello.coop/.well-known/openid-configuration|
-|`issuer`|https://issuer.hello.coop|
-|`authorization_endpoint` |https://wallet.hello.coop/authorize|
-|`token_endpoint` |https://wallet.hello.coop/oauth/token|
-|`userinfo_endpoint` |https://wallet.hello.coop/oauth/userinfo|
-
-</div>
+| Parameter                | URL                                                        |
+|--------------------------|------------------------------------------------------------|
+| `openid-configuration`   | https://issuer.hello.coop/.well-known/openid-configuration |
+| `issuer`                 | https://issuer.hello.coop                                  |
+| `authorization_endpoint` | https://wallet.hello.coop/authorize                        |
+| `token_endpoint`         | https://wallet.hello.coop/oauth/token                      |
+| `userinfo_endpoint`      | https://wallet.hello.coop/oauth/userinfo                   |
 
 2. The platform will need the client id from the Hellō console. 
 
@@ -28,5 +24,8 @@ Many platforms have a generic OpenID Connect (OIDC) plug-in / module / configura
 
 In the future we will have more specific instructions for popular platforms, as well as Hellō plugins / modules that only require installation and minimal configuration. If you are interested in writing a plug-in, please reach out [contact@hello.coop](mailto:contact@hello.coop?subject=Hellō+Plug-in+Inquiry).
 
-
----
+<style jsx>{`
+th {
+    display: none;
+}
+`}</style>
