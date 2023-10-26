@@ -209,15 +209,15 @@ Using:
 ```typescript
 const params = new URLSearchParams(window.location.hash.substring(1))
 const token = params.get('id_token')
-if (!id_token || params.has('error')) {
+if (!token || params.has('error')) {
     // process error
 }
 // get nonce from sessionStorage
 try {
     const response = validateToken({
+        client_id: HELLO_CLIENT_ID,
         token, 
-        nonce,
-        HELLO_CLIENT_ID
+        nonce
     })
     if (!response.active) {
         // process error
