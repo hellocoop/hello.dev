@@ -1,3 +1,5 @@
+import { Steps } from 'nextra/components'
+
 # Getting Started
 
 To use Hellō in your app, you will need to register your app, and add a Hellō button. 
@@ -8,11 +10,13 @@ If you are configuring a platform to use Hellō, you will need to copy and paste
 
 In the future we will have plug-ins for popular platforms that will simplify using Hellō. If you are interested in writing a plug-in, please reach out [contact@hello.coop](mailto:contact@hello.coop?subject=Hellō+Plug-in+Inquiry).
 
-## 1. App Registration
+<Steps>
+
+### 1. App Registration
 
 To use Hellō, register your application at [console.hello.coop](https://console.hello.coop/). You can start developing locally with just the **Client ID** and the defaults, which includes the **Development Redirect URIs** `http://localhost:*` and `http://127.0.0.1:*`. When you are ready to preview what is presented to users, provide the **Name**, **Logo**, and URLs for **Terms of Service** & **Privacy Policy**.  When you are ready for public access, provide your **Production Redirect URI(s)**.
 
-## 2. Standard Hellō Buttons
+### 2. Standard Hellō Buttons
 
 To add a Hellō Button to your page:
 
@@ -65,4 +69,4 @@ Note that it is best practice to only request the claims you require. For exampl
 
 If you are writing your own application, see [Integrating Hellō](/documentation/Integrating-hello.html). If you are configuring Hellō in a platform, see [Hellō & Platforms](/documentation/hello-platforms.html).
 
----
+</Steps>

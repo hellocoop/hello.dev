@@ -5,18 +5,13 @@ const withNextra = require('nextra')({
 })
 
 module.exports = withNextra({
-  redirects: () => {
-    return [
-      {
-        source: "/docs",
-        destination: "/docs/overview",
-        statusCode: 301,
-      },
-      {
-        source: "/docs/sdks",
-        destination: "/docs/sdks/nextjs",
-        statusCode: 301,
-      },
-    ]
-  }
+  // redirects: () => {
+  //   return [
+  //     {
+  //       source: "/docs",
+  //       destination: "/docs/overview",
+  //       statusCode: 301,
+  //     }
+  //   ]
+  // }
 })

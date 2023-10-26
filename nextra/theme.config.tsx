@@ -12,10 +12,7 @@ const config: DocsThemeConfig = {
     backToTop: true,
   },
   editLink: {
-    text: "Propose changes to this page ↗"
-  }, 
-  feedback: {
-    content: null
+    text: "Edit this page on GitHub ↗"
   }
 }
 
