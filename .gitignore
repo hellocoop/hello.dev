@@ -23,3 +23,6 @@ dist
 config.local.js
 basement_dist
 S3
+
+.next
+node_modules
