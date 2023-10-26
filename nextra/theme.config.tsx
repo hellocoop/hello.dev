@@ -6,7 +6,7 @@ const config: DocsThemeConfig = {
   darkMode: false,
   docsRepositoryBase: 'https://github.com/hellocoop/hello.dev',
   footer: {
-    text: 'Nextra Docs Template',
+    text: '',
   },
   toc: {
     backToTop: true,

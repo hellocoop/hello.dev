@@ -1,20 +1,32 @@
 {
   "index": {
-    "title": "Introduction",
+    "title": "Home",
     "type": "page",
-    "display": "hidden"
+    "display": "hidden",
+    "theme": {
+      "timestamp": false
+    }
   },
   "docs": {
     "title": "Documentation",
-    "type": "page"
+    "type": "page",
+    "theme": {
+      "timestamp": false
+    }
   },
   "faqs": {
     "title": "FAQs",
-    "type": "page"
+    "type": "page",
+    "theme": {
+      "timestamp": false
+    }
   },
   "pricing": {
     "title": "Pricing",
-    "type": "page"
+    "type": "page",
+    "theme": {
+      "timestamp": false
+    }
   },
   "blog": {
     "title": "Blog ↗",
