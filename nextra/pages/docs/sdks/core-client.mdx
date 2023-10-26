@@ -70,15 +70,8 @@ The APIs are the same except where noted.
 
 #### Browser
 ```typescript
-// typescript
-import { createAuthRequest, fetchToken, parseToken } from '@hellocoop/client'
+import { createAuthRequest, fetchToken, parseToken, validateToken } from '@hellocoop/client'
 ```
-or
-```javascript
-// javascript
-const { createAuthRequest, fetchToken, parseToken } = require('@hellocoop/client')
-```
-
 
 ## `createAuthRequest()`
 `const { url, nonce, code_verifier } = await createAuthRequest(config)`
