@@ -1,36 +1,38 @@
-Overview
+Getting Started
     Introduction
     User Experience
     Data Flow
-Quickstarts
-    Next.js Starter
-    WordPress
-Getting Started
-    (existing)
-Integrating Hellō
-    (existing)
-OpenID Config
-    (was Hello & Platforms)
-Hellō Claims
-    (existing)
-UX Reference
+    App Registration
     Buttons
-    Logos
-    Provider Hint
+    Scopes
+    Flows
+Quickstarts
+    - WordPress
+    - Next.js
+Hellō Buttons
+    Stylesheet
+    Explorer (explorer + generate code snippet to copy)
+    Reference (CSS classes table)
+    Tooltip (adding script)
+    Creating your own
+OpenID Connect
+    - Introduction
+    - Auth Request
+    - Auth Response
+    - ID Token
+    - Config
+
+Hellō Scopes
+    (existing)
+
 SDK Reference
     Next.js
-    Core
+    Core / Client
     Quickstart
-
-    SvelteKit
-    Express
-    Fastify
-    Client
 API Reference
     Wallet
     Quickstart
     Errors
-
 Hellō vs ___
     CIAM
     Auth0
@@ -46,8 +48,8 @@ Roadmap
     B2B Federation
     Mock Server
 
-
 Comparison
+----
 
 local dev
 custom UX
