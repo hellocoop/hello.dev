@@ -57,7 +57,7 @@ const ButtonExplorer = () => {
     return (
         <section className='rounded-t-lg overflow-hidden mt-6'>
             <div className='bg-[#1D2429] flex'>
-                <div className='bg-gray-800 px-2 py-3 flex justify-around items-center flex-1 relative'>
+                <div className='bg-gray-800 px-2 py-3 flex flex-wrap gap-4 justify-around items-center flex-1 relative'>
                     <span className='uppercase absolute -rotate-90 left-0 font-bold opacity-50' style={{fontSize: '9px'}}>Style</span>
                     
                     <div className='flex flex-col items-center'>
@@ -92,9 +92,9 @@ const ButtonExplorer = () => {
                 </div>
             </div>
             
-            <div className='flex rounded-b-lg overflow-hidden'>
+            <div className='flex flex-col md:flex-row rounded-b-lg overflow-hidden'>
                 {["light", "dark"].map(i => (
-                    <div key={i} id={"button-explorer-" + i} className="w-1/2 py-10 flex items-center justify-center relative">
+                    <div key={i} id={"button-explorer-" + i} className="md:w-1/2 py-10 flex items-center justify-center relative">
                         <span className={clsx('uppercase absolute -rotate-90 -left-3.5 font-bold opacity-50', i === "light" && "text-black")} style={{fontSize: '9px'}}>{i} Mode</span>
                         <button className={buttonClass}>ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>
                     </div>
