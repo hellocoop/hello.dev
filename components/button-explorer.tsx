@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import clsx from 'clsx'
-import { Pre } from 'nextra/components'
+import { Pre, Tabs } from 'nextra/components'
 
 const ButtonExplorer = () => {
     const COLORS = ['black', 'white']
     const THEME = ['light', 'dark', 'invert', 'static']
     const HOVER = ['pop', 'glow', 'flare', 'none']
+    const FRAMEWORKS = ['HTML', 'React', 'Svelte', 'Vue']
     const CLASS_MAPPING = {
         black: {
             "light": "",
@@ -41,7 +42,7 @@ const ButtonExplorer = () => {
         if(!lightButton || !darkButton)
             return
 
-        //TBD: For some reason ref.current.focus() is not working
+        //TBD: For some reason useRef() ref.current.focus() is not working
         lightButton.focus()
         // buttonRefs.light.current.focus()
         setTimeout(()=>{
@@ -99,17 +100,21 @@ const ButtonExplorer = () => {
                     </div>
                 ))}
             </div>
-            
-            {/* TBD Colorize */}
+
+            <Tabs items={FRAMEWORKS}>
+                {FRAMEWORKS.map(i => (
+                    <Tabs.Tab>
+                        {/* TBD Colorize */}
            <Pre hasCopyCode={true}>
                 <code data-language="html" data-theme="default">
-{`<button class="${buttonClass}">
+{`<button ${i === 'React' ? 'className' : 'class'}="${buttonClass}">
   ō&nbsp;&nbsp;Continue with Hellō
 </button>`}
                 </code>
            </Pre>
-
-            {/* {children} */}
+                    </Tabs.Tab>
+                ))}
+            </Tabs>
         </section>
     )
 }
