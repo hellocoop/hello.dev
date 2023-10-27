@@ -5,3 +5,13 @@ Introduction to SDK here
 @dickhardt  
 This is the page that loads /docs/sdks  
 Accessible through the sidebar clicking "SDK References"
+
+To create a page like this:
+```
+test/
+    /_meta.json  //like other directory, has info about pages inside the dir
+    /test-1.mdx
+    /test-2.mdx
+test.mdx         //this page will load when loading /docs/test 
+_meta.json       //update sidebar title of /docs/test here
+```
