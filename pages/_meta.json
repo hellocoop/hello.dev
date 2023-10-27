@@ -1,32 +1,29 @@
 {
+  "*": {
+    "theme": {
+      "footer": false,
+      "timestamp": false
+    } 
+  },
   "index": {
     "title": "Home",
     "type": "page",
     "display": "hidden",
     "theme": {
-      "timestamp": false
+      "layout": "full"
     }
   },
   "docs": {
     "title": "Documentation",
-    "type": "page",
-    "theme": {
-      "timestamp": false
-    }
+    "type": "page"
   },
   "faqs": {
     "title": "FAQs",
-    "type": "page",
-    "theme": {
-      "timestamp": false
-    }
+    "type": "page"
   },
   "pricing": {
     "title": "Pricing",
-    "type": "page",
-    "theme": {
-      "timestamp": false
-    }
+    "type": "page"
   },
   "blog": {
     "title": "Blog ↗",
