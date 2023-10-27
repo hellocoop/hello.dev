@@ -103,7 +103,7 @@ const ButtonExplorer = () => {
 
             <Tabs items={FRAMEWORKS}>
                 {FRAMEWORKS.map(i => (
-                    <Tabs.Tab>
+                    <Tabs.Tab key={i}>
                         {/* TBD Colorize */}
            <Pre hasCopyCode={true}>
                 <code data-language="html" data-theme="default">
