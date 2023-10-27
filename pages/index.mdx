@@ -49,7 +49,9 @@ import Feed from 'components/feed'
         <Card title="FAQs" description="Frequently asked developer questions." href="/faqs" />
         <Card title="Playground" description="Explore what you can do with Hellō." href="https://playground.hello.dev/" />
         <Card title="Console" description="Configure and manage your application(s)." href="https://console.hello.coop/" />
-        <Card title="Slack" description="Join the community to discuss Hellō." href="#" />
+        <button onClick={() => joinSlackCommunity('hello.dev')}>
+            <Card title="Slack" description="Join the community to discuss Hellō." href="" />
+        </button>
     </Cards>
 </section>
 

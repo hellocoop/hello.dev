@@ -8,6 +8,7 @@ class MyDocument extends Document {
         <Head>
           <link href="https://cdn.hello.coop/css/hello-btn.css" rel="stylesheet" />
           <script src="https://cdn.hello.coop/js/hello-dev-wc-footer.js"/>
+          <script src="https://cdn.hello.coop/js/join-slack-community.js"/>
         </Head>
         <body>
           <Main />
