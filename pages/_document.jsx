@@ -6,6 +6,8 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <link href="https://cdn.hello.coop/images/dev-favicon-light.png" rel="icon" media="(prefers-color-scheme: light)"/>
+          <link href="https://cdn.hello.coop/images/dev-favicon-dark.png" rel="icon" media="(prefers-color-scheme: dark)"/>
           <link href="https://cdn.hello.coop/css/hello-btn.css" rel="stylesheet" />
           <script src="https://cdn.hello.coop/js/hello-dev-wc-footer.js"/>
           <script src="https://cdn.hello.coop/js/join-slack-community.js"/>
