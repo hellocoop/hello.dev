@@ -1,0 +1,98 @@
+import React, { useEffect, useState, useRef } from 'react'
+import clsx from 'clsx'
+import { Pre } from 'nextra/components'
+
+const ButtonExplorer = ({children}) => {
+    const COLORS = ['black', 'white']
+    const THEME = ['light', 'dark', 'invert', 'static']
+    const HOVER = ['pop', 'glow', 'flare', 'none']
+    const CLASS_MAPPING = {
+        black: {
+            "light": "",
+            "dark": "hello-btn-black-on-dark",
+            "invert": "hello-btn-black-and-invert",
+            "static": "hello-btn-black-and-static"
+        },
+        white: {
+            "light": "hello-btn-white-on-light",
+            "dark": "hello-btn-white-on-dark",
+            "invert": "hello-btn-white-and-invert",
+            "static": "hello-btn-white-and-static"
+        },
+    }
+    const HOVER_MAPPING = {
+        "pop": "",
+        "glow": "hello-btn-hover-glow",
+        "flare": "hello-btn-hover-flare",
+        "none": "hello-btn-hover-none"
+    }
+
+    const [ color, setColor ] = useState(COLORS[0])
+    const [ theme, setTheme ] = useState(THEME[0])
+    const [ hover, setHover ] = useState(HOVER[0])
+    const [ loading, setLoading ] = useState(false)
+    const docIsAvailable = typeof document !== 'undefined'
+    const lightButton: HTMLElement = docIsAvailable && document.querySelector("#button-explorer-light button")
+    const darkButton: HTMLElement = docIsAvailable && document.querySelector("#button-explorer-dark button")
+
+    const buttonClass = clsx('hello-btn', CLASS_MAPPING[color][theme], HOVER_MAPPING[hover], loading && 'hello-btn-loader', )
+    
+    useEffect(() => {
+        if(!lightButton || !darkButton)
+            return
+
+        //TBD: For some reason ref.current.focus() is not working
+        lightButton.focus()
+        // buttonRefs.light.current.focus()
+        setTimeout(()=>{
+            lightButton.blur()
+            darkButton.focus()
+            setTimeout(() => {
+                darkButton.blur()
+            }, 500);
+        }, 500)
+    }, [color, theme, hover])
+
+    return (
+        <section className='rounded-t-lg overflow-hidden mt-6'>
+            <div className='bg-[#1D2429] flex'>
+                <div className='bg-gray-800 px-2 py-4 flex justify-around items-center flex-1'>
+                    <div className='flex gap-0.5 border border-black p-0.5 rounded-sm'>
+                        {COLORS.map(i => <button key={i} className={clsx("capitalize rounded-sm px-3", color === i && "bg-black")} onClick={() => setColor(i)}>{i}</button>)}
+                    </div>
+                    <div className='flex gap-0.5 border border-black p-0.5 rounded-sm'>
+                        {THEME.map(i => <button key={i} className={clsx("capitalize rounded-sm px-3", theme === i && "bg-black")} onClick={() => setTheme(i)}>{i}</button>)}
+                    </div>
+                    <div className='flex gap-0.5 border border-black p-0.5 rounded-sm'>
+                        {HOVER.map(i => <button key={i} className={clsx("capitalize rounded-sm px-3", hover === i && "bg-black")} onClick={() => setHover(i)}>{i}</button>)}
+                    </div>
+                </div>
+                <div className='bg-gray-700 px-2 py-4 flex justify-around items-center'>
+                    <div className='flex gap-0.5 border border-black p-0.5 rounded-sm'>
+                        <button className={clsx("capitalize rounded-sm px-2", loading && "bg-black")} onClick={() => setLoading(!loading)}>Loading</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div className='flex rounded-b-lg overflow-hidden'>
+                {["light", "dark"].map(i => (
+                    <div key={i} id={"button-explorer-" + i} className={clsx("w-1/2 p-10 flex items-center justify-center")}>
+                        <button className={buttonClass}>ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>
+                    </div>
+                ))}
+            </div>
+            
+           <Pre hasCopyCode={true}>
+                <code data-language="html" data-theme="default">
+{`<button class="${buttonClass}">
+  ō&nbsp;&nbsp;Continue with Hellō
+</button>`}
+                </code>
+           </Pre>
+
+            {/* {children} */}
+        </section>
+    )
+}
+
+export default ButtonExplorer
