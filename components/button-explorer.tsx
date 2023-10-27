@@ -57,7 +57,7 @@ const ButtonExplorer = () => {
     return (
         <section className='rounded-t-lg overflow-hidden mt-6'>
             <div className='bg-[#1D2429] flex'>
-                <div className='bg-gray-800 px-2 py-3 flex flex-wrap gap-4 justify-around items-center flex-1 relative'>
+                <div className='bg-gray-800 px-2 py-3 flex flex-wrap gap-2 justify-around items-center flex-1 relative'>
                     <span className='uppercase absolute -rotate-90 left-0 font-bold opacity-50' style={{fontSize: '9px'}}>Style</span>
                     
                     <div className='flex flex-col items-center'>
