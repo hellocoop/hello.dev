@@ -9,6 +9,7 @@ class MyDocument extends Document {
           <link href="https://cdn.hello.coop/css/hello-btn.css" rel="stylesheet" />
           <script src="https://cdn.hello.coop/js/hello-dev-wc-footer.js"/>
           <script src="https://cdn.hello.coop/js/join-slack-community.js"/>
+          <script defer data-domain="hello.dev" src="https://plausible.io/js/script.js"/>
         </Head>
         <body>
           <Main />
