@@ -1,3 +1,31 @@
+import React, { isValidElement, useState } from 'react'
+
+export const Copy = ({children}) => {
+    const [copied, setCopied] = useState(false)
+    const hasChildren = element =>
+        isValidElement(element) && Boolean(element.props.children)
+
+    const ReactChildrenText = children => {
+        if (hasChildren(children)) return ReactChildrenText(children.props.children)
+        return children
+    }
+
+    const copyToClipboard = () => {
+        setCopied(true)
+        const textToCopy = ReactChildrenText(children)
+        navigator.clipboard.writeText(textToCopy)
+        setTimeout(() => setCopied(false), 500)
+    }
+    return (
+        <>
+            {children} 
+            <button onClick={copyToClipboard} className="w-16 text-sm">
+                {copied ? 'Copied!' : 'Copy'}
+            </button>
+        </>
+    )
+}
+
 # OpenID Config
 
 Many platforms have a generic OpenID Connect (OIDC) plug-in / module / configuration. To use Hellō with these platforms you will need to copy and paste configuration information between Hellō and the platform. We suggest having browser windows open with both the Hellō console and the platform administrative console.
@@ -6,11 +34,11 @@ Many platforms have a generic OpenID Connect (OIDC) plug-in / module / configura
 
 | Parameter                | URL                                                        |
 |--------------------------|------------------------------------------------------------|
-| `openid-configuration`   | https://issuer.hello.coop/.well-known/openid-configuration |
-| `issuer`                 | https://issuer.hello.coop                                  |
-| `authorization_endpoint` | https://wallet.hello.coop/authorize                        |
-| `token_endpoint`         | https://wallet.hello.coop/oauth/token                      |
-| `userinfo_endpoint`      | https://wallet.hello.coop/oauth/userinfo                   |
+| `openid-configuration`   | <Copy>https://issuer.hello.coop/.well-known/openid-configuration</Copy> |
+| `issuer`                 | <Copy>https://issuer.hello.coop</Copy>                                  |
+| `authorization_endpoint` | <Copy>https://wallet.hello.coop/authorize</Copy>                        |
+| `token_endpoint`         | <Copy>https://wallet.hello.coop/oauth/token</Copy>                      |
+| `userinfo_endpoint`      | <Copy>https://wallet.hello.coop/oauth/userinfo</Copy>                   |
 
 2. The platform will need the client id from the Hellō console. 
 
