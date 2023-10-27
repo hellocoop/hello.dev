@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
@@ -16,6 +17,14 @@ const config: DocsThemeConfig = {
   },
   editLink: {
     text: "Edit this page on GitHub ↗"
+  },
+  useNextSeoProps() {
+    const { asPath } = useRouter()
+    if (asPath !== '/') {
+      return {
+        titleTemplate: '%s | hello.dev'
+      }
+    }
   }
 }
 
