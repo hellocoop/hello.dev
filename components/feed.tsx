@@ -82,10 +82,10 @@ const Feed = () => {
 
     return (
         <>
-            <ul className="m-0 mt-6 space-y-4">
+            <ul className="m-0 mt-6 space-y-12 md:space-y-4">
                 {posts.map(i => (
                     <li key={i.guid}>
-                        <Link href={i.link} target="_blank" className="flex items-center gap-6 group">
+                        <Link href={i.link} target="_blank" className="flex flex-col md:flex-row md:items-center gap-6 group">
                             <img src={i.cover_image} className="w-64 h-36 rounded-md object-cover flex-shrink-0" />
                             <div>
                                 <span className="text-sm opacity-80">{i.pubDate.split(" ").slice(0, -2).join(" ")}</span>
@@ -98,7 +98,7 @@ const Feed = () => {
                     </li>
                 ))}
             </ul>
-            <Link href="https://blog.hello.dev" target="_blank" className="flex items-center gap-6 group ml-64 pl-6 mt-10 text-xl hover:underline font-semibold">Read more at blog.hello.dev ↗</Link>
+            <Link href="https://blog.hello.dev" target="_blank" className="flex items-center gap-6 group md:ml-64 md:pl-6 mt-10 text-xl hover:underline font-semibold">Read more at blog.hello.dev ↗</Link>
         </>
     )
 }
