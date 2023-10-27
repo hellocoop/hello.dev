@@ -7,11 +7,12 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link href="https://cdn.hello.coop/css/hello-btn.css" rel="stylesheet" />
-          {/* <script src="https://cdn.hello.coop/js/hello-btn.js"></script> */}
+          <script src="https://cdn.hello.coop/js/hello-dev-wc-footer.js"/>
         </Head>
         <body>
           <Main />
           <NextScript />
+          <wc-footer/>
         </body>
       </Html>
     );
