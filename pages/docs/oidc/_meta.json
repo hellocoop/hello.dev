@@ -1,0 +1,6 @@
+{
+    "request": "Auth Request",
+    "response": "Auth Response",
+    "token": "ID Token",
+    "config": "Configuration"
+}

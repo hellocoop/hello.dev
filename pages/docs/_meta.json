@@ -1,11 +1,12 @@
 {
-    "overview": "",
-    "quickstarts": "",
-    "hello-buttons": "Hellō Buttons",
-    "getting-started": "",
-    "integrating-hello": "",
-    "openid-config": "OpenID Config",
-    "hello-scopes": "",
-    "ux-reference": "UX Reference",
-    "sdks": "SDK References"
+    "overview": "Overview",
+    "getting-started": "Getting Started",
+    "quickstarts": "Quickstarts",
+    "buttons": "Hellō Buttons",
+    "oidc": "OpenID Connect",
+    "scopes": "Hellō Scopes",
+    "sdks": "SDK References",
+    "apis": "API References",
+    "comparison": "Hellō vs ___",
+    "roadmap": "Roadmap"
 }
