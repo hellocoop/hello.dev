@@ -20,21 +20,21 @@ You can add Hellō Quickstart to a sample application, plug-in, or other softwar
 
 ### Launching Quickstart 
 
-You load https://quickstart.hello.coop/ with the following query parameters:
+You load https://quickstart.hello.coop/ with the following optional query parameters:
 
 |Name||Description|
-|---|---|---|
-|`response_uri`|Optional|URI that Quickstart will redirect to with the `client_id` query parameter|
-|`suffix`|Optional|String that will be appended to the suggested name (eg: John's + suffix) for an app to be created. Defaults to "Application"|
-|`integration`|Optional|Application that started Quickstart, shown in console, defaults to `quickstart`|
-|`name`|Optional|Name of the application (`suffix` param is ignored if `name` param is provided)|
-|`tos_uri`|Optional|URI to the Terms of Service|
-|`pp_uri`|Optional|URI to the Privacy Policy|
-|`image_uri`|Optional|URI to the app logo|
-|`dark_image_uri`|Optional|URI to the dark theme app logo, which is shown if dark theme is detected in the browser|
-|`redirect_uri`|Optional|One or more space separated OAuth `redirect_uri` values to be added to the Production Redirect URIs<br/>`http:\\localhost:*` and `http:\\127.0.0.1` Development Redirect URIs are enabled by default|
-|`wildcard_domain`|Optional|a boolean value indicating if wildcard domains are enabled in Development Redirect URIs|
-|`provider_hint`|Optional|a space separated list of recommended providers per [provider_hint](./ux-reference#provider-hint) that will be presented when logging in new users to Quickstart|
+|---|---|
+|`response_uri`| URI that Quickstart will redirect to with the `client_id` query parameter|
+|`suffix`| String that will be appended to the suggested name (eg: John's + suffix) for an app to be created. Defaults to "Application"|
+|`integration`| Application that started Quickstart, shown in console, defaults to `quickstart`|
+|`name`| Name of the application (`suffix` param is ignored if `name` param is provided)|
+|`tos_uri`| URI to the Terms of Service|
+|`pp_uri`| URI to the Privacy Policy|
+|`image_uri`| URI to the app logo|
+|`dark_image_uri`| URI to the dark theme app logo, which is shown if dark theme is detected in the browser|
+|`redirect_uri`| One or more space separated OAuth `redirect_uri` values to be added to the Production Redirect URIs<br/>`http:\\localhost:*` and `http:\\127.0.0.1` Development Redirect URIs are enabled by default|
+|`wildcard_domain`| a boolean value indicating if wildcard domains are enabled in Development Redirect URIs|
+|`provider_hint`| a space separated list of recommended providers per [provider_hint](./ux-reference#provider-hint) that will be presented when logging in new users to Quickstart|
 
 **An example URL with params to quickstart will look like this:**<br/>
 *(line feeds added & URL decoded for readability)*
@@ -59,10 +59,7 @@ This will open up a browser window, where you will need to login with Hellō, an
 - --provider_hint (-p) - space separated string of provider_hint 
 - --suffix (-x) - suffix to add to generated app name
 - --integration (-i) - integration name shown in console
-- --file (-f) - file to write out HELLO_CLIENT_ID
-- --secret (-s) - boolean to generate a HELLO_COOKIE_SECRET value
 - --wildcard (-w) - boolean to set the wildcard domain Development Redirect URI
-- --debug (-d) - output debug info
 
 ## `@hellocoop/quickstart` API
 `quickstart(config)`
