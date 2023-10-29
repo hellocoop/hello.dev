@@ -8,7 +8,7 @@ To your application, Hellō is an [OpenID Connect](https://openid.net/specs/open
 
 Currently, Hellō is ideal for developers building **new**, **greenfield applications** where there is no requirement to integrate with existing user registration and login. In the future, we will have features that provide simple integration points.
 
-Login providers include: Apple, Discord, Facebook, Google, GitHub, GitLab, Tumbler, Twitch, Line, Mastodon, MetaMask, Microsoft, WordPress.com, Yahoo!, WalletConnect. We also support OTP over email and phone, and QR codes for logging into a desktop with your phone. Mobile devices will prompt the user to register a Passkey for a streamlined experience on their return. 
+Login providers include: Apple, Discord, Facebook, Google, GitHub, GitLab, Tumbler, Twitch, Line, Mastodon, MetaMask, Microsoft, WordPress.com, Yahoo!, WalletConnect. We also support OTP over email, and QR codes for logging into a desktop with your phone. Mobile devices will prompt the user to register a Passkey for a streamlined experience on their return. 
 
 Hellō currently supports Arabic `ar`, English `en`, French `fr`, German `de`, Hindi `hi`, & Spanish `es`. We welcome [translations](https://github.com/hellocoop/wallet-i18n)!
 
@@ -27,7 +27,7 @@ Hellō currently supports Arabic `ar`, English `en`, French `fr`, German `de`, H
 
 5. The user is redirected to your app and is now logged in and your app shows the profile information received from Hellō.
 
-If the user wants to update their profile, they can click the Update button, which will take them back to Hellō where they can change the claims to be release to your app, such as a new profile picture or verified email.
+If the user wants to update their profile, they can click an Update button for the data they would like to change, which will take them back to Hellō where they can change the claim to be release to your app, such as a new profile picture or verified email.
 
 <button className="hello-btn hello-btn-white-and-static" style={{marginTop: "10px"}}>ō&nbsp;&nbsp;&nbsp;Update Email with Hellō</button>
 
@@ -36,7 +36,7 @@ You can check out the Hellō user experience with our demo at [GreenfieldDemo.co
 
 ## Data Flow
 
-1. Your app redirects the user's browser to Hellō with your request.
+1. Your app redirects the user's browser to Hellō (`https://wallet.hello.coop/authorize`) with your request.
 
 2. Hellō requests and receives authentication claims from the user's selected provider.
 
