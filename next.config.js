@@ -8,6 +8,7 @@ module.exports = withNextra({
   output: 'export',
   distDir: 'S3',
   swcMinify: true,
+  trailingSlash: true,
   images: {
     // https://stackoverflow.com/a/74752466/9747630
     unoptimized: true
