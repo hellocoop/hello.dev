@@ -25,3 +25,4 @@ S3
 pnpm-lock.yaml
 .next
 node_modules
+out
