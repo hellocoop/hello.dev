@@ -5,6 +5,13 @@ import { NextIcon, QuickstartIcon, CoreIcon, ErrorIcon } from 'components/icons'
 
 Introduction to SDK here
 
+<Cards>
+  <Card icon={<NextIcon/>} title="Next.js" href="/docs/sdks/nextjs" />
+  <Card icon={<CoreIcon/>} title="Core/Client" href="/docs/sdks/core-client" />
+  <Card icon={<QuickstartIcon/>} title="Quickstart" href="/docs/sdks/quickstart" />
+  <Card icon={<ErrorIcon/>} title="Errors" href="/docs/sdks/errors" />
+</Cards>
+
 @dickhardt  
 This is the page that loads when visiting /docs/sdks  
 Accessible through the sidebar clicking "SDK References"
@@ -18,10 +25,3 @@ test/
 test.mdx         //this page will load when loading /docs/test 
 _meta.json       //update sidebar title of /docs/test here
 ```
-
-<Cards>
-  <Card icon={<NextIcon/>} title="Next.js" href="/docs/sdks/nextjs" />
-  <Card icon={<CoreIcon/>} title="Core/Client" href="/docs/sdks/core-client" />
-  <Card icon={<QuickstartIcon/>} title="Quickstart" href="/docs/sdks/quickstart" />
-  <Card icon={<ErrorIcon/>} title="Errors" href="/docs/sdks/errors" />
-</Cards>
