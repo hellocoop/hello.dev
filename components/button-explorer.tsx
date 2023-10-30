@@ -56,8 +56,8 @@ const ButtonExplorer = () => {
 
     return (
         <section className='rounded-xl overflow-hidden mt-6'>
-            <div className='flex text-white'>
-                <div className='bg-[#1D2429] px-2 py-3 flex flex-wrap gap-2 justify-around items-center flex-1 relative'>
+            <div className='flex bg-[#1D2429] text-white'>
+                <div className='px-2 py-3 flex flex-wrap gap-2 justify-around items-center flex-1 relative'>
                     <span className='uppercase absolute -rotate-90 left-0 font-bold opacity-50' style={{fontSize: '9px'}}>Style</span>
                     
                     <div className='flex flex-col items-center'>
@@ -84,7 +84,7 @@ const ButtonExplorer = () => {
                         </div>
                     </div>
                 </div>
-                <div className='bg-[#1B2E3C] p-2 flex justify-around items-center relative'>
+                <div className='my-2 border-l border-white border-opacity-20 p-2 flex justify-around items-center relative'>
                     <span className='uppercase absolute -rotate-90 left-0 font-bold opacity-50' style={{fontSize: '9px'}}>State</span>
                     <div className='flex gap-0.5 border border-white border-opacity-30  p-0.5 rounded-md ml-5'>
                         <button className={clsx("capitalize rounded-md px-2", loading && "bg-blue-500")} onClick={() => setLoading(!loading)}>Loading</button>
