@@ -4,7 +4,7 @@ Following are errors returned by the Hellō server when making an authorization 
 
 ## Request
 
-If there is an issue with fulfilling the request [(Step 3)](/documentation/Integrating-hello.html#_3-make-request), the response [(Step 4)](/documentation/Integrating-hello.html#_4-receive-response) will have an `error` query parameter set to one of the following string:
+If there is an issue with fulfilling the request [(Step 3)](/docs/apis/errors), the response [(Step 4)](/docs/apis/errors/#introspection) will have an `error` query parameter set to one of the following string:
 
 |Error|Description|
 |---|---|
@@ -21,7 +21,7 @@ Example
 
 ## Introspection
 
-Following are the responses from the [Token Introspection API](/documentation/Integrating-hello.html#_5-1-introspection) `https://wallet.hello.coop/oauth/introspect`
+Following are the responses from the [Token Introspection API](/docs/apis/errors/#introspection) `https://wallet.hello.coop/oauth/introspect`
 
 If the token is invalid in anyway, the API will return `active` set to `false`
 

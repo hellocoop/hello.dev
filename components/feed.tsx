@@ -62,7 +62,7 @@ const Feed = () => {
             <pre><code class="lang-plaintext">https://wallet.hello.coop/authorize?{...}
             &amp;provider_hint=github+email--+apple--
             </code></pre>
-            <p>For details see the <code>provider_hint</code> <a target="_blank" href="https://www.hello.dev/documentation/provider-hint.html">documentation</a></p>
+            <p>For details see the <code>provider_hint</code> <a target="_blank">documentation</a></p>
             <p>New users would then be presented with the following options:</p>
             <p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1677266377895/f6994cb6-a7c9-430d-ab91-3fbb43cae2e8.png" alt class="image--center mx-auto" /></p>
             <p>You can check out how <code>provider_hint</code> works with the <a target="_blank" href="https://playground.hello.dev/">Hell Playground</a></p>
