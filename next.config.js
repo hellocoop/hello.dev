@@ -6,8 +6,10 @@ const withNextra = require('nextra')({
 
 module.exports = withNextra({
   output: 'export',
+  distDir: 'S3',
   swcMinify: true,
   images: {
+    // https://stackoverflow.com/a/74752466/9747630
     unoptimized: true
   }
   // redirects: () => {
