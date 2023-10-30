@@ -5,6 +5,7 @@ title: hello.dev
 import React, { useState, useEffect } from 'react'
 import { Cards, Card } from 'components/cards'
 import Feed from 'components/feed'
+import { QuickstartIcon, DocIcon, FAQIcon, PlaygroundIcon, ConsoleIcon, SlackIcon } from 'components/icons'
 
 <main className="max-w-5xl mx-auto">
 <section className="flex flex-col md:flex-row md:items-end md:justify-between mt-10">
@@ -44,13 +45,13 @@ import Feed from 'components/feed'
 <section className="my-20">
     <h2 className="text-3xl font-bold leading-tight">Start building your next app with Hellō ...</h2>
     <Cards>
-        <Card title="Quickstarts" description="Get something up and running quickly." href="/docs/quickstarts" />
-        <Card title="Documentation" description="An overview and step-by-step guide." href="/docs" />
-        <Card title="FAQs" description="Frequently asked developer questions." href="/faqs" />
-        <Card title="Playground" description="Explore what you can do with Hellō." href="https://playground.hello.dev/" />
-        <Card title="Console" description="Configure and manage your application(s)." href="https://console.hello.coop/" />
+        <Card icon={<QuickstartIcon/>} title="Quickstarts" description="Get something up and running quickly." href="/docs/quickstarts" />
+        <Card icon={<DocIcon/>} title="Documentation" description="An overview and step-by-step guide." href="/docs" />
+        <Card icon={<FAQIcon/>} title="FAQs" description="Frequently asked developer questions." href="/faqs" />
+        <Card icon={<PlaygroundIcon/>} title="Playground" description="Explore what you can do with Hellō." href="https://playground.hello.dev/" />
+        <Card icon={<ConsoleIcon/>} title="Console" description="Configure and manage your application(s)." href="https://console.hello.coop/" />
         <button onClick={() => joinSlackCommunity('hello.dev')}>
-            <Card title="Slack" description="Join the community to discuss Hellō." href="" />
+            <Card icon={<SlackIcon/>} title="Slack" description="Join the community to discuss Hellō." href="" />
         </button>
     </Cards>
 </section>
