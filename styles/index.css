@@ -6,7 +6,6 @@
 
 .nextra-nav-container {
     @apply h-12;
-    @apply bg-[#303030]
 }
 
 .nextra-nav-container nav {
