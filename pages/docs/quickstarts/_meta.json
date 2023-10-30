@@ -2,5 +2,11 @@
     "nextjs": "Next.js",
     "wordpress": "WordPress",
     "express": "Express",
-    "fastify": "Fastify"
+    "fastify": "Fastify",
+    "request": {
+        "title": "Request ↗",
+        "type": "page",
+        "href": "https://github.com/hellocoop/hello.dev/discussions/53",
+        "newWindow": true
+    }
 }
