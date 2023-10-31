@@ -4,21 +4,21 @@ import { Pre, Tabs } from 'nextra/components'
 
 const ButtonExplorer = () => {
     const COLORS = ['black', 'white']
-    const THEME = ['light', 'dark', 'invert', 'static']
+    const THEME = ['ignore-light', 'ignore-dark', 'aware-invert', 'aware-static']
     const HOVER = ['pop', 'glow', 'flare', 'none']
     const FRAMEWORKS = ['HTML', 'React', 'Svelte', 'Vue']
     const CLASS_MAPPING = {
         black: {
-            "light": "",
-            "dark": "hello-btn-black-on-dark",
-            "invert": "hello-btn-black-and-invert",
-            "static": "hello-btn-black-and-static"
+            "ignore-light": "",
+            "ignore-dark": "hello-btn-black-on-dark",
+            "aware-invert": "hello-btn-black-and-invert",
+            "aware-static": "hello-btn-black-and-static"
         },
         white: {
-            "light": "hello-btn-white-on-light",
-            "dark": "hello-btn-white-on-dark",
-            "invert": "hello-btn-white-and-invert",
-            "static": "hello-btn-white-and-static"
+            "ignore-light": "hello-btn-white-on-light",
+            "ignore-dark": "hello-btn-white-on-dark",
+            "aware-invert": "hello-btn-white-and-invert",
+            "aware-static": "hello-btn-white-and-static"
         },
     }
     const HOVER_MAPPING = {
@@ -73,7 +73,7 @@ const ButtonExplorer = () => {
                             <span className='text-xs'>Theme Aware</span>
                         </div>
                         <div className='flex gap-0.5 border border-white border-opacity-30  p-0.5 rounded-md mt-1'>
-                            {THEME.map(i => <button key={i} className={clsx("capitalize rounded-md px-3", theme === i && "bg-blue-500")} onClick={() => setTheme(i)}>{i}</button>)}
+                            {THEME.map(i => <button key={i} className={clsx("capitalize rounded-md px-3", theme === i && "bg-blue-500")} onClick={() => setTheme(i)}>{i.split("-")[1]}</button>)}
                         </div>
                     </div>
 
@@ -101,27 +101,60 @@ const ButtonExplorer = () => {
                 ))}
             </div>
 
-            <Pre hasCopyCode={true} style={{margin: 0}}>
+            <Tabs items={FRAMEWORKS}>
+                <Tabs.Tab>
+                <Pre hasCopyCode={true} style={{margin: 0}}>
                 <code data-language="html" data-theme="default">
 {`<button class="${buttonClass}">
   ō&nbsp;&nbsp;Continue with Hellō
 </button>`}
                 </code>
-           </Pre>
+                </Pre>
+                </Tabs.Tab>
 
-            {/* <Tabs items={FRAMEWORKS}>
-                {FRAMEWORKS.map(i => (
-                    <Tabs.Tab key={i}>
-           <Pre hasCopyCode={true}>
-                <code data-language="html" data-theme="default">
-{`<button ${i === 'React' ? 'className' : 'class'}="${buttonClass}">
-  ō&nbsp;&nbsp;Continue with Hellō
-</button>`}
+                <Tabs.Tab>
+                <Pre hasCopyCode={true} style={{margin: 0}}>
+                <code data-language="jsx" data-theme="default">
+{`import { ContinueButton } from '@hellocoop/react'
+  
+export default function() {
+  return (
+    <ContinueButton${color != "black" ? ' color="' + color + '"' : ""}${theme != "ignore-light" ? ' theme="' + theme + '"' : ""}${hover != "pop" ? ' hover="' + hover + '"' : ""}${loading == true ? " showLoader" : ""} />
+  )
+}
+`}
                 </code>
-           </Pre>
-                    </Tabs.Tab>
-                ))}
-            </Tabs> */}
+                </Pre>
+                </Tabs.Tab>
+
+                <Tabs.Tab>
+                <Pre hasCopyCode={true} style={{margin: 0}}>
+                <code data-language="html" data-theme="default">
+{`<script>
+  import { ContinueButton } from '@hellocoop/svelte'
+</script>
+  
+<ContinueButton${color != "black" ? ' color="' + color + '"' : ""}${theme != "ignore-light" ? ' theme="' + theme + '"' : ""}${hover != "pop" ? ' hover="' + hover + '"' : ""}${loading == true ? " showLoader" : ""} />
+`}
+                </code>
+                </Pre>
+                </Tabs.Tab>
+
+                <Tabs.Tab>
+                <Pre hasCopyCode={true} style={{margin: 0}}>
+                <code data-language="html" data-theme="default">
+{`<script>
+  import { ContinueButton } from '@hellocoop/vue'
+</script>
+  
+<template>
+  <ContinueButton${color != "black" ? ' color="' + color + '"' : ""}${theme != "ignore-light" ? ' theme="' + theme + '"' : ""}${hover != "pop" ? ' hover="' + hover + '"' : ""}${loading == true ? " showLoader" : ""} />
+</template>
+`}
+                </code>
+                </Pre>
+                </Tabs.Tab>
+            </Tabs>
         </section>
     )
 }
