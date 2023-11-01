@@ -1,1 +1,50 @@
 # Wallet
+
+## Authorization Request 
+
+See [OpenID Connect | Auth Request](../oidc/request/) for the supported standard parameters.
+
+The Hellō Wallet supports the following extended paramters:
+
+### `provider_hint`
+
+When Hellō does not know the user's preferred provider (new user or new browser), they are presented with a recommended list of providers to choose from, with the option to show all the other supported providers. This minimizes the risk that a new user is overwhelmed by all the available options, while still providing choice.
+
+You can change which providers are recommended to better align with your users' preferences by passing a `provider_hint` query parameter in your authorization request.  You add providers by providing one or more space (or `+` in URL) separated slugs: 
+
+```http {3}
+https://wallet.hello.coop/authorize
+?{...}
+&provider_hint=discord+github
+```
+
+You can demote a default provider by suffixing the slug with `--`.
+
+```http /google--/
+https://wallet.hello.coop/authorize
+?{...}
+&provider_hint=google--
+```
+
+**Provider Defaults** 
+
+| Platform     | Default provider_hint values  |
+| -----------  | ----------------------------- |
+| Default      | `google email passkey¹`       |
+| macOS/iOS    | `apple google email passkey¹` |
+| Windows      | `microsoft google email`      |
+
+¹ Mobile devices where passkey is supported
+
+**Possible slug values**
+
+`apple google discord facebook github gitlab`<br/>
+` twitch twitter tumblr mastodon microsoft line qrcode wordpress yahoo `<br/>
+`email ethereum passkey`
+
+You can see how the `provider_hint` functionality works in the <a href="https://playground.hello.dev" target="_blank">Hellō Playground</a>
+
+## Authorization Response
+
+### `wildcard_domain`
+
