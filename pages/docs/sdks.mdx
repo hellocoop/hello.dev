@@ -1,6 +1,16 @@
+import { Cards, Card } from 'nextra/components'
+import { NextIcon, QuickstartIcon, CoreIcon, ErrorIcon } from 'components/icons'
+
 # SDKs
 
 Introduction to SDK here
+
+<Cards>
+  <Card icon={<NextIcon/>} title="Next.js" href="/docs/sdks/nextjs" />
+  <Card icon={<CoreIcon/>} title="Core/Client" href="/docs/sdks/core-client" />
+  <Card icon={<QuickstartIcon/>} title="Quickstart" href="/docs/sdks/quickstart" />
+  <Card icon={<ErrorIcon/>} title="Errors" href="/docs/sdks/errors" />
+</Cards>
 
 @dickhardt  
 This is the page that loads when visiting /docs/sdks  

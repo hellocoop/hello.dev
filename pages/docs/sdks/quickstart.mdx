@@ -22,7 +22,7 @@ You can add Hellō Quickstart to a sample application, plug-in, or other softwar
 
 You load https://quickstart.hello.coop/ with the following optional query parameters:
 
-|Name||Description|
+|Name|Description|
 |---|---|
 |`response_uri`| URI that Quickstart will redirect to with the `client_id` query parameter|
 |`suffix`| String that will be appended to the suggested name (eg: John's + suffix) for an app to be created. Defaults to "Application"|
@@ -34,7 +34,7 @@ You load https://quickstart.hello.coop/ with the following optional query parame
 |`dark_image_uri`| URI to the dark theme app logo, which is shown if dark theme is detected in the browser|
 |`redirect_uri`| One or more space separated OAuth `redirect_uri` values to be added to the Production Redirect URIs<br/>`http:\\localhost:*` and `http:\\127.0.0.1` Development Redirect URIs are enabled by default|
 |`wildcard_domain`| a boolean value indicating if wildcard domains are enabled in Development Redirect URIs|
-|`provider_hint`| a space separated list of recommended providers per [provider_hint](./ux-reference#provider-hint) that will be presented when logging in new users to Quickstart|
+|`provider_hint`| a space separated list of recommended providers per [provider_hint](/docs/apis/wallet) that will be presented when logging in new users to Quickstart|
 
 **An example URL with params to quickstart will look like this:**<br/>
 *(line feeds added & URL decoded for readability)*

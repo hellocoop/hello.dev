@@ -2,6 +2,7 @@
     "recurse": true,
     "skip": [
         "www.linkedin.com",
-        "/js/script.hash.js"
+        "/js/script.hash.js",
+        "github.com/hellocoop/hello.dev/*"
     ]
   }

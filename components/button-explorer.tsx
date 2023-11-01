@@ -4,21 +4,21 @@ import { Pre, Tabs } from 'nextra/components'
 
 const ButtonExplorer = () => {
     const COLORS = ['black', 'white']
-    const THEME = ['light', 'dark', 'invert', 'static']
+    const THEME = ['ignore-light', 'ignore-dark', 'aware-invert', 'aware-static']
     const HOVER = ['pop', 'glow', 'flare', 'none']
     const FRAMEWORKS = ['HTML', 'React', 'Svelte', 'Vue']
     const CLASS_MAPPING = {
         black: {
-            "light": "",
-            "dark": "hello-btn-black-on-dark",
-            "invert": "hello-btn-black-and-invert",
-            "static": "hello-btn-black-and-static"
+            "ignore-light": "",
+            "ignore-dark": "hello-btn-black-on-dark",
+            "aware-invert": "hello-btn-black-and-invert",
+            "aware-static": "hello-btn-black-and-static"
         },
         white: {
-            "light": "hello-btn-white-on-light",
-            "dark": "hello-btn-white-on-dark",
-            "invert": "hello-btn-white-and-invert",
-            "static": "hello-btn-white-and-static"
+            "ignore-light": "hello-btn-white-on-light",
+            "ignore-dark": "hello-btn-white-on-dark",
+            "aware-invert": "hello-btn-white-and-invert",
+            "aware-static": "hello-btn-white-and-static"
         },
     }
     const HOVER_MAPPING = {
@@ -55,15 +55,15 @@ const ButtonExplorer = () => {
     }, [color, theme, hover])
 
     return (
-        <section className='rounded-t-lg overflow-hidden mt-6'>
-            <div className='bg-[#1D2429] flex'>
-                <div className='bg-gray-800 px-2 py-3 flex flex-wrap gap-2 justify-around items-center flex-1 relative'>
+        <section className='rounded-xl overflow-hidden mt-6'>
+            <div className='flex bg-[#1D2429] text-white'>
+                <div className='px-2 py-3 flex flex-wrap gap-2 justify-around items-center flex-1 relative'>
                     <span className='uppercase absolute -rotate-90 left-0 font-bold opacity-50' style={{fontSize: '9px'}}>Style</span>
                     
                     <div className='flex flex-col items-center'>
                         <span className='text-xs'>Color</span>
-                        <div className='flex gap-0.5 border border-black p-0.5 rounded-md ml-3 mt-1'>
-                            {COLORS.map(i => <button key={i} className={clsx("capitalize rounded-md px-3", color === i && "bg-black")} onClick={() => setColor(i)}>{i}</button>)}
+                        <div className='flex gap-0.5 border border-white border-opacity-30  p-0.5 rounded-md ml-3 mt-1'>
+                            {COLORS.map(i => <button key={i} className={clsx("capitalize rounded-md px-3", color === i && "bg-blue-500")} onClick={() => setColor(i)}>{i}</button>)}
                         </div>
                     </div>
 
@@ -72,48 +72,88 @@ const ButtonExplorer = () => {
                             <span className='text-xs'>Theme Ignore</span>
                             <span className='text-xs'>Theme Aware</span>
                         </div>
-                        <div className='flex gap-0.5 border border-black p-0.5 rounded-md mt-1'>
-                            {THEME.map(i => <button key={i} className={clsx("capitalize rounded-md px-3", theme === i && "bg-black")} onClick={() => setTheme(i)}>{i}</button>)}
+                        <div className='flex gap-0.5 border border-white border-opacity-30  p-0.5 rounded-md mt-1'>
+                            {THEME.map(i => <button key={i} className={clsx("capitalize rounded-md px-3", theme === i && "bg-blue-500")} onClick={() => setTheme(i)}>{i.split("-")[1]}</button>)}
                         </div>
                     </div>
 
                     <div className='flex flex-col items-center'>
                         <span className='text-xs'>Hover</span>
-                        <div className='flex gap-0.5 border border-black p-0.5 rounded-md mt-1'>
-                            {HOVER.map(i => <button key={i} className={clsx("capitalize rounded-md px-3", hover === i && "bg-black")} onClick={() => setHover(i)}>{i}</button>)}
+                        <div className='flex gap-0.5 border border-white border-opacity-30 p-0.5 rounded-md mt-1'>
+                            {HOVER.map(i => <button key={i} className={clsx("capitalize rounded-md px-3", hover === i && "bg-blue-500")} onClick={() => setHover(i)}>{i}</button>)}
                         </div>
                     </div>
                 </div>
-                <div className='bg-gray-700 p-2 flex justify-around items-center relative'>
+                <div className='my-2 border-l border-white border-opacity-20 p-2 flex justify-around items-center relative'>
                     <span className='uppercase absolute -rotate-90 left-0 font-bold opacity-50' style={{fontSize: '9px'}}>State</span>
-                    <div className='flex gap-0.5 border border-black p-0.5 rounded-md ml-5'>
-                        <button className={clsx("capitalize rounded-md px-2", loading && "bg-black")} onClick={() => setLoading(!loading)}>Loading</button>
+                    <div className='flex gap-0.5 border border-white border-opacity-30  p-0.5 rounded-md ml-5'>
+                        <button className={clsx("capitalize rounded-md px-2", loading && "bg-blue-500")} onClick={() => setLoading(!loading)}>Loading</button>
                     </div>
                 </div>
             </div>
             
-            <div className='flex flex-col md:flex-row rounded-b-lg overflow-hidden'>
+            <div className='flex flex-col md:flex-row rounded-b-xl overflow-hidden'>
                 {["light", "dark"].map(i => (
-                    <div key={i} id={"button-explorer-" + i} className="md:w-1/2 py-10 flex items-center justify-center relative">
-                        <span className={clsx('uppercase absolute -rotate-90 -left-3.5 font-bold opacity-50', i === "light" && "text-black")} style={{fontSize: '9px'}}>{i} Mode</span>
+                    <div key={i} id={"button-explorer-" + i} className={clsx("md:w-1/2 py-10 flex items-center justify-center relative", i === "light" && "border border-black border-opacity-10")} style={{borderBottomLeftRadius: i === "light" ? "0.75rem" : 0}}>
+                        <span className={clsx('uppercase absolute -rotate-90 -left-3.5 font-bold opacity-50', i === "light" ? "text-black" : "text-white")} style={{fontSize: '9px'}}>{i} Mode</span>
                         <button className={buttonClass}>ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>
                     </div>
                 ))}
             </div>
 
             <Tabs items={FRAMEWORKS}>
-                {FRAMEWORKS.map(i => (
-                    <Tabs.Tab key={i}>
-                        {/* TBD Colorize */}
-           <Pre hasCopyCode={true}>
+                <Tabs.Tab>
+                <Pre hasCopyCode={true} style={{margin: 0}}>
                 <code data-language="html" data-theme="default">
-{`<button ${i === 'React' ? 'className' : 'class'}="${buttonClass}">
+{`<button class="${buttonClass}">
   ō&nbsp;&nbsp;Continue with Hellō
 </button>`}
                 </code>
-           </Pre>
-                    </Tabs.Tab>
-                ))}
+                </Pre>
+                </Tabs.Tab>
+
+                <Tabs.Tab>
+                <Pre hasCopyCode={true} style={{margin: 0}}>
+                <code data-language="jsx" data-theme="default">
+{`import { ContinueButton } from '@hellocoop/react'
+  
+export default function() {
+  return (
+    <ContinueButton${color != "black" ? ' color="' + color + '"' : ""}${theme != "ignore-light" ? ' theme="' + theme + '"' : ""}${hover != "pop" ? ' hover="' + hover + '"' : ""}${loading == true ? " showLoader" : ""} />
+  )
+}
+`}
+                </code>
+                </Pre>
+                </Tabs.Tab>
+
+                <Tabs.Tab>
+                <Pre hasCopyCode={true} style={{margin: 0}}>
+                <code data-language="html" data-theme="default">
+{`<script>
+  import { ContinueButton } from '@hellocoop/svelte'
+</script>
+  
+<ContinueButton${color != "black" ? ' color="' + color + '"' : ""}${theme != "ignore-light" ? ' theme="' + theme + '"' : ""}${hover != "pop" ? ' hover="' + hover + '"' : ""}${loading == true ? " showLoader" : ""} />
+`}
+                </code>
+                </Pre>
+                </Tabs.Tab>
+
+                <Tabs.Tab>
+                <Pre hasCopyCode={true} style={{margin: 0}}>
+                <code data-language="html" data-theme="default">
+{`<script>
+  import { ContinueButton } from '@hellocoop/vue'
+</script>
+  
+<template>
+  <ContinueButton${color != "black" ? ' color="' + color + '"' : ""}${theme != "ignore-light" ? ' theme="' + theme + '"' : ""}${hover != "pop" ? ' hover="' + hover + '"' : ""}${loading == true ? " showLoader" : ""} />
+</template>
+`}
+                </code>
+                </Pre>
+                </Tabs.Tab>
             </Tabs>
         </section>
     )
