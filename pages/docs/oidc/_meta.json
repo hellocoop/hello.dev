@@ -1,7 +1,7 @@
 {
     "request": "Auth Request",
     "response": "Auth Response",
-    "token_endpont": "Token Endpoint",
+    "token-endpont": "Token Endpoint",
     "introspection": "Introspection",
     "token": "ID Token",
     "config": "Configuration"
