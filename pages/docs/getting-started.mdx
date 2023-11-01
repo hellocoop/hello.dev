@@ -1,71 +1,95 @@
-import ButtonExplorer from 'components/button-explorer'
 import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
 
 # Getting Started
 
-To use Hellō in your app, you will need to register your app, and add a Hellō button. 
+<Callout type="info" emoji="">
+    Check out our [Quickstarts](./quickstarts) to get up and running quickly on supported platforms!
+</Callout>
 
-If you are writing your own application, integrating Hellō is straightforward and does not require any frameworks or third party libraries.
+To use Hellō in your web app you will need to:
 
-If you are configuring a platform to use Hellō, you will need to copy and paste values between the Hellō console and the platform's administrative console.
+1. Register your app at Hellō
+2. Add a Hellō button 
+3. Configure your server for Hellō
 
-In the future we will have plug-ins for popular platforms that will simplify using Hellō. If you are interested in writing a plug-in, please reach out [contact@hello.coop](mailto:contact@hello.coop?subject=Hellō+Plug-in+Inquiry).
 
 <Steps>
 
 ### App Registration
 
-To use Hellō, register your application at [console.hello.coop](https://console.hello.coop/). You can start developing locally with just the **Client ID** and the defaults, which includes the **Development Redirect URIs** `http://localhost:*` and `http://127.0.0.1:*`. When you are ready to preview what is presented to users, provide the **Name**, **Logo**, and URLs for **Terms of Service** & **Privacy Policy**.  When you are ready for public access, provide your **Production Redirect URI(s)**.
+To use Hellō, register your application at [console.hello.coop](https://console.hello.coop/). You can start developing locally with just the **Client ID** and the defaults, which includes the **Development Redirect URIs** `http://localhost:*` and `http://127.0.0.1:*`. Depending on your server environment, you may need to generate a **Client Secret**.
 
-### Standard Hellō Buttons
+When you are ready to preview what is presented to users, provide the **Name**, **Logo**, and URLs for **Terms of Service** & **Privacy Policy**.  When you are ready for public access, provide your **Production Redirect URI(s)**.
+
+### Add a Hellō Button
+
+<Callout type="info" emoji="">
+    If you are using React based framework, use our [`@hellocoop/react`](./sdks/react) component library.
+</Callout>
 
 To add a Hellō Button to your page:
 
-<b>2.1</b> Include a link to the Hellō stylesheet for button styling and Hellō JavaScript file for displaying the Hellō about text in the `<head>` of your document.  
+<b>2.1</b> Add a link to the Hellō stylesheet for button styling and Hellō JavaScript file for displaying the Hellō about text in the `<head>` of your document.  
 
-```html {3-4}
+```html {3}
 <head>
   <!-- ... -->
   <link href="https://cdn.hello.coop/css/hello-btn.css" rel="stylesheet"/>
-  <script src="https://cdn.hello.coop/js/hello-btn.js"></script>
+  <!-- ... -->
 </head>
 ```
 
-<b>2.2</b> Include the HTML for the Hellō Button in your page:
+<b>2.2</b> Add the HTML for the Hellō Button in your page:
 
-<ButtonExplorer/>
-
-Don't see your locale? We encourage you to create a translation for your locale per<br/>[hellocoop/wallet-i18n](https://github.com/hellocoop/wallet-i18n) and submit a pull request for review.
-
-### Custom Button Label
-
-You can override the default "Continue with Hellō" button text by setting the `data-label` attribute of the button like this:
-```html
-  <button
-    class="hello-btn hello-btn-white-and-static"
-    data-label="ō&nbsp;&nbsp;&nbsp;Update Email with Hellō"
-  ></button>
+```html {3-7}
+<body>
+  <!-- ... -->  
+  <div class="hello-container">
+    <button class="hello-btn" onClick="login">
+      ō&nbsp;&nbsp;&nbsp;Continue with Hellō
+    </button>
+  </div>
+  <!-- ... -->  
+</body>
 ```
 
-<button className="hello-btn hello-btn-white-and-static">ō&nbsp;&nbsp;&nbsp;Update Email with Hellō</button>
+<b>2.3</b> Add the `login()` function in your page:
 
+```html {9-15}
+<body>
+  <!-- ... -->  
+  <div class="hello-container">
+    <button class="hello-btn" onClick="login">
+      ō&nbsp;&nbsp;&nbsp;Continue with Hellō
+    </button>
+  </div>
 
-### Self-Managed Hellō Buttons
+<script>
+  function login(event){
+    event.target.classList.add('hello-btn-loader')  // Show spinner
+    event.target.disabled = true                    // Disable button
+    window.location.href = LOGIN_PATH               // login endpoint
+  }
+</script>
 
-If you are concerned with including a script from Hellō, you can find the source code at [hellocoop/button](https://github.com/hellocoop/button). You can use this as a reference to create your own buttons.
+<!-- ... -->  
+</body>
+```
+The `LOGIN_PATH` will be determined by your server software.
 
-If you don't want to use the Hellō stylesheet, the Hellō button is either charcoal (#303030) on white, or white on charcoal. Note that the Hellō logo `ō` is an `o` with a [macron](https://en.wikipedia.org/wiki/Macron_(diacritic)). You can use the `ō` character if you have `<meta charset="UTF-8">` in your page `<head>` element (best practice for HTML documents). For reference, the UTF-8 encoding is`0xC5 0x8D` and the HTML markup is `&omacr;`.
+See [Hellō Buttons](./buttons) for styling and other button options.
 
-### Select Claims
+### Configure Your Server for Hellō
 
-You request claims from Hellō by including a scope for that claim in your request. Any claims you request from Hellō are required claims, IE the user will need to provide a value. Hellō only supports verified email and phone claims. Unverified email and phone are not supported. [Hellō Claims](/docs/scopes) provides a full list of supported scopes and associated claims. 
+Your server will need to support the OpenID Connect protocol to work with Hellō. Most platforms have a module that provides OpenID Connect support. Hellō supports all the various ways that an application may use OpenID Connect. 
 
-Hellō will always return the `sub` claim, a globally unique identifier in the form of a GUID, that you can use to identify the user across any apps under your publisher. The `sub` claim is unique to your publisher for a given user. Other publishers will receive a different `sub` claim for the user.
+Follow the directions for your platform on enabling and installing OpenID Connect.
 
-Note that it is best practice to only request the claims you require. For example, you may only need a preferred name to address the user initially, and a verified email address when they would like a notification. Hellō makes it easy to do incremental consent and request additional claims once you need them.
+Some software supports the `openid-configuration` file which is located at `https://issuer.hello.coop/.well-known/openid-configuration` for Hellō.
 
-### Add Hellō to your application
+See [OpenID Connect | Configuration](./oidc/config) for detailed information on how to configure your server.
 
-If you are writing your own application, see [Integrating Hellō](/docs/integrating-hello). If you are configuring Hellō in a platform, see [Hellō & Platforms](#).
+See [Hellō Scopes](./scopes) for information on the claims you may request from Hellō.
 
 </Steps>

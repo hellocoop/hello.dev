@@ -1,5 +1,14 @@
 # Hellō Scopes
 
+## Overview
+
+You request claims from Hellō by including a scope for that claim in your request. Any claims you request from Hellō are required claims, IE the user will need to provide a value. Hellō only supports verified email and phone claims. Unverified email and phone are not supported. See below fora full list of supported scopes and associated claims. 
+
+Hellō will always return the `sub` claim, a globally unique identifier in the form of a GUID, that you can use to identify the user across any apps under your publisher. The `sub` claim is unique to your publisher for a given user. Other publishers will receive a different `sub` claim for the user.
+
+Note that it is best practice to only request the claims you require. For example, you may only need a preferred name to address the user initially, and a verified email address when they would like a notification. Hellō makes it easy to do incremental consent and request additional claims once you need them.
+
+
 You include scopes in the request for the information (claims) you would like Hellō to return about the user. Unlike other providers, Hellō will always provide a value for any requested scope. Hellō will always gather user consent before releasing information to you. 
 
 When requesting multiple scopes, separate them with a space. The space will often be converted to a `+` when URL Encoding the parameters.
@@ -11,7 +20,7 @@ Following are the scopes currently supported by Hellō. At the top are the stand
 
 |Scope|Description|
 |---|---|
-|`openid`|This scope is a no-op, and is always returned.<br/>If you don't want any other claims, provide just this one.|
+|`openid`|This scope is required, and the `sub` claims is always returned.<br/>If you don't want any other claims, provide just this one.|
 |`name`|Full / legal name.|
 |`nickname`|Preferred name.|
 |`given_name`|AKA First name.|
