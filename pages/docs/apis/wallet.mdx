@@ -1,3 +1,6 @@
+import { Callout } from 'nextra/components'
+
+
 # Wallet
 
 ## Authorization Request 
@@ -7,6 +10,8 @@ See [OpenID Connect | Auth Request](../oidc/request/) for the supported standard
 The Hellō Wallet supports the following extended paramters:
 
 ### `provider_hint`
+
+
 
 When Hellō does not know the user's preferred provider (new user or new browser), they are presented with a recommended list of providers to choose from, with the option to show all the other supported providers. This minimizes the risk that a new user is overwhelmed by all the available options, while still providing choice.
 
@@ -42,8 +47,11 @@ https://wallet.hello.coop/authorize
 ` twitch twitter tumblr mastodon microsoft line qrcode wordpress yahoo `<br/>
 `email ethereum passkey`
 
-You can see how the `provider_hint` functionality works in the <a href="https://playground.hello.dev" target="_blank">Hellō Playground</a>
 
+<Callout type="info" emoji="🦆">
+Explore how the `provider_hint` functionality works with the [Hellō Playgound](https://playground.hello.dev)<br/>
+*Logout of the [Hellō Wallet](https://wallet.hello.coop) and click `forget me` to see the new user experience*
+</Callout>
 ## Authorization Response
 
 ### `wildcard_domain`
