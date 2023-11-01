@@ -2,6 +2,7 @@
     "nextjs": "Next.js",
     "react": "React",
     "core-client": "Core/Client",
-    "quickstart": "",
-    "errors": ""
+    "quickstart": "Quickstart",
+    "config": "hello.config",
+    "faqs": "FAQs"
 }

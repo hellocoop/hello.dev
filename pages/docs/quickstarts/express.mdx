@@ -1,2 +1,41 @@
 # Express
 
+```
+npm i @hellocoop/express
+```
+
+```sh
+npx @hellocoop/quickstart --express 
+```
+
+
+```
+const auth = require('@hellocoop/express')
+const helloConfig = require('./hello.config.js')
+
+// auth router attaches /api/hellocoop routes
+app.use(auth(helloConfig))
+
+app.get('/', req, res ) => {
+    res.send(JSON.stringify(req.auth))
+}
+
+
+### Login 
+
+http://localhost:3000/api/hellocoop?login=true
+
+
+### Logout 
+
+http://localhost:3000/api/hellocoop?logout=true
+
+### SDK API
+
+`auth`
+
+`req.auth`
+
+`req.auth.logout()`
+
+`hello.config.js`

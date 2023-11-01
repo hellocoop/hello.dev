@@ -1,1 +1,42 @@
 # Fastify
+
+
+```
+npm i @hellocoop/fastify
+```
+
+```sh
+npx @hellocoop/quickstart --fastify 
+```
+
+
+```
+const auth = require('@hellocoop/fastify')
+const helloConfig = require('./hello.config.js')
+
+// plugin attaches /api/hellocoop routes
+app.register(auth(helloConfig))
+
+app.get('/', req, res ) => {
+    res.send(JSON.stringify(req.auth))
+}
+
+
+### Login 
+
+http://localhost:3000/api/hellocoop?login=true
+
+
+### Logout 
+
+http://localhost:3000/api/hellocoop?logout=true
+
+### SDK API
+
+`auth`
+
+`req.auth`
+
+`req.auth.logout()`
+
+`hello.config.js`
