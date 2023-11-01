@@ -1,6 +1,5 @@
 {
     "wallet": "Wallet",
     "quickstart": "Quickstart",
-    "admin": "Admin",
-    "errors": "Errors"
+    "admin": "Admin"
 }

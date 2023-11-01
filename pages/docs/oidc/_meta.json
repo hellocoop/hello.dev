@@ -4,5 +4,6 @@
     "token-endpont": "Token Endpoint",
     "introspection": "Introspection",
     "token": "ID Token",
-    "config": "Configuration"
+    "config": "Configuration",
+    "errors": "Error Responses"
 }
