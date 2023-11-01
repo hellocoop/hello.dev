@@ -1,4 +1,7 @@
+import Script from 'next/script'
 import ButtonExplorer from 'components/button-explorer.tsx'
+
+<Script src="https://cdn.hello.coop/js/hello-btn.js" onLoad={() => dispatchEvent(new Event('load'))} />
 
 # Hellō Buttons
 
@@ -71,9 +74,9 @@ To display a tooltip alongside the button and educate your users about Hellō, a
   <button class="hello-about"></button>
 </div>
 ```
-<div class="hello-container">
-  <button className="hello-btn">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>
-  <button className="hello-about">Rohan - would  you make this act like the tooltip?</button>
+<div className="hello-container">
+  <button className="hello-btn"></button>
+  <button className="hello-about"></button>
 </div>
 
 The script automatically adds the "ō Continue with Hellō" text to the button. If you wish to override this behavior, such as changing the button label to "ō Update Email with Hellō," you can do so with the `data-label` attribute.
@@ -96,9 +99,9 @@ By default, the Hellō script localizes the button text according to the browser
 </div>
 ```
 
-<div class="hello-container">
-  <button className="hello-btn" lang="es">ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>
-  <button className="hello-about">Rohan - would you make this act like the tooltip?</button>
+<div className="hello-container" lang="es">
+  <button className="hello-btn"></button>
+  <button className="hello-about"></button>
 </div>
 
 To view the list of supported locales, please visit [hellocoop/wallet-i18n](https://github.com/hellocoop/wallet-i18n).  

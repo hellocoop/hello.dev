@@ -11,3 +11,11 @@
 .nextra-nav-container nav {
     @apply h-full;
 }
+
+.hello-about {
+    color: white;
+}
+
+.dark.hello-about {
+    color: #303030;
+}
