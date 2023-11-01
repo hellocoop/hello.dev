@@ -302,6 +302,30 @@ See [pageAuth Config](#pageauth-config)
 
 ## Configuration
 
+
+###  `hello.config.ts`
+
+loaded by `pageAuth()`
+
+```typescript filename="hello.config.ts"
+import { Config } from '@hellocoop/nextjs'
+import loggedInCallback from '@/src/your-logged-in-logic' 
+
+const config: Config = {
+    client_id: '00001111_2222_3333_4444_555566667777',
+    scope: ['email','name','picture'], // default scopes
+    provider_hint: ['github'],         // add Github as provider 
+    callbacks: {
+        loggedInCallback        // called when logged in
+    },
+    pages: {
+        loggedIn: '/',          // default route after logged in
+        loggedOut:'/',          // default route when logged out
+        error:  '/auth/error',  // OAuth error parameters are passed in query string
+    
+}
+export default config
+```
 ### Environment Variables
 
 **Variables that MUST be set:**
@@ -324,22 +348,3 @@ node -e console.log(crypto.randomBytes(32).toString('hex'))
 
 - `HELLO_DOMAIN` - overrides 'hello.coop' - used for testing by Hellō team
 - `HELLO_WALLET` - overrides default 'https://wallet.hello.coop' - used if mocking Hellō server
-
-### `pageAuth()` Config
-
-```typescript filename="/api/hellocoop.ts"
-import loggedInCallback from '@/src/your-logged-in-logic' 
-
-import pageAuth from '@hellocoop/nextjs'
-export default pageAuth({
-    scope: ['email','name','picture'], // default scopes
-    callbacks: {
-        loggedInCallback        // called when logged in
-    },
-    pages: {
-        loggedIn: '/',          // default route after logged in
-        loggedOut:'/',          // default route when logged out
-        error:  '/auth/error',  // OAuth error parameters are passed in query string
-    }
-})
-```
