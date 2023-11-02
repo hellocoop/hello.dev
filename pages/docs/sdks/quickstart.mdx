@@ -8,7 +8,7 @@ The [Hellō Login](https://wordpress.org/plugins/hello-login/) WordPress plug-in
 There are three mechanisms to invoke Quickstart:
 
 1. Load `https://quickstart.hello.coop` with query parameters. This can be used by any configuration script.
-2. Run the Quickstart CLI with `npx @hellocoop/quickstart` passing command line parameters. This requires the developer to have Node.js installed. The CLI can generate a `HELLO_COOKIE_SECRET` and write it and `HELLO_CLIENT_ID` to a `.env` file. 
+2. Run the Quickstart CLI with `npx @hellocoop/quickstart@latest` passing command line parameters. This requires the developer to have Node.js installed. The CLI can generate a `HELLO_COOKIE_SECRET` and write it and `HELLO_CLIENT_ID` to a `.env` file. 
 3. Import the `@hellocoop/quickstart` npm package into a Node.js script and use the module.
 
 (2) and (3) both start a local web server on an unused port and launch the default web browser to load the Quickstart Web App.
@@ -49,7 +49,7 @@ Try out the [Quickstart App ](https://quickstart.hello.coop/)
 
 You can run the following command to create or retrieve the `client_id` for a Hellō Application. 
 ```sh
-npx @hellocoop/quickstart@latest
+npx @hellocoop/quickstart@latest@latest
 ```
 
 This will open up a browser window, where you will need to login with Hellō, and then choose to create a new app, or return the `client_id`.
