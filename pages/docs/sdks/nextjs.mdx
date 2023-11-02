@@ -61,7 +61,7 @@ You can now add components and use the APIs.
 
 You will need add the `HELLO_CLIENT_ID` and a new `HELLO_COOKIE_SECRET` that can be generated with 
 ```sh
-node -e console.log(crypto.randomBytes(32).toString('hex'))
+node -e console.log(crypto.randomBytes(16).toString('hex'))
 ``` 
 to your deployed environment(s)
 
@@ -337,7 +337,7 @@ You will need to add them to the environment of a deployed app.
 - `HELLO_COOKIE_SECRET` a random 64 char hex string (32 bytes). Should be unique for each environment. Generate a secret with:
 
 ```sh
-node -e console.log(crypto.randomBytes(32).toString('hex'))
+node -e console.log(crypto.randomBytes(16).toString('hex'))
 ```
 
 **Variables that may be needed:**
