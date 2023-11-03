@@ -348,3 +348,21 @@ node -e console.log(crypto.randomBytes(16).toString('hex'))
 
 - `HELLO_DOMAIN` - overrides 'hello.coop' - used for testing by Hellō team
 - `HELLO_WALLET` - overrides default 'https://wallet.hello.coop' - used if mocking Hellō server
+
+
+----------
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    images: {
+      domains: [
+        'cdn.hello.coop', //Hellō Generic Profile Picture
+        'pictures.hello.coop',
+        'www.gravatar.com',
+        'pictures.hello-staging.net',
+        'pictures.hello-dev.net'
+      ]
+    }
+}
+
+module.exports = nextConfig
