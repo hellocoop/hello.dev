@@ -1,19 +1,19 @@
 import { Callout, Steps, Tabs } from 'nextra/components'
 
-# Svelte
+# Vue
 
-This packages provides Hellō button components that you can use in a Svelte SPA.
+This packages provides Hellō button components that you can use in a Vue SPA.
 > The `@hellocoop/vue` can be used with the [`@hellocoop/client`](/docs/sdks/core-client/) package.
 
 ## Setup
 
-To add Hellō to your Svelte application, in your project directory:
+To add Hellō to your Vue application, in your project directory:
 
 <Steps>
 ### Install the package
 
 ```sh npm2yarn
-npm i @hellocoop/svelte
+npm i @hellocoop/vue
 ```
 
 ### Add Hellō stylesheet
@@ -37,7 +37,7 @@ import { // only import buttons used
     UpdateTwitterButton,
     UpdateGitHubButton,
     UpdateGitLabButton
-} from '@hellocoop/svelte'
+} from '@hellocoop/vue'
 ```
 
 ### Buttons
@@ -74,9 +74,9 @@ Explore styling with the [button playground](/docs/buttons/#explorer)
 ### `<HelloProvider/>`
 
 By default, clicking the Hellō button would redirect to `/api/hellocoop?login=true` endpoint with the optional properties as additional query parameters. To override this behavior, wrap your app with the `<HelloProvider/>` component and pass the `config` object as a prop to the provider.
-```svelte filename="App.svelte"
-<script>
-    import { HelloProvider } from '@hellocoop/svelte';
+```vue filename="App.vue"
+<script setup>
+    import { HelloProvider } from '@hellocoop/vue';
 
     //default
     const config = {
@@ -84,9 +84,11 @@ By default, clicking the Hellō button would redirect to `/api/hellocoop?login=t
     }
 </script>
 
-<HelloProvider {config}>
-    <main> 
-    ...
-    </main>
-</HelloProvider>
+<template>
+    <HelloProvider :config="config">
+        <main> 
+        ...
+        </main>
+    </HelloProvider>
+</template>
 ```

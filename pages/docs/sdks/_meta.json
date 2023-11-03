@@ -2,6 +2,7 @@
     "nextjs": "Next.js",
     "react": "React",
     "svelte": "Svelte",
+    "vue": "Vue",
     "core-client": "Core/Client",
     "quickstart": "Quickstart",
     "config": "hello.config",

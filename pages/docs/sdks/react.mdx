@@ -1,8 +1,9 @@
 import { Callout, Steps, Tabs } from 'nextra/components'
 
-# Svelte
+# React
 
-This packages provides Hellō button components that you can use in the React SPA.
+This packages provides Hellō button components that you can use in a React SPA.
+> The `@hellocoop/vue` can be used with the [`@hellocoop/client`](/docs/sdks/core-client/) package.
 
 ## Setup
 
@@ -69,3 +70,25 @@ import { // only import buttons used
 - `hover` - pop | glow | flare | none
 
 Explore styling with the [button playground](/docs/buttons/#explorer)
+
+### `<HelloProvider/>`
+
+By default, clicking the Hellō button would redirect to `/api/hellocoop?login=true` endpoint with the optional properties as additional query parameters. To override this behavior, wrap your app with the `<HelloProvider/>` component and pass the `config` object as a prop to the provider.
+```jsx filename="App.jsx"
+import { HelloProvider } from '@hellocoop/react';
+
+//default
+const config = {
+    login: '/api/hellocoop?login=true'
+}
+
+export default function() {
+    return (
+        <HelloProvider config={config}>
+            <main>
+            ...
+            </main>
+        </HelloProvider>
+    )
+}
+```
