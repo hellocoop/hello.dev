@@ -61,7 +61,7 @@ You can now add components and use the APIs.
 
 You will need add the `HELLO_CLIENT_ID` and a new `HELLO_COOKIE_SECRET` that can be generated with 
 ```sh
-node -e console.log(crypto.randomBytes(16).toString('hex'))
+node -e"console.log(crypto.randomBytes(16).toString('hex'))"
 ``` 
 to your deployed environment(s)
 
@@ -308,15 +308,15 @@ See [pageAuth Config](#pageauth-config)
 loaded by `pageAuth()`
 
 ```typescript filename="hello.config.ts"
-import { Config } from '@hellocoop/nextjs'
-import loggedInCallback from '@/src/your-logged-in-logic' 
+import type { Config } from '@hellocoop/nextjs'
+import loggedIn from './src/your-logged-in-logic'
 
 const config: Config = {
     client_id: '00001111_2222_3333_4444_555566667777',
     scope: ['email','name','picture'], // default scopes
-    provider_hint: ['github'],         // add Github as provider 
+    provider_hint: ['github'],         // this will add Github as a provider 
     callbacks: {
-        loggedInCallback        // called when logged in
+        loggedIn                // called when logged in
     },
     pages: {
         loggedIn: '/',          // default route after logged in
@@ -326,44 +326,29 @@ const config: Config = {
 }
 export default config
 ```
+
+- See [Hellō Scopes](/scopes) for `scope` options.
+- See [API Reference|Wallet|provider_hint](http://localhost:3000/docs/apis/wallet/#provider_hint) for `provider_hint` details.
+
 ### Environment Variables
 
-**Variables that MUST be set:**
+**Required Variables that MUST be set:**
 
-These variables are added to the `.env` created by Quickstart for running locally.
-You will need to add them to the environment of a deployed app.
+The `HELLO_COOKIE_SECRET` is added to `.env.local` by Quickstart for running locally.
+You will need to add it the environment of a deployed app.
 
-- `HELLO_CLIENT_ID` the client_id from the  in `.env` set by Quickstart
-- `HELLO_COOKIE_SECRET` a random 64 char hex string (32 bytes). Should be unique for each environment. Generate a secret with:
+- `HELLO_COOKIE_SECRET` a random 32 char hex string (16 bytes). Should be unique for each environment. Generate a secret with:
 
 ```sh
-node -e console.log(crypto.randomBytes(16).toString('hex'))
+node -e "console.log(crypto.randomBytes(16).toString('hex'))"
 ```
 
-**Variables that may be needed:**
+**Optional Variables that MaY be needed:**
 
 - `HELLO_REDIRECT_URI` overrides dynamic redirect_uri discovery
+- `HELLO_CLIENT_ID` the client_id for the app. Will over ride value in `hello.config.ts`
 
 **Testing Variables:**
 
 - `HELLO_DOMAIN` - overrides 'hello.coop' - used for testing by Hellō team
 - `HELLO_WALLET` - overrides default 'https://wallet.hello.coop' - used if mocking Hellō server
-
-
-----------
-```
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-    images: {
-      domains: [
-        'cdn.hello.coop', //Hellō Generic Profile Picture
-        'pictures.hello.coop',
-        'www.gravatar.com',
-        'pictures.hello-staging.net',
-        'pictures.hello-dev.net'
-      ]
-    }
-}
-
-module.exports = nextConfig
-```
