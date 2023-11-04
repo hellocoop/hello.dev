@@ -1,4 +1,11 @@
-# Next.js
+import { Steps } from 'nextra/components'
+import { Tabs } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
+
+# Next.js Quickstart
+
+Follow the directions below to add Hellō to your application. 
 
 
 ## Next.js Starter
@@ -6,3 +13,153 @@
 The [Hellō Next.js Starter](https://github.com/hellocoop/hello-nextjs-starter) demonstrates how to use the [`@hellocoop/nextjs`](https://www.npmjs.com/package/@hellocoop/nextjs) package. 
 In less than a minute you will have the starter app running on your local machine -- a minute later you can have it deployed to Vercel. 
 You will have access to all the Hellō login options including Apple, Facebook, Google, GitHub, GitLab, and Microsoft. See deployed versions at [https://hello-nextjs-starter.vercel.app/](https://hello-nextjs-starter.vercel.app/) and [https://hello-nextjs-starter.netlify.app/](https://hello-nextjs-starter.netlify.app/).
+
+
+<Callout type="info" emoji="">
+    If you want to explore a sample app, check out our [Hellō Next.js Sample](https://github.com/hellocoop/hello-nextjs-sample).
+</Callout>
+
+This package provides all the endpoints your application needs to use Hellō. The login result is stored in an encrypted cookie, the contents are retrieved client side with `useAuth()` and server side with `getAuth()`. 
+
+## Setup Server
+
+To add Hellō to your Next.js application, in your project directory:
+
+<Steps>
+### Install the package 
+
+```sh npm2yarn
+npm i @hellocoop/nextjs
+```
+
+### Run Quickstart
+
+```sh
+npx @hellocoop/quickstart@latest --nextjs
+ ```
+
+- You will be prompted to download the `@hellocoop/quickstart` package
+- You will be prompted to log in to Hellō 
+- You will be prompted to create an application, or select an existing one
+- A `hello.config.ts` file will be created containing your app's `client_id`
+- A `./pages/api/hellocoop.ts` file will be created as the Hellō endpoint
+- A random `HELLO_COOKIE_SECRET` will be generated and added to `env.local`
+
+Your server should now be fully configured to work with Hellõ
+
+### Test Server
+
+Start your application locally:
+
+```sh
+npm run dev
+```
+
+Assuming the server starts on port 3000, 
+
+1. Load this link to check your logged in status:
+
+http://localhost:3000/api/hellocoop?auth=true
+
+You should get `{"isLoggedIn"=false}`
+
+2. Log in to Hellō with:
+
+http://localhost:3000/api/hellocoop?login=true
+
+and see your logged in status and profile with:
+
+http://localhost:3000/api/hellocoop?auth=true
+
+3. Log out with:
+
+http://localhost:3000/api/hellocoop?logout=true
+
+and confirm you are logged out with:
+
+http://localhost:3000/api/hellocoop?auth=true
+
+</Steps>
+
+## Setup Client
+
+<Steps>
+
+### Add Hellō stylesheet
+
+To provide the button styling, add the below code to the `<Head>` section of the `_document`:
+
+```html
+<link rel="stylesheet" href="https://cdn.hello.coop/css/hello-btn.css"/>
+```
+
+### Add Image Hosts
+
+```ts
+const nextConfig = {
+    images: {
+      domains: [
+        'cdn.hello.coop',
+        'pictures.hello.coop',
+        'www.gravatar.com'
+      ]
+    }
+}
+```
+
+### Add Hellō Test Page
+
+
+```tsx
+import { LoggedOut, LoggedIn, Continue, useAuth } from `@hellocoop/nextjs/react`
+
+export default test () => {
+    return (
+        <>
+            <LoggedOut>
+                <>
+            </LoggedOut>
+            <LoggedIn>
+
+
+
+)}
+```
+
+### Test Client
+
+
+
+
+</Steps>
+
+
+See [hello-nextjs-starter _document.tsx](https://github.com/hellocoop/hello-nextjs-starter/blob/main/pages/_document.tsx) for reference.
+
+> To ensure the button styles are available, client-side rendered buttons check if the stylesheet has been included in the document head, and if not the stylesheet is injected. Injecting into the head is [not recommended](https://nextjs.org/docs/messages/no-stylesheets-in-head-component) and creates a button rendering glitch.
+
+
+
+
+### Create API route
+
+Create a `hellocoop.js` file in the `/pages/api` directory that contains:
+
+```typescript filename="/pages/api/hellocoop.js"
+import { pageAuth } from '@hellocoop/nextjs'
+export default pageAuth({})
+```
+> See the next section for configuration options that can be passed to `pageAuth()`
+
+You can now add components and use the APIs.
+
+---
+
+>Deploying Your App
+
+You will need add the `HELLO_CLIENT_ID` and a new `HELLO_COOKIE_SECRET` that can be generated with 
+```sh
+node -e console.log(crypto.randomBytes(16).toString('hex'))
+``` 
+to your deployed environment(s)
+
