@@ -1,54 +1,91 @@
-# Express
+import { Steps } from 'nextra/components'
+import { Tabs } from 'nextra/components'
+import { Callout } from 'nextra/components'
 
-```
+# Express Quickstart
+
+Follow the directions below to add [Hellō](https://www.hello.coop) to your [Express](https://expressjs.com/) application in a couple minutes. 
+
+- You will get the user's name, verified email, and profile picture.
+- Users can use their preferred login provider including Apple, Facebook, Google, GitHub, GitLab, and Microsoft.
+- Hellō has done all the work to get a verified email and profile picture. 
+
+<Steps>
+
+
+### Install the Package 
+
+In your project directory:
+
+```sh npm2yarn
 npm i @hellocoop/express
 ```
 
+### Run Quickstart
+
 ```sh
-npx @hellocoop/quickstart@latest --express 
+npx @hellocoop/quickstart@latest --express
+ ```
+Quickstart will prompt you to:
+- download the `@hellocoop/quickstart` package
+- log in to Quickstart with Hellō
+- create an application, or select an existing one
+
+Quickstart will then:
+- create a `hello.config.js` file containing your app's `client_id`
+- generate a random `HELLO_COOKIE_SECRET` and add it to `.env`
+
+### Mount Hellō
+
+In your main server file where you have something like 
+
+`const app = express()`
+
+add the following code:
+
+<Tabs items={['TypeScript', 'JavaScript']} defaultIndex="2" >
+  <Tabs.Tab>
+```typescript
+
+import helloAuth from '@hellocoop/express'
+import helloConfig from './hello.config.js' // adjust path as needed
+
+app.use( helloAuth( helloConfig ) )
 ```
+  </Tabs.Tab>
 
+  <Tabs.Tab>
+```javascript
+const helloAuth = require('@hellocoop/express')
+const helloConfig = require('./hello.config.js') // adjust path as needed
 
+app.use( helloAuth( helloConfig ) )
 ```
-const auth = require('@hellocoop/express')
-const helloConfig = require('./hello.config.js')
-
-// auth router attaches /api/hellocoop routes
-app.use(auth(helloConfig))
-
-app.get('/', req, res ) => {
-    res.send(JSON.stringify(req.auth))
-}
+  </Tabs.Tab>
+</Tabs>
 
 
-### Login 
+Your server should now be fully configured to work with Hellõ
 
-http://localhost:3000/api/hellocoop?login=true
+### Test Your Server
 
+Start your application locally. Assuming the server starts on port 3000, 
 
-### Logout 
+1. Check your logged in status with:<br/>http://localhost:3000/api/hellocoop?auth=true
 
-http://localhost:3000/api/hellocoop?logout=true
+You should get `{"isLoggedIn"=false}` in your browser window.
 
-### SDK API
+2. Log in to Hellō with:<br/>http://localhost:3000/api/hellocoop?login=true
 
-`auth`
+3. See your logged in status and profile with:<br/>http://localhost:3000/api/hellocoop?auth=true
 
-`req.getAuth()`
+4. Log out with:<br/>http://localhost:3000/api/hellocoop?logout=true
 
-`req.auth`
+5. Confirm you are logged out with:<br/>http://localhost:3000/api/hellocoop?auth=true
 
-`res.logout()`
+</Steps>
 
-`hello.config.js`
+You have added Hellō to your Express application.
 
-Middleware
+## Next Steps
 
-`import { redirect, unauthorized, setAuth } from '@hellocoop/express/middleware'`
-
-
-`redirect()`
-
-`unauthorized`
-
-`setAuth`

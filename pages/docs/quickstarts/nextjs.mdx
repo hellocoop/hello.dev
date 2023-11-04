@@ -5,7 +5,7 @@ import { Callout } from 'nextra/components'
 
 # Next.js Quickstart
 
-Follow the directions below to add [Hellō](https://www.hello.coop) to your Next.js application in a couple minutes. 
+Follow the directions below to add [Hellō](https://www.hello.coop) to your [Next.js](https://nextjs.org/) application in a couple minutes. 
 
 - You will get the user's name, verified email, and profile picture.
 - Users can use their preferred login provider including Apple, Facebook, Google, GitHub, GitLab, and Microsoft.
@@ -17,10 +17,10 @@ Follow the directions below to add [Hellō](https://www.hello.coop) to your Next
 
 ## Add Hellō to Your Server
 
-In your project directory:
 
 <Steps>
-### Install the package 
+### Install the Package 
+In your project directory:
 
 ```sh npm2yarn
 npm i @hellocoop/nextjs
@@ -39,7 +39,7 @@ Quickstart will prompt you to:
 Quickstart will then:
 - create a `hello.config.ts` file containing your app's `client_id`
 - mount the Hellō endpoint by creating the `./pages/api/hellocoop.ts` file
-- generate a random `HELLO_COOKIE_SECRET` and add it to `env.local`
+- generate a random `HELLO_COOKIE_SECRET` and add it to `.env.local`
 
 Your server should now be fully configured to work with Hellõ
 
@@ -53,27 +53,18 @@ npm run dev
 
 Assuming the server starts on port 3000, 
 
-1. Load this link to check your logged in status:
 
-http://localhost:3000/api/hellocoop?auth=true
+1. Check your logged in status with:<br/>http://localhost:3000/api/hellocoop?auth=true
 
-You should get `{"isLoggedIn"=false}`
+You should get `{"isLoggedIn"=false}` in your browser window.
 
-2. Log in to Hellō with:
+2. Log in to Hellō with:<br/>http://localhost:3000/api/hellocoop?login=true
 
-http://localhost:3000/api/hellocoop?login=true
+3. See your logged in status and profile with:<br/>http://localhost:3000/api/hellocoop?auth=true
 
-and see your logged in status and profile with:
+4. Log out with:<br/>http://localhost:3000/api/hellocoop?logout=true
 
-http://localhost:3000/api/hellocoop?auth=true
-
-3. Log out with:
-
-http://localhost:3000/api/hellocoop?logout=true
-
-and confirm you are logged out with:
-
-http://localhost:3000/api/hellocoop?auth=true
+5. Confirm you are logged out with:<br/>http://localhost:3000/api/hellocoop?auth=true
 
 
 </Steps>
