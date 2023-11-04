@@ -3,6 +3,8 @@ import { QuickstartIcon, ButtonIcon, OIDCIcon, SDKIcon, APIIcon, CompareIcon, Ro
 
 # Overview
 
+Quicklinks to documentation sections:
+
 <Cards>
   <Card icon={<QuickstartIcon/>} title="Quickstarts" href="/docs/quickstarts" />
   <Card icon={<ButtonIcon/>} title="Hellō Buttons" href="/docs/buttons" />
@@ -58,7 +60,11 @@ You can check out the Hellō user experience with our demo at [GreenfieldDemo.co
 
 4. The user directs Hellō which claims to release to your app.
 
-5. Hellō redirects the user's browser back to your app with an ID Token containing the claims the user has chosen to release to your app.
+5. Hellō redirects the user's browser back to your app with either:
 
-6. (optional) Your app passes the ID Token to the Hellō introspection API to validate the ID Token.
+- an authorization code, which your app exchanges for an ID Token at the token endpoint
+
+- an ID Token containing the claims the user has chosen to release to your app, and your app verifies the ID Token is valid
+
+This is a standard OpenID Connect data flow. Details in [OpenID Connect](./docs/oidc).
 
