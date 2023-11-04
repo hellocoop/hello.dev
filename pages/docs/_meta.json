@@ -3,10 +3,10 @@
     "getting-started": "Getting Started",
     "quickstarts": "Quickstarts",
     "buttons": "Hellō Buttons",
-    "oidc": "OpenID Connect",
     "scopes": "Hellō Scopes",
     "sdks": "SDK References",
     "apis": "API References",
+    "oidc": "OpenID Connect",
     "comparison": "Hellō vs ___",
     "roadmap": "Roadmap"
 }
