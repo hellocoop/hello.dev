@@ -117,14 +117,14 @@ export default function HelloTest() {
         <LoggedOut>
             <ContinueButton targetURI="/hello-test"/>
         </LoggedOut>
-        <LoggedOut>
+        <LoggedIn>
             <pre>
               {JSON.stringify(useAuth(), null, 4)}
             </pre>
             <Link href={getLogOutRoute({target_uri:'/hello-test'})}>
               log out
             </Link>
-        </LoggedOut>        
+        </LoggedIn>        
       </main>
       <style jsx>{`
         main {
