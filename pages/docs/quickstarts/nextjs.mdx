@@ -61,7 +61,7 @@ Assuming the server started on port 3000:
 
 1. Check your logged in status with:<br/>http://localhost:3000/api/hellocoop?auth=true
 
-You should get `{"isLoggedIn"=false}` in your browser window.
+You should get `{"isLoggedIn": false}` in your browser window.
 
 2. Log in to Hellō with:<br/>http://localhost:3000/api/hellocoop?login=true
 
@@ -94,7 +94,6 @@ You have configured your server to use Hellō!
 Copy the following code and save it to `hello-test.jsx` in your `pages` folder:
 
 ```jsx filename="./pages/hello-test.jsx"
-// hello-test.jsx
 import { 
   LoggedOut, 
   LoggedIn, 
@@ -102,49 +101,42 @@ import {
   useAuth, 
   getLogOutRoute 
 } from '@hellocoop/nextjs/react'
-import Head from 'next/head';
+import Head from 'next/head'
+import Link from 'next/link'
 
-export default function helloTest() {
-    return (
-        <div className="container">
-        <Head>
-            <title>Hellō Test Page</title>
-            {/* Next.js will complain about injecting the following stylesheet 
-                -> move to _document.tsx when ready */}
-            <link rel="stylesheet" href="https://cdn.hello.coop/css/hello-btn.css"/>      
-        </Head>
-        <main>
-            <LoggedOut>
-                <ContinueButton targetURI="/hello-test"/>
-            </LoggedOut>
-            <LoggedIn>
-                <pre><code>
-                    {JSON.stringify(useAuth(), null, 4)}
-                </code></pre>
-                <p/>
-                <h1><a href={getLogOutRoute({target_uri:'/hello-test'})}>
-                    log out
-                </a></h1>
-            </LoggedIn>        
-        </main>
-        <style jsx>{`
-            .container {
-                height: 100vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-            main {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-        `}</style>
-    </div>  
-    )
+export default function HelloTest() {
+  return (
+    <>
+      <Head>
+        <title>Hellō Test Page</title>
+        {/* Next.js will complain about injecting the following stylesheet 
+            -> move to _document.tsx when ready */}
+        <link rel="stylesheet" href="https://cdn.hello.coop/css/hello-btn.css"/>      
+      </Head>
+      <main>
+        <LoggedOut>
+            <ContinueButton targetURI="/hello-test"/>
+        </LoggedOut>
+        <LoggedOut>
+            <pre>
+              {JSON.stringify(useAuth(), null, 4)}
+            </pre>
+            <Link href={getLogOutRoute({target_uri:'/hello-test'})}>
+              log out
+            </Link>
+        </LoggedOut>        
+      </main>
+      <style jsx>{`
+        main {
+            min-height: 100vH;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+      `}</style>
+    </>
+  )
 }
 ```
 
