@@ -1,4 +1,15 @@
+
+import { Check } from 'nextra/components'
+import W from 'components/warning'
+import C from 'components/checked'
+
 # Hellō vs ____
+
+## Hosted 
+
+## DIY
+
+
 
 looks similiar
 
@@ -6,60 +17,89 @@ A cooperative creating a utility.
 
 New paradigm for user login and registration. 
 
+Entropy
+
+## Cost
+
+## Configuration
+
+
+TODO - Hello diagram
+
 ![CIAM configuration](/ciam.svg)
 
-## Auth0
+## Data Schema
 
-## Clerk
+TODO - Clerk / NextAuth schema vs Hello schema  
 
-## Keycloak
+## When to Use 
+### Auth0
 
-## NextAuth.js
+### Clerk
+
+### Keycloak
+
+### NextAuth.js
 
 ## Feature Comparison
 
-|    | Feature                        | Hellō | Auth0 | Clerk | Keycloak  | NextAuth.js | 
-|:--:|--------------------------------|-------|-------|-------|-----------|-------------|
-| 1  | Auto-config                    |  ✅   |  ❌   |   ❌  |    ❌     |    ❌       |
-| 2  | Zero Social<br/>Login Config   |  ✅   |  ❌   |   ❌  |    ❌     |    ❌       |
-| 3  | Verified Email                 |  ✅   |  ✅   |   ✅  |    ❌     |    ❌       |
-| 4  | Account Merging                |  ✅   |  🟡   |   ✅  |    ❌     |    🟡       |
-| 5  | localhost<br/>development      |  ✅   |  ✅   |   ✅  |    🟡     |    🟡       |
-| 6  | BYO-DB                         |  ✅   |  ❌   |   ❌  |    🟡     |    🟡       |
-| 7  | Passkeys                       |  ✅   |  ✅   |   ✅  |    ✅     |    🟡       | 
-| 8  | Customizable<br/>User Flow     |  N/A  |  ✅   |   ✅  |    ✅     |    ✅       | 
-| 9  | Passwords                      |  N/A  |  ✅   |   ✅  |    ✅     |    🟡       | 
-| 10 | Lift & Shift                   |  ❌   |  ✅   |   ✅  |    ✅     |    ✅       | 
+### 0.  Price
 
-| Feature                           | Hellō | Auth0 | Clerk | Keycloak  | NextAuth.js | 
-| ----------------------------------|-------|-------|-------|-----------|-------------|
-| 1. Auto-config                    |  ✅   |  ❌   |   ❌  |    ❌     |    ❌       |
-| 2. Zero Social<br/>Login Config   |  ✅   |  ❌   |   ❌  |    ❌     |    ❌       |
-| 3. Verified Email                 |  ✅   |  ✅   |   ✅  |    ❌     |    ❌       |
-| 4. Account Merging                |  ✅   |  🟡   |   ✅  |    ❌     |    🟡       |
-| 5. localhost<br/>development      |  ✅   |  ✅   |   ✅  |    🟡     |    🟡       |
-| 6. BYO-DB                         |  ✅   |  ❌   |   ❌  |    🟡     |    🟡       |
-| 7. Passkeys                       |  ✅   |  ✅   |   ✅  |    ✅     |    🟡       | 
-| 8. Customizable<br/>User Flow     |  N/A  |  ✅   |   ✅  |    ✅     |    ✅       | 
-| 9. Passwords                      |  N/A  |  ✅   |   ✅  |    ✅     |    🟡       | 
-| 10. Lift & Shift                   |  ❌   |  ✅   |   ✅  |    ✅     |    ✅       | 
 
-1. Hellō Quickstart will create and register your application, and auto-config your Redirect URIs
-2. Hellō is an abstraction & privacy layer between you and your users' preferred provider.
-3.
-4.
-5.
-6.
-7.
-8.
+### 1.  Auto Config
+
+
+### 2.  Zero Social Login Config
+
+
+### 3.  Verified Email
+
+
+### 4.  Account Merging
+
+
+### 5.  localhost development
+
+
+### 6.  BYO-DB
+
+
+### 7.  Passkeys
+
+
+### 8.  Customizable User Flow
+
+
+### 9.  Passwords
+
+
+### 10. Lift & Shift
+
+
+### Feature Summary Chart
+
+|    | Feature                        | Hellō | Auth0 | Clerk | Keycloak  | NextAuth | 
+|:--:|--------------------------------|:-----:|:-----:|:-----:|:---------:|:--------:|
+| 1  | Auto Config                    | <C/>  |  ❌   |   ❌  |    ❌     |    ❌     |
+| 2  | Zero Social<br/>Login Config   | <C/>  |  ❌   |   ❌  |    ❌     |    ❌     |
+| 3  | Verified Email                 | <C/>  | <C/>  |  <C/> |    ❌     |    ❌     |
+| 4  | Account Merging                | <C/>  | <W/>  |  <C/> |    ❌     |   <W/>    |
+| 5  | localhost<br/>development      | <C/>  | <C/>  |  <C/> |   <W/>    |   <W/>    |
+| 6  | BYO-DB                         | <C/>  |  ❌   |   ❌  |   <W/>    |   <W/>    |
+| 7  | Passkeys                       | <C/>  | <C/>  |  <C/> |   <C/>    |   <W/>    | 
+| 8  | Customizable<br/>User Flow     |  N/A  | <C/>  |  <C/> |   <C/>    |   <C/>    | 
+| 9  | Passwords                      |  N/A  | <C/>  |  <C/> |   <C/>    |   <W/>    | 
+| 10 | Lift & Shift                   |  ❌   | <C/>  |  <C/> |   <C/>    |   <C/>    | 
+
+
 
 ## Pricing Comparison
 
-| MAU    |    Auth0¹ |   Clerk²  | Hellō³|
-| ------:|----------:|----------:| -----:|
-| 1k     |   $70/mo  |    $25/mo | FREE  |
-| 10k    |  $700/mo  |   $205/mo | FREE  |
-| 100k   |     CALL  | $2,005/mo | FREE  |
+| MAU    |    Auth0¹ |   Clerk²  |     Hellō³|
+| ------:|----------:|----------:| :--------:|
+| 1k     |   $70/mo  |    $25/mo | **FREE**  |
+| 10k    |  $700/mo  |   $205/mo | **FREE**  |
+| 100k   |     CALL  | $2,005/mo | **FREE**  |
 
 ¹ [Auth0 B2C Essentials](https://auth0.com/pricing)<br/>
 ² [Clerk Hobby](https://clerk.com/pricing)<br/>
