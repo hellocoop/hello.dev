@@ -61,13 +61,13 @@ npm run dev
 Assuming the server started on port 3000: 
 
 
-1. Check your logged in status with:<br/>http://localhost:3000/api/hellocoop?auth=true
+1. Check your logged in status in a new tab with:<br/>http://localhost:3000/api/hellocoop?auth=true
 
 You should get `{"isLoggedIn": false}` in your browser window.
 
-2. Log in to Hellō with:<br/>http://localhost:3000/api/hellocoop?login=true
+2. Log in to Hellō with in a new tab with:<br/>http://localhost:3000/api/hellocoop?login=true
 
-3. See your logged in status and profile with:<br/>http://localhost:3000/api/hellocoop?auth=true
+3. See your logged in status and profile by reloading `/api/hellocoop?auth=true`
 
 You should see something similar to this:
 ```json
@@ -81,9 +81,9 @@ You should see something similar to this:
 }
 ```
 
-4. Log out with:<br/>http://localhost:3000/api/hellocoop?logout=true
+4. Log out in a new tab with:<br/>http://localhost:3000/api/hellocoop?logout=true&target_uri=%2Fapi%2Fhellocoop%3Fauth%3Dtrue
 
-5. Confirm you are logged out with:<br/>http://localhost:3000/api/hellocoop?auth=true
+After being logged out, you will be redirected back to `api/hellocoop?auth=true` to confirm you are logged out.
 
 </Steps>
 You have configured your server to use Hellō!
