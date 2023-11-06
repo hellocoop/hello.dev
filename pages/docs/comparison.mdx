@@ -2,6 +2,7 @@
 import { Check } from 'nextra/components'
 import W from 'components/warning'
 import C from 'components/checked'
+import Color from 'components/color'
 
 # Hellō vs ____
 
@@ -45,6 +46,18 @@ TODO - Clerk / NextAuth schema vs Hello schema
 
 ### 0.  Price
 
+#### Service Pricing
+
+| MAU    |   Hellō¹  |    Auth0² |   Clerk³  |
+| ------:| :--------:|----------:|----------:|
+| 1k     | **FREE**  |   $70/mo  |    $25/mo |
+| 10k    | **FREE**  |  $700/mo  |   $205/mo |
+| 100k   | **FREE**  |     CALL  | $2,005/mo |
+
+¹ Login and verified email are free for unlimited MAU [Pricing](/pricing/)<br/>
+² [Auth0 B2C Essentials](https://auth0.com/pricing)<br/>
+³ [Clerk Hobby](https://clerk.com/pricing)<br/>
+
 
 ### 1.  Auto Config
 
@@ -80,6 +93,7 @@ TODO - Clerk / NextAuth schema vs Hello schema
 
 |    | Feature                        | Hellō | Auth0 | Clerk | Keycloak  | NextAuth | 
 |:--:|--------------------------------|:-----:|:-----:|:-----:|:---------:|:--------:|
+| 0  | Price | <Color color="#4CAF50">FREE</Color>|<Color color="red">$$$</Color>|<Color color="red">$</Color>|<Color color="yellow">DIY</Color>|<Color color="yellow">DIY</Color>|
 | 1  | Auto Config                    | <C/>  |  ❌   |   ❌  |    ❌     |    ❌     |
 | 2  | Zero Social<br/>Login Config   | <C/>  |  ❌   |   ❌  |    ❌     |    ❌     |
 | 3  | Verified Email                 | <C/>  | <C/>  |  <C/> |    ❌     |    ❌     |
@@ -93,15 +107,4 @@ TODO - Clerk / NextAuth schema vs Hello schema
 
 
 
-## Pricing Comparison
-
-| MAU    |    Auth0¹ |   Clerk²  |     Hellō³|
-| ------:|----------:|----------:| :--------:|
-| 1k     |   $70/mo  |    $25/mo | **FREE**  |
-| 10k    |  $700/mo  |   $205/mo | **FREE**  |
-| 100k   |     CALL  | $2,005/mo | **FREE**  |
-
-¹ [Auth0 B2C Essentials](https://auth0.com/pricing)<br/>
-² [Clerk Hobby](https://clerk.com/pricing)<br/>
-³ Login and verified email are free for unlimited MAU [Pricing](/pricing/)<br/>
 
