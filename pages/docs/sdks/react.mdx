@@ -92,3 +92,104 @@ export default function() {
     )
 }
 ```
+
+# POSSIBLE REDUNDANT COPY BELOW
+
+
+<Tabs items={['TypeScript', 'JavaScript']}>
+  <Tabs.Tab>
+    ```typescript
+    import { // only import buttons used
+        ContinueButton, 
+        LoginButton, 
+        UpdateEmailButton, 
+        UpdatePictureButton,
+        UpdateDiscordButton,
+        UpdateTwitterButton,
+        UpdateGitHubButton,
+        UpdateGitLabButton
+    } from '@hellocoop/nextjs'
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```javascript
+    const { // only import buttons used
+        ContinueButton, 
+        LoginButton, 
+        UpdateEmailButton, 
+        UpdatePictureButton,
+        UpdateDiscordButton,
+        UpdateTwitterButton,
+        UpdateGitHubButton,
+        UpdateGitLabButton
+    } = require('@hellocoop/nextjs')
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### `<ContinueButton/>`
+
+`<ContinueButton/>` - provides \[ ō Continue with Hellō \]
+
+`<LoginButton/>` - provides \[ ō Login with Hellō \]
+
+**Optional properties:**
+
+- `scope` - Array of [Hellō scope values](/docs/scopes). Default `['openid', 'email', 'name', 'picture']`.
+- `targetURI` - defaults to `HELLO_DEFAULT_TARGET_ROUTE` or '/'
+- `providerHint` - Array of [provider hints](/docs/apis/wallet). Example `['github', 'gitlab', 'email--', 'apple--', 'microsoft--']` would always recommend GitHub, GitLab, and Google.
+
+`<UpdateEmailButton/>` - provides \[ ō Update Email with Hellō \]
+
+`<UpdatePictureButton/>` - provides \[ ō Update Picture with Hellō \]
+
+`<UpdateDiscordButton/>` - provides \[ ō Update Discord with Hellō \]
+
+`<UpdateTwitterButton/>` - provides \[ ō Update Twitter with Hellō \]
+
+`<UpdateGitHubButton/>` - provides \[ ō Update GitHub with Hellō \]
+
+`<UpdateGitLabButton/>` - provides \[ ō Update GitLab with Hellō \]
+
+**Optional button styling properties:**
+- `color` - white | black
+- `theme` - ignore-light | ignore-dark | aware-invert | aware-static
+- `hover` - pop | glow | flare | none
+
+Explore styling with the [button playground](/docs/buttons/#explorer)
+
+### `<LoggedIn/>`
+
+Components to display content based on logged in state
+
+<Tabs items={['.tsx', '.jsx']}>
+  <Tabs.Tab>
+    ```typescript
+    import { LoggedIn, LoggedOut } from '@hellocoop/nextjs'
+    
+    <LoggedIn>
+        <b>content displayed if logged in</b>
+    </LoggedIn>
+    <LoggedOut>
+        <i>content displayed if logged out</i>
+    </LoggedOut>
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```javascript
+    const { LoggedIn, LoggedOut } = require('@hellocoop/nextjs')
+    
+    <LoggedIn>
+        <b>content displayed if logged in</b>
+    </LoggedIn>
+    <LoggedOut>
+        <i>content displayed if logged out</i>
+    </LoggedOut>
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### `<HelloProvider/>`
+
+Wrapping component for passing context to all children components. See [`getServerSideProps()`](#getserversideprops)
+

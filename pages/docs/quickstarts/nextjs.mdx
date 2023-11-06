@@ -5,7 +5,7 @@ import { Callout } from 'nextra/components'
 
 # Next.js Quickstart
 
-Follow the directions below to add [Hellō](https://www.hello.coop) to your [Next.js](https://nextjs.org/) application in a couple minutes. 
+Follow the directions below to add [Hellō](https://www.hello.coop) to your [Next.js](https://nextjs.org/) application in a couple of minutes. 
 
 - You will get the user's name, verified email, and profile picture.
 - Users can use their preferred login provider including Apple, Facebook, Google, GitHub, GitLab, and Microsoft.
@@ -17,6 +17,7 @@ Follow the directions below to add [Hellō](https://www.hello.coop) to your [Nex
 
 ## Add Hellō to Your Server
 
+*We use JavaScript in this Quickstart as it works everywhere. TypeScript is supported.*
 
 <Steps>
 ### Install the Package 
@@ -37,8 +38,8 @@ Quickstart will prompt you to:
 - create an application, or select an existing one
 
 Quickstart will then:
-- create a `hello.config.ts` file containing your app's `client_id`
-- mount the Hellō endpoint by creating the `./pages/api/hellocoop.ts` file
+- create a `hello.config.js` file containing your app's `client_id`
+- mount the Hellō endpoint by creating the `./pages/api/hellocoop.js` file
 - generate a random `HELLO_COOKIE_SECRET` and add it to `.env.local`
 
 Your server should now be fully configured to work with Hellõ
@@ -51,7 +52,7 @@ Start your application locally:
 npm run dev
 ```
 
-Assuming the server starts on port 3000, 
+Assuming the server started on port 3000: 
 
 
 1. Check your logged in status with:<br/>http://localhost:3000/api/hellocoop?auth=true
@@ -62,85 +63,86 @@ You should get `{"isLoggedIn"=false}` in your browser window.
 
 3. See your logged in status and profile with:<br/>http://localhost:3000/api/hellocoop?auth=true
 
+You should see something similar to this:
+```json
+{
+  "isLoggedIn": true,
+  "sub": "66752aed-9cc2-4d17-875f-379b1a578f9a",
+  "iat": 1699234659,
+  "name": "Dick Hardt",
+  "picture": "https://pictures.hello.coop/r/7a160eed-46bf-48e2-a909-161745535895.png",
+  "email": "dick.hardt@hello.coop"
+}
+```
+
 4. Log out with:<br/>http://localhost:3000/api/hellocoop?logout=true
 
 5. Confirm you are logged out with:<br/>http://localhost:3000/api/hellocoop?auth=true
 
-
 </Steps>
-
 You have configured your server to use Hellō!
 
 ## Add Hellō to Your Client
 
 <Steps>
-
-### Add Hellō stylesheet
-
-To provide the styling for Hellō buttons, add the below code to the `<Head>` section of your `_document.tsx` or `_document.jsx` file:
-
-
-```html filename="_document.tsx or _document.jsx"
-<link rel="stylesheet" href="https://cdn.hello.coop/css/hello-btn.css"/>
-```
-
-### Add Image Hosts
-
-To use the [`Image Component`](https://nextjs.org/docs/pages/api-reference/components/image) to display profile pictures add the Hellō and Gravatar `domains` to the `images` section of your `next.config.js` file: 
-
-```js {4-6} filename="next.config.js"
-const nextConfig = {
-    images: {
-      domains: [
-        'cdn.hello.coop',
-        'pictures.hello.coop',
-        'www.gravatar.com'
-      ]
-    }
-}
-```
-
 ### Add Hellō Test Page
 
-Copy the following code and save it to `hello-test.tsx` or `hello-test.jsx` in your `pages` folder:
+Copy the following code and save it to `hello-test.jsx` in your `pages` folder:
 
-<Tabs items={['TypeScript', 'JavaScript']}>
-  <Tabs.Tab>
-```typescript filename="./pages/hello-test.tsx"
-import { LoggedOut, LoggedIn, Continue, useAuth } from `@hellocoop/nextjs/react`
+```jsx filename="./pages/hello-test.jsx"
+// hello-test.jsx
+import { 
+  LoggedOut, 
+  LoggedIn, 
+  ContinueButton, 
+  useAuth, 
+  getLogOutRoute 
+} from '@hellocoop/nextjs/react'
+import Head from 'next/head';
 
-export default test () => {
+export default function helloTest() {
     return (
-        <>
+        <div className="container">
+        <Head>
+            <title>Hellō Test Page</title>
+            {/* Next.js will complain about injecting the following stylesheet 
+                -> move to _document.tsx when ready */}
+            <link rel="stylesheet" href="https://cdn.hello.coop/css/hello-btn.css"/>      
+        </Head>
+        <main>
             <LoggedOut>
-                <>
+                <ContinueButton targetURI="/hello-test"/>
             </LoggedOut>
             <LoggedIn>
-
-
-
-)}
+                <pre><code>
+                    {JSON.stringify(useAuth(), null, 4)}
+                </code></pre>
+                <p/>
+                <h1><a href={getLogOutRoute({target_uri:'/hello-test'})}>
+                    log out
+                </a></h1>
+            </LoggedIn>        
+        </main>
+        <style jsx>{`
+            .container {
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            main {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        `}</style>
+    </div>  
+    )
+}
 ```
-  </Tabs.Tab>
-  <Tabs.Tab>
-```javascript filename="./pages/hello-test.jsx"
-const { LoggedOut, LoggedIn, Continue, useAuth } = require()`@hellocoop/nextjs/react`)
-
-export default test () => {
-    return (
-        <>
-            <LoggedOut>
-                <>
-            </LoggedOut>
-            <LoggedIn>
-
-
-
-)}
-```
-  </Tabs.Tab>
-</Tabs>
-
 
 ### Test Your Client
 
@@ -150,66 +152,34 @@ http://localhost:3000/hello-test
 
 2. Clink on the `[ ō  Continue with Hellō ]` button
 
-This will log you in and display your profile information.
+This will log you in and display your profile information as JSON.
 
 3. Click on the `log out` link to log out
-
 </Steps>
 
 You now have added Hellō to your Client!
 
 ## Add a Callback Stub
 
-We will add and configure a stub that you will modify later to integrate with your user database.
-
+We will now add a stub function that you can modify later to integrate with your user database.
 <Steps>
-
 ### Create Callback Stub
 
-Copy the following code and save it to `hello-callback.ts` or `hello-callback.js` in your `src` folder:
+Copy the following code and save it to `hello-callback.js` in your `src` folder (create the `src` folder if needed):
 
-<Tabs items={['TypeScript', 'JavaScript']}>
-  <Tabs.Tab>
-```typescript filename="./src/hello-callback.ts"
-// hello-callback.ts
-import type { LoggedInParams, LoggedInResponse } from '@hellocoop/nextjs'
- 
-export default async loggedInCallback ({ 
-    payload,    // parsed ID Token payload
-    token,      // ID Token in compact, unparsed format
-    req,        // NextApiRequest
-    res         // NextApiResponse
-}:LoggedInParams): Promise<LoggedInResponse> => {
-
-    console.log('Callback received:',JSON.stringify(payload))
-    // TODO
-    // lookup user from your DB wth payload.sub user identifier
-    // create a user in DB if not found if open registration
-
-    return({
-        // accessDenied = true, // will set auth.isLoggedIn = false
-        // isProcessed = true,  // response has been sent by callback()
-        // updatedAuth = {},    // auth object stored in cookie
-    })
-}
-```
-  </Tabs.Tab>
-
-  <Tabs.Tab>
 ```javascript filename="./src/hello-callback.js"
 // hello-callback.js
-module.export = async () => { 
+module.exports = async ({ 
     payload,    // parsed ID Token payload
     token,      // ID Token in compact, unparsed format
     req,        // NextApiRequest
     res         // NextApiResponse
-} => {
-
-    console.log('Callback received:',JSON.stringify(payload))
+}) => {
+ 
+    console.log('Callback received:',JSON.stringify(payload,null,4))
     // TODO
     // lookup user from your DB wth payload.sub user identifier
     // create a user in DB if not found if open registration
-
     return({
         // accessDenied = true, // will set auth.isLoggedIn = false
         // isProcessed = true,  // response has been sent by callback()
@@ -217,19 +187,16 @@ module.export = async () => {
     })
 }
 ```
-  </Tabs.Tab>
-</Tabs>
 
 ### Configure Callback
 
-Add the highlighted lines to your `hello.config.ts` file:
+Add the highlighted lines to your `hello.config.js` file:
 
-```ts {2,6-8}
-import type { Config } from '@hellocoop/nextjs'
+```javascript {1,5-7}
 import loggedIn from './src/hello-callback'
 
 const config = {
-    client_id: '${client_id}',
+    client_id: 'YOUR_CLIENT_ID',
     callbacks: {
         loggedIn
     }
@@ -239,21 +206,21 @@ export default config
 
 ### Test the Callback
 
-1. Start your server as usual:
-```sh
-npm run dev
-```
-2. Load the test page and clink on the `[ ō  Continue with Hellō ]` button
+1. Restart your server for it to load the updated configuration
+
+2. Load the test page and click on the `[ ō  Continue with Hellō ]` button
 
 http://localhost:3000/hello-test
 
-You should see the contents of the ID Token payload logged to your terminal.
+You should see the contents of the ID Token payload logged to your terminal. See [OpenID Connect | ID Token](/oidc/token) for details.
 
 </Steps>
 
-You now have a stub you can extend to integrate your user database.
+You now have a stub you can extend to integrate your user database!
 
 ## Next Steps
+
+# UNDER CONSTRUCTION
 
 Update your [`hello.config.js`](/docs/sdks/nextjs/#helloconfigts) to change the claims received or providers recommended to new users.
 
