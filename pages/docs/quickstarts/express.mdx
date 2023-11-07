@@ -110,9 +110,9 @@ We will now add a stub function that you can modify later to integrate with your
 <Steps>
 ### Create Callback Stub
 
-Copy the following code and save it to `hello-callback.js` in your `src` folder (create the `src` folder if needed):
+Copy the following code and save it to `hello-callback.js` in your root folder (you can move it later):
 
-```javascript filename="./src/hello-callback.js"
+```javascript filename="./hello-callback.js"
 // hello-callback.js
 module.exports = async ({ 
     payload,    // parsed ID Token payload
@@ -138,7 +138,7 @@ module.exports = async ({
 Add the highlighted lines to your `hello.config.js` file:
 
 ```javascript {1,5-7}
-const loggedIn = require('./src/hello-callback')
+const loggedIn = require('./hello-callback')
 
 const config = {
     client_id: 'YOUR_CLIENT_ID',
