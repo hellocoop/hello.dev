@@ -12,11 +12,14 @@ const config: DocsThemeConfig = {
   footer: {
     text: '',
   },
+  feedback: {
+    content: () => <span style={{marginRight: '-5px'}}>Question? Give us feedback</span>
+  },
   toc: {
     backToTop: true,
   },
   editLink: {
-    text: "Edit this page on GitHub ↗"
+    text: "Edit this page on GitHub"
   },
   useNextSeoProps() {
     const { asPath } = useRouter()

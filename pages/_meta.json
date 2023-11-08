@@ -26,19 +26,19 @@
     "type": "page"
   },
   "blog": {
-    "title": "Blog ↗",
+    "title": "Blog",
     "type": "page",
     "href": "https://blog.hello.dev/",
     "newWindow": true
   },
   "console": {
-    "title": "Console ↗",
+    "title": "Console",
     "type": "page",
     "href": "https://console.hello.coop/",
     "newWindow": true
   },
   "playground": {
-    "title": "Playground ↗",
+    "title": "Playground",
     "type": "page",
     "href": "https://playground.hello.dev/",
     "newWindow": true

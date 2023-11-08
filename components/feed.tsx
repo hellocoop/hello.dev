@@ -98,7 +98,7 @@ const Feed = () => {
                     </li>
                 ))}
             </ul>
-            <Link href="https://blog.hello.dev" target="_blank" className="flex items-center gap-6 group md:ml-64 md:pl-6 mt-10 text-xl hover:underline font-semibold">Read more at blog.hello.dev ↗</Link>
+            <Link href="https://blog.hello.dev" target="_blank" className="flex items-center gap-6 group md:ml-64 md:pl-6 mt-10 text-xl hover:underline font-semibold">Read more at blog.hello.dev</Link>
         </>
     )
 }
