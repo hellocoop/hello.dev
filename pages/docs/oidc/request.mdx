@@ -1,4 +1,83 @@
 # Auth Request
 
 
+# 2. Create Request URL
+
+*The [`@hellocoop/core`](https://www.npmjs.com/package/@hellocoop/nextjs) npm package has a `createAuthRequest()` function that simplifies creating an authorization request URL, including the PKCE code_verifier and code_challenge*
+
+The **request URL** is `https://wallet.hello.coop/authorize` and a query with the following standard [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) parameters:
+
+|Parameter|Description|
+|---|---|
+|`client_id`|The `client_id` for your app from [console.hello.coop](https://console.hello.coop) |
+|`redirect_uri`|One of the redirect_uri values you registered for your app |
+|`scope`|The `openid` scope and zero or more scopes listed at [Hellō Claims](/docs/scopes)|
+|`nonce`|A unique string that will be included in the signed ID Token. This links the ID Token to your request|
+|`response_type` (optional)| `id_token` flow or<br/><span>`code` flow (default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)).</span> |
+|`response_mode` (optional)|if `id_token` flow `fragment` or `form_post` (default) <br/>if `code` flow `fragment`, `form_post`, or `query` (default)|
+|`state` (optional)|A value representing the state of your application that will be returned as a parameter in the response|
+|`code_challenge`|REQUIRED if `code` flow and not using a client secret to authenticate to the token endpoint.|
+|`code_challenge_method`|May be provided if `code_challenge` is included.<br/>MUST have value of `S256`|
+
+### PKCE Code
+
+> [RFC 7636](https://datatracker.ietf.org/doc/html/rfc7636) *(Proof Key for Code Exchange by OAuth Public Clients)* enables your application to prove it made the authorization request that received the authorization code when it calls the token endpoint. 
+>
+>
+> This is done by generating a random `code_verifier` and then a `code_challenge` which is a SHA256 cryptographic hash `code_verifier`.
+>
+>
+>The `code_challenge` is part of the authorization request, and the `code_verifier` is presented with the `code` to Hellō which verifies the `code` was requested with the `code_challenge`. This allows an application to not have to manage a client secret when using a `code` flow.
+
+
+**Here is a sample `id_token` flow request from the[ GreenfieldDemo](https://greenfielddemo.com) app**<br/>
+*(line feeds added for readability)*
+
+```http
+https://wallet.hello.coop/authorize
+?client_id=3574f001-0874-4b20-bffd-8f3e37634274
+&redirect_uri=https://greenfielddemo.com/
+&scope=name+nickname+email+picture+openid
+&nonce=b957cea0-f159-4390-ba48-5c5d7e943ea4
+&response_mode=fragment
+```
+
+**Here is a sample `code` flow request from the[ Hellō Next.js Starter](https://hello-nextjs-starter.vercel.app/) app**<br/>
+*(line feeds added for readability)*
+
+```http
+https://wallet.hello.coop/authorize
+?client_id=db4ad0b8-c589-4328-8094-f2d0e2cd3aaa
+&redirect_uri=https://hello-nextjs-starter.netlify.app/api/hellocoop
+&scope=openid+name+email+picture
+&nonce=ecc855c9-41e3-46a0-a99a-d1fa3e3c1d3f
+&response_type=code
+&response_mode=query
+&code_challenge=F_xW4_XNddm_XXZgMQAnHBWZRAtc3ZXxb-kcL_rvDns
+&code_challenge_method=S256
+```
+
+### Advanced Features
+See the [Authorization Request](/docs/oidc/request) reference for additional functionality including how to change the recommended providers.
+
+## 3. Make Request
+
+Cause the user's browser to load the `request URL` you created in `Step 2`. Here are some examples:
+- Set `window.location.href` with JavaScript
+```javascript
+window.location.href = "https://wallet.hello.coop/authorize?..."
+```
+- An `<a>` tag with an `href` to the `requestURL`
+```html
+<a href="https://wallet.hello.coop/authorize?..." /> ... </a>
+```
+- HTTP 302 redirect from the server
+```
+HTTP/1.1 302 Found
+Location: https://wallet.hello.coop/authorize?...
+```
+
+The user will then interact with Hellō. When finished they will be redirected back to your application with either an ID Token, an authorization code, or an error response.
+
+
 See [API Reference | Wallet](../apis/wallet/#authorization-request) for extended parameters such as `provider_hint`.
