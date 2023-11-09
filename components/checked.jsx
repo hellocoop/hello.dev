@@ -7,7 +7,7 @@ const GreenCheckedCircle = () => {
       data-testid="geist-icon"
       fill="none"
       height="20"  
-      shape-rendering="geometricPrecision"
+      shapeRendering="geometricPrecision"
       stroke="#4CAF50"  
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -20,5 +20,4 @@ const GreenCheckedCircle = () => {
     </svg>
   );
 };
-
 export default GreenCheckedCircle;
