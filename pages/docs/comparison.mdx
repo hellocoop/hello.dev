@@ -6,60 +6,91 @@ import Color from 'components/color'
 
 # Hellō vs ____
 
-## Hosted 
+You're building a new app and wondering if you should use Hellō vs _____. The goal of this page is to help you decide. 
+Hellō is a new paradigm in how you can add login and registration to your application, but it is not the right solution for all use cases. 
 
-## DIY
+## Hellō
 
+The Hellō Service is an OpenID Connect Provider. As a developer, you integrate with Hellō the same as you would Apple, Facebook, Google, or Microsoft. Unlike those services, Hellō will let you request any of the [supported claims](./scopes/). For example, if you want a verified email and profile picture, Hellō will help the user acquire that data and release it to you. Once the user has provided their information to Hellō, it is available for them to reuse the when they sign up to their next Hellō application. 
 
+Hellō is like an digital identity wallet for your users, where they can build up their identity and then easily share it when they want, lower the friction for them to register at new applications. Unlike other providers, Hellō's business model is to provide applications verified claims the user chooses to release, not surveillance capitalism. To address the issues of a [central service], Hellō is innovation in [organization](https://www.hello.coop/pages/cooperative.html) and [data](https://www.hello.coop/pages/data-governance.html) governance.
 
-looks similiar
+Having a central service for users to manage and reuse their identity significantly can significantly lower the effort you must expend in developing a new application, and the ongoing cost of the solution. Let's dive into some details.
 
-A cooperative creating a utility. 
+### <Color color="#00FF00">*Pros*</Color>
+- *Cost* - Login and verified email are FREE. Unlimited MAU. We will monetize when you need / want verified information about your users. See our pricing for details on the Hellō business model.
+- *Time to Market* - 
+- *Data Model* - You only need a user table. You do not need to a table for user accounts / authentication as Hellō provides you an ID Token with an identifier for the user and the claims you requested. No Passwords. No managing muliple social logins. Rare account merging as Hellō will merge social accounts for you.
 
-New paradigm for user login and registration. 
-
-Entropy
-
-## Cost
-
-## Configuration
-
-
-TODO - Hello diagram
-
-![CIAM configuration](/ciam.svg)
-
-Apple 8 step process 
-https://support.appmachine.com/support/solutions/articles/80000978304-creating-an-ios-developer-account-step-by-step-guide
-
-You will want Apple if you expect people to use your website on an Apple device
+### <Color color="#FF0000">*Cons*</Color>
+- *External Service* - 
+- *No Passwords*  - 
+- *No DB* -
 
 
-- Create an account
-- Purchase access to developer program
-- Obtain 
+## Alternatives
 
 
-![Hellō configuration](/hello.svg)
-
-## Data Schema
-
-TODO - Clerk / NextAuth schema vs Hello schema  
-
-## When to Use 
 ### Auth0
+
+Auth0 is the gold standard in the CIAM market (Customer Identity and Access Management). They are now part of Okta, the gold standard in enterprise identity management. AWS Cognito, Google Firebase, Microsoft Entra B2C, Ory are comparable offerings with a similar vintage. Gluu and FusionAuth are similar, and also offer an open source option you can run yourself, which makes them similar to [Keycloak](#keycloak) (see below). The typical architectural pattern for these services is to be a separate server that you redirect your users to, the user authenticates there, and then the user is redirected back to your app. This is similar to the architectural pattern for Hellō. Unlike Hellō, your authoritative user profile and authentication data is stored on their server. 
 
 ### Clerk
 
+Clerk.dev is one of a new generation of vendors that position themselves as providing "Auth". Others include Descope, Stytch, and Userfront. The new generation of solutions are more integrated with the developer app. Front end components are integrated directly into your app, and the architecture is more akin to your front end built with components from the vendor, call APIs to authenticate and get user information. 
+
+
+<Color color="#00FF00">*Pros*</Color> Auth0 / Clerk
+- *Managed Service* - Authentication is managed for you. You don't have to worry about storing passwords etc. Security is hard, and unless you have experts, there is a risk you will make a mistake. You only pay for what you need, and the services will generally scale up as needed.
+- *Time to Market* - You are able to get up and running quickly as they have ready to use datastores for users, organizations, and basic access control.
+- *Lift and Shift* - You can move to and away from these solutions and your own implementation. While not trivial, it is possible to migrate passwords and re-usee the same social login credentials so users can continue to log in the same way when you migrate. 
+
+<Color color="#FF0000">*Cons*</Color> Auth0 / Clerk
+- *Cost* - Depending on your budget available per MAU, these services can be prohibitively expensive. See [pricing comparison](#0-cost) below.
+- *Data model* - While it is great to get started with the datastore provided, many apps will have other data associated with their users / customers that needs to be stored somewhere else. This requires synchronizing between their system and yours, adding entropy to your application.
+- *Complexity* - These are feature rich offerings and you likely only need to use a small subset of them. The initial setup may be quick, but there are many knobs to adjust to get the system to do what you need.
+
 ### Keycloak
+
+Keyloak is a popular open source project written in Java that support all popular identity protocols including OAuth 2, OpenID Connect, SAML, SCIM, and LDAP. If you are willing and have the skills to host your own infrastructure and keep the software up to date, and you need a large part of the functionality offered, Keycloak may be a good choice. 
+
+<Color color="#00FF00">*Pros*</Color> Keycloak
+- *OSS* - Its open source. There are no licensing fees. You can adapt it to your needs if desired. You can inspect the code if you want. 
+- *Cost* - You just have to pay for your team to manage and operate, and your own IT infrastructure. 
+- *Functionality* - If you have to integrate a bunch of disparate systems that all speak different protocols, Keycloak can probably provide the needed functionality. As it is OSS, you enhance to better meet your needs.
+
+<Color color="#FF0000">*Cons*</Color> Keycloak
+- *DIY* - Security is hard. Starting with Keycloak is much better than writing your own software, but you still need to keep everything buttoned up and secure.
+- *Monolith Service* - Keycloak has a minimum infrastructure and operating service, and is challenging to scale up to multiple instances. Keycloak is written in Java. It does not have a cloud native architecture. 
+- *Complex* - If you are only using a small part of the functionality, it may be overly complex and time consuming compared to other options. The breadth of functionality also provides a broad attack surface.
 
 ### NextAuth.js
 
+NextAuth.js (rebranding as Auth.js) is a popular open source React framework (Svelte and Vue coming) for adding login and registration to apps build with Next.js (Auth.js supports other JavaScript based full stack platforms). 
+
+<Color color="#00FF00">*Pros*</Color>  NextAuth.js
+- *OSS* -
+- *Cost* - 
+- *DB Adapters* - 
+
+<Color color="#FF0000">*Cons*</Color>  NextAuth.js
+- *DIY* - 
+- *Node.js Only*
+
+
+
+
+### Write Your Owm
+
+<Color color="#FF0000">*Don't*</Color> This is a BAD IDEA™ unless you have an experienced team of security engineers and are operating at a scale where it is cost effective. 
+
+
+
 ## Feature Comparison
 
-### 0.  Price
+### 0.  Cost
 
-#### Service Pricing
+
 
 | MAU    |   Hellō¹  |    Auth0² |   Clerk³  |
 | ------:| :--------:|----------:|----------:|
@@ -72,10 +103,39 @@ TODO - Clerk / NextAuth schema vs Hello schema
 ³ [Clerk Hobby](https://clerk.com/pricing)<br/>
 
 
+There is also the time and cost to integrate with your app, which is covered in the next section.
+
 ### 1.  Auto Config
 
 
+
+![CIAM configuration](/ciam.svg)
+
+
+
+![Hellō configuration](/hello.svg)
+
+
 ### 2.  Zero Social Login Config
+
+As an abstraction layer between your app and how the user authenticates, Hellō is the app registered at each social login provider. This removes the time consuming task of registering your app at each provider you want to support.
+
+
+
+
+This provides a privacy layer for your user as the provider only sees the user logging into Hellō.
+  between the provider and your app, 
+
+Apple 8 step process 
+https://support.appmachine.com/support/solutions/articles/80000978304-creating-an-ios-developer-account-step-by-step-guide
+
+You will want Apple if you expect people to use your website on an Apple device
+
+
+- Create an account
+- Purchase access to developer program
+- Obtain 
+
 
 
 ### 3.  Verified Email
@@ -98,6 +158,11 @@ TODO - Clerk / NextAuth schema vs Hello schema
 
 ### 9.  Passwords
 
+Hellō does not offer login with passwords. This is a feature. Credential stuffing is a significant threat to any service that reaches scale.
+
+Do you really want to make your users manage yet-another-password, when they can re-use a login they already have, that has built a model on how they use the internet, and is investing millions of dollars in protecting their account?
+
+We don't offer passwords. We don't think you should either. Not having to protect against credential stuffing significantly lowers the cost basis for Hellō, passing those savings on to you. 
 
 ### 10. Lift & Shift
 
@@ -106,7 +171,7 @@ TODO - Clerk / NextAuth schema vs Hello schema
 
 |    | Feature                        | Hellō | Auth0 | Clerk | Keycloak  | NextAuth | 
 |:--:|--------------------------------|:-----:|:-----:|:-----:|:---------:|:--------:|
-| 0  | Price | <Color color="#4CAF50">FREE</Color>|<Color color="red">$$$</Color>|<Color color="red">$</Color>|<Color color="yellow">DIY</Color>|<Color color="yellow">DIY</Color>|
+| 0  | Price | <Color color="#00FF00">**FREE**</Color>|<Color color="red">**$$$**</Color>|<Color color="red">**$**</Color>|<Color color="yellow">**DIY**</Color>|<Color color="yellow">**DIY**</Color>|
 | 1  | Auto Config                    | <C/>  |  ❌   |   ❌  |    ❌     |    ❌     |
 | 2  | Zero Social<br/>Login Config   | <C/>  |  ❌   |   ❌  |    ❌     |    ❌     |
 | 3  | Verified Email                 | <C/>  | <C/>  |  <C/> |    ❌     |    ❌     |
@@ -119,5 +184,33 @@ TODO - Clerk / NextAuth schema vs Hello schema
 | 10 | Lift & Shift                   |  ❌   | <C/>  |  <C/> |   <C/>    |   <C/>    | 
 
 
+
+----
+
+# Hosted 
+
+## DIY
+
+
+
+looks similiar
+
+A cooperative creating a utility. 
+
+New paradigm for user login and registration. 
+
+Entropy
+
+## Cost
+
+## Configuration
+
+
+TODO - Hello diagram
+
+
+## Data Schema
+
+TODO - Clerk / NextAuth schema vs Hello schema  
 
 
