@@ -11,7 +11,7 @@ Hellō is a new paradigm in how you can add login and registration to your appli
 
 ## Hellō
 
-The Hellō Service is an OpenID Connect Provider. As a developer, you integrate with Hellō the same as you would Apple, Facebook, Google, or Microsoft. Unlike those services, Hellō will let you request any of the [supported claims](./scopes/). For example, if you want a verified email and profile picture, Hellō will help the user acquire that data and release it to you. Once the user has provided their information to Hellō, it is available for them to reuse the when they sign up to their next Hellō application. 
+The Hellō Service is an OpenID Connect Provider. As a developer, you integrate with Hellō the same as you would Apple, Facebook, Google, or Microsoft. Unlike those services, Hellō will let you request any of the [supported claims](./scopes/). For example, if you want a verified email and profile picture, Hellō will help the user acquire that data and release it to you. Once the user has provided their information to Hellō, it is available for them to reuse when they sign up to their next Hellō application. 
 
 Hellō is like an digital identity wallet for your users, where they can build up their identity and then easily share it when they want, lower the friction for them to register at new applications. Unlike other providers, Hellō's business model is to provide applications verified claims the user chooses to release, not surveillance capitalism. To address the issues of a [central service], Hellō is innovation in [organization](https://www.hello.coop/pages/cooperative.html) and [data](https://www.hello.coop/pages/data-governance.html) governance.
 
@@ -33,7 +33,7 @@ Having a central service for users to manage and reuse their identity significan
 
 ### Auth0
 
-Auth0 is the gold standard in the CIAM market (Customer Identity and Access Management). They are now part of Okta, the gold standard in enterprise identity management. AWS Cognito, Google Firebase, Microsoft Entra B2C, Ory are comparable offerings with a similar vintage. Gluu and FusionAuth are similar, and also offer an open source option you can run yourself, which makes them similar to [Keycloak](#keycloak) (see below). The typical architectural pattern for these services is to be a separate server that you redirect your users to, the user authenticates there, and then the user is redirected back to your app. This is similar to the architectural pattern for Hellō. Unlike Hellō, your authoritative user profile and authentication data is stored on their server. 
+Auth0 is the gold standard in the CIAM market (Customer Identity and Access Management). They are now part of Okta, the gold standard in enterprise identity management. AWS Cognito, Google Firebase, Microsoft Entra B2C, Ory are comparable offerings with a similar vantage. Gluu and FusionAuth are similar, and also offer an open source option you can run yourself, which makes them similar to [Keycloak](#keycloak) (see below). The typical architectural pattern for these services is to be a separate server that you redirect your users to, the user authenticates there, and then the user is redirected back to your app. This is similar to the architectural pattern for Hellō. Unlike Hellō, your authoritative user profile and authentication data is stored on their server. 
 
 ### Clerk
 
@@ -43,7 +43,7 @@ Clerk.dev is one of a new generation of vendors that position themselves as prov
 <Color color="#00FF00">*Pros*</Color> Auth0 / Clerk
 - *Managed Service* - Authentication is managed for you. You don't have to worry about storing passwords etc. Security is hard, and unless you have experts, there is a risk you will make a mistake. You only pay for what you need, and the services will generally scale up as needed.
 - *Time to Market* - You are able to get up and running quickly as they have ready to use datastores for users, organizations, and basic access control.
-- *Lift and Shift* - You can move to and away from these solutions and your own implementation. While not trivial, it is possible to migrate passwords and re-usee the same social login credentials so users can continue to log in the same way when you migrate. 
+- *Lift and Shift* - You can move to and away from these solutions and your own implementation. While not trivial, it is possible to migrate passwords and re-use the same social login credentials so users can continue to log in the same way when you migrate. 
 
 <Color color="#FF0000">*Cons*</Color> Auth0 / Clerk
 - *Cost* - Depending on your budget available per MAU, these services can be prohibitively expensive. See [pricing comparison](#0-cost) below.
