@@ -8,7 +8,7 @@ const GreenCheckedCircle = () => {
       fill="none"
       height="20"  
       shapeRendering="geometricPrecision"
-      stroke="#4CAF50"  
+      stroke="#00FF00"  
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"  
