@@ -3,10 +3,10 @@ import { Tabs } from 'nextra/components'
 import { Callout } from 'nextra/components'
 
 
-# Express SDK
+# fastify SDK
 
 <Callout type="info" emoji="ℹ️">
-    Follow the [Express Quickstart](/docs/quickstart/express) directions to add Hellō to your application in minutes.
+    Follow the [Fastify Quickstart](/docs/quickstart/fastify) directions to add Hellō to your application in minutes.
 </Callout>
 
 ## Setup
@@ -16,7 +16,7 @@ Following are the steps required to setup this package:
 ### 1. Package Installation
 
 ```sh npm2yarn
-npm i @hellocoop/express
+npm i @hellocoop/fastify
 ```
 
 > Hellō Quickstart will perform steps 2 - 4 for you
@@ -58,27 +58,24 @@ In your main server file add the following code:
 
 <Tabs items={['TypeScript', 'JavaScript']} defaultIndex="2" >
   <Tabs.Tab>
-```typescript {2-3,7}
-import express from 'express'
-import helloAuth from '@hellocoop/express'
-import helloConfig from './hello.config.js' // adjust path as needed
+```typescript {2-3,5}
+import fastify from 'fastify'
+import helloConfig from '../hello.config.js' // adjust path as needed
+import { helloAuth } from '@hellocoop/fastify'
 
-const app = express()
-
-app.use( helloAuth( helloConfig ) )
+fastify.register(helloAuth, config)
 
 ```
   </Tabs.Tab>
 
   <Tabs.Tab>
-```javascript {2-3,7}
-const express = require('express')
-const helloConfig = require('./hello.config.js') // adjust path as needed
-const { helloAuth } = require('@hellocoop/express')
+```javascript {2-3,5}
+const fastify = require('fastify')
+const { helloAuth } require('@hellocoop/fastify')
+const helloConfig = require('../hello.config.js') // adjust path as needed
 
-const app = express()
+fastify.register(helloAuth, config)
 
-app.use( helloAuth( helloConfig ) )
 ```
   </Tabs.Tab>
 </Tabs>
@@ -125,7 +122,7 @@ See [hello.config.js](./config)
 
 ## Middleware
 
-`import { redirect, unauthorized, setAuth } from '@hellocoop/express/middleware'`
+`import { redirect, unauthorized, setAuth } from '@hellocoop/fastify/middleware'`
 
 ### `redirect()`
 
@@ -133,7 +130,7 @@ Will redirect to the passed path if `isLoggedIn=false`.
 
 Example:
 ```js
-app.get('/dashboard', redirect('/'), dashboard)`
+app.register(redirect('/'))`
 ```
 ### `unauthorized`
 
@@ -141,10 +138,8 @@ Will return a `401` status code if `isLoggedIn=false`
 
 Example:
 ```js
-app.use('/api', unauthorized )`
+app.register( unauthorized )
 ```
-
-Would return a `401` for any unauthenticated call to `/api/*`. 
 
 ### `setAuth`
 
@@ -152,9 +147,8 @@ Middleware that reads and decrypts the `hellocoop_auth` cookie and sets `req.aut
 
 Example:
 ```js
-app.use('/profiles', setAuth )`
+app.register( setAuth )`
 ```
 
-Would set req.auth for all profile pages.
 
 

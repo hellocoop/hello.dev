@@ -1,30 +1,65 @@
 # SDK FAQs
 
-How do
 
 ## Cookies
 
+### *1) Why do the SDKs set cookies?*
 
-### *1) What cookies are set?
+Cookies enable you do easily get basic auth information without having to make a DB call on each request. Managing the stateless session information for you is one less security related task you need to do.
 
-How are cookies encrypted?
+### *2) What cookies are set?*
 
+A `hellocoop_oidc` cookie that stores the OIDC (OpenID Connect) protocol state. This cookie expires after 5 minutes, and is deleted after completion of the OIDC flow.
 
+A `hellocoop_auth` cookie that stores the `auth` object. This cookie expires with the browser session.
 
-Stateless Cookies
+### *3) How are cookies encrypted?*
 
-OIDC Cookie
+The cookies are encrypted using `aes-128-gcm` and the [`HELLO_COOKIE_SECRET`](./environment/#hello_cookie_secret)
 
-Auth Cookie
+### *4) What options are used with the cookies?*
 
-Cookie Encryption - aes-128-gcm
+The options are:
+- `httpOnly: true` - prevents the browser from looking at or changing the cookies
+- `secure: true` - set when `NODE_ENV=production` which requires cookie to only be used with `https`
+- `sameSite: strict` - the browser will only send the cookie from pages that are in the same domain. This provides additional security, but adds complexity when responding to redirects. The SDKs employ a bounce to enable this restriction.
 
-alg - HELLO_COOKIE_SECRET - 128 bit random value 
+The `hellocoop_oidc` cookie is further restricted to only be sent to the Hellō endpoint (default is `api/hellocop`) and a `maxAge:300` (5 minutes).
 
 ## Redirect URI Discovery 
 
-Why /api/hellocoop
+### *1) What is a Redirect URI?*
 
-low probability of cnoflict -- eg: /api/hello is a common sample Endpoint
+This URI is where Hellō redirects the user after interacting with the Hellō Wallet. The Redirect URI is the `redirect_uri` sent in an [authorization request](/docs/oidc/request) and is a required parameter in the Hellō implementation of OpenID Connect. The `redirect_uri` is one of the ways that Hellō ensures the application identified by the `client_id`, and all Redirect URIs for an application MUST be registered at the [Hellō Developer Console](https://console.hello.coop). If a `redirect_uri`is provided that is not registered, Hellō will not redirect the user back to the application. 
+
+### *2) What are the challenges with Redirect URIs?*
+
+- Local development - If you are developing locally, using a Redirect URI such as `http://localhost:3000` lets you debug and develop on your own machine without any complicated configuration. Unfortunately, allowing `localhost` as a Redirect URI reduces the security of your application as an attacker can more easily impersonate your app by using your `client_id` in a request and redirecting back to a server running on a user's machine and obtaining an ID Token for your app.
+
+- Configuration - Your server needs to be configured with its Redirect URI, usually as an environment variable, and Hellō needs to be configured with each environments Redirect URI.
+
+- Dynamic Previews - Services such as Vercel will generate a new, random hostname for each of your deployments so that you can preview them all independently. Manually adding the Redirect URIs for each preview is impractical.
+
+Hellō addresses these issues with Development Redirect URIs, Redirect URI Discovery, and Redirect URI Auto Config.
+
+### *2) What are Development Redirect URIs?*
+
+Hellō separates Redirect URIs to be either Development or Production. Only members of your team are allowed to use the Development Redirect URIs registered at Hellō. This allows your team to work against `localhost` without exposing your users to the security concerns of `localhost`. To reduce manual configuration, `localhost` (and `127.0.0.1`) are enabled by default when you create an app.
+
+### *3) What is Redirect URI Discovery?*
+
+If [`HELLO_REDIRECT_URI`](./environment/#hello_redirect_uri) has not been set, each server instance running a Hellō SDK will discover its Redirect URI on the first call to login by sending back a page with a script to read the URI the browser is running on and sending that back to the Hellō endpoint as an additional parameter, and then used to send the authorization request to Hellō. The SDK memoizes the Redirect URI for subsequent calls. This allows the SDK to learn the Redirect URI for Dynamic Previews, where the hostname is not known prior to deployment.
+
+### *4) What is Redirect URI Auto Config?*
+
+Redirect URI Auto Config removes manual configuration of the Redirect URI at the Hellō Developer Console. The Redirect URI Discovery removes the configuration burden at the server, but the Redirect URI still needs to be configured at Hellō. If the wildcard domain `https://*` option in the Development Redirect URIs is enabled for the application, your team is able to use any `https` Redirect URI. When using an unregistered Redirect URI, the Hellō Wallet adds the `wildcard_domain` query parameter to the response. When the SDKs see this parameter, they inject an interstitial page prompting your team member to register the Redirect URI as either a Development or Production RedirectURI, removing the requirement to manually register the Redirect URI.
+
+### *5) Why not just use `/api/hellocoop`?*
+
+We need the full URL for the `redirect_uri`. The server we are running may be behind a proxy, and the path may be mapped under another path. The discovery mechanism ensures we get the endpoint that the browser is using. 
+
+### *6) Why do the SDKs default to `/api/hellocoop`?*
+
+Putting it in `api` separates the endpoint from pages. Using `hellocoop` removes conflicts with many tutorials that create a `/api/hello` path. 
 
 

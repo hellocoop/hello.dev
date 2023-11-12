@@ -1,2 +1,60 @@
-# `hello.config`
+# `hello.config.js`
+
+This file contains the configuration for the [Express](./express), [Fastify](./fastify), and [Next.js](./nextjs) SDKs. It isis imported used by `hellocoop.js` file that provides the Hellō endpoint.
+
+A sample:
+
+```js filename="hello.config.js"
+const loggedIn = require('./path-to-your-loggedIn=-callback-function')
+
+const config = {
+    client_id: 'YOUR_CLIENT_ID',
+    scope: ['openid','name','email'], // default - openid name email picture
+    provider_hint: ['github'],         
+    routes: {
+        loggedIn: '/dashboard', // defaults to '/'
+        loggedOut: '/logout',   // defaults to '/'
+        error: 'error'          // defaults to built in error page
+    },
+    callbacks: {
+        loggedIn:
+    }
+}
+module.exports = config
+```
+
+### `client_id` 
+- required unless provided by a the `HELLO_CLIENT_ID` environment variable
+### `scope` 
+- override default scope request, see [Hellō Scopes](/docs/scopes) for options
+### `provider_hint` 
+- override providers recommended to users, see [API Reference | provider_hint](/docs/apis/wallet/#provider_hint)
+### `routes`
+- override routes to redirect user on log in, log out, and an OAuth error
+### `callback.loggedIn` 
+- function called on each successful login
+
+Here is how it is called:
+
+```js
+const {accessDenied, target_uri, updatedAuth} = await loggedIn( token, payload, cbReq, cbRes )
+```
+
+- `accessDenied` - optional boolean returned if the user should not be logged in
+
+- `target_uri` - optional URL to override where to redirect the user
+
+- `updated_auth` - an optional object that will to extend the auth object stored in the encrypted cookie. Use this to set roles or groups or other app specific user properties you want readily available. You cannot change the `iat`, `sub`, or `isLoggedIn` values
+
+- `token` - the [ID Token](/docs/oidc/token) in compact format
+
+- `payload` - the full payload of the ID Token.
+
+- `cbReq.getHeaders()` - returns the request headers
+
+- `cbRes.setHeaders( name, value )` - will set a response header
+
+- `cbRes.setCookie( name, value, options )` - will set a cookie value with options per [cookie](https://www.npmjs.com/package/cookie) `serialize`
+
+
 

@@ -41,27 +41,29 @@ Quickstart will then:
 
 ### Mount Hellō
 
-In your main server file where you have something like 
-
-`const app = express()`
-
-add the following code:
+In your main server file add the following code:
 
 <Tabs items={['TypeScript', 'JavaScript']} defaultIndex="2" >
   <Tabs.Tab>
-```typescript
-
+```typescript {2-3,7}
+import express from 'express'
 import helloAuth from '@hellocoop/express'
 import helloConfig from './hello.config.js' // adjust path as needed
 
+const app = express()
+
 app.use( helloAuth( helloConfig ) )
+
 ```
   </Tabs.Tab>
 
   <Tabs.Tab>
-```javascript
-const { helloAuth } = require('@hellocoop/express')
+```javascript {2-3,7}
+const express = require('express')
 const helloConfig = require('./hello.config.js') // adjust path as needed
+const { helloAuth } = require('@hellocoop/express')
+
+const app = express()
 
 app.use( helloAuth( helloConfig ) )
 ```
@@ -163,7 +165,8 @@ You now have a stub you can extend to integrate your user database!
 
 ## Next Steps
 
+- Change the claims received or providers recommended by updating your [`hello.config.js`](/docs/sdks/config/) file.
 
-Update your [`hello.config.js`](/docs/sdks/express/#helloconfigts) to change the claims received or providers recommended to new users.
+- Review the [SDK Reference | Next.js](../sdks/express) documentation.
 
-Review the [SDK Reference | Next.js](../sdks/express) documentation.
+- Replace the `./hello-callback.js` file with your own code that integrates with your user DB.
