@@ -26,6 +26,8 @@ The options are:
 
 The `hellocoop_oidc` cookie is further restricted to only be sent to the Hellō endpoint (default is `api/hellocop`) and a `maxAge:300` (5 minutes).
 
+In contrast, NextAuth.js has set [`sameSite: lax`](https://github.com/nextauthjs/next-auth/blob/main/packages/core/src/lib/cookie.ts).
+
 ### *5) Why are you not using `aes-256-gcm`?*
 
 Encrypting the cookie is only one layer of defense. The cookie is already protected by TLS and is not available to the browser. 128 bit keys are considered adequate security, and 256 bit keys are typically only required for military applications. Why consume more resources than are needed?
