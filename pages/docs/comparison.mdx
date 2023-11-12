@@ -149,7 +149,7 @@ Hellō has paved the path for localhost development by enabling it by default fo
 
 Hosted CIAM solutions simplify getting up and running by providing a datastore for your users' data and credentials. Not having to manage the storage of passwords is a positive. *(Not having yet-another-password is even better!)* This presents challenges when you need more that profile data to be associated with the user. You will have your own database, and you are now syncing across disparate data systems.
 
-You use your own DB with Hellō, and since Hellō is managing account linking and not you, you only need the one table for your users. No need to be mapping a table of accounts to user profiles. 
+You use your own DB with Hellō, and since Hellō is managing account linking and not you, you only need the one table for your users. No need to be mapping a table of accounts to user profiles or a table for email verifications. See the [NextAuth.js Postgres schema](https://next-auth.js.org/v3/adapters/typeorm/postgres) for comparison.
 
 ### 7.  Passkeys
 
