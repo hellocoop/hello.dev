@@ -21,17 +21,21 @@ const config: DocsThemeConfig = {
   editLink: {
     text: "Edit this page on GitHub"
   },
+  head: null,
   useNextSeoProps() {
     const { asPath } = useRouter()
+    const description = useConfig().frontMatter.description || 'hello.dev'
+
     if (asPath !== '/') {
       return {
+        description,
         titleTemplate: '%s | hello.dev',
         openGraph: {
           type: 'website',
           locale: 'en_US',
           url: 'https://hello.dev',
           site_name: 'hello.dev',
-          description: useConfig()?.frontMatter?.title || 'hello.dev',
+          description,
         },
         twitter: {
           handle: '@hellocoop',
