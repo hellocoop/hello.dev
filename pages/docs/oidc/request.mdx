@@ -17,8 +17,8 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 |`response_type` (optional)| `id_token` (implicit flow) or<br/><span>`code` (code flow - default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)).</span> |
 |`response_mode` (optional)|if `id_token` flow `fragment` or `form_post` (default) <br/>if `code` flow `fragment`, `form_post`, or `query` (default)|
 |`state` (optional)|A value representing the state of your application that will be returned as a parameter in the response|
-|`code_challenge`|REQUIRED if `code` flow and not using a client secret to authenticate to the token endpoint.|
-|`code_challenge_method`|May be provided if `code_challenge` is included.<br/>MUST have value of `S256`|
+|`code_challenge`|REQUIRED if `code` flow and not using a client secret to authenticate to the token endpoint. See PKCE below|
+|`code_challenge_method`|May be provided if `code_challenge` is included.<br/>MUST have value of `S256`. See PKCE below|
 
 ### PKCE Code
 
