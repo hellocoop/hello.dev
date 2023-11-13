@@ -171,6 +171,10 @@ Hellō does not offer login with passwords. This is a feature. Do you really wan
 
 If you are looking to move from your existing auth system, Hellō is unlikely to be the right choice for you. You cannot bring your users' existing passwords, or use your existing social login client_id. 
 
+### 11. Authorization Server
+
+A common design pattern for complex mobile applications is to use an OAuth 2.0 Authorization Server that issue the application an access token and potentially a resource token. The access tokens are presented when making API calls. As authentication solutions, neither Hellō nor NextAuth offer this functionality. 
+
 ### Feature Summary Chart
 
 |    | Feature                        | Hellō | Auth0 | Clerk | Keycloak  | NextAuth | 
@@ -186,14 +190,7 @@ If you are looking to move from your existing auth system, Hellō is unlikely to
 | 8  | Customizable<br/>User Flow     |  N/A  | <C/>  |  <C/> |   <C/>    |   <C/>    | 
 | 9  | Passwords                      |  N/A  | <C/>  |  <C/> |   <C/>    |   <W/>    | 
 | 10 | Lift & Shift                   |  ❌   | <C/>  |  <C/> |   <C/>    |   <C/>    | 
+| 11 | Authorization<br/>Server       |  ❌   | <C/>  |  <C/> |   <C/>    |    ❌     | 
 
-
-
-----
-
-
-## Data Schema
-
-TODO - Clerk / NextAuth schema vs Hello schema  
 
 
