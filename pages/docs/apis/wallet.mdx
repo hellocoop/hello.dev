@@ -1,0 +1,77 @@
+import { Callout } from 'nextra/components'
+
+# Wallet
+
+## Authorization Request 
+
+See [OpenID Connect | Auth Request](../oidc/request/) for the supported standard parameters.
+
+The Hellō Wallet supports the following extended parameter:
+
+### `provider_hint`
+
+When Hellō does not know the user's preferred provider (new user or new browser), they are presented with a recommended list of providers to choose from, with the option to show all the other supported providers. This minimizes the risk that a new user is overwhelmed by all the available options, while still providing choice.
+
+You can change which providers are recommended to better align with your users' preferences by passing a `provider_hint` query parameter in your authorization request.  You add providers by providing one or more space (or `+` in URL) separated slugs: 
+
+```http {3}
+https://wallet.hello.coop/authorize
+?{...}
+&provider_hint=discord+github
+```
+
+You can demote a default provider by suffixing the slug with `--`.
+
+```http /google--/
+https://wallet.hello.coop/authorize
+?{...}
+&provider_hint=google--
+```
+
+**Provider Defaults** 
+
+| Platform     | Default provider_hint values  |
+| -----------  | ----------------------------- |
+| Default      | `google email passkey¹`       |
+| macOS/iOS    | `apple google email passkey¹` |
+| Windows      | `microsoft google email`      |
+
+¹ Mobile devices where passkey is supported
+
+Possible slug values:
+
+- `apple`
+- `discord`
+- `email`
+- `ethereum`
+- `facebook`
+- `github`
+- `gitlab`
+- `google`
+- `line`
+- `mastodon`
+- `microsoft`
+- `passkey` - only offered on mobile devices
+- `qrcode`- useful when user may be at a Kiosk and will use their phone to login
+- `tumblr`
+- `twitch`
+- `twitter`
+- `wordpress`
+- `yahoo`
+
+
+<Callout type="info" emoji="🦆">
+Explore how the `provider_hint` functionality works with the [Hellō Playgound](https://playground.hello.dev)<br/>
+*Logout of the [Hellō Wallet](https://wallet.hello.coop) and click `forget me` to see the new user experience*
+</Callout>
+## Authorization Response
+
+See [OpenID Connect | Auth Response](../oidc/response/) for the supported standard parameters.
+
+The Hellō Wallet supports the following extended parameter:
+
+### `wildcard_domain`
+
+This parameter is part of the Hellō Auto Config process. If wildcard Development Redirect URIs (`https://*`) are enabled, and the supplied `redirect_uri` is not registered,
+then the Wallet will append the `wildcard_domain` parameter to the authorization response so that the application software can detect that it's Redirect URI is not registered, and prompt the developer to register it.
+

@@ -1,0 +1,91 @@
+import { Callout, Steps, Tabs } from 'nextra/components'
+
+# Svelte
+
+This packages provides Hellō button components that you can use in a Svelte SPA.
+
+## Setup
+
+To add Hellō to your Svelte application, in your project directory:
+
+<Steps>
+### Install the package
+
+```sh npm2yarn
+npm i @hellocoop/svelte
+```
+
+### Add Hellō stylesheet
+
+To provide the button styling, add the below code to the `<head>` section of the `index.html`:
+
+```html
+<link rel="stylesheet" href="https://cdn.hello.coop/css/hello-btn.css"/>
+```
+</Steps>
+
+## Components
+
+```typescript
+import { // only import buttons used
+    ContinueButton, 
+    LoginButton, 
+    UpdateEmailButton, 
+    UpdatePictureButton,
+    UpdateDiscordButton,
+    UpdateTwitterButton,
+    UpdateGitHubButton,
+    UpdateGitLabButton
+} from '@hellocoop/svelte'
+```
+
+### Buttons
+
+`<ContinueButton/>` - provides \[ ō Continue with Hellō \]
+
+`<LoginButton/>` - provides \[ ō Login with Hellō \]
+
+**Optional properties:**
+
+- `scope` - Array of [Hellō scope values](/docs/scopes). Default `['openid', 'email', 'name', 'picture']`.
+- `targetURI` - defaults to `HELLO_DEFAULT_TARGET_ROUTE` or '/'
+- `providerHint` - Array of [provider hints](/docs/apis/wallet). Example `['github', 'gitlab', 'email--', 'apple--', 'microsoft--']` would always recommend GitHub, GitLab, and Google.
+
+`<UpdateEmailButton/>` - provides \[ ō Update Email with Hellō \]
+
+`<UpdatePictureButton/>` - provides \[ ō Update Picture with Hellō \]
+
+`<UpdateDiscordButton/>` - provides \[ ō Update Discord with Hellō \]
+
+`<UpdateTwitterButton/>` - provides \[ ō Update Twitter with Hellō \]
+
+`<UpdateGitHubButton/>` - provides \[ ō Update GitHub with Hellō \]
+
+`<UpdateGitLabButton/>` - provides \[ ō Update GitLab with Hellō \]
+
+**Optional button styling properties:**
+- `color` - white | black
+- `theme` - ignore-light | ignore-dark | aware-invert | aware-static
+- `hover` - pop | glow | flare | none
+
+Explore styling with the [button playground](/docs/buttons/#explorer)
+
+### `<HelloProvider/>`
+
+By default, clicking the Hellō button would redirect to `/api/hellocoop?login=true` endpoint with the optional properties as additional query parameters. To override this behavior, wrap your app with the `<HelloProvider/>` component and pass the `config` object as a prop to the provider.
+```svelte filename="App.svelte"
+<script>
+    import { HelloProvider } from '@hellocoop/svelte';
+
+    //default
+    const config = {
+        login: '/api/hellocoop?login=true'
+    }
+</script>
+
+<HelloProvider {config}>
+    <main> 
+    ...
+    </main>
+</HelloProvider>
+```

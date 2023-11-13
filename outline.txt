@@ -1,0 +1,63 @@
+Getting Started
+    Introduction
+    User Experience
+    Data Flow
+    App Registration
+    Buttons
+    Scopes
+    Flows
+Quickstarts
+    - WordPress
+    - Next.js
+Hellō Buttons
+    Stylesheet
+    Explorer (explorer + generate code snippet to copy)
+    Reference (CSS classes table)
+    Tooltip (adding script)
+    Creating your own
+OpenID Connect
+    - Introduction
+    - Auth Request
+    - Auth Response
+    - ID Token
+    - Config
+
+Hellō Scopes
+    (existing)
+
+SDK Reference
+    Next.js
+    Core / Client
+    Quickstart
+API Reference
+    Wallet
+    Quickstart
+    Errors
+Hellō vs ___
+    CIAM
+    Auth0
+    Clerk
+    Keycloak
+    NextAuth.js
+    Comparison
+Roadmap
+    Quickstarts & SDKs
+    App Invitations
+    Delegated Access
+    Emergency Override
+    B2B Federation
+    Mock Server
+
+Comparison
+----
+
+local dev
+custom UX
+Pricing
+User Pool 
+
+Auth Methods
+    Password
+    Passkeys
+    
+

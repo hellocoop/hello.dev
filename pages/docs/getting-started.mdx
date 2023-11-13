@@ -1,0 +1,95 @@
+import { Steps } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
+# Getting Started
+
+<Callout type="info" emoji="ℹ️">
+    Check out our [Quickstarts](./quickstarts) to get up and running quickly on supported platforms!
+</Callout>
+
+To use Hellō in your web app you will need to:
+
+1. Register your app at Hellō
+2. Add a Hellō button 
+3. Configure your server for Hellō
+
+
+<Steps>
+
+### App Registration
+
+To use Hellō, register your application at [console.hello.coop](https://console.hello.coop/). You can start developing locally with just the **Client ID** and the defaults, which includes the **Development Redirect URIs** `http://localhost:*` and `http://127.0.0.1:*`. Depending on your server environment, you may need to generate a **Client Secret**.
+
+When you are ready to preview what is presented to users, provide the **Name**, **Logo**, and URLs for **Terms of Service** & **Privacy Policy**.  When you are ready for public access, provide your **Production Redirect URI(s)**.
+
+### Add a Hellō Button
+
+<Callout type="info" emoji="ℹ️">
+    If you are using React based framework, use our [`@hellocoop/react`](./sdks/react) component library.
+</Callout>
+
+To add a Hellō Button to your page:
+
+<b>2.1</b> Add a link to the Hellō stylesheet for button styling and Hellō JavaScript file for displaying the Hellō about text in the `<head>` of your document.  
+
+```html {3}
+<head>
+  <!-- ... -->
+  <link href="https://cdn.hello.coop/css/hello-btn.css" rel="stylesheet"/>
+  <!-- ... -->
+</head>
+```
+
+<b>2.2</b> Add the HTML for the Hellō Button in your page:
+
+```html {3-7}
+<body>
+  <!-- ... -->  
+  <div class="hello-container">
+    <button class="hello-btn" onclick="login">
+      ō&nbsp;&nbsp;&nbsp;Continue with Hellō
+    </button>
+  </div>
+  <!-- ... -->  
+</body>
+```
+
+<b>2.3</b> Add the `login()` function in your page:
+
+```html {9-15}
+<body>
+  <!-- ... -->  
+  <div class="hello-container">
+    <button class="hello-btn" onclick="login">
+      ō&nbsp;&nbsp;&nbsp;Continue with Hellō
+    </button>
+  </div>
+
+<script>
+  function login(event){
+    event.target.classList.add('hello-btn-loader')  // Show spinner
+    event.target.disabled = true                    // Disable button
+    window.location.href = LOGIN_PATH               // login endpoint
+  }
+</script>
+
+<!-- ... -->  
+</body>
+```
+The `LOGIN_PATH` will be determined by your server software.
+
+See [Hellō Buttons](./buttons) for styling and other button options.
+
+### Configure Your Server for Hellō
+
+Your server will need to support the OpenID Connect protocol to work with Hellō. Most platforms have a module that provides OpenID Connect support. Hellō supports all the various ways that an application may use OpenID Connect. 
+
+Follow the directions for your platform on enabling and installing OpenID Connect.
+
+Some software supports the `openid-configuration` file which is located at `https://issuer.hello.coop/.well-known/openid-configuration` for Hellō.
+
+See [OpenID Connect | Configuration](./oidc/config) for detailed information on how to configure your server.
+
+See [Hellō Scopes](./scopes) for information on the claims you may request from Hellō.
+
+</Steps>

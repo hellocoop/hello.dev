@@ -1,0 +1,37 @@
+# Environment Variables
+
+Consult your deployment and framework documentation on how to set these the environment values.
+
+## Required
+
+### HELLO_COOKIE_SECRET
+
+This environment variable must be set. It should be a different value for each environment such as development and production. This is the key to encrypt and decrypt the cookies. It is a 16 byte random / 32 character hex value. You can generate a value with:
+
+```sh
+node -e "console.log(crypto.randomBytes(16).toString('hex'))"
+```
+
+## Optional
+
+### HELLO_REDIRECT_URI
+
+Overrides auto config of `redirect_uri`. Set to be the full URL for the `redirect_uri` value. Setting this environment variable in production will eliminate the initial discovery bounce of auto config. 
+
+## Advanced
+
+### HELLO_CLIENT_ID
+
+Will override the `client_id` value set in `hello.config.js`. Use if you need different `client_id` values for different environments.
+
+### HELLO_API_ROUTE
+
+Defaults to `/api/hellocoop`. Change if you MUST have a different path for the Hellō router.
+
+### HELLO_HOST
+
+Defaults to `wallet.hello.coop`. Change when using a mock server of the Wallet. 
+
+### HELLO_DOMAIN
+
+Defaults to `hello.coop`. Used by Hellō for development and internal testing. Will change the domain used for the Wallet, Quickstart, and Console.

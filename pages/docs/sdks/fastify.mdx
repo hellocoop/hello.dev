@@ -1,0 +1,154 @@
+import { Steps } from 'nextra/components'
+import { Tabs } from 'nextra/components'
+import { Callout } from 'nextra/components'
+
+
+# fastify SDK
+
+<Callout type="info" emoji="ℹ️">
+    Follow the [Fastify Quickstart](/docs/quickstarts/fastify) directions to add Hellō to your application in minutes.
+</Callout>
+
+## Setup
+
+Following are the steps required to setup this package:
+
+### 1. Package Installation
+
+```sh npm2yarn
+npm i @hellocoop/fastify
+```
+
+> Hellō Quickstart will perform steps 2 - 4 for you
+> ```sh
+> npx @hellocoop/quickstart@latest --nextjs
+> ```
+
+### 2. `HELLO_COOKIE_SECRET`
+
+The environment variable `HELLO_COOKIE_SECRET` must be set to 32 char (16 byte) random hex string is required to encrypt cookies used by this package. This can be in `.env` for local development. 
+
+You can generate new values with:
+```sh
+node -e"console.log(crypto.randomBytes(16).toString('hex'))"
+``` 
+Remember to set a unique `HELLO_COOKIE_SECRET` in each of your deployed environments.
+
+The `.env` file should not be checked into your repository, and should be in your `.gitignore` file.
+
+### 3. `client_id`
+
+If not using Hellō Quickstart, you will need to create an application at the [Hellō Developer Console](https://console.hello.coop/) and get a `client_id`.
+
+### 4. `hello.config.js`
+
+The convention is to create a `hello.config.js` file in the root of your project for configuration. This file is imported into the `hellocoop.js` file and passed to the `pageAuth()` function for configuration. Below is a basic configuration file. See []() for additional configuration.
+
+```javascript
+const config = {
+    client_id: 'your-client_id-here'
+}
+module.exports = config
+```
+This file should be checked into your repository.
+
+### 5. API Route
+
+In your main server file add the following code:
+
+<Tabs items={['TypeScript', 'JavaScript']} defaultIndex="2" >
+  <Tabs.Tab>
+```typescript {2-3,5}
+import fastify from 'fastify'
+import helloConfig from '../hello.config.js' // adjust path as needed
+import { helloAuth } from '@hellocoop/fastify'
+
+fastify.register(helloAuth, config)
+
+```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+```javascript {2-3,5}
+const fastify = require('fastify')
+const { helloAuth } require('@hellocoop/fastify')
+const helloConfig = require('../hello.config.js') // adjust path as needed
+
+fastify.register(helloAuth, config)
+
+```
+  </Tabs.Tab>
+</Tabs>
+
+`helloAuth()` will add the `/api/hellocoop` endpoint which will process login, logout, and the redirect callback.
+
+
+Your server should now be fully configured to work with Hellõ.
+
+----------
+
+## API
+
+### `helloAuth()` 
+
+Configures the SDK and adds the `/api/hellocoop` route. See [5. Api Route](#5-api-route) for usage.
+
+### `req.getAuth()`
+Decrypts the `hellocoop_auth` cookie, sets `auth` to the value, and returns the result. If no cookie, sets `auth` to:
+
+```js
+isLoggedIn: false
+```
+
+### `req.auth`
+
+Returns the `auth` object if `req.getAuth()` has been called, or `setAuth` Middleware has been processed. Here is an example with the default scopes:
+
+```js
+isLoggedIn: true,
+sub: '66752aed-9cc2-4d17-875f-379b1a578f9a',
+iat: '1699234659',
+name: 'Dick Hardt',
+picture: 'https://pictures.hello.coop/r/7a160eed-46bf-48e2-a909-161745535895.png',
+email: 'dick.hardt@hello.coop'
+```
+### `res.logout()`
+
+Clears the `hellocoop_auth` cookie.
+
+### `hello.config.js`
+
+See [hello.config.js](./config)
+
+## Middleware
+
+`import { redirect, unauthorized, setAuth } from '@hellocoop/fastify/middleware'`
+
+### `redirect()`
+
+Will redirect to the passed path if `isLoggedIn=false`.
+
+Example:
+```js
+app.register(redirect('/'))`
+```
+### `unauthorized`
+
+Will return a `401` status code if `isLoggedIn=false`
+
+Example:
+```js
+app.register( unauthorized )
+```
+
+### `setAuth`
+
+Middleware that reads and decrypts the `hellocoop_auth` cookie and sets `req.auth`.
+
+Example:
+```js
+app.register( setAuth )`
+```
+
+
+

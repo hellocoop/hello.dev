@@ -1,0 +1,96 @@
+# Authentication Response
+
+## Response Modes
+
+If the user consents to your request, you will receive either a `code` or an `id_token` based on the value you set in `response_type`. If an error occurred, you will receive an `error` parameter instead. See the [Error](/docs/oidc/errors) section of API reference for error response details.
+
+How you receive the response is determined by the value of `response_mode`:
+
+### `query`
+
+This `response_mode` is only for the `code` flow. Not allowing `id_token` prevents the token and associated PII from being in web server logs.
+
+Sample Node.js code for getting code (or possible error)
+```javascript
+const { code, error } = req.query
+if (error)
+  // process error
+if (code)
+  // exchange code for id_token - see below
+```
+
+### `fragment`
+
+This `response_mode` is for client side processing of the response such as a single page app as the the fragment is only available to the browser. 
+
+The following sample JavaScript will acquire the `id_token` from the fragment
+
+```javascript
+const params = new URLSearchParams(window.location.hash.substring(1))
+const id_token = params.get('id_token') // eyJhbGciOiJSUzI1...rest_of_ID_Token
+```
+
+### `form_post`
+
+To provide this `response_mode`, Hellō sends a page to the browser that contains JavaScript that posts the response to the `redirect_uri`. Note this is NOT a JSON object, but has `Content-Type: application/x-www-form-urlencoded`
+
+Sample Node.js code for getting code (or possible error)
+```javascript
+const { code, error } = req.body
+if (error)
+  // process error
+if (code)
+  // exchange code for id_token - see below
+```
+
+## Process Response
+
+Both the `code` and `id_token` responses require further processing to complete authenticating your user. 
+
+### `code`
+
+You retrieve the ID Token for the user by doing an HTTP `POST` with `Content-Type: application/x-www-form-urlencoded` to `https://wallet.hello.coop/oauth/token` with the `client_id`,`code`, and `redirect_uri` parameters. If using PKCE, then the `code_verifier` is also included. Otherwise the `client_secret` is passed.
+
+**Sample code to call token endpoint**
+
+```javascript
+const url = 'https://wallet.hello.coop/oauth/token'
+const params = {
+  client_id,    // your apps client_id
+  code,         // the authorization code your received
+  redirect_uri, // the redirect_uri you used when making the request
+  code_verifier // the code_verifier used to generate the code_challenge
+
+}
+const options = {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    headers: {'Content-type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(params).toString()
+}
+const response = await fetch(url, options)
+const { id_token, error } = await response.json()
+```
+
+Assuming no errors, you now have an ID Token in compact JWT format.
+
+There is no requirement to verify the ID Token returned from the token endpoint as your application received it directly from Hellō. Of course, if your application provides the ID Token to another system, then it can independently verify the token.
+
+You will need to parse the ID Token to access the user info contained. See the [ID Token](./token/) section for details on the contents of an ID Token. 
+
+The `@hellocoop/core` Node.js SDK provides the `parseToken()` helper function to parse the ID Token for you.
+
+### `id_token`
+
+Your application has an ID Token for the user in compact format, but before using it, you need to ensure it is valid, and not an ID Token an attacker has passed to your application.
+
+You can verify the `id_token` by:
+1. Posting it to the [Hellō introspection API](); or
+2. Performing [self validation]() per [OpenID Connect 3.1.3.7](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation). It is highly recommended that you use a proven library to do verification of the ID Token.
+
+### UserInfo Endpoint
+
+To support inflexible deployments, Hellō supports the [UserInfo Endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo), an OAuth 2.0 protected resource. When doing calling the token endpoint, Hellō returns an access token in addition to the ID Token. The UserInfo endpoint is at `https://wallet.hello.coop/oauth/userinfo`. 
+
+NOTE: This is a stateless endpoint, as the access token contains all the information in the ID Token. This endpoint verifies the access token and returns the contents.

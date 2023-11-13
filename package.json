@@ -1,34 +1,38 @@
 {
   "name": "hello.dev",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "description": "Hellō is an OpenID Connect Provider that simplifies user registration and login, allowing you to provide all the choices your user's may want in hours instead of days or weeks.",
-  "main": "index.js",
-  "authors": {
-    "name": "",
-    "email": ""
-  },
-  "engines": {
-    "node": "~18",
-    "npm": "~9"
-  },
-  "repository": "/Hellō Dev",
   "scripts": {
-    "postinstall": "./scripts/pre-requisites.sh",
-    "dev": "vuepress dev src",
-    "build": "vuepress build src",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "test": "linkinator ./S3 --config linkinator.config.json",
     "pr": "./scripts/pr.sh",
     "rebase": "git pull origin main --rebase",
     "review": "npm run rebase && npm run build && npm run test && npm run pr"
   },
-  "license": "MIT",
-  "devDependencies": {
-    "@vuepress/plugin-register-components": "^2.0.0-beta.38",
-    "linkinator": "^4.0.3",
-    "vuepress": "^2.0.0-beta.35"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hellocoop/hello.dev.git"
   },
+  "bugs": {
+    "url": "https://github.com/hellocoop/hello.dev/issues"
+  },
+  "homepage": "https://www.hello.dev/",
   "dependencies": {
-    "vue-code-highlight": "^0.7.8",
-    "vuepress-plugin-vuepress2.x-code-copy": "github:rohanharikr/vuepress-plugin-vuepress2.x-code-copy"
+    "next": "^13.0.6",
+    "nextra": "latest",
+    "nextra-theme-docs": "latest",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.10",
+    "autoprefixer": "^10.4.16",
+    "linkinator": "^6.0.1",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^4.9.3"
   }
 }

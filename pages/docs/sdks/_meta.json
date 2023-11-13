@@ -1,0 +1,19 @@
+{
+    "express": "Express",
+    "fastify": "Fastify",
+    "nextjs": "Next.js",
+    "react": "React",
+    "svelte": "Svelte",
+    "vue": "Vue",
+    "----": {
+      "type": "separator"
+    },
+    "core-client": "Core/Client",
+    "quickstart": "Quickstart",
+    "---": {
+        "type": "separator"
+      },
+    "config": "hello.config.js",
+    "environment": "Environment Vars",
+    "faqs": "FAQs"
+}

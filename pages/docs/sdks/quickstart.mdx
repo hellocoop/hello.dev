@@ -1,0 +1,72 @@
+# Quickstart
+
+[Quickstart](https://quickstart.hello.coop) accelerates getting a developer up and running with apps that use Hellō. It returns a `client_id` by creating a new app with defaults, or selecting an existing Hellō app.
+
+The [Hellō Login](https://wordpress.org/plugins/hello-login/) WordPress plug-in and [Hellō Next.js Sample](https://hello-nextjs-sample.vercel.app) app use Hellō Quickstart.
+
+
+There are three mechanisms to invoke Quickstart:
+
+1. Load `https://quickstart.hello.coop` with query parameters. This can be used by any configuration script. See [API Reference | Quickstart](/docs/apis/quickstart) for details.
+2. Run the Quickstart CLI with `npx @hellocoop/quickstart@latest` passing command line parameters. This requires the developer to have Node.js installed. 
+3. Import the `@hellocoop/quickstart` npm package into a Node.js script and use the module.
+
+(2) and (3) both start a local web server on an unused port and launch the default web browser to load the Quickstart Web App.
+
+
+## CLI Parameters
+
+You can run the following command to create or retrieve the `client_id` for a Hellō Application. 
+```sh
+npx @hellocoop/quickstart@latest
+```
+
+This will open up a browser window, where you will need to login with Hellō, and then choose to create a new app, or return the `client_id`.
+
+#### Options
+
+- --provider_hint (-p) - space separated string of provider_hint 
+- --suffix (-x) - suffix to add to generated app name
+- --integration (-i) - integration name shown in console
+- --wildcard (-w) - boolean to set the wildcard domain Development Redirect URI
+- --nextjs - boolean to configure a Next.js app
+- --express - boolean to configure an Express app
+- --fastify - boolean to configure a Fastify app
+
+## `@hellocoop/quickstart` API
+`quickstart(config)`
+
+You can incorporate Quickstart in a Node.js script as part of your installer
+
+To install in a project:
+
+```sh npm2yarn
+npm install -D @hellocoop/quickstart
+```
+
+You can then use call Quickstart from a configuration script, example:
+```typescript
+// typescript
+import quickstart from '@hellocoop/quickstart';
+
+...
+const config = {
+    response_uri: 'http://localhost:8080',
+    name: 'Acme Demo App'
+    // ... other config parameters
+}
+
+const client_id = await quickstart(config)
+```
+
+### Options
+
+|Name|Description|
+|---|---|
+|`suffix`| String that will be appended to the suggested name (eg: John's + suffix) for an app to be created. Defaults to "Application"|
+|`integration`| Application that started Quickstart, shown in console, defaults to `quickstart`|
+|`name`| Name of the application (`suffix` param is ignored if `name` param is provided)|
+|`wildcard_domain`| a boolean value indicating if wildcard domains are enabled in Development Redirect URIs|
+|`provider_hint`| a space separated list of recommended providers per [provider_hint](/docs/apis/wallet/#provider-hint) that will be presented when logging in new users to Quickstart|
+
+The options above are passed through as query parameters to the Quickstart Web App, and are the same as documented in [API Reference | Quickstart](/docs/apis/quickstart/)

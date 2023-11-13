@@ -1,0 +1,46 @@
+{
+  "*": {
+    "theme": {
+      "footer": false,
+      "timestamp": false
+    } 
+  },
+  "index": {
+    "title": "Home",
+    "type": "page",
+    "display": "hidden",
+    "theme": {
+      "layout": "full"
+    }
+  },
+  "docs": {
+    "title": "Documentation",
+    "type": "page"
+  },
+  "faqs": {
+    "title": "FAQs",
+    "type": "page"
+  },
+  "pricing": {
+    "title": "Pricing",
+    "type": "page"
+  },
+  "blog": {
+    "title": "Blog",
+    "type": "page",
+    "href": "https://blog.hello.dev/",
+    "newWindow": true
+  },
+  "console": {
+    "title": "Console",
+    "type": "page",
+    "href": "https://console.hello.coop/",
+    "newWindow": true
+  },
+  "playground": {
+    "title": "Playground",
+    "type": "page",
+    "href": "https://playground.hello.dev/",
+    "newWindow": true
+  }
+}
