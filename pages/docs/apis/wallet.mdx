@@ -68,10 +68,14 @@ Explore how the `provider_hint` functionality works with the [Hellō Playgound](
 
 See [OpenID Connect | Auth Response](../oidc/response/) for the supported standard parameters.
 
-The Hellō Wallet supports the following extended parameter:
+The Hellō Wallet supports the following extended parameters:
 
 ### `wildcard_domain`
 
 This parameter is part of the Hellō Auto Config process. If wildcard Development Redirect URIs (`https://*`) are enabled, and the supplied `redirect_uri` is not registered,
-then the Wallet will append the `wildcard_domain` parameter to the authorization response so that the application software can detect that it's Redirect URI is not registered, and prompt the developer to register it.
+then the Wallet will append the `wildcard_domain` parameter to the authorization response so that the application software can detect that it's Redirect URI is not registered, and prompt the developer to register it. The `wildcard_domain` is a URL that will load the Hellō Developer Console for the current Application and prompt the team member to save as a Development Redirect URI, Production Redirect URI, or cancel
+
+### `app_name`
+
+Included if `wildcard_domain` is provided. Contains the App Name as registered at the Hellō Developer Console.
 
