@@ -9,7 +9,7 @@ const Feed = () => {
             item: ['cover_image']
         }}
     )
-    const rss = "https://blog.hello.coop/feed/"
+    const rss = "https://blog.hello.dev/rss.xml"
     const [posts, setPosts] = useState([])
     
     useEffect(() => {
