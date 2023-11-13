@@ -73,20 +73,6 @@ export default function HelloTest() {
             alignSelf: 'center',
             width: '80%' // Adjust as needed
         }
-        @media (prefers-color-scheme: light) {
-            body {
-                color: #303030;
-                background: white;
-                color-scheme: light;
-            }
-        }
-        @media (prefers-color-scheme: dark) {
-            body {
-                color: #d4d4d4;
-                background: #151515;
-                color-scheme: dark;
-            }
-        }
       `}</style>
     </>
   )
