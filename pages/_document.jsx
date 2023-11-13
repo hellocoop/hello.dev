@@ -12,7 +12,15 @@ class MyDocument extends Document {
           <script src="https://cdn.hello.coop/js/hello-dev-wc-footer.js"/>
           <script src="https://cdn.hello.coop/js/join-slack-community.js"/>
           <script defer data-domain="hello.dev" src="https://plausible.io/js/script.js"/>
-          <meta name="description" content="Hellō is an OpenID Connect Provider that simplifies user registration and login, allowing you to provide all the choices your user's may want in hours instead of days or weeks."></meta>
+          <meta name="description" content="Hellō gives you login and registration in minutes, not hours, days or weeks."></meta>
+          <meta property="og:image" content="https://cdn.hello.coop/images/mockup-light.png" />
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:width" content="512" />
+          <meta property="og:image:height" content="583" />
+          <meta name="twitter:image" content="https://cdn.hello.coop/images/mockup-light.png" />
+          <meta name="twitter:image:type" content="image/png" />
+          <meta name="twitter:image:width" content="512" />
+          <meta name="twitter:image:height" content="583" />
         </Head>
         <body>
           <Main />

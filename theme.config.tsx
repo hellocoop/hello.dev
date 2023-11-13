@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { DocsThemeConfig } from 'nextra-theme-docs'
+import { DocsThemeConfig, useConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
   logo: <span className="font-semibold text-xl">hello.dev</span>,
@@ -25,7 +25,19 @@ const config: DocsThemeConfig = {
     const { asPath } = useRouter()
     if (asPath !== '/') {
       return {
-        titleTemplate: '%s | hello.dev'
+        titleTemplate: '%s | hello.dev',
+        openGraph: {
+          type: 'website',
+          locale: 'en_US',
+          url: 'https://hello.dev',
+          site_name: 'hello.dev',
+          description: useConfig()?.frontMatter?.title || 'hello.dev',
+        },
+        twitter: {
+          handle: '@hellocoop',
+          site: '@hellocoop',
+          cardType: 'summary_large_image',
+        }
       }
     }
   }
