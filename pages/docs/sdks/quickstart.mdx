@@ -2,54 +2,23 @@
 
 [Quickstart](https://quickstart.hello.coop) accelerates getting a developer up and running with apps that use Hellō. It returns a `client_id` by creating a new app with defaults, or selecting an existing Hellō app.
 
-The [Hellō Login](https://wordpress.org/plugins/hello-login/) WordPress plug-in and [Hellō Next.js Starter](https://hello-nextjs-starter.vercel.app) app use Hellō Quickstart.
+The [Hellō Login](https://wordpress.org/plugins/hello-login/) WordPress plug-in and [Hellō Next.js Sample](https://hello-nextjs-sample.vercel.app) app use Hellō Quickstart.
 
 
 There are three mechanisms to invoke Quickstart:
 
-1. Load `https://quickstart.hello.coop` with query parameters. This can be used by any configuration script.
-2. Run the Quickstart CLI with `npx @hellocoop/quickstart@latest` passing command line parameters. This requires the developer to have Node.js installed. The CLI can generate a `HELLO_COOKIE_SECRET` and write it and `HELLO_CLIENT_ID` to a `.env` file. 
+1. Load `https://quickstart.hello.coop` with query parameters. This can be used by any configuration script. See [API Reference | Quickstart](/docs/apis/quickstart) for details.
+2. Run the Quickstart CLI with `npx @hellocoop/quickstart@latest` passing command line parameters. This requires the developer to have Node.js installed. 
 3. Import the `@hellocoop/quickstart` npm package into a Node.js script and use the module.
 
 (2) and (3) both start a local web server on an unused port and launch the default web browser to load the Quickstart Web App.
 
 
-## Querystring API
-
-You can add Hellō Quickstart to a sample application, plug-in, or other software module with the web redirect API below.
-
-### Launching Quickstart 
-
-You load https://quickstart.hello.coop/ with the following optional query parameters:
-
-|Name|Description|
-|---|---|
-|`response_uri`| URI that Quickstart will redirect to with the `client_id` query parameter|
-|`suffix`| String that will be appended to the suggested name (eg: John's + suffix) for an app to be created. Defaults to "Application"|
-|`integration`| Application that started Quickstart, shown in console, defaults to `quickstart`|
-|`name`| Name of the application (`suffix` param is ignored if `name` param is provided)|
-|`tos_uri`| URI to the Terms of Service|
-|`pp_uri`| URI to the Privacy Policy|
-|`image_uri`| URI to the app logo|
-|`dark_image_uri`| URI to the dark theme app logo, which is shown if dark theme is detected in the browser|
-|`redirect_uri`| One or more space separated OAuth `redirect_uri` values to be added to the Production Redirect URIs<br/>`http:\\localhost:*` and `http:\\127.0.0.1` Development Redirect URIs are enabled by default|
-|`wildcard_domain`| a boolean value indicating if wildcard domains are enabled in Development Redirect URIs|
-|`provider_hint`| a space separated list of recommended providers per [provider_hint](/docs/apis/wallet/#provider-hint) that will be presented when logging in new users to Quickstart|
-
-**An example URL with params to quickstart will look like this:**<br/>
-*(line feeds added & URL decoded for readability)*
-
-### Quickstart Response
-
-On completion, the Quickstart app will load the `response_uri` with `client_id` query parameter set to the Hellō Client ID. 
-
-Try out the [Quickstart App ](https://quickstart.hello.coop/)
-
 ## CLI Parameters
 
 You can run the following command to create or retrieve the `client_id` for a Hellō Application. 
 ```sh
-npx @hellocoop/quickstart@latest@latest
+npx @hellocoop/quickstart@latest
 ```
 
 This will open up a browser window, where you will need to login with Hellō, and then choose to create a new app, or return the `client_id`.
@@ -60,6 +29,9 @@ This will open up a browser window, where you will need to login with Hellō, an
 - --suffix (-x) - suffix to add to generated app name
 - --integration (-i) - integration name shown in console
 - --wildcard (-w) - boolean to set the wildcard domain Development Redirect URI
+- --nextjs - boolean to configure a Next.js app
+- --express - boolean to configure an Express app
+- --fastify - boolean to configure a Fastify app
 
 ## `@hellocoop/quickstart` API
 `quickstart(config)`
@@ -86,9 +58,15 @@ const config = {
 
 const client_id = await quickstart(config)
 ```
-All the options are strings that are passed as query parameters to the Quickstart Web App. See the [Quickstart API](#querystring-api) for details.
 
-## Admin API
+### Options
 
-This API is used by [Console](https://console.hello.coop) and [Quickstart](https://quickstart.hello.coop) to manage Hellō Publishers & Applications. Please contact us if you would like to integrate Hellō Admin APIs directly into your management console.
+|Name|Description|
+|---|---|
+|`suffix`| String that will be appended to the suggested name (eg: John's + suffix) for an app to be created. Defaults to "Application"|
+|`integration`| Application that started Quickstart, shown in console, defaults to `quickstart`|
+|`name`| Name of the application (`suffix` param is ignored if `name` param is provided)|
+|`wildcard_domain`| a boolean value indicating if wildcard domains are enabled in Development Redirect URIs|
+|`provider_hint`| a space separated list of recommended providers per [provider_hint](/docs/apis/wallet/#provider-hint) that will be presented when logging in new users to Quickstart|
 
+The options above are passed through as query parameters to the Quickstart Web App, and are the same as documented in [API Reference | Quickstart](/docs/apis/quickstart/)

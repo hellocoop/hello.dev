@@ -8,7 +8,7 @@ import { Callout } from 'nextra/components'
     Check out our [Hellō Next.js Sample](https://github.com/hellocoop/hello-nextjs-sample) where you will be logging in with [Hellō](https://hello.coop/) in less than a minute.
 </Callout>
 <Callout type="info" emoji="ℹ️">
-    Follow the [Next.js Quickstart](/docs/quickstart/nextjs) directions to add Hellō to your application in minutes.
+    Follow the [Next.js Quickstart](/docs/quickstarts/nextjs) directions to add Hellō to your application in minutes.
 </Callout>
 
 
@@ -153,7 +153,7 @@ The following buttons are available:
 </Tabs>
 >  Note they are in `@hellocoop/nextjs/react`
 
-See the [SDK Reference | React](../react/) for details.
+See the [SDK Reference | React](./react/) for details.
 
 ## Components
 
@@ -181,7 +181,7 @@ The following React components are available:
 </Tabs>
 >  Note they are in `@hellocoop/nextjs/react`
 
-See the [SDK Reference | React](../react/) for details.
+See the [SDK Reference | React](./) for details.
 
 ## Client APIs
 
@@ -347,7 +347,7 @@ const config: Config = {
 export default config
 ```
 
-- See [Hellō Scopes](/scopes) for `scope` options.
+- See [Hellō Scopes](/docs/scopes) for `scope` options.
 - See [API Reference|Wallet|provider_hint](http://localhost:3000/docs/apis/wallet/#provider_hint) for `provider_hint` details.
 
 ### Environment Variables
@@ -393,7 +393,7 @@ To provide the button styling, add the below code to the `<Head>` section of the
 <link rel="stylesheet" href="https://cdn.hello.coop/css/hello-btn.css"/>
 ```
 
-See [hello-nextjs-starter _document.tsx](https://github.com/hellocoop/hello-nextjs-starter/blob/main/pages/_document.tsx) for reference.
+See [hello-nextjs-sample _document.tsx](https://github.com/hellocoop/hello-nextjs-sample/blob/main/pages/_document.tsx) for reference.
 
 > To ensure the button styles are available, client-side rendered buttons check if the stylesheet has been included in the document head, and if not the stylesheet is injected. Injecting into the head is [not recommended](https://nextjs.org/docs/messages/no-stylesheets-in-head-component) and creates a button rendering glitch.
 

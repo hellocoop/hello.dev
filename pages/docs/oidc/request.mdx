@@ -1,7 +1,8 @@
-# Auth Request
+# Authentication Request
 
+Hello supports both the [Code Flow](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth) and the [Implicit Flow](https://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth)
 
-# 2. Create Request URL
+## Create Request URL
 
 *The [`@hellocoop/core`](https://www.npmjs.com/package/@hellocoop/nextjs) npm package has a `createAuthRequest()` function that simplifies creating an authorization request URL, including the PKCE code_verifier and code_challenge*
 
@@ -13,7 +14,7 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
 |`scope`|The `openid` scope and zero or more scopes listed at [Hellō Claims](/docs/scopes)|
 |`nonce`|A unique string that will be included in the signed ID Token. This links the ID Token to your request|
-|`response_type` (optional)| `id_token` flow or<br/><span>`code` flow (default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)).</span> |
+|`response_type` (optional)| `id_token` (implicit flow) or<br/><span>`code` (code flow - default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)).</span> |
 |`response_mode` (optional)|if `id_token` flow `fragment` or `form_post` (default) <br/>if `code` flow `fragment`, `form_post`, or `query` (default)|
 |`state` (optional)|A value representing the state of your application that will be returned as a parameter in the response|
 |`code_challenge`|REQUIRED if `code` flow and not using a client secret to authenticate to the token endpoint.|
@@ -30,7 +31,7 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 >The `code_challenge` is part of the authorization request, and the `code_verifier` is presented with the `code` to Hellō which verifies the `code` was requested with the `code_challenge`. This allows an application to not have to manage a client secret when using a `code` flow.
 
 
-**Here is a sample `id_token` flow request from the[ GreenfieldDemo](https://greenfielddemo.com) app**<br/>
+**Here is a sample `id_token` (implicit flow) request from the[ GreenfieldDemo](https://greenfielddemo.com) app**<br/>
 *(line feeds added for readability)*
 
 ```http
@@ -42,13 +43,13 @@ https://wallet.hello.coop/authorize
 &response_mode=fragment
 ```
 
-**Here is a sample `code` flow request from the[ Hellō Next.js Starter](https://hello-nextjs-starter.vercel.app/) app**<br/>
+**Here is a sample `code` flow request from the [Hellō Next.js Sample](https://hello-nextjs-sample.vercel.app/) app**<br/>
 *(line feeds added for readability)*
 
 ```http
 https://wallet.hello.coop/authorize
 ?client_id=db4ad0b8-c589-4328-8094-f2d0e2cd3aaa
-&redirect_uri=https://hello-nextjs-starter.netlify.app/api/hellocoop
+&redirect_uri=https://hello-nextjs-sample.netlify.app/api/hellocoop
 &scope=openid+name+email+picture
 &nonce=ecc855c9-41e3-46a0-a99a-d1fa3e3c1d3f
 &response_type=code
@@ -58,9 +59,9 @@ https://wallet.hello.coop/authorize
 ```
 
 ### Advanced Features
-See the [Authorization Request](/docs/oidc/request) reference for additional functionality including how to change the recommended providers.
+See the [API Reference | Wallet](/docs/apis/wallet/) for additional functionality including how to change the recommended providers with `provider_hint`.
 
-## 3. Make Request
+## Make Request
 
 Cause the user's browser to load the `request URL` you created in `Step 2`. Here are some examples:
 - Set `window.location.href` with JavaScript
@@ -78,6 +79,3 @@ Location: https://wallet.hello.coop/authorize?...
 ```
 
 The user will then interact with Hellō. When finished they will be redirected back to your application with either an ID Token, an authorization code, or an error response.
-
-
-See [API Reference | Wallet](../apis/wallet/#authorization-request) for extended parameters such as `provider_hint`.

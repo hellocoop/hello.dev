@@ -122,7 +122,7 @@ Useful when:
 - `response_type=id_token`
 - `response_mode=fragment`
 
-This is a helper function for the `https://wallet.hello.coop/oauth/introspection` API as described [here](../Integrating-hello#id-token). 
+This is a helper function for the `https://wallet.hello.coop/oauth/introspection` API as described [here](/docs/oidc/verification#introspection). 
 
 `const response = await validateToken(params)`
 
@@ -137,7 +137,7 @@ params = {
 
 This will call the wallet's introspection endpoint that will examine the token, ensure it was from Hellō, has not expired, and return the payload.
 
-If successfully validated, you will receive the full [ID Token payload](../Integrating-hello#introspection-response) with `active: true` to indicate it is an active token. If unsuccessful, you will receive an [Introspection Errors](./errors#introspection).
+If successfully validated, you will receive the full [ID Token payload](/docs/oidc/verification#response) with `active: true` to indicate it is an active token. If unsuccessful, you will receive an [Introspection Errors](/docs/oidc/errors#introspection).
 
 
 ## Server Code Sample

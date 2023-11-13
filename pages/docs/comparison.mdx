@@ -23,9 +23,9 @@ Having a central service for users to manage and reuse their identity significan
 - *Data Model* - You only need a user table. You do not need to a table for user accounts / authentication as Hellō provides you an ID Token with an identifier for the user and the claims you requested. No Passwords. No managing muliple social logins. Rare account merging as Hellō will merge social accounts for you.
 
 ### <Color color="#FF0000">*Cons*</Color>
-- *External Service* - 
-- *No Passwords*  - 
-- *No DB* -
+- *External Service* - You are taking a dependency on another service.
+- *No Passwords* - If you require users to be able to user passwords, Hellō is not your solution. 
+- *No DB* - Hellō does not manage your user database. Setting up your own database takes effort.
 
 
 ## Alternatives
@@ -75,7 +75,7 @@ NextAuth.js (rebranding as Auth.js) is a popular open source React framework (Sv
 
 <Color color="#FF0000">*Cons*</Color>  NextAuth.js
 - *DIY* - You will need to keep everything updated. NextAuth initially made a wise decision to not support passwords, minimizing the attack surface. They recently started supporting passwords, dramatically increasing the account protection burden. 
-- *Node.js Only* - A popular option, but not useful if you are using another language for your server
+- *Node.js Only* - A popular option, but not useful if you are using another language for your server.
 
 
 ### Write Your Owm
@@ -107,7 +107,7 @@ There is also the time and cost to integrate with your app and to configure each
 
 ### 1.  Auto Config
 
-With the [Hellō Quickstarts](/docs/qucikstarts), you can start developing with Hellō with no manual configuration. Even if you are not using one of the Quickstarts, you are able to start building your app on your local machine after logging into the [Hellō Developer Console](https://console.hello.coop). 
+With the [Hellō Quickstarts](/docs/quickstarts), you can start developing with Hellō with no manual configuration. Even if you are not using one of the Quickstarts, you are able to start building your app on your local machine after logging into the [Hellō Developer Console](https://console.hello.coop). 
 
 When you are ready for production, you only need to set your Terms of Service and Privacy Policy URLs, drop in your logo, and set your Production Redirect URI. A process that takes minutes
 

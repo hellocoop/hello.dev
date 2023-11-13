@@ -5,8 +5,6 @@ sidebar: false
 
 # FAQs
 
-## Lorem Ipsum
-
 ### *1) What is Hellō?* 
 
 Hellō is a service that simplifies registration and log in of your users. Hellō uses OpenID Connect, the same protocol used by Apple, Facebook, and Google in their social log in services. 
@@ -21,7 +19,7 @@ Hellō has a freemium business model where we provide free and premium verified 
 
 ### *4) How do I get started using Hellō?*
 
-Check out the [Using Hellō](/docs/getting-started) documentation. 
+Check if there is a [Quickstart](/docs/quickstarts/) for your platform, or the the [Using Hellō](/docs/getting-started/) documentation. 
 
 
 ### *5) What types of applications is Hellō suitable for?*
@@ -32,20 +30,19 @@ Hellō can be used with any application that can perform an OpenID Connect flow.
 
 New applications have no existing user pool to integrate with. Since there is no existing investment in registration and log in, the Hellō value proposition to a new application is very strong. In the future, as Hellō starts to achieve a critical mass of users, we will provide integration features for existing (brown field) applications.
 
-## Lorem Ipsum
 
 ### *7) What is a publisher?*
 
 A publisher is a group of administrators and testers working on one or more applications. The publisher abstraction allows you to have multiple apps that all receive the same `sub` subject identifier for a given user, so that you can provide user's a holistic experience across all of your apps if desired. *(Currently you are not yet able to invite others to your application -- coming soon!)*
 
 
-### *8) What is the difference between development and production redirect URIs?*
+### *8) What is the difference between Development and Production Redirect URIs?*
 
-Hellō will only allow a publisher's administrator, developers, and testers to access an application's development URIs. Other users will be denied access. Localhost addresses are not permitted in production URIs.
+Hellō will only allow a publisher's administrator and testers to access an application's development URIs. Other users will be denied access. Localhost addresses are not permitted in production URIs.
 
 ### *9) Which OpenID Connect flows does Hellō support?*
 
-Unlike most social providers, Hellō supports all the redirect flows. We recommend the `id_token` flow if that choice is available to you as you will not need to manage a client secret nor implement [PKCE]. Hellō also supports the `code` flow which requires PKCE or a client secret (ideally both). The `code` flow will return both an `id_token` and an `access_token`, the later can be used to call the Hellō `user_info_endpoint` if you are using an integration that only works that way.
+Hellō supports the both the code and implicit flows. We recommend the `code` flow unless you are writing a single page app.
 
 ### *10) What does Hellō provide me to identify my users?*
 
@@ -67,11 +64,10 @@ You can use the picture URL as the user's profile picture using the Hellō CDN, 
 
 You can send the user back to Hellō where the user can update a claim. To see this in action, see the:
 
-<button className="hello-btn hello-btn-white-and-static" style={{marginTop: "10px"}}>ō&nbsp;&nbsp;&nbsp;Update with Hellō</button> 
+<button className="hello-btn hello-btn-white-and-static" style={{marginTop: "10px"}}>ō&nbsp;&nbsp;&nbsp;Update Email with Hellō</button> 
 
 functionality in the [GreenfieldDemo.com](https://greenfielddemo.com) demo app.
 
-## Lorem Ipsum
 
 ### *15) How do I tell Hellō the user wants to update the profile they have at my application?*
 

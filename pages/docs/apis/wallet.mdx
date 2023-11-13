@@ -6,7 +6,7 @@ import { Callout } from 'nextra/components'
 
 See [OpenID Connect | Auth Request](../oidc/request/) for the supported standard parameters.
 
-The Hellō Wallet supports the following extended paramters:
+The Hellō Wallet supports the following extended parameter:
 
 ### `provider_hint`
 
@@ -66,5 +66,12 @@ Explore how the `provider_hint` functionality works with the [Hellō Playgound](
 </Callout>
 ## Authorization Response
 
+See [OpenID Connect | Auth Response](../oidc/response/) for the supported standard parameters.
+
+The Hellō Wallet supports the following extended parameter:
+
 ### `wildcard_domain`
+
+This parameter is part of the Hellō Auto Config process. If wildcard Development Redirect URIs (`https://*`) are enabled, and the supplied `redirect_uri` is not registered,
+then the Wallet will append the `wildcard_domain` parameter to the authorization response so that the application software can detect that it's Redirect URI is not registered, and prompt the developer to register it.
 
