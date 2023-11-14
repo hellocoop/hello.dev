@@ -39,7 +39,7 @@ const Feed = () => {
                                 <span className="text-sm opacity-80">{i.pubDate.split(" ").slice(0, -2).join(" ")}</span>
                                 <h3 className="text-xl font-semibold my-1 group-hover:underline">{i.title}</h3>
                                 <p className={`${styles.description} opacity-80`}>
-                                    {i.contentSnippet}
+                                    {i.contentSnippet.replaceAll('Hell', 'Hellō')}
                                 </p>
                             </div>
                         </Link>
