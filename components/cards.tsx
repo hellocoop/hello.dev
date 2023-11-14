@@ -92,7 +92,7 @@ export function Card({
       >
         {icon}
         {title}
-        <span className="block -mt-1 opacity-60 text-sm">{description}</span>
+        <span className="block -mt-1 opacity-60 text-sm text-left">{description}</span>
         {animatedArrow}
       </span>
     </NextLink>
