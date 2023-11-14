@@ -34,6 +34,8 @@ node -e"console.log(crypto.randomBytes(16).toString('hex'))"
 ``` 
 Remember to set a unique `HELLO_COOKIE_SECRET` in each of your deployed environments.
 
+See [Environment Vars](./environment) for additional values that can be set.
+
 The `.env` file should not be checked into your repository, and should be in your `.gitignore` file.
 
 ### 3. `client_id`
@@ -50,7 +52,10 @@ const config = {
 }
 module.exports = config
 ```
-This file should be checked into your repository.
+This file should be checked into your repository. 
+
+See [hello.config.js](./config) for additional configuration.
+
 
 ### 5. API Route
 
@@ -119,9 +124,6 @@ email: 'dick.hardt@hello.coop'
 
 Clears the `hellocoop_auth` cookie.
 
-### `hello.config.js`
-
-See [hello.config.js](./config)
 
 ## Middleware
 

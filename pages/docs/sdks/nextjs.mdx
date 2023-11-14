@@ -37,6 +37,8 @@ node -e"console.log(crypto.randomBytes(16).toString('hex'))"
 ``` 
 Remember to set a unique `HELLO_COOKIE_SECRET` in each of your deployed environments.
 
+See [Environment Vars](./environment) for additional values that can be set.
+
 The `.env.local` file should not be checked into your repository, and should be in your `.gitignore` file.
 
 ### 3. `client_id`
@@ -54,6 +56,8 @@ const config = {
 module.exports = config
 ```
 This file should be checked into your repository.
+
+See [hello.config.js](./config) for additional configuration.
 
 ### 5. API Route
 
@@ -185,9 +189,7 @@ See the [SDK Reference | React](./) for details.
 
 ## Client APIs
 
-# UNDER CONSTRUCTION
-
-### `useAuth()` - Client Side
+### `useAuth()`
 
 ```typescript
 import { useAuth } from '@hellocoop/nextjs'
@@ -207,7 +209,6 @@ const {
 } = useAuth()
 ```
 
-```
 
 ### `logOut()`
 
@@ -221,8 +222,9 @@ import { logOut, logOutRoute } from '@hellocoop/nextjs'
 
 ## Server APIs 
 
-### `getAuth()` - Server Side
+> We are still working on Server APIs for Server Components that work with the App Router
 
+### `getAuth( req )` ( Page Router )
 
 ```typescript
 import { getAuth } from '@hellocoop/nextjs'
@@ -239,6 +241,7 @@ const {
 } = await getAuth( req )
 ```
 
+Used in page routes to get the auth object.
 
 ### `getServerSideProps()`
 
@@ -273,8 +276,9 @@ export { getServerSideProps } from '@hellocoop/nextjs'
 This is a callback you provide in the `pageAuth()` config that can do any logic you need when a user logs in. For example:
 
 - Determine if the user has access
-- Process the page yourself
 - Add roles or other properties to the `auth` cookie
+
+See [`callback.login`](./config#callbackloggedin) for details
 
 ```typescript filename="src/your-logged-in-logic.ts"
 import type { LoggedInParams, LoggedInResponse } from '@hellocoop/nextjs'
@@ -289,136 +293,15 @@ export default async loggedInCallback ({
     // use sub claim as user identifier
     const { sub: id } = payload
     const user = async readUserTable(id)
-    const authorizedUser: boolean = isUserAuthorized(user)
-
-    // no auth cookie set - redirected to error page
-    if (!authorizedUser) 
+    const role: Role = getUserRole(id)    
+    
+    // auth cookie will not be set
+    if (!isRoleAuthorized(role)) 
         return {accessDenied: true}
 
-    // no auth cookie set - process response directly
-    if (!authorizedUser) {
-        res.end(ErrorResponse)
-        return {
-            accessDenied: true
-            isProcessed: true
-        }
-    }
-
-    // choose what to store in auth cookie
-    return { auth: { email, name, picture }} = payload  // default values
-
-    // process response and set auth cookie
     const { email, name, picture } = payload
-    res.end(LoggedInPage({ email, name, picture }))
     return { 
-        isProcessed: true,
-        auth: { email, name, picture }
+        // add role to auth object
+        auth: { email, name, picture, role }
     }
 } 
-
-### `pageAuth()`
-
-See [pageAuth Config](#pageauth-config)
-
-## Configuration
-
-
-###  `hello.config.js`
-
-loaded by `pageAuth()`
-
-```typescript filename="hello.config.js"
-import type { Config } from '@hellocoop/nextjs'
-import loggedIn from './src/your-logged-in-logic'
-
-const config: Config = {
-    client_id: '00001111_2222_3333_4444_555566667777',
-    scope: ['email','name','picture'], // default scopes
-    provider_hint: ['github'],         // this will add Github as a provider 
-    callbacks: {
-        loggedIn                // called when logged in
-    },
-    pages: {
-        loggedIn: '/',          // default route after logged in
-        loggedOut:'/',          // default route when logged out
-        error:  '/auth/error',  // OAuth error parameters are passed in query string
-    
-}
-export default config
-```
-
-- See [Hellō Scopes](/docs/scopes) for `scope` options.
-- See [API Reference|Wallet|provider_hint](http://localhost:3000/docs/apis/wallet/#provider_hint) for `provider_hint` details.
-
-### Environment Variables
-
-**Required Variables that MUST be set:**
-
-The `HELLO_COOKIE_SECRET` is added to `.env.local` by Quickstart for running locally.
-You will need to add it the environment of a deployed app.
-
-- `HELLO_COOKIE_SECRET` a random 32 char hex string (16 bytes). Should be unique for each environment. Generate a secret with:
-
-```sh
-node -e "console.log(crypto.randomBytes(16).toString('hex'))"
-```
-
-**Optional Variables that MaY be needed:**
-
-- `HELLO_REDIRECT_URI` overrides dynamic redirect_uri discovery
-- `HELLO_CLIENT_ID` the client_id for the app. Will over ride value in `hello.config.js`
-
-**Testing Variables:**
-
-- `HELLO_DOMAIN` - overrides 'hello.coop' - used for testing by Hellō team
-- `HELLO_WALLET` - overrides default 'https://wallet.hello.coop' - used if mocking Hellō server
-
-
-
-```sh
-npx @hellocoop/quickstart@latest --nextjs
-```
-
-
-
-If not already installed, this will prompt to temporarily install the `@hellocoop/quickstart` package, and then launch the Hellō Quickstart Web App with parameters suitable for Next.js. 
-
-After logging into Hellō you will create or select an application, and then the application's `client_id` and a generated secret for encrypting cookies will be added to the local `.env` file as `HELLO_CLIENT_ID` and `HELLO_COOKIE_SECRET`. 
-
-### Add Hellō stylesheet
-
-To provide the button styling, add the below code to the `<Head>` section of the `_document`:
-
-```html
-<link rel="stylesheet" href="https://cdn.hello.coop/css/hello-btn.css"/>
-```
-
-See [hello-nextjs-sample _document.tsx](https://github.com/hellocoop/hello-nextjs-sample/blob/main/pages/_document.tsx) for reference.
-
-> To ensure the button styles are available, client-side rendered buttons check if the stylesheet has been included in the document head, and if not the stylesheet is injected. Injecting into the head is [not recommended](https://nextjs.org/docs/messages/no-stylesheets-in-head-component) and creates a button rendering glitch.
-
-
-### Create API route
-
-Create a `hellocoop.js` file in the `/pages/api` directory that contains:
-
-```typescript filename="/pages/api/hellocoop.js"
-import { pageAuth } from '@hellocoop/nextjs'
-export default pageAuth({})
-```
-> See the next section for configuration options that can be passed to `pageAuth()`
-
-You can now add components and use the APIs.
-
----
-
->Deploying Your App
-
-You will need add the `HELLO_CLIENT_ID` and a new `HELLO_COOKIE_SECRET` that can be generated with 
-```sh
-node -e"console.log(crypto.randomBytes(16).toString('hex'))"
-``` 
-to your deployed environment(s)
-
-
-
