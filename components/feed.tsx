@@ -30,7 +30,7 @@ const Feed = () => {
 
     return (
         <>
-            <ul className="m-0 mt-6 space-y-12 md:space-y-4">
+            <ul id="blog-posts" className="m-0 mt-6 space-y-12 md:space-y-4">
                 {posts.map(i => (
                     <li key={i.guid}>
                         <Link href={i.link} target="_blank" className="flex flex-col md:flex-row md:items-center gap-6 group">
@@ -46,8 +46,7 @@ const Feed = () => {
                     </li>
                 ))}
             </ul>
-            {/* TBD External Link */}
-            <Link href="https://blog.hello.dev" className="flex items-center gap-6 group md:ml-64 md:pl-6 mt-10 text-xl hover:underline font-semibold">Read more at blog.hello.dev</Link>
+            <Link href="https://blog.hello.dev" target="_blank" className="flex items-center gap-6 group md:ml-64 md:pl-6 mt-10 text-xl hover:underline font-semibold">Read more at blog.hello.dev</Link>
         </>
     )
 }
