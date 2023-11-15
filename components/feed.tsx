@@ -46,7 +46,8 @@ const Feed = () => {
                     </li>
                 ))}
             </ul>
-            <Link href="https://blog.hello.dev" target="_blank" className="no-ext-link-icon flex items-center gap-6 group md:ml-64 md:pl-6 mt-10 text-xl hover:underline font-semibold">Read more at blog.hello.dev</Link>
+            {/* TBD Make link open in new tab (fix extenal link icon positioning) */}
+            <Link href="https://blog.hello.dev" className="flex items-center gap-6 group md:ml-64 md:pl-6 mt-10 text-xl hover:underline font-semibold">Read more at blog.hello.dev</Link>
         </>
     )
 }
