@@ -18,13 +18,13 @@ Hellō is like an digital identity wallet for your users, where they can build u
 Having a central service for users to manage and reuse their identity significantly can significantly lower the effort you must expend in developing a new application, and the ongoing cost of the solution. Let's dive into some details.
 
 ### <Color color="#00FF00">*Pros*</Color>
-- *Cost* - Login and verified email are FREE. Unlimited MAU. We will monetize when you need / want verified information about your users. See our pricing for details on the Hellō business model.
-- *Time to Market* - 
-- *Data Model* - You only need a user table. You do not need to a table for user accounts / authentication as Hellō provides you an ID Token with an identifier for the user and the claims you requested. No Passwords. No managing muliple social logins. Rare account merging as Hellō will merge social accounts for you.
+- *Cost* - Login and verified email are FREE. Unlimited MAU. We will monetize when you need / want verified information about your users. See our [pricing](/pricing) for details on the Hellō business model.
+- *Time to Market* - With our [Quickstarts])(/docs/quickstarts) you can be fully configured and [deployed in 60 seconds](https://blog.hello.dev/hello-in-60-seconds).
+- *Data Model* - You only need a user table. You do not need to a table for user accounts / authentication as Hellō provides you an ID Token with an identifier for the user and the claims you requested. No Passwords. No managing multiple social logins. Rare account merging as Hellō will merge social accounts for you.
 
 ### <Color color="#FF0000">*Cons*</Color>
 - *External Service* - You are taking a dependency on another service.
-- *No Passwords* - If you require users to be able to user passwords, Hellō is not your solution. 
+- *No Passwords* - If you require users to be able to use passwords, Hellō is not your solution. 
 - *No DB* - Hellō does not manage your user database. Setting up your own database takes effort.
 
 
@@ -33,7 +33,7 @@ Having a central service for users to manage and reuse their identity significan
 
 ### Auth0
 
-Auth0 is the gold standard in the CIAM market (Customer Identity and Access Management). They are now part of Okta, the gold standard in enterprise identity management. AWS Cognito, Google Firebase, Microsoft Entra B2C, Ory are comparable offerings with a similar vantage. Gluu and FusionAuth are similar, and also offer an open source option you can run yourself, which makes them similar to [Keycloak](#keycloak) (see below). The typical architectural pattern for these services is to be a separate server that you redirect your users to, the user authenticates there, and then the user is redirected back to your app. This is similar to the architectural pattern for Hellō. Unlike Hellō, your authoritative user profile and authentication data is stored on their server. 
+Auth0 is the gold standard in the CIAM market (Customer Identity and Access Management). They are now part of Okta, the gold standard in enterprise identity management. AWS Cognito, Google Firebase, Microsoft Entra B2C, Ory are comparable offerings with a similar vantage. Gluu and FusionAuth are similar, and also offer an open source or free options you can run yourself, which makes them similar to [Keycloak](#keycloak) (see below). The typical architectural pattern for these services is to be a separate server that you redirect your users to, the user authenticates there, and then the user is redirected back to your app. This is similar to the architectural pattern for Hellō. Unlike Hellō, your authoritative user profile and authentication data is stored on their server. 
 
 ### Clerk
 
@@ -78,7 +78,7 @@ NextAuth.js (rebranding as Auth.js) is a popular open source React framework (Sv
 - *Node.js Only* - A popular option, but not useful if you are using another language for your server.
 
 
-### Write Your Owm
+### Write Your Own
 
 <Color color="#FF0000">*Don't*</Color> This is a BAD IDEA™ unless you have an experienced team of security engineers and are operating at a scale where it is cost effective. 
 
@@ -153,7 +153,7 @@ You use your own DB with Hellō, and since Hellō is managing account linking an
 
 ### 7.  Passkeys
 
-[Passkeys] are the new, new thing in authentication. Passkeys are a significant improvement over passwords, but are yet-another-credential for the user to manage, are unfamiliar to most users, and add another dimension and complexity to login. Adding support for Passkeys should be carefully considered. Once enabled, you will need to manage the additional complexity.
+[Passkeys](https://fidoalliance.org/passkeys/) are the new, new thing in authentication. Passkeys are a significant improvement over passwords, but are yet-another-credential for the user to manage, are unfamiliar to most users, and add another dimension and complexity to login. Adding support for Passkeys should be carefully considered. Once enabled, you will need to manage the additional complexity.
 
 In contrast, the user of passkeys is transparent to you if you use Hellō. We offer users to enroll a passkey on mobile devices, where the experience is seamless. The passkey is not an alternative to their preferred provider, it is a secure shortcut on an enrolled device that allows them to use their on device biometrics to authenticate.
 
