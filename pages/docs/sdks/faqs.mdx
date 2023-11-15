@@ -22,11 +22,11 @@ The cookies are encrypted using `aes-256-gcm` and the [`HELLO_COOKIE_SECRET`](./
 The options are:
 - `httpOnly: true` - prevents the browser from looking at or changing the cookies
 - `secure: true` - set when `NODE_ENV=production` which requires cookie to only be used with `https`
-- `sameSite: strict` - the browser will only send the cookie from pages that are in the same domain. This provides additional security, but adds complexity when responding to redirects. The SDKs employ a bounce to enable this restriction.
+- `sameSite: 'lax'` - the browser will only send the cookie to routes that are in the app's domain, but will send it will be sent from other domains that link to or redirect to that domain. We will be enabling an option to upgrade to `sameSite: strict` for those that require the higher security.
 
 The `hellocoop_oidc` cookie is further restricted to only be sent to the Hellō endpoint (default is `api/hellocop`) and a `maxAge:300` (5 minutes).
 
-In contrast, NextAuth.js has set [`sameSite: lax`](https://github.com/nextauthjs/next-auth/blob/main/packages/core/src/lib/cookie.ts). OWASP has a [good explanation](https://owasp.org/www-community/SameSite) on the difference between setting `sameSite` to be `strict` vs `lax`.
+OWASP has a [good explanation](https://owasp.org/www-community/SameSite) on the difference between `sameSite` being `strict` vs `lax`.
 
 
 ## Redirect URI Discovery 
