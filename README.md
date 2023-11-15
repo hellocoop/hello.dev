@@ -20,6 +20,9 @@ This repo contains the source code and documentation powering [https://hello.dev
 
 1. `npm run dev` to start the hot-reloading development server (powered by [Vite](https://vitejs.dev/))
 1. `open http://localhost:8080` to open the site in your favorite browser
+   
+### Testing
+1. `npm run test` will check all the links
 
 ## License
 
