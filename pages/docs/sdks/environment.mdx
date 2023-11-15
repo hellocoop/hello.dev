@@ -6,10 +6,10 @@ Consult your deployment and framework documentation on how to set these the envi
 
 ### HELLO_COOKIE_SECRET
 
-This environment variable must be set. It should be a different value for each environment such as development and production. This is the key to encrypt and decrypt the cookies. It is a 16 byte random / 32 character hex value. You can generate a value with:
+This environment variable must be set. It should be a different value for each environment such as development and production. This is the key to encrypt and decrypt the cookies. It is a 32 byte random / 64 character hex value. You can generate a value with:
 
 ```sh
-node -e "console.log(crypto.randomBytes(16).toString('hex'))"
+node -e "console.log(crypto.randomBytes(32).toString('hex'))"
 ```
 
 ## Optional

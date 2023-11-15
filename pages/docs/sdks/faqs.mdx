@@ -15,7 +15,7 @@ A `hellocoop_auth` cookie that stores the `auth` object. This cookie expires wit
 
 ### *3) How are cookies encrypted?*
 
-The cookies are encrypted using `aes-128-gcm` and the [`HELLO_COOKIE_SECRET`](./environment/#hello_cookie_secret)
+The cookies are encrypted using `aes-256-gcm` and the [`HELLO_COOKIE_SECRET`](./environment/#hello_cookie_secret)
 
 ### *4) What options are used with the cookies?*
 
@@ -28,9 +28,6 @@ The `hellocoop_oidc` cookie is further restricted to only be sent to the Hellō 
 
 In contrast, NextAuth.js has set [`sameSite: lax`](https://github.com/nextauthjs/next-auth/blob/main/packages/core/src/lib/cookie.ts). OWASP has a [good explanation](https://owasp.org/www-community/SameSite) on the difference between setting `sameSite` to be `strict` vs `lax`.
 
-### *5) Why are you not using `aes-256-gcm`?*
-
-Encrypting the cookie is only one layer of defense. The cookie is already protected by TLS and is not available to the browser. 128 bit keys are considered adequate security, and 256 bit keys are typically only required for military applications. Why consume more resources than are needed?
 
 ## Redirect URI Discovery 
 

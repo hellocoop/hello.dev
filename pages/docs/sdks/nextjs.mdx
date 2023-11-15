@@ -29,11 +29,11 @@ npm i @hellocoop/nextjs
 
 ### 2. `HELLO_COOKIE_SECRET`
 
-The environment variable `HELLO_COOKIE_SECRET` must be set to 32 char (16 byte) random hex string is required to encrypt cookies used by this package. This can be in `.env.local` for local development. 
+The environment variable `HELLO_COOKIE_SECRET` must be set to 64 char (32 byte) random hex string is required to encrypt cookies used by this package. This can be in `.env.local` for local development. 
 
 You can generate new values with:
 ```sh
-node -e"console.log(crypto.randomBytes(16).toString('hex'))"
+node -e"console.log(crypto.randomBytes(32).toString('hex'))"
 ``` 
 Remember to set a unique `HELLO_COOKIE_SECRET` in each of your deployed environments.
 
