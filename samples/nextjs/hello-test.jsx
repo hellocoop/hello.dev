@@ -7,11 +7,11 @@ import {
     useAuth, 
     getLogOutRoute 
 } from '@hellocoop/nextjs/react'
-
+ 
 export default function HelloTest() {
   const status = useAuth(); 
   const { auth: {name, picture, email} } = status;
-
+ 
   return (
     <>
       <Head>
@@ -41,6 +41,21 @@ export default function HelloTest() {
             {JSON.stringify(status, null, 4)}
         </pre>
       </main>
+      <style global jsx>{`
+        @media (prefers-color-scheme: light) {
+            body {
+                color: #303030;
+                background: white;
+            }
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: #d4d4d4;
+                background: #151515;
+                color-scheme: dark;
+            }
+        }
+      `}</style>
       <style jsx>{`
         main {
             min-height: 100vh;
@@ -48,6 +63,7 @@ export default function HelloTest() {
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            font-family: sans-serif;
         }
         .profile, .logout-link {
             margin: 10px 0;
