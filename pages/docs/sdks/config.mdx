@@ -37,7 +37,7 @@ module.exports = config
 Here is how it is called:
 
 ```js
-const {accessDenied, target_uri, updatedAuth} = await loggedIn( token, payload, cbReq, cbRes )
+const {accessDenied, target_uri, updatedAuth} = await loggedIn( { token, payload, cbReq, cbRes } )
 ```
 
 - `accessDenied` - optional boolean returned if the user should not be logged in
