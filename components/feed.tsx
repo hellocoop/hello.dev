@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import Parser from 'rss-parser';
 import styles from './feed.module.css'
 
@@ -34,11 +35,12 @@ const Feed = () => {
                 {posts.map(i => (
                     <li key={i.guid}>
                         <Link href={i.link} target="_blank" className="flex flex-col md:flex-row md:items-center gap-6 group">
-                            <img src={i.cover_image} className="w-64 h-36 rounded-md object-cover flex-shrink-0" />
+                            <Image src={i.cover_image} alt={i.title} width={256} height={144} className="rounded-md object-cover flex-shrink-0" priority={false} />
                             <div>
                                 <span className="text-sm opacity-80">{i.pubDate.split(" ").slice(0, -2).join(" ")}</span>
                                 <h3 className="text-xl font-semibold my-1 group-hover:underline">{i.title}</h3>
                                 <p className={`${styles.description} opacity-80`}>
+                                    {/* RSS trims the ō letter */}
                                     {i.contentSnippet.replaceAll('Hell', 'Hellō')}
                                 </p>
                             </div>
