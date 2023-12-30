@@ -7,6 +7,7 @@
     "sdks": "SDK References",
     "apis": "API References",
     "oidc": "OpenID Connect",
+    "mockin": "Hellō Mockin",
     "comparison": "Hellō vs ___",
     "roadmap": "Roadmap"
 }

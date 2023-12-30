@@ -1,0 +1,80 @@
+# Hellō Mockin
+
+# UNDER CONSTRUCTION
+
+
+###  mockin - a mock server for the Hellō Wallet
+
+## Installation
+
+## Configuration
+
+- `IP` - IP that *mockin* will listen on. Defaults to `127.0.0.1`
+- `PORT` - port that *mockin* will listen on. Defaults to `3333`
+- `ISSUER` - Issuer that *mockin* will use as the `iss` value. Defaults to `http:${IP}:${PORT}` which is `http://127.0.0.1:3333` if other defaults are used. Note that the ISSUER value does not need to be the same as IP:PORT, and can be any value except the production ISSUER value (`https://issuer.hello.coop`). It needs to be an address that will resolve to *mockin* if your app is fetching up `ISSUER/.well-known/openid-configuration`
+
+- `client_id` - you can pass any value
+
+If you are using one of the SDKs from https://github.com/hellocoop/packages you set `HELLO_WALLET` to be where the browser and server can reach *mockin* which is `http://127.0.0.1:3333` by default.
+
+## Mockin & Playground
+If you run `npx @hellocoop/mockin` using the defaults and then in https://playground.hello.dev add `http://127.0.0.1:3333/authorize` as an Authorization Server, you can play with the different parameters and see the responses returned. You can make `curl` commands to *mockin* to set mock return values. For example 
+```
+curl -X PUT "http://127.0.0.1:3333/mock/authorization?error=access_denied" 
+```
+will return the current value of MOCK and when using Playground will return the `access_denied` error as if the user had denied access.
+
+
+### `client_id`
+You can use any string as the `client_id` parameter. The same vale mus be used in the authorization request when calling the `token` endpoint. The `aud` value in the ID Token will be the same value
+
+### `redirect_uri`
+There is no check on a valid `redirect_uri`. 
+
+## Mock API
+
+PUT /mock/token
+    ?iss=
+    ?aud=
+    ?expired=true
+    ?wrong_key=true
+
+PUT /mock/authorize 
+    ?error=
+    ?wildcard_domain=
+    ?state=
+
+PUT /mock/oauth/token
+    ?status= 
+    ?error= 
+
+PUT /mock/oauth/introspection
+    ?status= 
+    ?error= 
+
+PUT /mock/oauth/userinfo
+    ?status= 
+    ?error= 
+
+DELETE /mock/
+
+PUT /mock/user/:user
+    where `:user` can be `0, 1 or 2` per user array in `src/users.js`
+
+PUT /mock/claims
+
+```
+    /mock/claims?email=mock@mock.example
+```
+
+PUT /mock/invite
+    ?error
+
+PUT /mock/set
+    {
+        header
+        payload
+    }
+
+DELETE /mock
+
