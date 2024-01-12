@@ -1,80 +1,150 @@
+import { Callout } from 'nextra/components'
+
 # Hellō Mockin
+ *A mock login server for Hellō*
 
-# UNDER CONSTRUCTION
+## Overview
+Registration and login are one of the first interactions your users will have with your app. It is usually the start of their user journey. Flowing through a production provider during development is tedious, and is impractical in automated testing.
 
 
-###  mockin - a mock server for the Hellō Wallet
+Mockin is a mock of the Hellō of the OpenID Connect Login Service and implements the authorization, token, introspection, and userinfo endpoints. 
 
-## Installation
+- Development - speeds up development as you won't be redirecting through the Hellō production server. 
+- Testing - simplifies creating end to end tests, and with the [`/mock`](#mock-api) APIs, can simulate expired and invalid responses allowing you to ensure your app properly handles all exceptions, improving your security posture.
 
-## Configuration
+Mockin simplifies development. Start the login flow by clicking on the `[ ō Continue with Hellō ]` button. Your browser will redirect to Mockin and then back to your app which will then complete the login flow.
 
-- `IP` - IP that *mockin* will listen on. Defaults to `127.0.0.1`
-- `PORT` - port that *mockin* will listen on. Defaults to `3333`
-- `ISSUER` - Issuer that *mockin* will use as the `iss` value. Defaults to `http:${IP}:${PORT}` which is `http://127.0.0.1:3333` if other defaults are used. Note that the ISSUER value does not need to be the same as IP:PORT, and can be any value except the production ISSUER value (`https://issuer.hello.coop`). It needs to be an address that will resolve to *mockin* if your app is fetching up `ISSUER/.well-known/openid-configuration`
+You can call the `/mock` APIs while testing to change the user or claims returned, simulate errors, and provide invalid or expired tokens, allowing you to ensure your app properly handles all exceptions, improving your security posture.
 
-- `client_id` - you can pass any value
+## Nodejs Usage
 
-If you are using one of the SDKs from https://github.com/hellocoop/packages you set `HELLO_WALLET` to be where the browser and server can reach *mockin* which is `http://127.0.0.1:3333` by default.
+Add mockin as a development dependency:
+```sh npm2yarn
+npm i -D @hellocoop/mockin
+```
+Run mockin
+```
+npx @hellocoop/mockin
+```
+<Callout type="info" emoji="ℹ️">
+    Your app does not need to be a Nodejs app. If you have Nodejs 18+ installed, you can run `npx @hellocoop/mockin`
+</Callout>
 
-## Mockin & Playground
-If you run `npx @hellocoop/mockin` using the defaults and then in https://playground.hello.dev add `http://127.0.0.1:3333/authorize` as an Authorization Server, you can play with the different parameters and see the responses returned. You can make `curl` commands to *mockin* to set mock return values. For example 
+## Docker Usage
+
+`docker run  -d -p 3333:3333 hellocoop/mockin:latest`
+
+If you are running Mockin with `docker-compose` or `Kubernetes`, you will need to set the environment variables for the Mockin service to the hostname the service is running at, and similarly will need to configure your app to redirect to that service when the the `[ ō Continue with Hellō ]` button is pressed. See https://github.com/hellocoop/packages/tree/main/tests for a `docker-compose` example using Playwright.
+
+## Playing with Mockin
+You can use Mocking with the [Hellō Playground](https://playground.hello.dev). Run Mockin with either: 
+
+- `npx @hellocoop/mockin`, or 
+- `docker run  -d -p 3333:3333 hellocoop/mockin:latest`
+
+ and then in https://playground.hello.dev add `http://127.0.0.1:3333/authorize` as an Authorization Server. You can then play with the different parameters and see the responses returned. 
+
+You can make `curl` commands to the `/mockin` API to set mock return values. For example 
 ```
 curl -X PUT "http://127.0.0.1:3333/mock/authorization?error=access_denied" 
 ```
 will return the current value of MOCK and when using Playground will return the `access_denied` error as if the user had denied access.
 
+## Configuring Your App
+You will need to have your app configured to use the URL where Mockin is running. For example, your app will need to redirect the user to `http://127.0.0.1/3333/authorize` if you are using the Mockin defaults rather than instead of `https://wallet.hello.coop/authorize`.
 
-### `client_id`
+
+## Environment Variables
+
+Set these environment variables to change where Mockin listens and what `iss` is set to in the ID Token:
+
+### `IP` 
+- IP that Mockin will listen on. Defaults to `127.0.0.1`
+### `PORT` 
+- port that Mockin will listen on. Defaults to `3333`
+### `ISSUER` 
+- Issuer that Mockin will use as the `iss` value. Defaults to `http:${IP}:${PORT}` which is `http://127.0.0.1:3333` if other defaults are used. Note that the ISSUER value does not need to be the same as IP:PORT, and can be any value except the production ISSUER value (setting it to `https://issuer.hello.coop` will generate an error). It needs to be an address that will resolve to Mockin if your app is fetching up `ISSUER/.well-known/openid-configuration`
+
+<Callout type="info" emoji="ℹ️">
+If you are using one of the SDKs from https://github.com/hellocoop/packages you set `HELLO_WALLET` to be where the browser and server can reach Mockin which is `http://127.0.0.1:3333` by default.
+</Callout>
+
+- `client_id`
 You can use any string as the `client_id` parameter. The same vale mus be used in the authorization request when calling the `token` endpoint. The `aud` value in the ID Token will be the same value
 
-### `redirect_uri`
+- `redirect_uri`
 There is no check on a valid `redirect_uri`. 
+
+## Testing with Playwright
+
+[Playwright](https://playwright.dev/) is a popular end-to-end testing tool for modern web apps that uses Nodejs, and works well with Mockin. Playwright allows you to start one or more local servers when running Playwright tests, which makes it easy to start your app and Mockin at the same time. 
+
+In your playwright.config.ts
+
+```typescript filename="playwright.config.ts"
+export default defineConfig({
+    /* ... other settings */
+  webServer: [{
+    // adjust to be command to start your web app
+    command: 'npm start',
+    // adjust to be URL Playwright can call to confirm your app is running
+    url: 'http://127.0.0.1:3000',
+  },{
+    // Mockin default config
+    command: 'npx @hellocoop/mockin',
+    url: 'http://127.0.0.1:3333/',
+  }]
+});
+```
+
+See https://github.com/hellocoop/packages/tree/main/express for an example
 
 ## Mock API
 
-PUT /mock/token
-    ?iss=
-    ?aud=
-    ?expired=true
-    ?wrong_key=true
+All Mock APIs return 200 and the current value of MOCK if successful, a 404 response with an explanation if an invalid request.
 
-PUT /mock/authorize 
-    ?error=
-    ?wildcard_domain=
-    ?state=
+### `PUT /mock/token`
+Changes the ID Token to be invalid in some way. Pass one or more of the following query parameters:
+- `iss=<value>` sets the value of the `iss` claim to be the passed value
+- `aud=<value>` sets the value of the `aud` claim to be the passed value
+- `expired=true` returns an ID token that has expired
+- `wrong_key=true` signs the ID token with the wrong key
 
-PUT /mock/oauth/token
-    ?status= 
-    ?error= 
+Example: `PUT /mock/token?expired=true`
 
-PUT /mock/oauth/introspection
-    ?status= 
-    ?error= 
+### `PUT /mock/authorize`
+Changes the response from `/authorize`, the `authorization_endpoint`:
+- `error=<error_code>` sets the OAuth error code to be returned.
+- `wildcard_domain=<domain>` sets the `wild_card_domain` parameter, part of the [Hellō Auto Config process](https://www.hello.dev/docs/apis/wallet/#wildcard_domain).
+- `state=<value>` sets the `state` parameter to be returned. Use to test getting back the wrong `state` parameter.
 
-PUT /mock/oauth/userinfo
-    ?status= 
-    ?error= 
+Example: `PUT /mock/authorize?error=access_denied` will direct Mockin to simulate the user canceling requests in subsequent flows. 
 
-DELETE /mock/
+### `PUT /mock/oauth/token`
+Changes the response from `/oauth/token`, the `token_endpoint`, to return an error:
+- `error=<error_code>` sets the OAuth error code to be returned. The status code will be changed as well unless set separately.
+- `status=<code>` sets the 3 digit HTTP status code returned.
 
-PUT /mock/user/:user
-    where `:user` can be `0, 1 or 2` per user array in `src/users.js`
+### `PUT /mock/oauth/introspect`
+Changes the response from `/oauth/introspection`, the `introspection_endpoint`, to return an error:
+- `error=<error_code>` sets the OAuth error code to be returned. The status code will be changed as well unless set separately.
+- `status=<code>` sets the 3 digit HTTP status code returned.
 
-PUT /mock/claims
+### `PUT /mock/oauth/userinfo`
+Changes the response from `/oauth/userinfo`, the `userinfo_endpoint`, to return an error:
+- `error=<error_code>` sets the OAuth error code to be returned. The status code will be changed as well unless set separately.
+- `status=<code>` sets the 3 digit HTTP status code returned.
 
-```
-    /mock/claims?email=mock@mock.example
-```
 
-PUT /mock/invite
-    ?error
+### `PUT /mock/user/:user`
+Change which user is returned.`:user` can be `0, 1 or 2` per user array in `src/users.js`. `0` is default.
 
-PUT /mock/set
-    {
-        header
-        payload
-    }
+### `PUT /mock/claims`
+Change a claim to be returned in the ID Token.
 
-DELETE /mock
+Example: `PUT /mock/claims?email=mock@mock.example` will then have `"email"="mock@mock.example"` in subsequent ID Token responses. Useful to test a user changing a value such as their email address.
+
+### `DELETE /mock`
+Deletes all mock values that have been set. Call before / after tests to clear any mock values that have been set
+
 
