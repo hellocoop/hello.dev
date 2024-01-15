@@ -147,6 +147,12 @@ Example: `PUT /mock/claims?email=mock@mock.example` will then have `"email"="moc
 ### `DELETE /mock`
 Deletes all mock values that have been set. Call before / after tests to clear any mock values that have been set
 
+### Mock Limitations
+
+The Mock data is stored in memory and stateful. All requests will get the same result given the state. Keep this in mind if running multiple tests at the same time.
+
+When using `response_mode=code` the state of the result is stored in memory for providing the subsequent call to the token endpoint. This prevents Mockin from using this flow in a serverless deployment
+
 ## Contributions
 
 We welcome contributions, feedback, and filing issues. See the Mockin repo https://github.com/hellocoop/mockin
