@@ -72,14 +72,14 @@ Explore styling with the [button playground](/docs/buttons/#explorer)
 
 ### `<HelloProvider/>`
 
-By default, clicking the Hellō button would redirect to `/api/hellocoop?login=true` endpoint with the optional properties as additional query parameters. To override this behavior, wrap your app with the `<HelloProvider/>` component and pass the `config` object as a prop to the provider.
+By default, clicking the Hellō button would redirect to `/api/hellocoop?op=login` endpoint with the optional properties as additional query parameters. To override this behavior, wrap your app with the `<HelloProvider/>` component and pass the `config` object as a prop to the provider.
 ```svelte filename="App.svelte"
 <script>
     import { HelloProvider } from '@hellocoop/svelte';
 
     //default
     const config = {
-        login: '/api/hellocoop?login=true'
+        login: '/api/hellocoop?op=login'
     }
 </script>
 
