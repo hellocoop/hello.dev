@@ -26,8 +26,9 @@ Run mockin
 ```
 npx @hellocoop/mockin
 ```
-<Callout type="info" emoji="ℹ️">
-    Your app does not need to be a Nodejs app. If you have Nodejs 18+ installed, you can run `npx @hellocoop/mockin`
+<Callout type="info">
+    Your app does not need to be a Nodejs app. If you have Nodejs 18+ installed, you can run  
+    `npx @hellocoop/mockin`
 </Callout>
 
 ## Docker Usage
@@ -51,7 +52,7 @@ curl -X PUT "http://127.0.0.1:3333/mock/authorization?error=access_denied"
 will return the current value of MOCK and when using Playground will return the `access_denied` error as if the user had denied access.
 
 ## Configuring Your App
-You will need to have your app configured to use the URL where Mockin is running. For example, your app will need to redirect the user to `http://127.0.0.1/3333/authorize` if you are using the Mockin defaults rather than instead of `https://wallet.hello.coop/authorize`.
+You will need to have your app configured to use the URL where Mockin is running. For example, your app will need to redirect the user to `http://127.0.0.1/3333/authorize` if you are using the Mockin defaults instead of `https://wallet.hello.coop/authorize`.
 
 
 ## Environment Variables
@@ -65,12 +66,12 @@ Set these environment variables to change where Mockin listens and what `iss` is
 ### `ISSUER` 
 - Issuer that Mockin will use as the `iss` value. Defaults to `http:${IP}:${PORT}` which is `http://127.0.0.1:3333` if other defaults are used. Note that the ISSUER value does not need to be the same as IP:PORT, and can be any value except the production ISSUER value (setting it to `https://issuer.hello.coop` will generate an error). It needs to be an address that will resolve to Mockin if your app is fetching up `ISSUER/.well-known/openid-configuration`
 
-<Callout type="info" emoji="ℹ️">
+<Callout type="info">
 If you are using one of the SDKs from https://github.com/hellocoop/packages you set `HELLO_WALLET` to be where the browser and server can reach Mockin which is `http://127.0.0.1:3333` by default.
 </Callout>
 
 - `client_id`
-You can use any string as the `client_id` parameter. The same vale mus be used in the authorization request when calling the `token` endpoint. The `aud` value in the ID Token will be the same value
+You can use any string as the `client_id` parameter. The same vale must be used in the authorization request when calling the `token` endpoint. The `aud` value in the ID Token will be the same value
 
 - `redirect_uri`
 There is no check on a valid `redirect_uri`. 
@@ -115,7 +116,7 @@ Example: `PUT /mock/token?expired=true`
 ### `PUT /mock/authorize`
 Changes the response from `/authorize`, the `authorization_endpoint`:
 - `error=<error_code>` sets the OAuth error code to be returned.
-- `wildcard_domain=<domain>` sets the `wild_card_domain` parameter, part of the [Hellō Auto Config process](https://www.hello.dev/docs/apis/wallet/#wildcard_domain).
+- `wildcard_domain=<domain>` sets the `wild_card_domain` parameter, part of the [Hellō Auto Config process](https://www.hello.dev/docs/apis/wallet/#wildcard_domain)
 - `state=<value>` sets the `state` parameter to be returned. Use to test getting back the wrong `state` parameter.
 
 Example: `PUT /mock/authorize?error=access_denied` will direct Mockin to simulate the user canceling requests in subsequent flows. 
@@ -151,10 +152,11 @@ Deletes all mock values that have been set. Call before / after tests to clear a
 
 The Mock data is stored in memory and stateful. All requests will get the same result given the state. Keep this in mind if running multiple tests at the same time.
 
-When using `response_mode=code` the state of the result is stored in memory for providing the subsequent call to the token endpoint. This prevents Mockin from using this flow in a serverless deployment
+When using `response_mode=code` the state of the result is stored in memory for providing the subsequent call to the token endpoint. This prevents Mockin from using this flow in a serverless deployment.
 
 ## Contributions
 
-We welcome contributions, feedback, and filing issues. See the Mockin repo https://github.com/hellocoop/mockin
+We welcome contributions, feedback, and filing issues.  
+See the Mockin repo https://github.com/hellocoop/mockin
 
 

@@ -45,23 +45,23 @@ This URI is where Hellō redirects the user after interacting with the Hellō Wa
 
 Hellō addresses these issues with Development Redirect URIs, Redirect URI Discovery, and Redirect URI Auto Config.
 
-### *2) What are Development Redirect URIs?*
+### *3) What are Development Redirect URIs?*
 
 Hellō separates Redirect URIs to be either Development or Production. Only members of your team are allowed to use the Development Redirect URIs registered at Hellō. This allows your team to work against `localhost` without exposing your users to the security concerns of `localhost`. To reduce manual configuration, `localhost` (and `127.0.0.1`) are enabled by default when you create an app.
 
-### *3) What is Redirect URI Discovery?*
+### *4) What is Redirect URI Discovery?*
 
 If [`HELLO_REDIRECT_URI`](./environment/#hello_redirect_uri) has not been set, each server instance running a Hellō SDK will discover its Redirect URI on the first call to login by sending back a page with a script to read the URI the browser is running on and sending that back to the Hellō endpoint as an additional parameter, and then used to send the authorization request to Hellō. The SDK memoizes the Redirect URI for subsequent calls. This allows the SDK to learn the Redirect URI for Dynamic Previews, where the hostname is not known prior to deployment.
 
-### *4) What is Redirect URI Auto Config?*
+### *5) What is Redirect URI Auto Config?*
 
 Redirect URI Auto Config removes manual configuration of the Redirect URI at the Hellō Developer Console. The Redirect URI Discovery removes the configuration burden at the server, but the Redirect URI still needs to be configured at Hellō. If the wildcard domain `https://*` option in the Development Redirect URIs is enabled for the application, your team is able to use any `https` Redirect URI. When using an unregistered Redirect URI, the Hellō Wallet adds the `wildcard_domain` query parameter to the response. When the SDKs see this parameter, they inject an interstitial page prompting your team member to register the Redirect URI as either a Development or Production RedirectURI, removing the requirement to manually register the Redirect URI.
 
-### *5) Why not just use `/api/hellocoop`?*
+### *6) Why not just use `/api/hellocoop`?*
 
 We need the full URL for the `redirect_uri`. The server we are running may be behind a proxy, and the path may be mapped under another path. The discovery mechanism ensures we get the endpoint that the browser is using. 
 
-### *6) Why do the SDKs default to `/api/hellocoop`?*
+### *7) Why do the SDKs default to `/api/hellocoop`?*
 
 Putting it in `api` separates the endpoint from pages. Using `hellocoop` removes conflicts with many tutorials that create a `/api/hello` path. 
 
