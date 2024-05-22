@@ -9,16 +9,15 @@ const loggedIn = require('./path-to-your-loggedIn=-callback-function')
 
 const config = {
     client_id: 'YOUR_CLIENT_ID',
-    scope: ['openid','name','email'], // default - openid name email picture
+    scope?: ['openid','name','email'], // default - openid name email picture
     provider_hint: ['github'],         
-    routes: {
+    routes?: {
         loggedIn: '/dashboard', // defaults to '/'
         loggedOut: '/logout',   // defaults to '/'
         error: 'error'          // defaults to built in error page
     },
-    callbacks: {
-        loggedIn:
-    }
+    loginSync?: (params: LoginSyncParams) => Promise<LoginSyncResponse>
+                // defaults to undefined
 }
 module.exports = config
 ```
@@ -31,13 +30,13 @@ module.exports = config
 - override providers recommended to users, see [API Reference | provider_hint](/docs/apis/wallet/#provider_hint)
 ### `routes`
 - override routes to redirect user on log in, log out, and an OAuth error
-### `callback.loggedIn` 
+### `loginSync`   
 - function called on each successful login
 
-Here is how it is called:
+Here is how `loginSync` called:
 
 ```js
-const {accessDenied, target_uri, updatedAuth} = await loggedIn( { token, payload, cbReq, cbRes } )
+const {accessDenied, target_uri, updatedAuth} = await loginSync( { token, payload, cbReq, cbRes } )
 ```
 
 - `accessDenied` - optional boolean returned if the user should not be logged in

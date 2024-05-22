@@ -1,37 +1,75 @@
 # Environment Variables
 
-Consult your deployment and framework documentation on how to set these the environment values.
+Consult your deployment and framework documentation on how to set these the environment variables.
 
 ## Required
 
-### HELLO_COOKIE_SECRET
+### COOKIE_SECRET
 
-This environment variable must be set. It should be a different value for each environment such as development and production. This is the key to encrypt and decrypt the cookies. It is a 32 byte random / 64 character hex value. You can generate a value with:
+This environment variable must be set. It should be a different value for each environment such as development and production. This is the key used to encrypt and decrypt the cookies the client uses to manage state. It is a 32 byte random / 64 character hex value. You can generate a value with:
 
 ```sh
 node -e "console.log(crypto.randomBytes(32).toString('hex'))"
 ```
 
-## Optional
+### CLIENT_ID
 
-### HELLO_REDIRECT_URI
+The `client_id` for your app from the [Hellō Developer Console](https://console.hello.coop).
 
-Overrides auto config of `redirect_uri`. Set to be the full URL for the `redirect_uri` value. Setting this environment variable in production will eliminate the initial discovery bounce of auto config. 
+This environment variable must be set when using the [`hellocoop/client`](https://github.com/hellocoop/docker-client) Docker Image or the [`@hellocoop/cdk-client`](https://github.com/hellocoop/) CDK Construct which don't not use `hello.config.js`.
+
+Optionally use with the SDKs to override the `client_id` value set in `hello.config.js` if you need different `client_id` values for different environments.
+
+## Recommended
+
+### HOST
+*or HELLO_HOST*
+
+The hostname component of the `redirect_uri` for your application. If set, the `redirect_uri` will be 
+```
+https://${HOST}/api/hellocoop
+``` 
+unless `API_ROUTE` is set, and then it will be 
+```
+https://${HOST}${API_ROUTE}
+```
+If `HOST` is not set, the client will send a script to the browser to detect the end point on the first call. This allows the client to be used by developers in development environments where the hostname is dynamically generated.
 
 ## Advanced
 
-### HELLO_CLIENT_ID
+### API_ROUTE
 
-Will override the `client_id` value set in `hello.config.js`. Use if you need different `client_id` values for different environments.
+Defaults to `/api/hellocoop`. Change if you have a different path for the Hellō router.
 
-### HELLO_API_ROUTE
+### COOKIE_TOKEN
 
-Defaults to `/api/hellocoop`. Change if you MUST have a different path for the Hellō router.
+Include the vale of the Hellō cookie when calling `op=auth`. This is an encrypted value that can be used with AWS API Gateway. Details TBD.
 
-### HELLO_HOST
+### LOGIN_EVENT_URL
 
-Defaults to `wallet.hello.coop`. Change when using a mock server of the Wallet. 
+Details TBD.
+
+### PROVIDER_HINT
+
+Override the provider hint
+
+### SAME_SITE_STRICT
+
+Use `same_site=strict` in the cookies set. Will cause additional redirects, and cookies will not be passed if a user links into your site from another site.
+
+### SCOPES
+
+Override the scope requested from Hellō. 
+
+### HELLO_*
+
+If there is a conflict with any of the variable names above that don't start with `Hello_`, you can prefix the variable name with `HELLO_`, which will take precedence over the the other value. For example `HELLO_HOST` will have precedence over `HOST`.
+
+
+### HELLO_WALLET
+
+Defaults to `wallet.hello.coop`. Change when using a mock server of the Wallet such as [mockin](../mockin) during development or testing. 
 
 ### HELLO_DOMAIN
 
-Defaults to `hello.coop`. Used by Hellō for development and internal testing. Will change the domain used for the Wallet, Quickstart, and Console.
+Defaults to `hello.coop`. Used by Hellō for development and internal testing. Will change the domain used for the Wallet, Quickstart, and Console SPAs.
