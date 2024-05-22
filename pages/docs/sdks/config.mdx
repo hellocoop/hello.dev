@@ -33,7 +33,7 @@ module.exports = config
 ### `loginSync`   
 - function called on each successful login
 
-Here is how `loginSync` called:
+Here is how your `loginSync` function will be called if provided:
 
 ```js
 const {accessDenied, target_uri, updatedAuth} = await loginSync( { token, payload, cbReq, cbRes } )
