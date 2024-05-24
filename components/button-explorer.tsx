@@ -32,6 +32,7 @@ const ButtonExplorer = () => {
     const [ theme, setTheme ] = useState(THEME[0])
     const [ hover, setHover ] = useState(HOVER[0])
     const [ loading, setLoading ] = useState(false)
+    const [ rtl, setRTL ] = useState(false)
     const docIsAvailable = typeof document !== 'undefined'
     const lightButton: HTMLElement = docIsAvailable && document.querySelector("#button-explorer-light button")
     const darkButton: HTMLElement = docIsAvailable && document.querySelector("#button-explorer-dark button")
@@ -52,6 +53,9 @@ const ButtonExplorer = () => {
                 darkButton.blur()
             }, 500);
         }, 500)
+
+        if(window.navigator.language.startsWith("ar"))
+            setRTL(true)
     }, [color, theme, hover])
 
     return (
@@ -94,7 +98,7 @@ const ButtonExplorer = () => {
             
             <div className='flex flex-col md:flex-row rounded-b-xl overflow-hidden'>
                 {["light", "dark"].map(i => (
-                    <div key={i} id={"button-explorer-" + i} className={clsx("md:w-1/2 py-10 flex items-center justify-center relative", i === "light" && "border border-black border-opacity-10")} style={{borderBottomLeftRadius: i === "light" ? "0.75rem" : 0}}>
+                    <div dir={rtl ? "rtl" : "ltr"} key={i} id={"button-explorer-" + i} className={clsx("md:w-1/2 py-10 flex items-center justify-center relative", i === "light" && "border border-black border-opacity-10")} style={{borderBottomLeftRadius: i === "light" ? "0.75rem" : 0}}>
                         <span className={clsx('uppercase absolute -rotate-90 -left-3.5 font-bold opacity-50', i === "light" ? "text-black" : "text-white")} style={{fontSize: '9px'}}>{i} Mode</span>
                         <button className={buttonClass}>ō&nbsp;&nbsp;&nbsp;Continue with Hellō</button>
                     </div>
