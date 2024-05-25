@@ -10,7 +10,7 @@ const Feed = () => {
             item: ['cover_image']
         }}
     )
-    const rss = "/rss.xml"
+    const rss = "/feed.xml"
     const [posts, setPosts] = useState([])
     
     useEffect(() => {

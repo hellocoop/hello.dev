@@ -4,7 +4,7 @@
 RSS_URL="https://blog.hello.dev/rss.xml"
 
 # Output file name
-OUTPUT_FILE="./public/rss.xml"
+OUTPUT_FILE="./public/feed.xml"
 
 # Fetch the RSS feed and save it locally
 curl -o "$OUTPUT_FILE" "$RSS_URL"
