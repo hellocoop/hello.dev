@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Hello Invite App allows inviting users to join your publisher. Redirect an inviter to `http://wallet.hello.coop/invite` with specific parameters to send and manage invitations. This guide provides a comprehensive overview of the required and optional parameters for different functionalities.
+The Hello Invite App allows inviting users to join your application. Redirect an inviter to `http://wallet.hello.coop/invite` with specific parameters to send and manage invitations. This guide provides a comprehensive overview of the required and optional parameters for different functionalities.
 
 ## Sending Invitations
 To send invites, redirect the inviter to `http://wallet.hello.coop/invite` with the following parameters:
@@ -22,6 +22,8 @@ To send invites, redirect the inviter to `http://wallet.hello.coop/invite` with 
 |------------|------------------------------------------------------------------|
 | `prompt`   | A prompt string shown to the invitee                             |
 | `events_uri`| The URI where events are posted as SET JWT (See [Events](#events) section) |
+| `state`| TBD |
+| `app_name`| TBD |
 | `role`     | Identifier passed back to the app in the SET JWT (See [Events](#events) section) |
 | `tenant`   | Identifier passed back to the app in the SET JWT (See [Events](#events) section) |
 
