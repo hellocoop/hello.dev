@@ -1,0 +1,85 @@
+# Invite App Documentation
+
+## Overview
+
+The Hello Invite App allows inviting users to join your publisher. Redirect an inviter to `http://wallet.hello.coop/invite` with specific parameters to send and manage invitations. This guide provides a comprehensive overview of the required and optional parameters for different functionalities.
+
+## Sending Invitations
+To send invites, redirect the inviter to `http://wallet.hello.coop/invite` with the following parameters:
+
+#### Required Parameters
+
+| Name                | Description                             |
+|---------------------|-----------------------------------------|
+| `inviter`           | The `subject` of the inviter            |
+| `client_id`         | Client ID associated with the app       |
+| `initiate_login_uri`| The URI where the invitee is sent upon accepting the invitation |
+| `return_uri`        | The URI where the inviter is sent after the invitation is sent |
+
+#### Optional Parameters
+
+| Name       | Description                                                      |
+|------------|------------------------------------------------------------------|
+| `prompt`   | A prompt string shown to the invitee                             |
+| `events_uri`| The URI where events are posted as SET JWT (See [Events](#events) section) |
+| `role`     | Identifier passed back to the app in the SET JWT (See [Events](#events) section) |
+| `tenant`   | Identifier passed back to the app in the SET JWT (See [Events](#events) section) |
+
+#### Example URL
+```http
+http://wallet.hello.coop/invite
+?inviter=59a27193-e919-462b-a324-4158d5ad372d
+&client_id=4c1ec93b-2714-4d72-9582-b09c515c5bd8
+&initiate_login_uri=https://greenfieldfitness.com/profile
+&return_uri=https://greenfieldfitness.com/profile
+&role=tester
+&prompt=John Smith invited you to be a tester for Greenfield Fitness
+&events_uri=https://greenfieldfitness.com/invite-events
+```
+
+## Managing Invites
+To manage outstanding invitations, redirect the inviter to `http://wallet.hello.coop/invite` with the following parameters:
+
+| Name                | Description                             |
+|---------------------|-----------------------------------------|
+| `inviter`           | The `subject` of the inviter            |
+| `client_id`         | Client ID associated with the app       |
+| `initiate_login_uri`| The URI where the invitee is sent upon accepting the invitation |
+| `return_uri`        | The URI where the inviter is sent after the invitation is sent |
+| `manage`            | Set to `true` to manage invitations     |
+
+#### Example URL
+```http
+http://wallet.hello.coop/invite
+?inviter=59a27193-e919-462b-a324-4158d5ad372d
+&client_id=4c1ec93b-2714-4d72-9582-b09c515c5bd8
+&initiate_login_uri=https://greenfieldfitness.com/profile
+&return_uri=https://greenfieldfitness.com/profile
+&manage=true
+```
+
+## Events
+Events are posted as SET JWT to the `events_uri` endpoint. No events are posted if `events_uri` is not present.
+
+### Event Types
+- `/invite/created`: Event sent after an invitation has been created.
+- `/invite/accepted`: Event sent after an invitation has been accepted by the invitee.
+- `/invite/retracted`: Event sent after an invitation has been retracted.
+- `/invite/declined`: Event sent after an invitation has been declined by the invitee.
+- `/invite/report`: Event sent after an invitation has been reported as abuse by the invitee.
+
+### Example SET JWT Payload
+```json
+{
+  "iss": "https://issuer.hello.coop",
+  "aud": "hello_console",
+  "https://hello.coop/invite/created": {
+    "inviter": "409cbba8-8a95-474d-a48a-2e8fcaf63fa9",
+    "sub": "d81d01c0-81f2-4964-bd8d-0e16c57c44db",
+    "email": "abc@xyz.com",
+    "role": "admin",
+    "tenant": "5c78e04e-23e3-4902-8b0b-eb7d2a0aab0e"
+  },
+  "iat": 1718713761
+}
+```
