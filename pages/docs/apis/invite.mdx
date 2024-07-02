@@ -82,7 +82,7 @@ https://wallet.hello.coop/invite
 To use Hellō Invite, you MUST support the *provider initiated login* flow, also known as [Third Party Initiated Login](https://openid.net/specs/openid-connect-core-1_0.html#ThirdPartyInitiatedLogin). 
 
 <Callout type="info">
-If you have a B2B application, the provider initiated login flow lets user access your application from their Organization's App Portal. 
+If you have a B2B application, the provider initiated login flow lets a user access your application from their organization's app portal. 
 In the future, Hellō will let applications that support *provider initiated login* to log in from their Hellō Wallet.
 </Callout>
 
@@ -96,12 +96,14 @@ In this flow, the user starts at Hellō after accepting the invitation, and is r
 Your application constructs an authorization request the same way as any other authorization request, but you also include the `login_hint` query parameter as provided.
 
 ### Managing Invites
-To manage outstanding invitations, redirect the inviter to `https://wallet.hello.coop/invite` with the following parameters:
+You can let your users manage their outstanding invitations with your application by redirecting them to `https://wallet.hello.coop/invite` with the following parameters:
 
 | Name                | Description                             |
 |---------------------|-----------------------------------------|
 | `client_id`         | Client ID associated with the app       |
 | `return_uri`        | The URI to return the inviter when they are done |
+
+This is the invite request without the `inviter` and `initiate_login_uri` query parameters.
 
 
 ## Multi Tenant/Role Apps
@@ -199,10 +201,10 @@ See example above for additional context
 | `iss`      | `https://issuer.hello.coop` The Hellō Issuer                     |
 | `aud`      | Your application's `client_id`                                   |
 | `https://hello.coop/invite/accepted` | The event object                       |
-| └ `inviter`   | Your app's `sub` of the inviter.                                |
-| └ `role`      | The `role` query parameter if provided when creating invite     |
-| └ `tenant`    | The `tenant` query parameter if provided when creating invite   |
-| └ `state`     | The `state` query parameter if provided when creating invite    |
-| └ `invitee`   | The invitee object                                              |
-| └└ `sub`       | The `sub` of the invitee                                        |
-| └└ `email`     | The verified email address of the invitee                       |                    
+| &nbsp;&nbsp;&nbsp;`inviter`   | Your app's `sub` of the inviter.                                |
+| &nbsp;&nbsp;&nbsp;`role`      | The `role` query parameter if provided when creating invite     |
+| &nbsp;&nbsp;&nbsp;`tenant`    | The `tenant` query parameter if provided when creating invite   |
+| &nbsp;&nbsp;&nbsp;`state`     | The `state` query parameter if provided when creating invite    |
+| &nbsp;&nbsp;&nbsp;`invitee`   | The invitee object                                              |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `sub`       | The `sub` of the invitee                                        |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `email`     | The verified email address of the invitee                       |                    
