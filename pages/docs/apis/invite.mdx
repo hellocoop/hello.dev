@@ -1,31 +1,63 @@
+import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
+
 # Invite (BETA)
+
+<Callout type="warning">
+This feature is currently in BETA, particularly the [Multi Tenant/Role](#multi-tenantrole-apps) features.
+</Callout>
 
 ## Overview
 
-The Hello Invite App allows inviting users to join your application. Redirect an inviter to `http://wallet.hello.coop/invite` with specific parameters to send and manage invitations. This guide provides a comprehensive overview of the required and optional parameters for different functionalities.
+A common feature of applications is to enable your users to invite other users to your application. Managing the links, emails, and status of an invite is undifferentiated work, particularly in a multi tenant / multi role application. Hellō Invite is a free service that lets your users invite other users to your application via an email address. Here is how it works:
 
-## Sending Invitations
-To send invites, redirect the inviter to `http://wallet.hello.coop/invite` with the following parameters:
+<Steps>
+
+1. You present your user with a button / link to invite other users to your app.
+
+2. You redirect the user (inviter) to `http://wallet.hello.coop/invite` with query parameters as described below. 
+
+3. The inviter provides Hellō with the email addresses of the invitees and sends the invites. They can resend or revoke previous invites here as well. In the future Hellō will let a user use their address book. 
+
+4. Hellō sends the invitees invitations to your app via email, with options to accept or decline the invitation. 
+
+5. The invitee accepts the invitation, is redirected to your app's provider initiated login endpoint, where your app then starts a login flow with Hellō.
+
+6. Your new user completes logging into your application.
+
+</Steps>
+
+You can experience Hellō Invite in the [Hellō Playground](https://playground.hello.dev) by inviting others to the Playground once you have logged in, and in the [Hellō Developer Console](https://console.hello.coop) by inviting others to be members of your team / publisher.
+
+## Using Hellō Invite
+
+### Prerequisites 
+
+To use Hellō Invite:
+
+- you have a Hellō Application registered at the [Hellō Developer console](https://console.hello.coop/)
+- the inviter has provided the `name` and `email` claims to your application
+- your application supports the [provider initiated login]() flow
+
+You will also need an `events_uri` and the ability to process incoming events if you have a multi-tenant or you want to enable the invitee to specify which role the invitee will get in a multi-role application. See [Multi-tenant/Multi-role]() below for details.
+ 
+ ### Invite Request
+
+Redirect the inviter to `http://wallet.hello.coop/invite` with the following parameters:
 
 #### Required Parameters
 
-| Name                | Description                             |
-|---------------------|-----------------------------------------|
-| `inviter`           | The `subject` of the inviter            |
-| `client_id`         | Client ID associated with the app       |
-| `initiate_login_uri`| The URI where the invitee is sent upon accepting the invitation |
-| `return_uri`        | The URI where the inviter is sent after the invitation is sent |
+| Name                | Description                                                        |
+|---------------------|--------------------------------------------------------------------|
+| `inviter`           | The `subj` provided by Hellō of the inviter.                       |
+| `client_id`         | Your `client_id` for your application.                             |
+| `initiate_login_uri`| The path where the invitee is sent upon accepting the invitation.  |
+| `return_uri`        | The URI for Hellō to return the inviter when they are done.        |
 
-#### Optional Parameters
+The `initiate_login_uri` and `return_uri` must have the same hostname, and that hostname MUST be in one of your application's  `redirect_uri`s in the Hellō Developer Console. 
 
-| Name       | Description                                                      |
-|------------|------------------------------------------------------------------|
-| `prompt`   | A prompt string shown to the invitee                             |
-| `events_uri`| The URI where events are posted as SET JWT (See [Events](#events) section) |
-| `state`| TBD |
-| `app_name`| TBD |
-| `role`     | Identifier passed back to the app in the SET JWT (See [Events](#events) section) |
-| `tenant`   | Identifier passed back to the app in the SET JWT (See [Events](#events) section) |
+See [provider initiated login]() below for details on the `initiate_login_uri`.
+
 
 #### Example URL
 ```http
@@ -34,54 +66,141 @@ http://wallet.hello.coop/invite
 &client_id=4c1ec93b-2714-4d72-9582-b09c515c5bd8
 &initiate_login_uri=https://greenfieldfitness.com/profile
 &return_uri=https://greenfieldfitness.com/profile
-&role=tester
-&prompt=John Smith invited you to be a tester for Greenfield Fitness
-&events_uri=https://greenfieldfitness.com/invite-events
 ```
 
-## Managing Invites
+
+#### Optional Parameters
+
+| Name       | Description                                                      |
+|------------|------------------------------------------------------------------|
+| `app_name` | Over ride the name of the app. Defaults to the name registered for the `client_id`. |
+| `prompt`   | Over ride the prompt string shown to the invitee. Defaults to "`name` invited you to join `app_name`" where `name` is the inviter's name they have provided to your application. |
+
+
+### Provider Initiated Login
+
+To use Hellō Invite, you MUST support the *provider initiated login* flow, also known as [Third Party Initiated Login](https://openid.net/specs/openid-connect-core-1_0.html#ThirdPartyInitiatedLogin). 
+
+<Callout type="info">
+If you have a B2B application, the provider initiated login flow let's user access your application from their Organization's App Portal. 
+In the future, Hellō will let applications that support *provider initiated login* to log in from their Hellō Wallet.
+</Callout>
+
+In this flow, the user starts at Hellō after accepting the invitation, and is redirected to your application with the following query parameters:
+
+| Name                | Description                                               |
+|---------------------|-----------------------------------------------------------|
+| `iss`               | `https://issuer.hello.coop` - the Hellō Issuer            |
+| `login_hint`        | a value you MUST send back to Hellō                       |
+
+Your application constructs an authorization request the same way as any other authorization request, but you also include the `login_hint` query parameter as provided.
+
+### Managing Invites
 To manage outstanding invitations, redirect the inviter to `http://wallet.hello.coop/invite` with the following parameters:
 
 | Name                | Description                             |
 |---------------------|-----------------------------------------|
 | `inviter`           | The `subject` of the inviter            |
 | `client_id`         | Client ID associated with the app       |
-| `initiate_login_uri`| The URI where the invitee is sent upon accepting the invitation |
-| `return_uri`        | The URI where the inviter is sent after the invitation is sent |
+| `return_uri`        | The URI to return the inviter when they are done |
 | `manage`            | Set to `true` to manage invitations     |
 
-#### Example URL
+
+## Multi Tenant/Role Apps
+
+If your application supports multiple tenants, and/or you want to enable a user to invite other users to have a specific role, then you need to provide the context of the invitation. 
+
+<Callout type="info">
+If your application supports multiple roles, but you only allow invited users to have one role, then you don't need this feature.
+</Callout>
+
+For example, the Hellō Developer Console is a multi tenant, multi role application. A user may belong to one or more Publishers (Teams), and may have either the Admin or Tester role in a given publisher. When a user wants to invite other users to be members of the team, the publisher identifier (tenant) and the role (`admin` or `tester`) are included in the query:
+
+Let's step through what happens when an admin (Jane) for a Publisher of Hellō Applications (Jane's Team) invites another admin (Jack) to be a member of their team in the Hellō Developer Console (Console). 
+
+<Steps>
+
+### Invite Request
+
+1. Jane is logged into the Console, and clicks the invite button in the admin section of member tab.
+
+1. Jane is redirected to (unescaped and line breaks added for readability):
+
 ```http
-http://wallet.hello.coop/invite
-?inviter=59a27193-e919-462b-a324-4158d5ad372d
-&client_id=4c1ec93b-2714-4d72-9582-b09c515c5bd8
-&initiate_login_uri=https://greenfieldfitness.com/profile
-&return_uri=https://greenfieldfitness.com/profile
-&manage=true
+https://wallet.hello.coop/invite
+?client_id=hello_console
+&initiate_login_uri=https://console.hello.coop
+&vents_uri=https://admin.hello.coop/hello/events
+&return_uri=https://console.hello.coop
+&inviter=265a56a3-ac04-471c-832e-5e16a74eb1f1
+&tenant=d09a69db-828e-4411-b1df-386f9524ee4f
+&app_name=Jane's+Team
+&role=admin
+&prompt=Jane+invited+you+to+be+an+admin+for+Jane's+Team
 ```
 
-## Events
-Events are posted as SET JWT to the `events_uri` endpoint. No events are posted if `events_uri` is not present.
+3. Jane enters Jack's email (jack@example.com) and sends the invitation.
 
-### Event Types
-- `/invite/created`: Event sent after an invitation has been created.
-- `/invite/accepted`: Event sent after an invitation has been accepted by the invitee.
-- `/invite/retracted`: Event sent after an invitation has been retracted.
-- `/invite/declined`: Event sent after an invitation has been declined by the invitee.
-- `/invite/report`: Event sent after an invitation has been reported as abuse by the invitee.
+### Invite Acceptance
+1. Jack receives the email invitation, clicks the accept, logs into Hellō, and chooses which information to release to the Hellō Developer Console, and then clicks the Continue button.
 
-### Example SET JWT Payload
+1. Hellō sends a signed JWT to the Console's `events_uri` (webhook). Here is the payload:
+
 ```json
 {
-  "iss": "https://issuer.hello.coop",
-  "aud": "hello_console",
-  "https://hello.coop/invite/created": {
-    "inviter": "409cbba8-8a95-474d-a48a-2e8fcaf63fa9",
-    "sub": "d81d01c0-81f2-4964-bd8d-0e16c57c44db",
-    "email": "abc@xyz.com",
-    "role": "admin",
-    "tenant": "5c78e04e-23e3-4902-8b0b-eb7d2a0aab0e"
-  },
-  "iat": 1718713761
+  "iss":"https://issuer.hello.coop",
+  "aud":"hello_console",
+  "https://hello.coop/invite/accepted":{
+    "inviter":"265a56a3-ac04-471c-832e-5e16a74eb1f1",
+    "tenant":"d09a69db-828e-4411-b1df-386f9524ee4f",
+    "role":"admin",
+    "invitee": {
+      "sub":"755f8bab-d839-4b03-ae3e-078aece7d965",
+      "email":"jack@example.com"
+    }
+  }
 }
 ```
+
+### Event Verification
+6. The Console then:
+    1. Verifies the JWT and signature signed by Hellō.
+    1. Confirms that Jane is an admin for Jane's Team - IE checks that Jane is authorized to make the invitation.
+    1. Adds Jack as an admin to Jane's Team
+    1. Replies with a 202 response to Hellō
+
+### Invitee Login
+1. Hellō then redirects Jack to the Console.
+
+1. The Console processes the authorization response as usual, and Jack is now an Admin in Jane's Team.
+
+</Steps>
+
+
+### Query Parameters
+
+The `events_uri` is required if any of `role`, `tenant`, or `state` are provided.
+
+| Name       | Description                                                      |
+|------------|------------------------------------------------------------------|
+| `role`     | An identifier string passed back to the app in the event JWT as the `role` property.|
+| `tenant`   | An identifier string passed back to the app in the event JWT as the `tenant` property.|
+| `state`    | An identifier string passed back to the app in the event JWT as the `state` property. <br/>Can be used for arbitrary state information.|
+| `events_uri`| The webhook where event JWTs are posted after the user consents to login to the application, but before being redirected to the application. <br/>The hostname of the `events_uri` must match the hostname used in the `initiate_login_uri` and `return_uri`. |
+
+### Event JWT Properties
+
+See example above for additional context
+
+| Name       | Description                                                      |
+|------------|------------------------------------------------------------------|
+| `iss`      | `https://issuer.hello.coop` The Hellō Issuer                     |
+| `aud`      | Your application's `client_id`                                   |
+| `https://hello.coop/invite/accepted` | The event object                       |
+| . `inviter`   | Your app's `sub` of the inviter.                                |
+| . `role`      | The `role` query parameter if provided when creating invite     |
+| . `tenant`    | The `tenant` query parameter if provided when creating invite   |
+| . `state`     | The `state` query parameter if provided when creating invite    |
+| . `invitee`   | The invitee object                                              |
+| .  . `sub`       | The `sub` of the invitee                                        |
+| .  . `email`     | The verified email address of the invitee                       |                    
