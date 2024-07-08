@@ -33,7 +33,7 @@ The environment variable `HELLO_COOKIE_SECRET` must be set to 64 char (32 byte) 
 
 You can generate new values with:
 ```sh
-node -e"console.log(crypto.randomBytes(32).toString('hex'))"
+node -e "console.log(crypto.randomBytes(32).toString('hex'))"
 ``` 
 Remember to set a unique `HELLO_COOKIE_SECRET` in each of your deployed environments.
 
