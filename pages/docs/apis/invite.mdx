@@ -15,7 +15,7 @@ A common feature of applications is to enable your users to invite other users t
 
 1. You present your user with a button / link to invite other users to your app.
 
-2. You redirect the user (inviter) to `http://wallet.hello.coop/invite` with query parameters as described below. 
+2. You redirect the user (inviter) to `https://wallet.hello.coop/invite` with query parameters as described below. 
 
 3. The inviter provides Hellō with the email addresses of the invitees and sends the invites. They can resend or revoke previous invites here as well. In the future Hellō will let a user use their address book. 
 
@@ -35,33 +35,33 @@ You can experience Hellō Invite in the [Hellō Playground](https://playground.h
 
 To use Hellō Invite:
 
-- you have a Hellō Application registered at the [Hellō Developer console](https://console.hello.coop/)
+- you have a Hellō Application registered at the [Hellō Developer Console](https://console.hello.coop/)
 - the inviter has provided the `name` and `email` claims to your application
-- your application supports the [provider initiated login]() flow
+- your application supports the [provider initiated login](https://openid.net/specs/openid-connect-core-1_0.html#ThirdPartyInitiatedLogin) flow
 
-You will also need an `events_uri` and the ability to process incoming events if you have a multi-tenant or you want to enable the invitee to specify which role the invitee will get in a multi-role application. See [Multi-tenant/Multi-role]() below for details.
+You will also need an `events_uri` and the ability to process incoming events if you have a multi-tenant or you want to enable the invitee to specify which role the invitee will get in a multi-role application. See [Multi-tenant/Multi-role](#multi-tenantrole-apps) below for details.
  
  ### Invite Request
 
-Redirect the inviter to `http://wallet.hello.coop/invite` with the following parameters:
+Redirect the inviter to `https://wallet.hello.coop/invite` with the following parameters:
 
 #### Required Parameters
 
 | Name                | Description                                                        |
 |---------------------|--------------------------------------------------------------------|
-| `inviter`           | The `subj` provided by Hellō of the inviter.                       |
-| `client_id`         | Your `client_id` for your application.                             |
+| `inviter`           | The `sub` provided by Hellō of the inviter.                       |
+| `client_id`         | The `client_id` for your application.                             |
 | `initiate_login_uri`| The path where the invitee is sent upon accepting the invitation.  |
 | `return_uri`        | The URI for Hellō to return the inviter when they are done.        |
 
 The `initiate_login_uri` and `return_uri` must have the same hostname, and that hostname MUST be in one of your application's  `redirect_uri`s in the Hellō Developer Console. 
 
-See [provider initiated login]() below for details on the `initiate_login_uri`.
+See [Provider initiated login](#provider-initiated-login) below for details on the `initiate_login_uri`.
 
 
 #### Example URL
 ```http
-http://wallet.hello.coop/invite
+https://wallet.hello.coop/invite
 ?inviter=59a27193-e919-462b-a324-4158d5ad372d
 &client_id=4c1ec93b-2714-4d72-9582-b09c515c5bd8
 &initiate_login_uri=https://greenfieldfitness.com/profile
@@ -73,8 +73,8 @@ http://wallet.hello.coop/invite
 
 | Name       | Description                                                      |
 |------------|------------------------------------------------------------------|
-| `app_name` | Over ride the name of the app. Defaults to the name registered for the `client_id`. |
-| `prompt`   | Over ride the prompt string shown to the invitee. Defaults to "`name` invited you to join `app_name`" where `name` is the inviter's name they have provided to your application. |
+| `app_name` | Override the name of the app. Defaults to the name registered for the `client_id`. |
+| `prompt`   | Override the prompt string shown to the invitee. Defaults to "`name` invited you to join `app_name`" where `name` is the inviter's name they have provided to your application. |
 
 
 ### Provider Initiated Login
@@ -82,7 +82,7 @@ http://wallet.hello.coop/invite
 To use Hellō Invite, you MUST support the *provider initiated login* flow, also known as [Third Party Initiated Login](https://openid.net/specs/openid-connect-core-1_0.html#ThirdPartyInitiatedLogin). 
 
 <Callout type="info">
-If you have a B2B application, the provider initiated login flow let's user access your application from their Organization's App Portal. 
+If you have a B2B application, the provider initiated login flow lets a user access your application from their organization's app portal. 
 In the future, Hellō will let applications that support *provider initiated login* to log in from their Hellō Wallet.
 </Callout>
 
@@ -96,14 +96,14 @@ In this flow, the user starts at Hellō after accepting the invitation, and is r
 Your application constructs an authorization request the same way as any other authorization request, but you also include the `login_hint` query parameter as provided.
 
 ### Managing Invites
-To manage outstanding invitations, redirect the inviter to `http://wallet.hello.coop/invite` with the following parameters:
+You can let your users manage their outstanding invitations with your application by redirecting them to `https://wallet.hello.coop/invite` with the following parameters:
 
 | Name                | Description                             |
 |---------------------|-----------------------------------------|
-| `inviter`           | The `subject` of the inviter            |
 | `client_id`         | Client ID associated with the app       |
 | `return_uri`        | The URI to return the inviter when they are done |
-| `manage`            | Set to `true` to manage invitations     |
+
+This is the invite request without the `inviter` and `initiate_login_uri` query parameters.
 
 
 ## Multi Tenant/Role Apps
@@ -122,15 +122,15 @@ Let's step through what happens when an admin (Jane) for a Publisher of Hellō A
 
 ### Invite Request
 
-1. Jane is logged into the Console, and clicks the invite button in the admin section of member tab.
+a. Jane is logged into the Console, and clicks the invite button in the admin section of member tab.
 
-1. Jane is redirected to (unescaped and line breaks added for readability):
+b. Jane is redirected to (unescaped and line breaks added for readability):
 
 ```http
 https://wallet.hello.coop/invite
 ?client_id=hello_console
 &initiate_login_uri=https://console.hello.coop
-&vents_uri=https://admin.hello.coop/hello/events
+&events_uri=https://admin.hello.coop/hello/events
 &return_uri=https://console.hello.coop
 &inviter=265a56a3-ac04-471c-832e-5e16a74eb1f1
 &tenant=d09a69db-828e-4411-b1df-386f9524ee4f
@@ -139,12 +139,12 @@ https://wallet.hello.coop/invite
 &prompt=Jane+invited+you+to+be+an+admin+for+Jane's+Team
 ```
 
-3. Jane enters Jack's email (jack@example.com) and sends the invitation.
+c. Jane enters Jack's email (jack@example.com) and sends the invitation.
 
 ### Invite Acceptance
-1. Jack receives the email invitation, clicks the accept, logs into Hellō, and chooses which information to release to the Hellō Developer Console, and then clicks the Continue button.
+a. Jack receives the email invitation, clicks the accept, logs into Hellō, and chooses which information to release to the Hellō Developer Console, and then clicks the Continue button.
 
-1. Hellō sends a signed JWT to the Console's `events_uri` (webhook). Here is the payload:
+b. Hellō sends a signed JWT to the Console's `events_uri` (webhook). Here is the payload:
 
 ```json
 {
@@ -163,16 +163,20 @@ https://wallet.hello.coop/invite
 ```
 
 ### Event Verification
-6. The Console then:
-    1. Verifies the JWT and signature signed by Hellō.
-    1. Confirms that Jane is an admin for Jane's Team - IE checks that Jane is authorized to make the invitation.
-    1. Adds Jack as an admin to Jane's Team
-    1. Replies with a 202 response to Hellō
+The Console then:
+
+a. Verifies the JWT and signature signed by Hellō.
+
+b. Confirms that Jane is an admin for Jane's Team - IE checks that Jane is authorized to make the invitation.
+
+c. Adds Jack as an admin to Jane's Team
+
+d. Replies with a 202 response to Hellō
 
 ### Invitee Login
-1. Hellō then redirects Jack to the Console.
+a. Hellō then redirects Jack to the Console.
 
-1. The Console processes the authorization response as usual, and Jack is now an Admin in Jane's Team.
+b. The Console processes the authorization response as usual, and Jack is now an Admin in Jane's Team.
 
 </Steps>
 
@@ -197,10 +201,10 @@ See example above for additional context
 | `iss`      | `https://issuer.hello.coop` The Hellō Issuer                     |
 | `aud`      | Your application's `client_id`                                   |
 | `https://hello.coop/invite/accepted` | The event object                       |
-| . `inviter`   | Your app's `sub` of the inviter.                                |
-| . `role`      | The `role` query parameter if provided when creating invite     |
-| . `tenant`    | The `tenant` query parameter if provided when creating invite   |
-| . `state`     | The `state` query parameter if provided when creating invite    |
-| . `invitee`   | The invitee object                                              |
-| .  . `sub`       | The `sub` of the invitee                                        |
-| .  . `email`     | The verified email address of the invitee                       |                    
+| &nbsp;&nbsp;&nbsp;`inviter`   | Your app's `sub` of the inviter.                                |
+| &nbsp;&nbsp;&nbsp;`role`      | The `role` query parameter if provided when creating invite     |
+| &nbsp;&nbsp;&nbsp;`tenant`    | The `tenant` query parameter if provided when creating invite   |
+| &nbsp;&nbsp;&nbsp;`state`     | The `state` query parameter if provided when creating invite    |
+| &nbsp;&nbsp;&nbsp;`invitee`   | The invitee object                                              |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `sub`       | The `sub` of the invitee                                        |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `email`     | The verified email address of the invitee                       |                    
