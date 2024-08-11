@@ -1,23 +1,24 @@
 # `hello.config.js`
 
-This file contains the configuration for the [Express](./express), [Fastify](./fastify), and [Next.js](./nextjs) SDKs. It isis imported used by `hellocoop.js` file that provides the Hellō endpoint.
+This file contains the configuration for the [Express](./express), [Fastify](./fastify), and [Next.js](./nextjs) SDKs. It is used by the `hellocoop.js` file that provides the Hellō endpoint.
 
 A sample:
 
 ```js filename="hello.config.js"
-const loggedIn = require('./path-to-your-loggedIn=-callback-function')
+const loginSync = require('./path-to-your-callback-function')
 
 const config = {
     client_id: 'YOUR_CLIENT_ID',
-    scope?: ['openid','name','email'], // default - openid name email picture
+    scope: ['openid','name','email'], // default - openid name email picture
     provider_hint: ['github'],         
-    routes?: {
-        loggedIn: '/dashboard', // defaults to '/'
-        loggedOut: '/logout',   // defaults to '/'
-        error: 'error'          // defaults to built in error page
+    routes: {
+        loggedIn:  '/dashboard', // defaults to '/'
+        loggedOut: '/logout',    // defaults to '/'
+        error:     '/error'      // defaults to built in error page
     },
-    loginSync?: (params: LoginSyncParams) => Promise<LoginSyncResponse>
+    loginSync,  // (params: LoginSyncParams) => Promise<LoginSyncResponse>
                 // defaults to undefined
+    logoutSync, // (params: LogoutSyncParams) => Promise<LogoutSyncResponse>
 }
 module.exports = config
 ```
@@ -25,13 +26,15 @@ module.exports = config
 ### `client_id` 
 - required unless provided by a the `HELLO_CLIENT_ID` environment variable
 ### `scope` 
-- override default scope request, see [Hellō Scopes](/docs/scopes) for options
+- override default scope request (openid name email picture), see [Hellō Scopes](/docs/scopes) for options
 ### `provider_hint` 
 - override providers recommended to users, see [API Reference | provider_hint](/docs/apis/wallet/#provider_hint)
 ### `routes`
-- override routes to redirect user on log in, log out, and an OAuth error
+- override routes to redirect user on log in, log out, and error
 ### `loginSync`   
-- function called on each successful login
+- optional function called on each successful login
+### `logoutSync`
+- optional function called on logout
 
 Here is how your `loginSync` function will be called if provided:
 
@@ -51,9 +54,25 @@ const {accessDenied, target_uri, updatedAuth} = await loginSync( { token, payloa
 
 - `cbReq.getHeaders()` - returns the request headers
 
-- `cbRes.setHeaders( name, value )` - will set a response header
+- `cbRes.getHeaders()` - returns the response headers
+
+- `cbRes.setHeader( name, value | [value] )` - will set a response header
 
 - `cbRes.setCookie( name, value, options )` - will set a cookie value with options per [cookie](https://www.npmjs.com/package/cookie) `serialize`
 
+
+Here is how your `logoutSync` function will be called if provided:
+
+```js
+ await logoutSync( { cbReq, cbRes } )
+```
+
+- `cbReq.getHeaders()` - returns the request headers
+
+- `cbRes.getHeaders()` - returns the response headers
+
+- `cbRes.setHeader( name, value | [value] )` - will set a response header
+
+- `cbRes.setCookie( name, value, options )` - will set a cookie value with options per [cookie](https://www.npmjs.com/package/cookie) `serialize`
 
 

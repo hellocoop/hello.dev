@@ -1,0 +1,80 @@
+# Web Client API
+
+The Web Client API abstracts logging into Hellō with web applications. The the [Express](/docs/sdks/express), [Fastify](/docs/sdks/fastify), and [Next.js](/docs/sdks/nextjs) SDKs all expose the Web Client API through the Hellō Endpoint. It is usually mounted at `/api/hellocoop`, but can be mounted at any route. Set the `API_ROUTE` environment variable to this value.
+
+The Hellō Endpoint is also the OpenID Connect `redirect_uri` for your application. IE, this is where Hellō sends the authorization response. The response is processed by endpoint and an encrypted cookie is set containing the auth state.
+
+## Operations
+
+The `op` query parameter is passed to the Hellō Endpoint to indicate the operation to be performed. Valid values are `login`, `auth`, and `logout`. 
+
+### Login
+
+Load this endpoint in the browser to login the user. Loading this endpoint will create and load an authorization request to the Hellō Wallet. The authorization response will be sent to the Hellō Endpoint and processed. If successful, the optional `loginSync` function will be called, and then the browser will be redirected to the `target_uri` if provided, or the loggedIn route. 
+
+
+| Parameter     | Description |
+|-|-|
+| target_uri    | overrides the default target_uri |
+| scope         | overrides the default scope |
+| provider_hint | overrides the default provider_hint |
+| login_hint    | provides a login_hint |
+
+*Exanple:*
+
+```http
+https://your-app.com/api/hellocoop
+?op=login
+&target_uri=/profile
+&scope=profile+nickname
+&provider_hint=github+gitlab
+```
+See [`hello.config.js`](/docs/sdks/config/) for details on these values
+
+*Error Response*
+
+If there is an error response from Hello, the browser will be redirected to the error page with the `error` parameter. See [Error Response](/oidc/errors) for details on error response. See [`hello.config.js`](/docs/sdks/config/) for overriding the default error page.
+
+
+### Auth
+
+This operation is to be called by your app and returns a JSON object containing the auth object in the encrypted cookie.
+
+*Example:*
+
+```http
+https://your-app.com/api/hellocoop?op=auth
+```
+
+*Logged In Example Response:*
+
+```json
+{
+  "isLoggedIn": true,
+  "sub": "sub_vvCgtpv35lDgQpHtxmpvmnxK_2nZ",
+  "iat": 1699234659,
+  "name": "Dick Hardt",
+  "picture": "https://pictures.hello.coop/r/7a160eed-46bf-48e2-a909-161745535895.png",
+  "email": "dick.hardt@hello.coop"
+}
+
+```
+
+*Logged Out Example Response:*
+
+```json
+{
+    "isLoggedIn":false
+}
+```
+
+
+### Logout
+
+Logs out the user by clearing the cookies and calling the optional logoutSync, and then redirects to the logged out route.
+
+*Example:*
+
+```http
+https://your-app.com/api/hellocoop?op=logout
+```

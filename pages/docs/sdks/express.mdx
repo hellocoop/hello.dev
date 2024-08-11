@@ -40,11 +40,11 @@ The `.env` file should not be checked into your repository, and should be in you
 
 ### 3. `client_id`
 
-If not using Hellō Quickstart, you will need to create an application at the [Hellō Developer Console](https://console.hello.coop/) and get a `client_id`.
+If did not use Hellō Quickstart, you will need to create an application at the [Hellō Developer Console](https://console.hello.coop/) and get a `client_id`.
 
 ### 4. `hello.config.js`
 
-The convention is to create a `hello.config.js` file in the root of your project for configuration. This file is imported into the `hellocoop.js` file and passed to the `pageAuth()` function for configuration. Below is a basic configuration file. See []() for additional configuration.
+The convention is to create a `hello.config.js` file in the root of your project for configuration. This file is imported into the `hellocoop.js` file and passed to the `pageAuth()` function for configuration. Below is a basic configuration file. See [`hello.config.js`](/docs/sdks/config/) for additional configuration.
 
 ```javascript
 const config = {
@@ -88,7 +88,7 @@ app.use( helloAuth( helloConfig ) )
   </Tabs.Tab>
 </Tabs>
 
-`helloAuth()` will add the `/api/hellocoop` endpoint which will process login, logout, and the redirect callback.
+`helloAuth()` will add the `/api/hellocoop` endpoint which will process the Hellō authorization response, and the [Web Client](/docs/api-web-client) `login`, `logout`, and `auth` operations.
 
 
 Your server should now be fully configured to work with Hellõ.
@@ -114,7 +114,7 @@ Returns the `auth` object if `req.getAuth()` has been called, or `setAuth` Middl
 
 ```js
 isLoggedIn: true,
-sub: '66752aed-9cc2-4d17-875f-379b1a578f9a',
+sub: 'sub_vvCgtpv35lDgQpHtxmpvmnxK_2nZ',
 iat: '1699234659',
 name: 'Dick Hardt',
 picture: 'https://pictures.hello.coop/r/7a160eed-46bf-48e2-a909-161745535895.png',
@@ -143,7 +143,7 @@ Will return a `401` status code if `isLoggedIn=false`
 
 Example:
 ```js
-app.use('/api', unauthorized )`
+app.use('/api', unauthorized )
 ```
 
 Would return a `401` for any unauthenticated call to `/api/*`. 
@@ -154,7 +154,7 @@ Middleware that reads and decrypts the `hellocoop_auth` cookie and sets `req.aut
 
 Example:
 ```js
-app.use('/profiles', setAuth )`
+app.use('/profiles', setAuth )
 ```
 
 Would set req.auth for all profile pages.

@@ -2,9 +2,9 @@
 
 Following are errors returned by the Hellō server when making an authorization request, or when calling the introspection API.
 
-## Request
+## Authorization Request Errors
 
-If there is an issue with fulfilling the request [(Step 3)](/docs/oidc/errors), the response [(Step 4)](/docs/oidc/errors/#introspection) will have an `error` query parameter set to one of the following string:
+If there is an issue with fulfilling the request, the response [(Step 4)](/docs/oidc/errors/#introspection) will have an `error` query parameter set to one of the following string:
 
 |Error|Description|
 |---|---|
@@ -19,7 +19,7 @@ Example
 
 ***NOTE:** If the request contains an invalid `client_id` or `request_uri`, a response will not be sent and the user will be presented with an error message per [RFC 6749 4.1.2.1](https://datatracker.ietf.org/doc/html/rfc6749#section-4.1.2.1)
 
-## Introspection
+## Introspection Errors
 
 Following are the responses from the [Token Introspection API](/docs/oidc/errors/#introspection) `https://wallet.hello.coop/oauth/introspect`
 
