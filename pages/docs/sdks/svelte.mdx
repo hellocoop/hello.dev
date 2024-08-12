@@ -30,12 +30,7 @@ To provide the button styling, add the below code to the `<head>` section of the
 import { // only import buttons used
     ContinueButton, 
     LoginButton, 
-    UpdateEmailButton, 
-    UpdatePictureButton,
-    UpdateDiscordButton,
-    UpdateTwitterButton,
-    UpdateGitHubButton,
-    UpdateGitLabButton
+    UpdateProfileButton
 } from '@hellocoop/svelte'
 ```
 
@@ -51,17 +46,7 @@ import { // only import buttons used
 - `targetURI` - defaults to `HELLO_DEFAULT_TARGET_ROUTE` or '/'
 - `providerHint` - Array of [provider hints](/docs/apis/wallet). Example `['github', 'gitlab', 'email--', 'apple--', 'microsoft--']` would always recommend GitHub, GitLab, and Google.
 
-`<UpdateEmailButton/>` - provides \[ ō Update Email with Hellō \]
-
-`<UpdatePictureButton/>` - provides \[ ō Update Picture with Hellō \]
-
-`<UpdateDiscordButton/>` - provides \[ ō Update Discord with Hellō \]
-
-`<UpdateTwitterButton/>` - provides \[ ō Update Twitter with Hellō \]
-
-`<UpdateGitHubButton/>` - provides \[ ō Update GitHub with Hellō \]
-
-`<UpdateGitLabButton/>` - provides \[ ō Update GitLab with Hellō \]
+`<UpdateProfileButton/>` - provides \[ ō Update Email with Hellō \]
 
 **Optional button styling properties:**
 - `color` - white | black
