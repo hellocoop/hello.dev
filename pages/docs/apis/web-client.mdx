@@ -20,7 +20,7 @@ Load this endpoint in the browser to login the user. Loading this endpoint will 
 | provider_hint | overrides the default provider_hint |
 | login_hint    | provides a login_hint |
 
-*Exanple:*
+*Example:*
 
 ```http
 https://your-app.com/api/hellocoop
@@ -33,7 +33,7 @@ See [`hello.config.js`](/docs/sdks/config/) for details on these values
 
 *Error Response*
 
-If there is an error response from Hello, the browser will be redirected to the error page with the `error` parameter. See [Error Response](/oidc/errors) for details on error response. See [`hello.config.js`](/docs/sdks/config/) for overriding the default error page.
+If there is an error response from Hello, the browser will be redirected to the error page with the `error` parameter. See [Error Response](/docs/oidc/errors) for details on error response. See [`hello.config.js`](/docs/sdks/config/) for overriding the default error page.
 
 
 ### Auth
@@ -64,7 +64,7 @@ https://your-app.com/api/hellocoop?op=auth
 
 ```json
 {
-    "isLoggedIn":false
+  "isLoggedIn":false
 }
 ```
 

@@ -1,5 +1,5 @@
 import { Cards, Card } from 'nextra/components'
-import {  AuthRequestIcon, AuthResponseIcon, IDTokenIcon, ConfigIcon } from 'components/icons'
+import {  AuthRequestIcon, AuthResponseIcon, IDTokenIcon, ConfigIcon, ErrorIcon, VerificationIcon } from 'components/icons'
 
 # OpenID Connect
 
@@ -14,9 +14,8 @@ NOTE: The Hellō Issuer is `https://issuer.hello.coop` and is NOT `https://walle
 <Cards>
   <Card icon={<AuthRequestIcon/>} title="Auth Request" href="/docs/oidc/request/" />
   <Card icon={<AuthResponseIcon/>} title="Auth Response" href="/docs/oidc/response/" />
-  <Card icon={<IDTokenIcon/>} title="Verification" href="/docs/oidc/verification/" />
+  <Card icon={<VerificationIcon/>} title="Verification" href="/docs/oidc/verification/" />
   <Card icon={<IDTokenIcon/>} title="ID Token" href="/docs/oidc/token/" />
   <Card icon={<ConfigIcon/>} title="Configuration" href="/docs/oidc/config/" />
-  <Card icon={<ConfigIcon/>} title="Error Responses" href="/docs/oidc/errors/" />
-
+  <Card icon={<ErrorIcon/>} title="Error Responses" href="/docs/oidc/errors/" />
 </Cards>
