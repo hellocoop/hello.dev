@@ -1,5 +1,5 @@
 import { Cards, Card } from 'nextra/components'
-import { WalletIcon, QuickstartIcon, AdminIcon, ErrorIcon } from 'components/icons'
+import { WalletIcon, QuickstartIcon, AdminIcon, ErrorIcon, WebClientIcon, InviteIcon } from 'components/icons'
 
 # API References
 
@@ -10,6 +10,9 @@ The [Wallet API](/docs/apis/wallet) follows the [OpenID Connect](/docs/oidc) sta
 The [Quickstart API](/docs/apis/quickstart) is the web interface to the Quickstart Web app. See [SDK Reference | Quickstart](/docs/sdks/quickstart/) for the node SDK.
 
 <Cards>
+  <Card icon={<WebClientIcon/>} title="Web Client" href="/docs/apis/web-client" />
   <Card icon={<WalletIcon/>} title="Wallet" href="/docs/apis/wallet" />
+  <Card icon={<InviteIcon/>} title="Invite (BETA)" href="/docs/apis/invite" />
   <Card icon={<QuickstartIcon/>} title="Quickstart" href="/docs/apis/quickstart" />
+  <Card icon={<AdminIcon/>} title="Admin" href="/docs/apis/admin" />
 </Cards>
