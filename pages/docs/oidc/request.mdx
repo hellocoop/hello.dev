@@ -12,14 +12,17 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 |---|---|
 |`client_id`|The `client_id` for your app from [console.hello.coop](https://console.hello.coop) |
 |`redirect_uri`|One of the redirect_uri values you registered for your app |
-|`scope`|The `openid` scope and zero or more scopes listed at [Hellō Claims](/docs/scopes)|
+|`scope`|The `openid` scope and zero or more space delimited scopes listed at [Hellō Claims](/docs/scopes)|
 |`nonce`|A unique string that will be included in the signed ID Token. This links the ID Token to your request|
-|`response_type` (optional)| `id_token` (implicit flow) or<br/><span>`code` (code flow - default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)).</span> |
-|`response_mode` (optional)|if `id_token` flow `fragment` or `form_post` (default) <br/>if `code` flow `fragment`, `form_post`, or `query` (default)|
+|`response_type` (optional)| `id_token` for *implicit flow* <br/>or<br/><span>`code` for *code flow* - default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)).</span> |
+|`response_mode` (optional)|if *id_token flow* can be `fragment` or `form_post` (default) <br/>if *code flow* can be `fragment`, `form_post`, or `query` (default)|
 |`state` (optional)|A value representing the state of your application that will be returned as a parameter in the response|
-|`code_challenge`|REQUIRED if `code` flow and not using a client secret to authenticate to the token endpoint. See PKCE below|
-|`code_challenge_method`|May be provided if `code_challenge` is included.<br/>MUST have value of `S256`. See PKCE below|
-
+|`code_challenge`|REQUIRED if *code flow* and not using a client secret to authenticate to the token endpoint. See PKCE below|
+|`code_challenge_method`|May be provided if `code_challenge` is included.<br/>MUST have value of `S256` if included. See PKCE below|
+|`prompt` (optional)|A space delimited list. Values include:|
+|                   | - `login` will require the user to re-authenticate at their login provider|
+|                   | - `consent` will require the user to review, and potentially change, released claims|
+|                   | other values are ignored| 
 ### PKCE Code
 
 > [RFC 7636](https://datatracker.ietf.org/doc/html/rfc7636) *(Proof Key for Code Exchange by OAuth Public Clients)* enables your application to prove it made the authorization request that received the authorization code when it calls the token endpoint. 
