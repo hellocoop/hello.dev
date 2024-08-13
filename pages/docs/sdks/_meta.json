@@ -5,14 +5,16 @@
     "react": "React",
     "svelte": "Svelte",
     "vue": "Vue",
-    "----": {
-      "type": "separator"
+    "---": {
+      "type": "separator",
+      "title": ""
     },
     "core-client": "Core/Client",
     "quickstart": "Quickstart",
-    "---": {
-        "type": "separator"
-      },
+    "---1": {
+      "type": "separator",
+      "title": ""
+    },
     "config": "hello.config.js",
     "environment": "Environment Vars",
     "faqs": "FAQs"
