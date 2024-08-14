@@ -10,19 +10,23 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 
 |Parameter|Description|
 |---|---|
-|`client_id`|The `client_id` for your app from [console.hello.coop](https://console.hello.coop) |
-|`redirect_uri`|One of the redirect_uri values you registered for your app |
-|`scope`|The `openid` scope and zero or more space delimited scopes listed at [Hellō Claims](/docs/scopes)|
-|`nonce`|A unique string that will be included in the signed ID Token. This links the ID Token to your request|
-|`response_type` (optional)| `id_token` for *implicit flow* <br/>or<br/><span>`code` for *code flow* - default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)).</span> |
-|`response_mode` (optional)|if *id_token flow* can be `fragment` or `form_post` (default) <br/>if *code flow* can be `fragment`, `form_post`, or `query` (default)|
-|`state` (optional)|A value representing the state of your application that will be returned as a parameter in the response|
-|`code_challenge`|REQUIRED if *code flow* and not using a client secret to authenticate to the token endpoint. See PKCE below|
-|`code_challenge_method`|May be provided if `code_challenge` is included.<br/>MUST have value of `S256` if included. See PKCE below|
-|`prompt` (optional)|A space delimited list. Values include:|
+|`client_id`<br/>*required*|The `client_id` for your app from [console.hello.coop](https://console.hello.coop).|
+|`redirect_uri`<br/>*required*|One of the redirect_uri values you registered for your app.|
+|`scope`<br/>*required*|The `openid` scope and zero or more space delimited scopes listed at [Hellō Claims](/docs/scopes).|
+|`nonce`<br/>*required*|A unique string that will be included in the signed ID Token. This links the ID Token to your request.|
+|`response_type`<br/>*optional*| `id_token` for *implicit flow* <br/>or<br/><span>`code` for *code flow* - default and recommended, but requires [PKCE - RFC7636](https://www.rfc-editor.org/rfc/rfc7636.html)).</span> |
+|`response_mode`<br/>*optional*|if *id_token flow* can be `fragment` or `form_post` (default) <br/>if *code flow* can be `fragment`, `form_post`, or `query` (default).|
+|`state`<br/>*optional*|A value representing the state of your application that will be returned as a parameter in the response.|
+|`code_challenge`|REQUIRED if *code flow* and not using a client secret to authenticate to the token endpoint. See PKCE below.|
+|`code_challenge_method`|MAY be provided if `code_challenge` is included.<br/>MUST have value of `S256` if included. See PKCE below.|
+|`login_hint`<br/>*optinal*|A hint for which user account to use. Only email addresses in the form of `mailto:name@domain.example` are currently supported.|
+|`prompt`<br/>*optional*|A space delimited list. Values include:|
 |                   | - `login` will require the user to re-authenticate at their login provider|
 |                   | - `consent` will require the user to review, and potentially change, released claims|
 |                   | other values are ignored| 
+
+The non-standard `provider_hint` is optionally available. See [Wallet API | provider_hint](/docs/apis/wallet/#provider_hint) for details.
+
 ### PKCE Code
 
 > [RFC 7636](https://datatracker.ietf.org/doc/html/rfc7636) *(Proof Key for Code Exchange by OAuth Public Clients)* enables your application to prove it made the authorization request that received the authorization code when it calls the token endpoint. 
