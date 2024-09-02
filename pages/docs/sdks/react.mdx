@@ -40,13 +40,15 @@ import { // only import buttons used
 
 `<LoginButton/>` - provides \[ ō Login with Hellō \]
 
+`<UpdateProfileButton/>` - provides \[ ō Update Profile with Hellō \]
+
 **Optional properties:**
 
 - `scope` - Array of [Hellō scope values](/docs/scopes). Default `['openid', 'email', 'name', 'picture']`.
 - `targetURI` - defaults to `HELLO_DEFAULT_TARGET_ROUTE` or '/'
 - `providerHint` - Array of [provider hints](/docs/apis/wallet). Example `['github', 'gitlab', 'email--', 'apple--', 'microsoft--']` would always recommend GitHub, GitLab, and Google.
-
-`<UpdateEmailButton/>` - provides \[ ō Update Profile with Hellō \]
+- `promptLogin` - defaults to `false`. Will require the user to re-authenticate at their login provider.
+- `promptConsent` - defaults to `false`. Will require the user to review, and potentially change, released claims.
 
 **Optional button styling properties:**
 - `color` - white | black
