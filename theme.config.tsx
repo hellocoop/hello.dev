@@ -5,7 +5,7 @@ import { DocsThemeConfig, useConfig } from 'nextra-theme-docs'
 const config: DocsThemeConfig = {
   logo: <span className="font-semibold text-xl">hello.dev</span>,
   darkMode: false,
-  docsRepositoryBase: 'https://github.com/hellocoop/hello.dev',
+  docsRepositoryBase: 'https://github.com/hellocoop/hello.dev/tree/main/',
   sidebar: {
     defaultMenuCollapseLevel: 1 //sidebar items collapsed by default
   },
