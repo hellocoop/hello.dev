@@ -19,7 +19,8 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 |`state`<br/>*optional*|A value representing the state of your application that will be returned as a parameter in the response.|
 |`code_challenge`|REQUIRED if *code flow* and not using a client secret to authenticate to the token endpoint. See PKCE below.|
 |`code_challenge_method`|MAY be provided if `code_challenge` is included.<br/>MUST have value of `S256` if included. See PKCE below.|
-|`login_hint`<br/>*optinal*|A hint for which user account to use. Only email addresses in the form of `mailto:name@domain.example` are currently supported.|
+|`login_hint`<br/>*optional*|A hint for which user account to use. Example `login_hint=name@domain.example`.|
+|`domain_hint`<br/>*optional*|A hint for which domain the user's managed account belongs to. Example `domain_hint=domain.example`.|
 |`prompt`<br/>*optional*|A space delimited list. Values include:|
 |                   | - `login` will require the user to re-authenticate at their login provider|
 |                   | - `consent` will require the user to review, and potentially change, released claims|
