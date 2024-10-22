@@ -1,11 +1,12 @@
 import { Tabs } from 'nextra/components'
 
-# Core / Client
+# Helper
 
-A collection of Node.js helper functions for integrating Hellō.
+A collection of JS helper functions for browsers and servers integrating Hellō.
 
-- `@hellocoop/core` is a Node.js package
-- `@hellocoop/client` is a browser optimized package
+- `@hellocoop/helper-browser` is a browser optimized package
+- `@hellocoop/helper-server`  is a Node.js npm package
+
 
 The APIs are the same except where noted.
 
@@ -14,13 +15,13 @@ The APIs are the same except where noted.
 #### Node.js
 
 ```sh npm2yarn
-npm i @hellocoop/core
+npm i @hellocoop/helper-server
 ```
 
 #### Browser 
 
 ```sh npm2yarn
-npm i @hellocoop/client
+npm i @hellocoop/helper-browser
 ```
 
 ## Usage
@@ -30,19 +31,19 @@ npm i @hellocoop/client
 <Tabs items={['TypeScript', 'JavaScript']}>
   <Tabs.Tab>
     ```sh
-    import { createAuthRequest, fetchToken, parseToken } from '@hellocoop/core'
+    import { createAuthRequest, fetchToken, parseToken } from '@hellocoop/helper-server'
     ```
   </Tabs.Tab>
   <Tabs.Tab>
     ```sh
-    const { createAuthRequest, fetchToken, parseToken } = require('@hellocoop/core')
+    const { createAuthRequest, fetchToken, parseToken } = require('@hellocoop/helper-server')
     ```
   </Tabs.Tab>
 </Tabs>
 
 #### Browser
 ```typescript
-import { createAuthRequest, fetchToken, parseToken, validateToken } from '@hellocoop/client'
+import { createAuthRequest, fetchToken, parseToken, validateToken } from '@hellocoop/helper-browser'
 ```
 
 ## `createAuthRequest()`
@@ -116,7 +117,7 @@ res.redirect(url) // redirect browser to make auth request
 token, client_id, nonce, wallet
 
 ## `validateToken()`
-*only in `@hellocoop/client`*
+*only in `@hellocoop/helper-browser`*
 
 Useful when:
 - `response_type=id_token`

@@ -6,7 +6,7 @@ import { Callout } from 'nextra/components'
 
 See [OpenID Connect | Auth Request](../oidc/request/) for the supported standard parameters.
 
-The Hellō Wallet supports the following extended parameter:
+The Hellō Wallet supports the following extended parameters:
 
 ### `provider_hint`
 
@@ -64,6 +64,18 @@ Possible slug values:
 Explore how the `provider_hint` functionality works with the [Hellō Playgound](https://playground.hello.dev)<br/>
 *Logout of the [Hellō Wallet](https://wallet.hello.coop) and click `forget me` to see the user experience*
 </Callout>
+
+### `domain_hint`
+
+The `domain_hint` indicates which domain, or type of account you want from the user. 
+
+If you provide a domain such as `hello.coop`, then the user will 
+be directed to log in with the provider that manages `hello.coop`.
+
+If you pass `domain_hint=managed`, then the user will be prompted to select a managed account. You can set this value if you want to require a managed account for your app.
+
+If you pass `domain_hint=personal`, then the user will be prompted to select a personal account. You can set this value if you want to require a personal account for your app.
+
 
 ## Authorization Response
 

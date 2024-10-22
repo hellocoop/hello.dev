@@ -9,7 +9,7 @@
       "type": "separator",
       "title": ""
     },
-    "core-client": "Core/Client",
+    "helper": "Helper",
     "quickstart": "Quickstart",
     "---1": {
       "type": "separator",
