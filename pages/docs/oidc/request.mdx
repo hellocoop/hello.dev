@@ -8,7 +8,7 @@ Hello supports both the [Code Flow](https://openid.net/specs/openid-connect-core
 
 The **request URL** is `https://wallet.hello.coop/authorize` and a query with the following standard [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) parameters:
 
-|Parameter|Description|
+|Parameters|Description|
 |---|---|
 |`client_id`<br/>*required*|The `client_id` for your app from [console.hello.coop](https://console.hello.coop).|
 |`redirect_uri`<br/>*required*|One of the redirect_uri values you registered for your app.|
@@ -19,14 +19,19 @@ The **request URL** is `https://wallet.hello.coop/authorize` and a query with th
 |`state`<br/>*optional*|A value representing the state of your application that will be returned as a parameter in the response.|
 |`code_challenge`|REQUIRED if *code flow* and not using a client secret to authenticate to the token endpoint. See PKCE below.|
 |`code_challenge_method`|MAY be provided if `code_challenge` is included.<br/>MUST have value of `S256` if included. See PKCE below.|
-|`login_hint`<br/>*optional*|A hint for which user account to use. Example `login_hint=name@domain.example`.|
-|`domain_hint`<br/>*optional*|A hint for which domain the user's managed account belongs to. Example `domain_hint=domain.example`.|
-|`prompt`<br/>*optional*|A space delimited list. Values include:|
+|`login_hint`<br/>*optional*|A hint for which user account to use. <br/>`login_hint=name@domain.example`|
+|`prompt`<br/>*optional*|A space delimited list. Accepted values include:|
 |                   | - `login` will require the user to re-authenticate at their login provider|
 |                   | - `consent` will require the user to review, and potentially change, released claims|
-|                   | other values are ignored| 
 
-The non-standard `provider_hint` is optionally available. See [Wallet API | provider_hint](/docs/apis/wallet/#provider_hint) for details.
+|Hellō Parameters|Description|
+|---|---|
+|`provider_hint`<br/>*optional*| See [Wallet API | provider_hint](/docs/apis/wallet/#provider_hint) for details. |
+|`domain_hint`<br/>*optional*|A hint for which domain or type of account: |
+| | - `domain_example` to request the user logs in with a specific managed account |
+| | - `organization` to request a managed account |
+| | - `personal` to request a personal (non-managed) account |
+
 
 ### PKCE Code
 
@@ -65,9 +70,6 @@ https://wallet.hello.coop/authorize
 &code_challenge=F_xW4_XNddm_XXZgMQAnHBWZRAtc3ZXxb-kcL_rvDns
 &code_challenge_method=S256
 ```
-
-### Advanced Features
-See the [API Reference | Wallet](/docs/apis/wallet/) for additional functionality including how to change the recommended providers with `provider_hint`.
 
 ## Make Request
 
