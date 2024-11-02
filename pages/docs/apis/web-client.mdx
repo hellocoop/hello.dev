@@ -1,25 +1,26 @@
 # Web Client API
 
-The Web Client API abstracts logging into Hellō with web applications. The the [Express](/docs/sdks/express), [Fastify](/docs/sdks/fastify), and [Next.js](/docs/sdks/nextjs) SDKs all expose the Web Client API through the Hellō Endpoint. It is usually mounted at `/api/hellocoop`, but can be mounted at any route. Set the `API_ROUTE` environment variable to this value.
+The Web Client API abstracts logging into Hellō with web applications. The [Express](/docs/sdks/express), [Fastify](/docs/sdks/fastify), and [Next.js](/docs/sdks/nextjs) SDKs all expose the Web Client API through the Hellō Endpoint. It is usually mounted at `/api/hellocoop`, but can be mounted at any route. Set the `API_ROUTE` environment variable to this value.
 
 The Hellō Endpoint is also the OpenID Connect `redirect_uri` for your application. IE, this is where Hellō sends the authorization response. The response is processed by endpoint and an encrypted cookie is set containing the auth state.
 
 ## Operations
 
-The `op` query parameter is passed to the Hellō Endpoint to indicate the operation to be performed. Valid values are `login`, `auth`, and `logout`. 
+The `op` query parameter is passed to the Hellō Endpoint to indicate the operation to be performed. Valid values are `login`, `auth`, `logout`, and `invite`. 
 
 ### Login
 
-Load this endpoint in the browser to login the user. Loading this endpoint will create and load an authorization request to the Hellō Wallet. The authorization response will be sent to the Hellō Endpoint and processed. If successful, the optional `loginSync` function will be called, and then the browser will be redirected to the `target_uri` if provided, or the loggedIn route. 
+Load this endpoint in the browser to login the user. Loading this endpoint will create and load an authorization request to the Hellō Wallet. The authorization response will be sent to the Hellō Endpoint and processed. If successful, the optional `loginSync` function will be called, and then the browser will be redirected to the `target_uri` if provided, the `route.loggedIn` value in [`hello.config.js`](/docs/sdks/config/), or the `/` route. 
 
 
-| Parameter     | Description |
+| Optional Parameter     | Description |
 |-|-|
-| target_uri    | overrides the default target_uri |
-| scope         | overrides the default scope |
-| provider_hint | overrides the default provider_hint |
-| login_hint    | provides a [login_hint]() |
-| prompt        | 
+| `target_uri`    | overrides where the user will be redirected to after a successful login. |
+| `scope`         | overrides the default scope to request from Hellō. |
+| `login_hint`    | provide a [login_hint]() of which user to log in. Set to the user's email address. |
+| `domain_hint`   | provide a [domain_hint]() of the domain the user will log in at. |
+| `provider_hint` | overrides the default [provider_hint]() of which providers to show a new user. |
+| `prompt`        | - `login` will require a fresh login for the user.<br/> - `consent` will present the user with the consent screen. Allows user <br/> to update their profile. |
 
 *Example:*
 
@@ -30,11 +31,10 @@ https://your-app.com/api/hellocoop
 &scope=profile+nickname
 &provider_hint=github+gitlab
 ```
-See [`hello.config.js`](/docs/sdks/config/) for details on these values
 
 *Error Response*
 
-If there is an error response from Hello, the browser will be redirected to the error page with the `error` parameter. See [Error Response](/docs/oidc/errors) for details on error response. See [`hello.config.js`](/docs/sdks/config/) for overriding the default error page.
+If there is an error response from Hello, the browser will be redirected to the error page with the `error` parameter. See [Error Response](/docs/oidc/errors) for details on error response values. See [`hello.config.js`](/docs/sdks/config/) for overriding the default error page.
 
 
 ### Auth
@@ -78,4 +78,14 @@ Logs out the user by clearing the cookies and calling the optional logoutSync, a
 
 ```http
 https://your-app.com/api/hellocoop?op=logout
+```
+
+### Invite
+
+Starts an invite flow to `https://wallet.hello.coop/invite`. See [Invite API (BETA)](./invite) 
+
+*Example:*
+
+```http
+https://your-app.com/api/hellocoop?op=invite
 ```
