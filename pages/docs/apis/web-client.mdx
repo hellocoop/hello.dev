@@ -17,9 +17,9 @@ Load this endpoint in the browser to login the user. Loading this endpoint will 
 |-|-|
 | `target_uri`    | overrides where the user will be redirected to after a successful login. |
 | `scope`         | overrides the default scope to request from Hellō. |
-| `login_hint`    | provide a [login_hint]() of which user to log in. Set to the user's email address. |
-| `domain_hint`   | provide a [domain_hint]() of the domain the user will log in at. |
-| `provider_hint` | overrides the default [provider_hint]() of which providers to show a new user. |
+| `login_hint`    | provide a [login_hint](/docs/oidc/request/#openid-connect-parameters) of which user to log in. Set to the user's email address. |
+| `domain_hint`   | provide a [domain_hint](/docs/apis/wallet/#domain_hint) of the domain the user will log in at. |
+| `provider_hint` | overrides the default [provider_hint](/docs/apis/wallet/#provider_hint) of which providers to show a new user. |
 | `prompt`        | - `login` will require a fresh login for the user.<br/> - `consent` will present the user with the consent screen. Allows user <br/> to update their profile. |
 
 *Example:*
