@@ -60,12 +60,17 @@ config = {
     response_mode?: 'fragment'|'query'|'form_post' - default 'query'
     nonce?: OpenID Connect "nonce" parameter override. 
     state?: OAuth "state" parameter
+    login_hint?: a hint for which user account to use.
+    domain_hint?: a hint for which domain or type of account (see below)
     provider_hint?: array of provider hint update values (see below)
+    prompt?: - 'login' | 'consent' (see below)
     wallet?: alternative mock wallet URL for testing
 }
 ```
 - [supported scopes](/docs/scopes)
-- [provider hint](/docs/apis/wallet/#provider-hint) documentation
+- [domain hint](/docs/apis/wallet/#domain_hint) documentation
+- [provider hint](/docs/apis/wallet/#provider_hint) documentation
+- [prompt](/docs/apis/web-client/#login) documentation
 
 Returns
 ```typescript
