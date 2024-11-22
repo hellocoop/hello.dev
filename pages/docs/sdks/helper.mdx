@@ -60,12 +60,17 @@ config = {
     response_mode?: 'fragment'|'query'|'form_post' - default 'query'
     nonce?: OpenID Connect "nonce" parameter override. 
     state?: OAuth "state" parameter
+    login_hint?: a hint for which user account to use.
+    domain_hint?: a hint for which domain or type of account (see below)
     provider_hint?: array of provider hint update values (see below)
+    prompt?: - 'login' | 'consent' (see below)
     wallet?: alternative mock wallet URL for testing
 }
 ```
 - [supported scopes](/docs/scopes)
-- [provider hint](/docs/apis/wallet/#provider-hint) documentation
+- [domain hint](/docs/apis/wallet/#domain_hint) documentation
+- [provider hint](/docs/apis/wallet/#provider_hint) documentation
+- [prompt](/docs/apis/web-client/#login) documentation
 
 Returns
 ```typescript
@@ -101,45 +106,36 @@ returns an ID Token in the JWT compact format (a string). Note that the ID Token
 
 Parses the header and payload from an ID Token. Does not verify the ID Token.
 
-```typescript
-// server login endpoint 
+## `createInviteRequest()` (BETA)
+`const { url } = createInviteRequest(config)`
 
-const { url, nonce, code_verifier } = await createAuthRequest({
-    client_id: CLIENT_ID,
-    redirect_uri: REDIRECT_URI // the callback endpoint
-})
-
-// store nonce & code_verifier in server session storage
-
-res.redirect(url) // redirect browser to make auth request
-```
-
-token, client_id, nonce, wallet
-
-## `validateToken()`
-*only in `@hellocoop/helper-browser`*
-
-Useful when:
-- `response_type=id_token`
-- `response_mode=fragment`
-
-This is a helper function for the `https://wallet.hello.coop/oauth/introspection` API as described [here](/docs/oidc/verification#introspection). 
-
-`const response = await validateToken(params)`
+A helper function to create the url to load in the browser to make the invite request to Hellō.
 
 ```typescript
-params = {
-    token: `id_token` from fragment
-    client_id: OAuth "client_id" parameter used in request
-    nonce?: OAuth "nonce" provided in authorization request - MUST be provided if in request
-    wallet?: alternative mock wallet host for testing
-} 
+config = {
+    inviter: `sub` provided by Hellō of the inviter - REQUIRED
+    client_id: `client_id` for your application - REQUIRED
+    initiate_login_uri: path where the invitee is sent upon accepting the invitation - REQUIRED
+    return_uri: URI for Hellō to return the inviter when they are done - REQUIRED
+    wallet?: string; alternative mock wallet host for testing
+    app_name?: override the name of the app - defaults to the name registered for the `client_id`
+    prompt?: override the prompt string shown to the invitee (see below)
+    role?: identifier string passed back to the app in the event JWT as the `role` property
+    tenant?: identifier string passed back to the app in the event JWT as the `tenant` property
+    state?: identifier string passed back to the app in the event JWT as the `state` property
+    events_uri?: The webhook where event JWTs are posted (see below)
+}
 ```
+- [Invite API](/docs/apis/invite) documentation
+- [prompt](/docs/apis/invite/#optional-parameters) documentation
+- [events_uri](/docs/apis/invite/#query-parameters) documentation
 
-This will call the wallet's introspection endpoint that will examine the token, ensure it was from Hellō, has not expired, and return the payload.
-
-If successfully validated, you will receive the full [ID Token payload](/docs/oidc/verification#response) with `active: true` to indicate it is an active token. If unsuccessful, you will receive an [Introspection Errors](/docs/oidc/errors#introspection).
-
+Returns
+```typescript
+{
+    url: URL to load in the browser to make the invite request
+}
+```
 
 ## Server Code Sample
 
