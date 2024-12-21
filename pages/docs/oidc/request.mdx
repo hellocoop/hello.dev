@@ -1,10 +1,16 @@
+import { Callout } from 'nextra/components'
+
 # Authentication Request
 
-Hello supports both the [Code Flow](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth) and the [Implicit Flow](https://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth)
+    *Hellō recommends using the [Code Flow](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth) with [PKCE](#pkce-code).*
+
+    *The [Implicit Flow](https://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth) is supported for backwards compatibility with software that only supports it.*
 
 ## Create Request URL
 
-*The [`@hellocoop/core`](https://www.npmjs.com/package/@hellocoop/nextjs) npm package has a `createAuthRequest()` function that simplifies creating an authorization request URL, including the PKCE code_verifier and code_challenge*
+<Callout type="info">
+    The [`@hellocoop/core`](https://www.npmjs.com/package/@hellocoop/nextjs) npm package has a `createAuthRequest()` function that simplifies creating an authorization request URL, including the PKCE code_verifier and code_challenge
+</Callout>
 
 The **request URL** is `https://wallet.hello.coop/authorize` and a query with the following standard [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) parameters:
 

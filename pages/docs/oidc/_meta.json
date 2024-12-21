@@ -4,5 +4,6 @@
     "verification": "Verification",
     "token": "ID Token",
     "config": "Configuration",
-    "errors": "Error Responses"
+    "errors": "Error Responses",
+    "unsupported": "Unsupported Features"
 }
