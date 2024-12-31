@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.hello.dev/
+
+# Sitemaps
+Sitemap: https://www.hello.dev/sitemap.xml
