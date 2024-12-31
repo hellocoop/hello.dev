@@ -6,6 +6,7 @@
     "dev": "next dev",
     "feed": "./scripts/feed.sh",
     "build": "npm run feed && next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "test": "linkinator ./S3 --config linkinator.config.json",
     "pr": "./scripts/pr.sh",
@@ -22,6 +23,7 @@
   "homepage": "https://www.hello.dev/",
   "dependencies": {
     "next": "^13.0.6",
+    "next-sitemap": "^4.2.3",
     "nextra": "latest",
     "nextra-theme-docs": "latest",
     "react": "^18.2.0",
