@@ -32,26 +32,27 @@ https://wallet.hello.coop/authorize
 
 | Platform     | Default provider_hint values  |
 | -----------  | ----------------------------- |
-| Default      | `google email passkey¹`       |
-| macOS/iOS    | `apple google email passkey¹` |
+| Default      | `google email`                |
+| macOS/iOS    | `apple google email`          |
 | Windows      | `microsoft google email`      |
-
-¹ Mobile devices where passkey is supported
 
 Possible slug values:
 
 - `apple`
+- `apple--`
 - `discord`
 - `email`
+- `email--`
 - `ethereum`
 - `facebook`
 - `github`
 - `gitlab`
 - `google`
+- `google--`
 - `line`
 - `mastodon`
 - `microsoft`
-- `passkey` - only offered on mobile devices
+- `microsoft--`
 - `qrcode`- useful when user may be at a Kiosk and will use their phone to login
 - `tumblr`
 - `twitch`
