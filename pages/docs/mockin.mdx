@@ -102,7 +102,20 @@ See https://github.com/hellocoop/packages/tree/main/express for an example
 
 ## Mock API
 
-All Mock APIs return 200 and the current value of MOCK if successful, a 404 response with an explanation if an invalid request.
+All Mock APIs return 200 (302 for authorization requests) along with the current value of MOCK if successful, a 404 response with an explanation if an invalid request.
+
+### `GET /authorize`
+ 
+See [Auth Request](/docs/oidc/request) for the query parameters of an authorization request.  
+
+Mockin supports the `login_hint` and `domain_hint` query parameters:
+- `login_hint` can be either the `email` or the `sub` of a mock user. Mockin returns the user whose `email` or `sub` matches the provided `login_hint`.
+- `domain_hint` should be the domain of an email (e.g., example.net). Mockin returns users whose email belongs to the specified domain.  
+
+See the list of builtin mock users [here](https://github.com/hellocoop/mockin/blob/main/src/users.js).
+
+> If both login_hint and domain_hint are passsed, login_hint takes precedence.
+
 
 ### `PUT /mock/token`
 Changes the ID Token to be invalid in some way. Pass one or more of the following query parameters:
