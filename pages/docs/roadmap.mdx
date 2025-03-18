@@ -22,7 +22,11 @@ Users will be able to select two or more users that can mutually agree to "break
 
 ## B2B Federation
 
-This functionality will allow a B2B app to offer their enterprise customers SSO and directory sync using their existing Hellō integration. We will introduce claims for `org` and `groups` that can be requested by an app. Hellō will federate with Enterprises, allowing them to re-use the federation across all Hellō apps. Users will be able to select from their personal or work identities on who they want to be when logging into an app.
+This functionality will allow a B2B app to offer their enterprise directory sync using their existing Hellō integration. We will introduce the `groups` claim that can be requested by an app. Hellō will federate with Enterprises, allowing them to re-use the federation across all Hellō apps. 
+
+## OpenID Provider Commands
+
+We are actively working on the OpenID Provider Commands and will offer this to our customers for lifecycle management. [latest draft](https://openid.github.io/openid-provider-commands/main.html) and [blog post](https://blog.hello.coop/2025/03/introducing-openid-provider-commands/)
 
 ## Hellō User Discovery
 
@@ -42,4 +46,8 @@ A headless mock service and a Docker image that would return test user info or e
 A Web App that you send your users to for them to invite other users to your app.
 
 Now available in [Hellō Developer Console](https://console.hello.coop) and available for your applications in BETA. See the [Invite](/docs/apis/invite/) documentation for details.
+
+### B2B SSO
+
+We now have managed accounts. Users are able to select from their personal or work identities when logging into an app. We provide a `tenant` claim for the app to know which tenant the user belongs to. The `tenant` claim is set to `personal` for personally managed accounts. 
 

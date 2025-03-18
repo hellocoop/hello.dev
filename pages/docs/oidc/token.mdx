@@ -66,15 +66,7 @@ URRrQrhTidVfCdFwswdrUZ3pdyhiTLlhC9Kn9Dtk5F3KVd0SEuzcb9cBJzNvV-vO-j7b-siqUJV4du3Q
         "name": "Dick Hardt",
         "iat": 1729709582,
         "exp": 1729709882,
-        "org": {
-            "id": "org_9yMcnK3agJyUDxOBp19gpSe8_PU1",
-            "domain": "hello.coop"
-        },
-        "org_claims": [
-            "picture",
-            "email",
-            "name"
-        ]
+        "tenant": "org_9yMcnK3agJyUDxOBp19gpSe8_PU1"
     },
 }
 ```
@@ -94,6 +86,4 @@ URRrQrhTidVfCdFwswdrUZ3pdyhiTLlhC9Kn9Dtk5F3KVd0SEuzcb9cBJzNvV-vO-j7b-siqUJV4du3Q
 |`email_verified`|Indicates email was verified. Will always be `true` from Hellō|
 |`iat`|The time the ID Token was issued in [Epoch time](https://en.wikipedia.org/wiki/Unix_time)|
 |`exp`|The time the ID Token expires.<br/>Hellō sets the expiry to be 5 minutes (300 seconds) after `iat`|
-|`org.id`|The Hellō identifier for the organization. Similar to `sub`, use this to identify the organization|
-|`org.domain`|The domain of the organization. Note the organization may change this|
-|`org_claims`|Array of claims that came from the organization. This is an experimental claim that may be deprecated.|
+|`tenant`|The Hellō identifier for the organization. Similar to `sub`, use this to identify the organization. Set to `personal` for personal accounts.|
