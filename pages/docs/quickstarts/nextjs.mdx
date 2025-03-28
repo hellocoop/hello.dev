@@ -38,39 +38,29 @@ npm i @hellocoop/nextjs
     ```sh
     npx @hellocoop/quickstart@latest --nextjs
     ```
-    Quickstart will prompt you to:
-    - download the `@hellocoop/quickstart` package
-    - log in to Quickstart with Hellō
-    - create an application, or select an existing one
-
-    Quickstart will then:
-    - create a `hello.config.js` file containing your app's `client_id`
-    - mount the Hellō endpoint by creating the `./app/api/hellocoop/route.js` file
-    - generate a random `HELLO_COOKIE_SECRET` and add it to `.env.local`
-
-    > If you created a new application, no more configuration is needed for local development. You can add a light and dark themed logo, and URLs for terms of service and your privacy policy when you are ready at the [Hellō Developer Console](https://console.hello.coop)
-
-    Your server should now be fully configured to work with Hellõ locally.
   </Tabs.Tab>
   <Tabs.Tab>
     ```sh
     npx @hellocoop/quickstart@latest --nextjs_pages_router
     ```
-    Quickstart will prompt you to:
-    - download the `@hellocoop/quickstart` package
-    - log in to Quickstart with Hellō
-    - create an application, or select an existing one
-
-    Quickstart will then:
-    - create a `hello.config.js` file containing your app's `client_id`
-    - mount the Hellō endpoint by creating the `./pages/api/hellocoop.js` file
-    - generate a random `HELLO_COOKIE_SECRET` and add it to `.env.local`
-
-    > If you created a new application, no more configuration is needed for local development. You can add a light and dark themed logo, and URLs for terms of service and your privacy policy when you are ready at the [Hellō Developer Console](https://console.hello.coop)
-
-    Your server should now be fully configured to work with Hellõ locally.
   </Tabs.Tab>
 </Tabs>
+
+Quickstart will prompt you to:
+1. Download the `@hellocoop/quickstart` package
+2. Log in to Quickstart with Hellō
+3. Create an application, or select an existing one
+
+Quickstart will then:
+1. Create a `hello.config.js` file containing your app's `client_id`
+2. Mount the Hellō endpoint by creating one of the following files, depending on your router setup:
+- `./app/api/hellocoop/route.js` (App Router)
+- `./pages/api/hellocoop.js` (Pages Router)
+3. Generate a random `HELLO_COOKIE_SECRET` and add it to `.env.local`
+
+> If you created a new application, no more configuration is needed for local development. You can add a light and dark themed logo, and URLs for terms of service and your privacy policy when you are ready at the [Hellō Developer Console](https://console.hello.coop)
+
+Your server should now be fully configured to work with Hellō locally.
 
 ### Test Your Server
 
