@@ -96,7 +96,7 @@ To use the [`Image Component`](https://nextjs.org/docs/pages/api-reference/compo
 ```js {4-15} filename="next.config.js"
 const nextConfig = {
     images: {
-        domains: [
+        remotePatterns: [
           {
             protocol: 'https',
             hostname: 'cdn.hello.coop'
