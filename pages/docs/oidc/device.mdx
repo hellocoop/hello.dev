@@ -29,7 +29,7 @@ To start the process, do an HTTP POST to the Hellō `device_authorization_endpoi
 
 ## Device Authorization Response
 
-If the request is accepted, a JSON response will be provided per . Here is a sample response:
+If the request is accepted, a JSON response will be provided per [RFC 8628 3.2](https://datatracker.ietf.org/doc/html/rfc8628#section-3.2). Here is a sample response:
 
 ```json
 {
@@ -55,4 +55,4 @@ device_code=bde3a264c27b79cfc0e838e098bd193f571cf01de45a871dd228ab889d519878&
 client_id=app_exampleapplication_cid
 ```
 
-The response will be the usually `token_endpoint` response 
+The response will usually be the `token_endpoint` response.
