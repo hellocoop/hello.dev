@@ -33,22 +33,34 @@ npm i @hellocoop/nextjs
 
 ### Run Quickstart
 
-```sh
-npx @hellocoop/quickstart@latest --nextjs
- ```
+ <Tabs items={['App Router (Recommended)', 'Pages Router']} storageKey="nextjs_router">
+  <Tabs.Tab>
+    ```sh
+    npx @hellocoop/quickstart@latest --nextjs_app_router
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```sh
+    npx @hellocoop/quickstart@latest --nextjs_pages_router
+    ```
+  </Tabs.Tab>
+</Tabs>
+
 Quickstart will prompt you to:
-- download the `@hellocoop/quickstart` package
-- log in to Quickstart with Hellō
-- create an application, or select an existing one
+1. Download the `@hellocoop/quickstart` package
+2. Log in to Quickstart with Hellō
+3. Create an application, or select an existing one
 
 Quickstart will then:
-- create a `hello.config.js` file containing your app's `client_id`
-- mount the Hellō endpoint by creating the `./pages/api/hellocoop.js` file
-- generate a random `HELLO_COOKIE_SECRET` and add it to `.env.local`
+1. Create a `hello.config.js` file containing your app's `client_id`
+2. Mount the Hellō endpoint by creating one of the following files, depending on your router setup:
+- `./app/api/hellocoop/route.js` (App Router)
+- `./pages/api/hellocoop.js` (Pages Router)
+3. Generate a random `HELLO_COOKIE_SECRET` and add it to `.env.local`
 
 > If you created a new application, no more configuration is needed for local development. You can add a light and dark themed logo, and URLs for terms of service and your privacy policy when you are ready at the [Hellō Developer Console](https://console.hello.coop)
 
-Your server should now be fully configured to work with Hellõ locally.
+Your server should now be fully configured to work with Hellō locally.
 
 ### Test Your Server
 
@@ -92,7 +104,110 @@ You have configured your server to use Hellō!
 <Steps>
 ### Add Hellō Test Page
 
-Copy the following code and save it to `hello-test.jsx` in your `pages` folder:
+ <Tabs items={['App Router (Recommended)', 'Pages Router']} storageKey="nextjs_router">
+  <Tabs.Tab>
+  Copy the following code and save it to `page.jsx` in your `app/hello-test` folder:
+
+```jsx filename="./app/hello-test/page.jsx"
+import Head from 'next/head'
+import Link from 'next/link'
+import { 
+    LoggedOut, 
+    LoggedIn, 
+    ContinueButton, 
+    useAuth, 
+    getLogOutRoute 
+} from '@hellocoop/nextjs/react'
+
+export default async function HelloTest() {
+  const status = auth(); 
+  const { auth: {name, picture, email} } = status;
+
+  return (
+    <>
+      <Head>
+        <title>Hellō Test Page</title>
+        <link rel="stylesheet" href="https://cdn.hello.coop/css/hello-btn.css"/>      
+      </Head>
+      <main>
+        <div className="profile">
+          <LoggedOut>
+              <ContinueButton targetURI="/hello-test"/>
+          </LoggedOut>
+          <LoggedIn>
+              <div className="user-details">
+                <img src={picture} alt={name} />
+                <h3>{name}</h3>
+                <p>{email}</p>
+              </div>
+              <div className="logout-link">
+                <Link href={getLogOutRoute({target_uri:'/hello-test'})}>
+                    log out
+                </Link>
+              </div>
+          </LoggedIn>        
+        </div> 
+        <hr className="separator" />
+        <pre>
+            {JSON.stringify(status, null, 4)}
+        </pre>
+      </main>
+      <style global jsx>{`
+        @media (prefers-color-scheme: light) {
+            body {
+                color: #303030;
+                background: white;
+            }
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: #d4d4d4;
+                background: #151515;
+                color-scheme: dark;
+            }
+        }
+      `}</style>
+      <style jsx>{`
+        main {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+        }
+        .profile, .logout-link {
+            margin: 10px 0;
+            text-align: center; /* Centering content */
+        }
+        .user-details {
+            margin-bottom: 20px;
+        }
+        .user-details img {
+            max-width: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .user-details h3, .user-details p {
+            margin: 5px 0;
+        }
+        .separator {
+            width: 80%;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+        pre {
+            alignSelf: 'center',
+            width: '80%' // Adjust as needed
+        }
+      `}</style>
+    </>
+  )
+}
+```
+  </Tabs.Tab>
+  <Tabs.Tab>
+  Copy the following code and save it to `hello-test.jsx` in your `pages` folder:
 
 ```jsx filename="./pages/hello-test.jsx"
 import Head from 'next/head'
@@ -191,6 +306,8 @@ export default function HelloTest() {
   )
 }
 ```
+  </Tabs.Tab>
+</Tabs>
 
 ### Test Your Client
 
