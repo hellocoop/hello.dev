@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "feed": "./scripts/feed.sh",
-    "build": "npm run feed && next build",
+    "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
     "test": "linkinator ./S3 --config linkinator.config.json",
