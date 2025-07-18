@@ -38,7 +38,28 @@ nav a[target="_blank"]:after {
     opacity: 0.75;
 }
 
+main {
+    /* for beta label positioning */
+    position: relative;
+}
+
 main a[target="_blank"]:after {
     top: 1px;
     margin-left: 4px;
+}
+
+.beta-label {
+    position: absolute;
+    top: 54px;
+    right: 32px;
+    width: 80px;
+}
+
+@media screen and (min-width: 768px) {
+    .beta-label {
+        position: absolute;
+        top: 32px;
+        right: 48px;
+        width: 110px;
+    }
 }
