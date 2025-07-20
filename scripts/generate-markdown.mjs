@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 // Paths
 const OUT_DIR = path.join(__dirname, '..', 'out'); // Next.js static export directory
 const S3_DIR = path.join(__dirname, '..', 'S3'); // Current S3 build directory
-const MARKDOWN_DIR = path.join(__dirname, '..', 'markdown', 'docs');
+const MARKDOWN_DIR = path.join(__dirname, '..', 'S3', 'markdown', 'docs'); // Output to S3 for sync
 
 // Configure turndown for better markdown conversion
 const turndownService = new TurndownService({
