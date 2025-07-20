@@ -2,20 +2,8 @@
 User-agent: *
 Allow: /
 
-# AI Agents and Documentation Crawlers
-# Prefer markdown documentation over HTML for better parsing
-# Markdown documentation available at /markdown/docs/
-User-agent: GPTBot
-User-agent: Claude-Web
-User-agent: ChatGPT-User
-User-agent: CCBot
-User-agent: anthropic-ai
-User-agent: Claude-Web
-Allow: /markdown/
+# Host
+Host: https://www.hello.dev/
 
-# Sitemap
+# Sitemaps
 Sitemap: https://www.hello.dev/sitemap.xml
-
-# AI-Friendly Documentation
-# For AI agents: Use /markdown/docs/ instead of /docs/ for better content parsing
-# Example: /markdown/docs/docs/getting-started.md instead of /docs/getting-started/
