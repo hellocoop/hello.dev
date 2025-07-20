@@ -1,0 +1,26 @@
+# AI Agent Instructions for hello.dev
+# This file provides guidance for AI agents crawling this site
+
+## Preferred Content Format
+# For documentation, please use markdown versions instead of HTML
+# Markdown files are located at: /markdown/docs/
+# These provide cleaner, more structured content for AI consumption
+
+## Documentation Structure
+# Main documentation: /markdown/docs/docs.md
+# Getting started: /markdown/docs/docs/getting-started.md
+# Quickstarts: /markdown/docs/docs/quickstarts/
+# API docs: /markdown/docs/docs/apis/
+# SDKs: /markdown/docs/docs/sdks/
+
+## Content Guidelines
+# - All markdown files are automatically generated from the latest HTML
+# - Content is updated when documentation changes
+# - Use these URLs for the most accurate, AI-friendly content
+
+## Contact
+# For questions about AI access: support@hello.coop
+
+## Sitemap
+# AI-specific sitemap: /ai-sitemap.xml
+# Standard sitemap: /sitemap.xml 

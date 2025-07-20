@@ -1,0 +1,55 @@
+DocumentationRoadmap
+
+# Hellō Roadmap
+
+Below are some of the new features and functionality we are exploring to work on next (or have completed).
+
+## Quickstarts / SDKs[](#quickstarts--sdks)
+
+As noted on [Quickstarts](/docs/quickstarts/), we are planning on Quickstarts and SDKs for:
+
+-   Nuxt
+-   Remix
+-   SvelteKit
+
+[Let us know what else you would like to see. (opens in a new tab)](https://github.com/hellocoop/hello.dev/discussions/53)
+
+## Delegated Access[](#delegated-access)
+
+Users will be able to delegate access to certain apps to other users.
+
+## Emergency Override[](#emergency-override)
+
+Users will be able to select two or more users that can mutually agree to "break glass" on a user's account if they are somehow incapacitated.
+
+## B2B Federation[](#b2b-federation)
+
+This functionality will allow a B2B app to offer their enterprise directory sync using their existing Hellō integration. We will introduce the `groups` claim that can be requested by an app. Hellō will federate with Enterprises, allowing them to re-use the federation across all Hellō apps.
+
+## OpenID Provider Commands[](#openid-provider-commands)
+
+We are actively working on the OpenID Provider Commands and will offer this to our customers for lifecycle management. [latest draft (opens in a new tab)](https://openid.github.io/openid-provider-commands/main.html) and [blog post (opens in a new tab)](https://blog.hello.coop/2025/03/introducing-openid-provider-commands/)
+
+## Hellō User Discovery[](#hellō-user-discovery)
+
+This functionality will let applications discover if a user has a Hellō Wallet, enabling the application to only offer Hellō to users that already have a Hellō Wallet, and continue offering the existing registration and log in to other users.
+
+## Shipped[](#shipped)
+
+### Mock Server[](#mock-server)
+
+A headless mock service and a Docker image that would return test user info or errors for end-to-end automated development testing.
+
+[Mockin Docs](/docs/mockin/), npm package [@hellocoop/mockin (opens in a new tab)](https://www.npmjs.com/package/@hellocoop/mockin), dockerimage [hellocoop/mockin (opens in a new tab)](https://hub.docker.com/r/hellocoop/mockin), and [mockin source (opens in a new tab)](https://github.com/hellocoop/mockin).
+
+### App Invitations[](#app-invitations)
+
+A Web App that you send your users to for them to invite other users to your app.
+
+Now available in [Hellō Developer Console (opens in a new tab)](https://console.hello.coop) and available for your applications in BETA. See the [Invite](/docs/apis/invite/) documentation for details.
+
+### B2B SSO[](#b2b-sso)
+
+We now have managed accounts. Users are able to select from their personal or work identities when logging into an app. We provide a `tenant` claim for the app to know which tenant the user belongs to. The `tenant` claim is set to `personal` for personally managed accounts.
+
+[Hellō vs ___](/docs/comparison/ "Hellō vs ___")
