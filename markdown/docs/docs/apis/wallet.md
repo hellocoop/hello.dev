@@ -1,0 +1,102 @@
+Documentation[API References](/docs/apis/)Wallet
+
+# Wallet API
+
+## Authorization Request[](#authorization-request)
+
+See [OpenID Connect | Auth Request](/docs/oidc/request/) for the supported standard parameters.
+
+The Hellō Wallet supports the following extended parameters:
+
+### `provider_hint`[](#provider_hint)
+
+When Hellō does not know the user's preferred provider (new user or new browser), they are presented with a recommended list of providers to choose from, with the option to show all the other supported providers. This minimizes the risk that a new user is overwhelmed by all the available options, while still providing choice.
+
+You can change which providers are recommended to better align with your users' preferences by passing a `provider_hint` query parameter in your authorization request. You add providers by providing one or more space (or `+` in URL) separated slugs:
+
+```
+https://wallet.hello.coop/authorize
+?{...}
+&provider_hint=discord+github
+```
+
+You can demote a default provider by suffixing the slug with `--`.
+
+```
+https://wallet.hello.coop/authorize
+?{...}
+&provider_hint=google--
+```
+
+**Provider Defaults**
+
+Platform
+
+Default provider_hint values
+
+Default
+
+`google email`
+
+macOS/iOS
+
+`apple google email`
+
+Windows
+
+`microsoft google email`
+
+Possible slug values:
+
+-   `apple`
+-   `apple--`
+-   `discord`
+-   `email`
+-   `email--`
+-   `ethereum`
+-   `facebook`
+-   `github`
+-   `gitlab`
+-   `google`
+-   `google--`
+-   `line`
+-   `mastodon`
+-   `microsoft`
+-   `microsoft--`
+-   `qrcode`\- useful when user may be at a Kiosk and will use their phone to login
+-   `tumblr`
+-   `twitch`
+-   `twitter`
+-   `wordpress`
+-   `yahoo`
+
+> **ℹ️ Info:** 🦆
+
+Explore how the `provider_hint` functionality works with the [Hellō Playgound (opens in a new tab)](https://playground.hello.dev)  
+*Logout of the [Hellō Wallet (opens in a new tab)](https://wallet.hello.coop) and click `forget me` to see the user experience*
+
+### `domain_hint`[](#domain_hint)
+
+The `domain_hint` indicates which domain, or type of account you want from the user.
+
+If you provide a domain such as `hello.coop`, then the user will be directed to log in with the provider that manages `hello.coop`.
+
+If you pass `domain_hint=managed`, then the user will be prompted to select a managed account. You can set this value if you want to require a managed account for your app.
+
+If you pass `domain_hint=personal`, then the user will be prompted to select a personal account. You can set this value if you want to require a personal account for your app.
+
+## Authorization Response[](#authorization-response)
+
+See [OpenID Connect | Auth Response](/docs/oidc/response/) for the supported standard parameters.
+
+The Hellō Wallet supports the following extended parameters:
+
+### `wildcard_domain`[](#wildcard_domain)
+
+This parameter is part of the Hellō Auto Config process. If wildcard Development Redirect URIs (`https://*`) are enabled, and the supplied `redirect_uri` is not registered, then the Wallet will append the `wildcard_domain` parameter to the authorization response so that the application software can detect that it's Redirect URI is not registered, and prompt the developer to register it. The `wildcard_domain` is a URL that will load the Hellō Developer Console for the current Application and prompt the team member to save as a Development Redirect URI, Production Redirect URI, or cancel
+
+### `app_name`[](#app_name)
+
+Included if `wildcard_domain` is provided. Contains the App Name as registered at the Hellō Developer Console.
+
+[Web Client](/docs/apis/web-client/ "Web Client")[Invite (BETA)](/docs/apis/invite/ "Invite (BETA)")

@@ -1,0 +1,70 @@
+Documentation[SDK References](/docs/sdks/)FAQs
+
+# SDK FAQs
+
+## Cookies[](#cookies)
+
+### *1) Why do the SDKs set cookies?*[](#1-why-do-the-sdks-set-cookies)
+
+Cookies enable you do easily get basic auth information without having to make a DB call on each request. Managing the stateless session information for you is one less security related task you need to do.
+
+### *2) What cookies are set?*[](#2-what-cookies-are-set)
+
+A `hellocoop_oidc` cookie that stores the OIDC (OpenID Connect) protocol state. This cookie expires after 5 minutes, and is deleted after completion of the OIDC flow.
+
+A `hellocoop_auth` cookie that stores the `auth` object. This cookie expires with the browser session.
+
+### *3) How are cookies encrypted?*[](#3-how-are-cookies-encrypted)
+
+The cookies are encrypted using `aes-256-gcm` and the [`HELLO_COOKIE_SECRET`](/docs/sdks/environment/#hello_cookie_secret)
+
+### *4) What options are used with the cookies?*[](#4-what-options-are-used-with-the-cookies)
+
+The options are:
+
+-   `httpOnly: true` - prevents the browser from looking at or changing the cookies
+-   `secure: true` - set when `NODE_ENV=production` which requires cookie to only be used with `https`
+-   `sameSite: 'lax'` - the browser will only send the cookie to routes that are in the app's domain, but will send it will be sent from other domains that link to or redirect to that domain. We will be enabling an option to upgrade to `sameSite: strict` for those that require the higher security.
+
+The `hellocoop_oidc` cookie is further restricted to only be sent to the Hellō endpoint (default is `api/hellocop`) and a `maxAge:300` (5 minutes).
+
+OWASP has a [good explanation (opens in a new tab)](https://owasp.org/www-community/SameSite) on the difference between `sameSite` being `strict` vs `lax`.
+
+## Redirect URI Discovery[](#redirect-uri-discovery)
+
+### *1) What is a Redirect URI?*[](#1-what-is-a-redirect-uri)
+
+This URI is where Hellō redirects the user after interacting with the Hellō Wallet. The Redirect URI is the `redirect_uri` sent in an [authorization request](/docs/oidc/request/) and is a required parameter in the Hellō implementation of OpenID Connect. The `redirect_uri` is one of the ways that Hellō ensures the application identified by the `client_id`, and all Redirect URIs for an application MUST be registered at the [Hellō Developer Console (opens in a new tab)](https://console.hello.coop). If a `redirect_uri`is provided that is not registered, Hellō will not redirect the user back to the application.
+
+### *2) What are the challenges with Redirect URIs?*[](#2-what-are-the-challenges-with-redirect-uris)
+
+-   Local development - If you are developing locally, using a Redirect URI such as `http://localhost:3000` lets you debug and develop on your own machine without any complicated configuration. Unfortunately, allowing `localhost` as a Redirect URI reduces the security of your application as an attacker can more easily impersonate your app by using your `client_id` in a request and redirecting back to a server running on a user's machine and obtaining an ID Token for your app.
+    
+-   Configuration - Your server needs to be configured with its Redirect URI, usually as an environment variable, and Hellō needs to be configured with each environments Redirect URI.
+    
+-   Dynamic Previews - Services such as Vercel will generate a new, random hostname for each of your deployments so that you can preview them all independently. Manually adding the Redirect URIs for each preview is impractical.
+    
+
+Hellō addresses these issues with Development Redirect URIs, Redirect URI Discovery, and Redirect URI Auto Config.
+
+### *3) What are Development Redirect URIs?*[](#3-what-are-development-redirect-uris)
+
+Hellō separates Redirect URIs to be either Development or Production. Only members of your team are allowed to use the Development Redirect URIs registered at Hellō. This allows your team to work against `localhost` without exposing your users to the security concerns of `localhost`. To reduce manual configuration, `localhost` (and `127.0.0.1`) are enabled by default when you create an app.
+
+### *4) What is Redirect URI Discovery?*[](#4-what-is-redirect-uri-discovery)
+
+If [`HELLO_REDIRECT_URI`](/docs/sdks/environment/#hello_redirect_uri) has not been set, each server instance running a Hellō SDK will discover its Redirect URI on the first call to login by sending back a page with a script to read the URI the browser is running on and sending that back to the Hellō endpoint as an additional parameter, and then used to send the authorization request to Hellō. The SDK memoizes the Redirect URI for subsequent calls. This allows the SDK to learn the Redirect URI for Dynamic Previews, where the hostname is not known prior to deployment.
+
+### *5) What is Redirect URI Auto Config?*[](#5-what-is-redirect-uri-auto-config)
+
+Redirect URI Auto Config removes manual configuration of the Redirect URI at the Hellō Developer Console. The Redirect URI Discovery removes the configuration burden at the server, but the Redirect URI still needs to be configured at Hellō. If the wildcard domain `https://*` option in the Development Redirect URIs is enabled for the application, your team is able to use any `https` Redirect URI. When using an unregistered Redirect URI, the Hellō Wallet adds the `wildcard_domain` query parameter to the response. When the SDKs see this parameter, they inject an interstitial page prompting your team member to register the Redirect URI as either a Development or Production RedirectURI, removing the requirement to manually register the Redirect URI.
+
+### *6) Why not just use `/api/hellocoop`?*[](#6-why-not-just-use-apihellocoop)
+
+We need the full URL for the `redirect_uri`. The server we are running may be behind a proxy, and the path may be mapped under another path. The discovery mechanism ensures we get the endpoint that the browser is using.
+
+### *7) Why do the SDKs default to `/api/hellocoop`?*[](#7-why-do-the-sdks-default-to-apihellocoop)
+
+Putting it in `api` separates the endpoint from pages. Using `hellocoop` removes conflicts with many tutorials that create a `/api/hello` path.
+
+[Environment Vars](/docs/sdks/environment/ "Environment Vars")[API References](/docs/apis/ "API References")
