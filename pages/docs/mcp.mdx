@@ -4,6 +4,9 @@ import { Callout } from 'nextra/components'
 
 <img src="https://cdn.hello.coop/images/beta-label.png" alt="BETA" className="beta-label"/>
 
+## Under Development
+
+{/*
 Model Context Protocol (MCP) server for creating and managing Hellō applications directly from your AI assistant.
 
 <Callout type="warning">
@@ -12,73 +15,79 @@ Model Context Protocol (MCP) server for creating and managing Hellō application
 
 ## Overview
 
-The Hellō MCP server provides programmatic access to the Hellō Admin API, allowing you to create and manage your Hellō applications without switching to the [Hellō Console](https://console.hello-beta.net)(NOTE: this is a link to the BETA console). This streamlines your development workflow by integrating application management directly into your AI assistant.
+The Hellō Admin MCP server provides programmatic access to the Hellō Admin API, allowing you to create and manage your Hellō applications without switching to the [Hellō Console](https://console.hello.coop), streamlining your development workflow by integrating application management directly into your AI assistant.
 
-**Note:** This server can only perform creation and management operations. To delete applications, you'll need to visit the [Hellō Console](https://console.hello.coop).
+**Note:** The MCP Server can only perform creation and management operations. To delete applications, you'll need to visit the [Hellō Console](https://console.hello.coop).
+
+## Authorization 
+
+MCP Clients gain access to the APIs by requesting the `mcp` scope. The resulting access token is only valid for an hour, and no refresh token is provided. If the access token has expired, then a new authorization flow will be initiated. 
+
+For clients using the `stdio` transport, the authorization flow is started by the local MCP server. For clients using the new `streamableHTTP` transport, the client will detect authorization is required and will start the authorization flow. 
 
 ## Installation
 
-### VS Code One-Click Install
+| Cursor | VS Code |
+|--------|---------|
+| [Install MCP Server](https://cursor.com/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL21jcC5oZWxsby5jb29wIn0K) | [Install on VS Code](vscode:mcp/install?%7B%22name%22%3A%22Hell%C5%8D%20Admin%22%2C%22url%22%3A%22https%3A//mcp.hello-beta.net%22%2C%22type%22%3A%22http%22%7D) |
 
-If you're using VS Code with MCP support, these links will install the server directly:
+### VS Code Configuration
 
-**Stdio Transport (Local):**
-<a href="vscode:mcp/install?%7B%22name%22%3A%22Hell%C5%8D%20Admin%20%28BETA%29%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40hellocoop%2Fmcp%40latest%22%5D%2C%22type%22%3A%22stdio%22%2C%22env%22%3A%7B%22HELLO_DOMAIN%22%3A%22hello-beta.net%22%7D%7D">
-  <img src="https://img.shields.io/badge/Install%20Stdio-VS%20Code-blue?style=for-the-badge&logo=visualstudiocode" alt="Install MCP using stdio in VS Code" />
-</a>
+Add to your `.vscode/mcp.json` file in your workspace or global settings:
 
-### Cursor One-Click Install
-
-If you're using Cursor, click this link to automatically install the Hellō MCP server:
-
-<a href="@cursor://anysphere.cursor-deeplink/mcp/install?name=hello&config=eyJ1cmwiOiJodHRwczovL21jcC5oZWxsby5jb29wIn0K">
-  <img src="https://img.shields.io/badge/Install%20in%20Cursor-000000?style=for-the-badge&logo=cursor" alt="Install MCP in Cursor" />
-</a>
-
-Or copy and paste this deeplink directly into Cursor:
-```
-@cursor://anysphere.cursor-deeplink/mcp/install?name=hello&config=eyJ1cmwiOiJodHRwczovL21jcC5oZWxsby5jb29wIn0K
-```
-
-### Manual Configuration
-
-If the one-click install doesn't work, add one of these configurations to your MCP client settings:
-
-#### Stdio Transport (Local)
+**HTTP Transport (Remote):**
 ```json
 {
-  "hello-admin-stdio": {
-    "command": "npx",
-    "args": ["-y", "@hellocoop/mcp@latest"],
-    "type": "stdio",
-    "env": {
-      "HELLO_DOMAIN": "hello-beta.net"
+  "servers": {
+    "hello-admin": {
+      "type": "http",
+      "url": "https://mcp.hello.coop"
     }
   }
 }
 ```
 
-The stdio transport:
-- Runs a local server process
-- Performs OAuth authentication in your browser
-- Gets a 1-hour access token for Admin API calls
-- Best for development and testing
-
-#### streamableHTTP Transport (Remote)
+**Stdio Transport (Local):**
 ```json
 {
-  "hello-admin-http": {
-    "url": "https://mcp.hello-beta.net/",
-    "type": "http"
+  "servers": {
+    "hello-admin": {
+      "type": "stdio", 
+      "command": "npx",
+      "args": ["-y", "@hellocoop/mcp@latest"]
+    }
   }
 }
 ```
 
-The HTTP transport:
-- Connects to our hosted MCP server
-- Handles OAuth authentication remotely
-- No local processes required
-- Best for production use
+### Other MCP Clients
+
+For other MCP clients, use these configurations:
+
+**Stdio Transport (Local):**
+
+```json
+{
+  "mcpServers": {
+    "hello-admin": {
+      "command": "npx",
+      "args": ["-y", "@hellocoop/mcp@latest"]
+    }
+  }
+}
+```
+
+**HTTP Transport (Remote):**
+```json
+{
+  "mcpServers": {
+    "hello-admin": {
+      "url": "https://mcp.hello.coop",
+      "type": "http"
+    }
+  }
+}
+```
 
 ## Available Tools
 
@@ -261,3 +270,4 @@ npm run get-token          # Get access token for API testing
 ---
 
 For more information, visit the [Hellō MCP Server repository](https://github.com/hellocoop/mcp).
+*/}
