@@ -4,15 +4,6 @@ import { Callout } from 'nextra/components'
 
 <img src="https://cdn.hello.coop/images/beta-label.png" alt="BETA" className="beta-label"/>
 
-## Under Development
-
-{/*
-
-Add warning that Cursor may complain if using an MCP server and claude sonnet  
-
-*/}
-
-{/*
 Model Context Protocol (MCP) server for creating and managing Hellō applications directly from your AI assistant.
 
 <Callout type="warning">
@@ -21,185 +12,129 @@ Model Context Protocol (MCP) server for creating and managing Hellō application
 
 ## Overview
 
-The Hellō Admin MCP server provides programmatic access to the Hellō Admin API, allowing you to create and manage your Hellō applications without switching to the [Hellō Console](https://console.hello.coop), streamlining your development workflow by integrating application management directly into your AI assistant.
-
-**Note:** The MCP Server can only perform creation and management operations. To delete applications, you'll need to visit the [Hellō Console](https://console.hello.coop).
-
-## Authorization 
-
-MCP Clients gain access to the APIs by requesting the `mcp` scope. The resulting access token is only valid for an hour, and no refresh token is provided. If the access token has expired, then a new authorization flow will be initiated. 
-
-For clients using the `stdio` transport, the authorization flow is started by the local MCP server. For clients using the new `streamableHTTP` transport, the client will detect authorization is required and will start the authorization flow. 
+The Hellō MCP server provides a **single powerful tool** (`hello_manage_app`) that lets you create and manage your Hellō applications directly from your AI assistant, including uploading logos for both light and dark themes.
 
 ## Installation
 
 | Cursor | VS Code |
 |--------|---------|
-| [Install MCP Server](https://cursor.com/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL21jcC5oZWxsby5jb29wIn0K) | [Install on VS Code](vscode:mcp/install?%7B%22name%22%3A%22Hell%C5%8D%20Admin%22%2C%22url%22%3A%22https%3A//mcp.hello-beta.net%22%2C%22type%22%3A%22http%22%7D) |
+| [Install MCP Server](https://cursor.com/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL21jcC5oZWxsby5jb29wIn0K) | [Install on VS Code](vscode:mcp/install?%7B%22name%22%3A%22Hell%C5%8D%20Admin%22%2C%22url%22%3A%22https%3A//mcp.hello.coop%22%2C%22type%22%3A%22http%22%7D) |
 
-### VS Code Configuration
+### Configuration Options
 
-Add to your `.vscode/mcp.json` file in your workspace or global settings:
-
-**HTTP Transport (Remote):**
+**HTTP Transport (Remote - Recommended):**
 ```json
 {
-  "servers": {
-    "hello-admin": {
-      "type": "http",
-      "url": "https://mcp.hello.coop"
-    }
+  "hello-admin-http": {
+    "url": "https://mcp.hello.coop/",
+    "type": "http"
   }
 }
 ```
 
-**Stdio Transport (Local):**
+**NPM Package (Local):**
 ```json
 {
-  "servers": {
-    "hello-admin": {
-      "type": "stdio", 
-      "command": "npx",
-      "args": ["-y", "@hellocoop/mcp@latest"]
-    }
+  "hello-admin-stdio": {
+    "command": "npx",
+    "args": ["-y", "@hellocoop/mcp@latest"],
+    "type": "stdio"
   }
 }
 ```
 
-LIST WHICH FILE IT IS FOR EACH AGENT
-
-### Other MCP Clients
-
-For other MCP clients, use these configurations:
-
-**Stdio Transport (Local):**
-
-```json
-{
-  "mcpServers": {
-    "hello-admin": {
-      "command": "npx",
-      "args": ["-y", "@hellocoop/mcp@latest"]
-    }
-  }
-}
-```
-
-**HTTP Transport (Remote):**
-```json
-{
-  "mcpServers": {
-    "hello-admin": {
-      "url": "https://mcp.hello.coop",
-      "type": "http"
-    }
-  }
-}
-```
+📖 **[Local Development Setup](https://github.com/hellocoop/MCP#local-development)** - For running from source
 
 ## Available Tools
 
-The MCP server provides these tools for managing your Hellō applications:
+### 🎯 Core Tool: `hello_manage_app`
 
-### Profile & Publisher Management
-- **`hello_get_profile`** - Get your developer profile and publishers
-- **`hello_create_publisher`** - Create a new publisher (team/organization)
-- **`hello_read_publisher`** - Read detailed publisher information
-- **`hello_update_publisher`** - Update publisher settings
+**The main tool for all application management** with these actions:
 
-### Application Management
-- **`hello_create_application`** - Create a new Hellō application
-- **`hello_read_application`** - Read detailed application information
-- **`hello_update_application`** - Update application settings
+- **`create`** - Create new applications with smart defaults
+- **`read`** - Read application details (or profile-only without client_id)
+- **`update`** - Update application settings
+- **`create_secret`** - Generate OAuth client secrets
+- **`upload_logo_file`** - Upload logo from base64 data
+- **`upload_logo_url`** - Upload logo from URL
 
-### Logo & Branding
-- **`hello_upload_logo`** - Upload application logos
-- **`hello_upload_logo_file`** - Upload logo from file data
-- **`hello_test_logo_url`** - Test if a logo URL is accessible
-- **`hello_logo_guidance`** - Get guidance for creating theme-appropriate logos
+**Every response includes your complete profile context:**
+- Your user profile (name, email, picture)
+- All your teams/organizations with roles
+- All your applications with team associations
+- Current team and application state
 
-### Integration & Legal
-- **`hello_generate_login_button`** - Generate HTML/JavaScript login buttons
-- **`hello_generate_legal_docs`** - Generate Terms of Service and Privacy Policy templates
-- **`hello_create_secret`** - Create client secrets for applications
-
+{/*
 ## Usage Examples
 
 ### Creating Your First Application
 
-1. **Get your profile** to see existing publishers:
+1. **Check your profile context**:
    ```
-   Use the hello_get_profile tool
-   ```
-
-2. **Create a publisher** if you don't have one:
-   ```
-   Use hello_create_publisher with your team name
+   Use hello_manage_app with action: "read" (no client_id)
    ```
 
-3. **Create an application**:
+2. **Create an application**:
    ```
-   Use hello_create_application with your publisher ID
-   ```
-
-4. **Generate login button** for your app:
-   ```
-   Use hello_generate_login_button with your application ID
+   Use hello_manage_app with:
+   - action: "create"
+   - name: "My App"
+   - dev_redirect_uris: ["http://localhost:3000/callback"]
    ```
 
-### Setting Up Legal Documents
-
-Before creating applications, you'll need Terms of Service and Privacy Policy URLs:
-
-1. **Generate legal documents**:
+3. **Upload a logo**:
    ```
-   Use hello_generate_legal_docs with your business details
-   ```
-
-2. **Host the documents** on your website
-
-3. **Use the URLs** when creating applications
-
-### Managing Application Logos
-
-1. **Get logo guidance**:
-   ```
-   Use hello_logo_guidance for design recommendations
+   Use hello_manage_app with:
+   - action: "upload_logo_url"
+   - client_id: "your-app-id"
+   - logo_url: "https://example.com/logo.png"
+   - logo_content_type: "image/png"
    ```
 
-2. **Upload your logo**:
-   ```
-   Use hello_upload_logo with an image URL
-   Or hello_upload_logo_file with base64 image data
-   ```
+### Managing Applications
 
-3. **Update application** with logo URL:
-   ```
-   Use hello_update_application to set the image_uri
-   ```
-
-## Environment Configuration
-
-You can customize the MCP server behavior with these environment variables:
-
-- **`HELLO_DOMAIN`** - Override the default domain (defaults to `hello.coop`)
-- **`HELLO_ADMIN`** - Override the admin server URL (defaults to `https://admin.hello.coop`)
-
-For development or testing with different environments, set these before running:
-
-```bash
-HELLO_DOMAIN=hello.coop npx @hellocoop/mcp
+**Read specific application:**
 ```
+Use hello_manage_app with:
+- action: "read"
+- client_id: "your-app-id"
+```
+
+**Update application:**
+```
+Use hello_manage_app with:
+- action: "update"
+- client_id: "your-app-id"
+- name: "Updated App Name"
+- tos_uri: "https://example.com/terms"
+```
+
+**Create client secret:**
+```
+Use hello_manage_app with:
+- action: "create_secret"
+- client_id: "your-app-id"
+```
+*/}
 
 ## Authentication
 
-The MCP server uses OAuth 2.0 for secure authentication:
+The MCP server uses OAuth 2.1 for secure authentication:
 
-1. **OAuth Flow**: When you first use a tool requiring authentication, the server opens your browser
+1. **OAuth Flow**: When you first use the tool, the server opens your browser
 2. **Login**: Complete the login process with your Hellō account
 3. **Token**: The server receives a 1-hour access token
-4. **API Calls**: All subsequent API calls use this token
-5. **Refresh**: The server automatically handles token refresh when needed
+4. **Context**: All API calls return your complete developer context
+
+
+## Available Resources
+
+Access comprehensive documentation and guidance:
+
+- **Hellō Documentation** - Complete integration documentation
+- **Hellō Quickstarts** - Framework-specific setup guides
+- **Hellō Logo Design Guidance** - Guide for creating theme-appropriate logos
+- **Hellō Login Button Implementation** - Complete button implementation guide
 
 ## Troubleshooting
 
@@ -209,73 +144,36 @@ The MCP server uses OAuth 2.0 for secure authentication:
 - The server will automatically prompt for login when needed
 - Make sure you complete the browser-based OAuth flow
 
-**"Invalid token" errors:**
-- Tokens expire after 1 hour
-- The server will automatically refresh expired tokens
-
-**"Publisher not found" errors:**
-- Use `hello_get_profile` to see your available publishers
-- Create a publisher first with `hello_create_publisher`
-
 **"Application not found" errors:**
-- Use `hello_read_publisher` to see applications under a publisher
-- Make sure you're using the correct publisher and application IDs
+- Use `hello_manage_app` with `action: "read"` to see your applications
+- Make sure you're using the correct `client_id`
+
+**Logo upload issues:**
+- Ensure `logo_content_type` matches your image format
+- Supported formats: PNG, JPEG, GIF, WebP, APNG, SVG
+- Keep file sizes under 100KB for best performance
 
 ### Getting Help & Contributing
 
-**We want your feedback!** This MCP server is in beta and we're actively improving it based on real-world usage.
+**We want your feedback!** This MCP server is in beta and we're actively improving it.
 
-- **🐛 Report Issues**: [GitHub Issues](https://github.com/hellocoop/mcp/issues) - Found a bug or have a feature request?
-- **🔧 Contribute**: [Submit Pull Requests](https://github.com/hellocoop/mcp/pulls) - Help us improve the server
-- **📖 Documentation**: [Full API documentation](https://console.hello.coop/documentation)
-- **💬 Community**: [Join our Discord](https://discord.gg/hellocoop) - Get help and share feedback
+- **📖 Documentation**: [MCP Server Repository](https://github.com/hellocoop/MCP)
+- **🐛 Report Issues**: [GitHub Issues](https://github.com/hellocoop/MCP/issues)
+- **🔧 Contribute**: [Submit Pull Requests](https://github.com/hellocoop/MCP/pulls)
+- **💬 Community**: [Join our Slack Community](https://hello-community.slack.com/join/shared_invite/zt-1eccnd2np-qJoOWBkHGnpxvBpCTtaH9g#/shared-invite/email)
 
-## Advanced Usage
+## Security & Limitations
 
-### Docker Deployment
+**Security:**
+- OAuth 21 industry-standard authentication
+- Short-lived tokens (1-hour expiration)
+- HTTPS-only API communication
+- Access scoped to create, read, update. No deletion permitted.
 
-For self-hosting the HTTP transport:
-
-```bash
-docker run -p 3000:3000 hellocoop/mcp:latest
-```
-
-### Development
-
-For local development:
-
-```bash
-git clone https://github.com/hellocoop/mcp
-cd mcp
-npm install
-npm start
-```
-
-### Testing
-
-The MCP server includes comprehensive testing:
-
-```bash
-npm test                    # Run all tests
-npm run test:oauth-interactive  # Test OAuth flow
-npm run get-token          # Get access token for API testing
-```
-
-## Security
-
-- **OAuth 2.0**: Industry-standard authentication
-- **Short-lived tokens**: 1-hour token expiration
-- **No stored credentials**: Tokens are not persisted locally
-- **HTTPS only**: All API communication is encrypted
-- **Scoped access**: Tokens only have necessary permissions
-
-## Limitations
-
-- **Read-only operations**: Cannot delete applications (use Console for deletion)
-- **Single domain**: Each server instance works with one Hellō domain
-- **Token expiration**: Requires re-authentication after 1 hour of inactivity
+**Current Limitations:**
+- Cannot delete applications (use [Hellō Console](https://console.hello.coop) for deletion)
+- Token requires re-authentication after 1 hour of inactivity
 
 ---
 
-For more information, visit the [Hellō MCP Server repository](https://github.com/hellocoop/mcp).
-*/}
+For detailed development setup, testing, and contribution guidelines, visit the [Hellō MCP Server repository](https://github.com/hellocoop/MCP).
