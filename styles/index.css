@@ -50,12 +50,12 @@ main a[target="_blank"]:after {
 
 .beta-label {
     position: absolute;
-    top: 54px;
+    top: 12px;
     right: 32px;
-    width: 80px;
+    width: 60px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 900px) {
     .beta-label {
         position: absolute;
         top: 32px;
