@@ -18,7 +18,7 @@ The Hellō MCP server provides a **single powerful tool** (`hello_manage_app`) t
 
 | Cursor | VS Code |
 |--------|---------|
-| [Install MCP Server](https://cursor.com/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL21jcC5oZWxsby5jb29wIn0K) | [Install on VS Code](vscode:mcp/install?%7B%22name%22%3A%22Hell%C5%8D%20Admin%22%2C%22url%22%3A%22https%3A//mcp.hello.coop%22%2C%22type%22%3A%22http%22%7D) |
+| [Install MCP Server](https://cursor.com/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL2FkbWluLW1jcC5oZWxsby5jb29wIn0=) | [Install on VS Code](vscode:mcp/install?%7B%22name%22%3A%22Hell%C5%8D%20Admin%22%2C%22url%22%3A%22https%3A%2F%2Fadmin-mcp.hello.coop%22%2C%22type%22%3A%22http%22%7D) |
 
 ### Configuration Options
 
@@ -26,7 +26,7 @@ The Hellō MCP server provides a **single powerful tool** (`hello_manage_app`) t
 ```json
 {
   "hello-admin-http": {
-    "url": "https://mcp.hello.coop/",
+    "url": "https://admin-mcp.hello.coop/",
     "type": "http"
   }
 }
@@ -37,13 +37,13 @@ The Hellō MCP server provides a **single powerful tool** (`hello_manage_app`) t
 {
   "hello-admin-stdio": {
     "command": "npx",
-    "args": ["-y", "@hellocoop/mcp@latest"],
+            "args": ["-y", "@hellocoop/admin-mcp@latest"],
     "type": "stdio"
   }
 }
 ```
 
-📖 **[Local Development Setup](https://github.com/hellocoop/MCP#local-development)** - For running from source
+📖 **[Local Development Setup](https://github.com/hellocoop/admin-mcp#local-development)** - For running from source
 
 ## Available Tools
 
@@ -157,9 +157,9 @@ Access comprehensive documentation and guidance:
 
 **We want your feedback!** This MCP server is in beta and we're actively improving it.
 
-- **Documentation**: [MCP Server Repository](https://github.com/hellocoop/MCP)
-- **Report Issues**: [GitHub Issues](https://github.com/hellocoop/MCP/issues)
-- **Contribute**: [Submit Pull Requests](https://github.com/hellocoop/MCP/pulls)
+- **Documentation**: [MCP Server Repository](https://github.com/hellocoop/admin-mcp)
+- **Report Issues**: [GitHub Issues](https://github.com/hellocoop/admin-mcp/issues)
+- **Contribute**: [Submit Pull Requests](https://github.com/hellocoop/admin-mcp/pulls)
 - **Community**: [Join our Slack Community](https://hello-community.slack.com/join/shared_invite/zt-1eccnd2np-qJoOWBkHGnpxvBpCTtaH9g#/shared-invite/email)
 
 ## Security & Limitations
@@ -176,4 +176,4 @@ Access comprehensive documentation and guidance:
 
 ---
 
-For detailed development setup, testing, and contribution guidelines, visit the [Hellō MCP Server repository](https://github.com/hellocoop/MCP).
+For detailed development setup, testing, and contribution guidelines, visit the [Hellō MCP Server repository](https://github.com/hellocoop/admin-mcp).
