@@ -8,7 +8,7 @@
     "apis": "API References",
     "oidc": "OpenID Connect",
     "mockin": "Hellō Mockin",
-    "mcp": "Hellō MCP Server",
+    "admin-mcp": "Admin MCP Server",
     "comparison": "Hellō vs ___",
     "roadmap": "Roadmap"
 }
