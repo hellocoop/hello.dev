@@ -2,27 +2,41 @@ import { Callout } from 'nextra/components'
 
 # MCP Server (BETA)
 
-<img src="https://cdn.hello.coop/images/beta-label.png" alt="BETA" className="beta-label"/>
+<div>
+  <img src="https://cdn.hello.coop/images/beta-label.png" alt="BETA" className="beta-label"/>
+</div>
 
 Model Context Protocol (MCP) server for creating and managing Hellō applications directly from your AI assistant.
 
 <Callout type="warning">
-**BETA Status**: This MCP server is currently in beta. We're actively seeking feedback and welcome contributions! Please report issues, suggest improvements, or submit pull requests to help us improve the developer experience.
+**BETA Status**: This MCP server is currently in beta. We're actively seeking feedback and welcome contributions! Please report issues, suggest improvements, or submit pull requests to help improve the developer experience.
 </Callout>
 
 ## Overview
 
 The Hellō MCP server provides a **single powerful tool** (`hello_manage_app`) that lets you create and manage your Hellō applications directly from your AI assistant, including uploading logos for both light and dark themes.
 
-## Installation
+## Key Features
 
-| Cursor | VS Code |
-|--------|---------|
-| [Install MCP Server](https://cursor.com/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL21jcC5oZWxsby5jb29wIn0K) | [Install on VS Code](vscode:mcp/install?%7B%22name%22%3A%22Hell%C5%8D%20Admin%22%2C%22url%22%3A%22https%3A//mcp.hello.coop%22%2C%22type%22%3A%22http%22%7D) |
+- One powerful tool (`hello_manage_app`) for all app management actions
+- Supports `create`, `update`, `read`, `create_secret`, and logo uploads
+- Compatible with major AI clients: Cursor, Claude, VS Code, LM Studio, and more
+- Automatically includes full developer context (user, teams, applications)
+- Secure OAuth 2.1 flow with short-lived access tokens
+- Supports both HTTP (remote) and STDIO (local) configurations
+- Access resources such as the Logo Design Guide, Login Button Guide, Quickstart Setup, and full API documentation
 
-### Configuration Options
+## Getting Started
 
-**HTTP Transport (Remote - Recommended):**
+You can install the Hellō MCP server manually using a simple configuration object, or use one of the quick-install options available in select tools.
+
+### Manual Configuration (Works in Most Tools)
+> Using a supported tool like Cursor or VS Code? You can skip ahead to the Quick Installation Options below.
+
+Use the following configurations if you're setting up the MCP server manually or using a tool that prompts for input.
+
+**HTTP Transport (Remote – Recommended)**
+
 ```json
 {
   "hello-admin-http": {
@@ -30,9 +44,10 @@ The Hellō MCP server provides a **single powerful tool** (`hello_manage_app`) t
     "type": "http"
   }
 }
-```
+````
 
-**NPM Package (Local):**
+**NPM Package (Local)**
+
 ```json
 {
   "hello-admin-stdio": {
@@ -43,124 +58,167 @@ The Hellō MCP server provides a **single powerful tool** (`hello_manage_app`) t
 }
 ```
 
-📖 **[Local Development Setup](https://github.com/hellocoop/MCP#local-development)** - For running from source
+### Quick Installation Options
+Some tools support direct install links or commands that preconfigure the MCP server for you.
 
-## Available Tools
+<details>
+<summary>Cursor</summary>
+
+<div className="px-2 py-4">
+Click to install:
+
+<a href="https://cursor.com/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL21jcC5oZWxsby5jb29wIn0K">
+  <img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Install MCP Server" />
+</a>
+
+Or install manually via `Cursor Settings → MCP → Add new MCP Server`. Use type `http` and URL `https://mcp.hello.coop/`.
+
+</div>
+</details>
+
+<details>
+<summary>VS Code</summary>
+
+<div className="px-2 py-4">
+Click to install:
+
+<a href="vscode:mcp/install?%7B%22name%22%3A%22Hell%C5%8D%20Admin%22%2C%22url%22%3A%22https%3A//mcp.hello.coop%22%2C%22type%22%3A%22http%22%7D" className="inline-block">
+  <img src="https://img.shields.io/badge/Install%20on-VS%20Code-007ACC?logo=visualstudiocode&logoColor=white" alt="Install on VS Code" />
+</a>
+
+Or follow the [VS Code guide](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server) or run:
+
+```bash
+code --add-mcp '{"name":"Hellō Admin","url":"https://mcp.hello.coop","type":"http"}'
+```
+
+</div>
+</details>
+
+<details>
+<summary>Claude Code</summary>
+
+<div className="px-2 py-4">
+Install using the Claude CLI:
+
+```bash
+claude mcp add hello-admin http https://mcp.hello.coop/
+```
+
+</div>
+</details>
+
+<details>
+<summary>Claude Desktop</summary>
+
+<p className="px-2 py-4">Follow the MCP install [guide](https://modelcontextprotocol.io/quickstart/user), and use the HTTP Transport config.</p>
+
+</details>
+
+<details>
+<summary>Gemini CLI</summary>
+
+<p className="px-2 py-4">See the [Gemini MCP Server docs](https://github.com/google-gemini/gemini-cli/blob/main/docs/tools/mcp-server.md#configure-the-mcp-server-in-settingsjson).</p>
+
+</details>
+
+<details>
+<summary>Goose</summary>
+
+<div className="px-2 py-4">
+Click to install:
+
+<a href="https://block.github.io/goose/extension?cmd=http&arg=https%3A%2F%2Fmcp.hello.coop%2F&id=hello-admin&name=Hell%C5%8D%20Admin&description=Manage%20your%20Hell%C5%8D%20apps%20via%20MCP">
+  <img src="https://block.github.io/goose/img/extension-install-dark.svg" alt="Install in Goose" />
+</a>
+
+Or go to `Advanced settings → Extensions → Add custom extension` and enter the HTTP config manually.
+
+</div>
+</details>
+
+<details>
+<summary>LM Studio</summary>
+
+<div className="px-2 py-4">
+Click to install:
+
+<a href="https://lmstudio.ai/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL21jcC5oZWxsby5jb29wIn0K">
+  <img src="https://files.lmstudio.ai/deeplink/mcp-install-light.svg" alt="Add MCP Server hello-admin to LM Studio" />
+</a>
+
+Or go to `Program → Install → Edit mcp.json` and paste the standard config.
+
+</div>
+</details>
+
+<details>
+<summary>Qodo Gen</summary>
+
+<p className="px-2 py-4">In Qodo Gen: open the chat panel → Connect more tools → Add new MCP → Paste the HTTP Transport config.</p>
+
+</details>
+
+<details>
+<summary>Windsurf</summary>
+<p className="px-2 py-4">Follow the [Windsurf MCP documentation](https://docs.windsurf.com/windsurf/cascade/mcp). Use the standard config.</p>
+</details>
+
+<details>
+<summary>Run from Source</summary>
+<p className="px-2 py-4">Clone the repo and follow the instructions at: https://github.com/hellocoop/MCP#local-development</p>
+</details>
+
+Don’t see your tool listed? [File an issue](https://github.com/hellocoop/hello.dev/issues) and we’ll add support.
+
+## Available Commands
 
 ### Core Tool: `hello_manage_app`
 
-**The main tool for all application management** with these actions:
+This is the primary tool for managing Hellō applications.
 
-- **`create`** - Create new applications with smart defaults
-- **`read`** - Read application details (or profile-only without client_id)
-- **`update`** - Update application settings
-- **`create_secret`** - Generate OAuth client secrets
-- **`upload_logo_file`** - Upload logo from base64 data
-- **`upload_logo_url`** - Upload logo from URL
+Supported actions:
 
-**Every response includes your complete profile context:**
-- Your user profile (name, email, picture)
-- All your teams/organizations with roles
-- All your applications with team associations
-- Current team and application state
+* `create` – Create new applications with smart defaults
+* `read` – Retrieve application or profile details
+* `update` – Update app settings (redirect URIs, names, etc.)
+* `create_secret` – Generate OAuth client secrets
+* `upload_logo_file` – Upload a logo using base64 data
+* `upload_logo_url` – Upload a logo via public URL
 
-{/*
-## Usage Examples
+Each response includes:
 
-### Creating Your First Application
-
-1. **Check your profile context**:
-   ```
-   Use hello_manage_app with action: "read" (no client_id)
-   ```
-
-2. **Create an application**:
-   ```
-   Use hello_manage_app with:
-   - action: "create"
-   - name: "My App"
-   - dev_redirect_uris: ["http://localhost:3000/callback"]
-   ```
-
-3. **Upload a logo**:
-   ```
-   Use hello_manage_app with:
-   - action: "upload_logo_url"
-   - client_id: "your-app-id"
-   - logo_url: "https://example.com/logo.png"
-   - logo_content_type: "image/png"
-   ```
-
-### Managing Applications
-
-**Read specific application:**
-```
-Use hello_manage_app with:
-- action: "read"
-- client_id: "your-app-id"
-```
-
-**Update application:**
-```
-Use hello_manage_app with:
-- action: "update"
-- client_id: "your-app-id"
-- name: "Updated App Name"
-- tos_uri: "https://example.com/terms"
-```
-
-**Create client secret:**
-```
-Use hello_manage_app with:
-- action: "create_secret"
-- client_id: "your-app-id"
-```
-*/}
+* Your user profile (name, email, picture)
+* Your teams and organizations, along with assigned roles
+* All apps associated with your teams
+* Current team and app state
 
 ## Authentication
 
-The MCP server uses OAuth 2.1 for secure authentication:
+This MCP server uses OAuth 2.1 for secure authentication:
 
 1. **OAuth Flow**: When you first use the tool, the server opens your browser
 2. **Login**: Complete the login process with your Hellō account
 3. **Token**: The server receives a 1-hour access token
 4. **Context**: All API calls return your complete developer context
 
-
-## Available Resources
-
-Access comprehensive documentation and guidance:
-
-- **Hellō Documentation** - Complete integration documentation
-- **Hellō Quickstarts** - Framework-specific setup guides
-- **Hellō Logo Design Guidance** - Guide for creating theme-appropriate logos
-- **Hellō Login Button Implementation** - Complete button implementation guide
-
 ## Troubleshooting
 
-### Common Issues
+### "Authentication required" errors
 
-**"Authentication required" errors:**
-- The server will automatically prompt for login when needed
-- Make sure you complete the browser-based OAuth flow
+* The server will automatically prompt for login when needed
+* Complete the browser-based OAuth flow when prompted
 
-**"Application not found" errors:**
-- Use `hello_manage_app` with `action: "read"` to see your applications
-- Make sure you're using the correct `client_id`
+### "Application not found"
 
-**Logo upload issues:**
-- Ensure `logo_content_type` matches your image format
-- Supported formats: PNG, JPEG, GIF, WebP, APNG, SVG
-- Keep file sizes under 100KB for best performance
+* Run `hello_manage_app` with `action: "read"` to list your apps
+* Double-check that you’re using the correct `client_id`
 
-### Getting Help & Contributing
+### Logo upload issues
 
-**We want your feedback!** This MCP server is in beta and we're actively improving it.
-
-- **Documentation**: [MCP Server Repository](https://github.com/hellocoop/MCP)
-- **Report Issues**: [GitHub Issues](https://github.com/hellocoop/MCP/issues)
-- **Contribute**: [Submit Pull Requests](https://github.com/hellocoop/MCP/pulls)
-- **Community**: [Join our Slack Community](https://hello-community.slack.com/join/shared_invite/zt-1eccnd2np-qJoOWBkHGnpxvBpCTtaH9g#/shared-invite/email)
+* Ensure `logo_content_type` matches the file type
+* Supported formats: `.png`, `.jpeg`, `.gif`, `.webp`, `.apng`, `.svg`
+* Keep file sizes under 100KB for best performance
 
 ## Security & Limitations
 
@@ -168,12 +226,22 @@ Access comprehensive documentation and guidance:
 - OAuth 2.1 industry-standard authentication
 - Short-lived tokens (1-hour expiration)
 - HTTPS-only API communication
-- Access scoped to create, read, update. No deletion permitted.
+- Access scoped to create, read, update. Deletion actions are intentionally restricted.
 
 **Current Limitations:**
 - Cannot delete applications (use [Hellō Console](https://console.hello.coop) for deletion)
 - Token requires re-authentication after 1 hour of inactivity
 
+
+## Contributing
+
+We welcome your feedback and contributions:
+
+* 📄 [MCP Server Docs](https://github.com/hellocoop/MCP)
+* 🐛 [GitHub Issues](https://github.com/hellocoop/MCP/issues)
+* 🔀 [Pull Requests](https://github.com/hellocoop/MCP/pulls)
+* 💬 [Join our Slack Community](https://hello-community.slack.com/join/shared_invite/zt-1eccnd2np-qJoOWBkHGnpxvBpCTtaH9g#/shared-invite/email)
+
 ---
 
-For detailed development setup, testing, and contribution guidelines, visit the [Hellō MCP Server repository](https://github.com/hellocoop/MCP).
+For local development, testing, and advanced usage, visit the full [MCP Server GitHub repo](https://github.com/hellocoop/MCP).
