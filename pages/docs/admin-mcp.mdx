@@ -1,21 +1,19 @@
 import { Callout } from 'nextra/components'
 
-# MCP Server (BETA)
+# Admin MCP Server (BETA)
 
 <div>
   <img src="https://cdn.hello.coop/images/beta-label.png" alt="BETA" className="beta-label"/>
 </div>
 
-Model Context Protocol (MCP) server for creating and managing Hellō applications directly from your AI assistant.
+The Admin MCP server lets you create and manage your Hellō applications directly from your AI assistant,  
+including uploading logos for both light and dark themes.
 
 <Callout type="warning">
-**BETA Status**: This MCP server is currently in beta. We're actively seeking feedback and welcome contributions! Please report issues, suggest improvements, or submit pull requests to help improve the developer experience.
+This MCP server is currently in BETA. Help us improve the server by filing [issues or making suggestions](https://github.com/hellocoop/MCP/issues).
 </Callout>
 
-## Overview
-
-The Hellō MCP server provides a **single powerful tool** (`hello_manage_app`) that lets you create and manage your Hellō applications directly from your AI assistant, including uploading logos for both light and dark themes.
-
+{/*
 ## Key Features
 
 - One powerful tool (`hello_manage_app`) for all app management actions
@@ -25,8 +23,74 @@ The Hellō MCP server provides a **single powerful tool** (`hello_manage_app`) t
 - Secure OAuth 2.1 flow with short-lived access tokens
 - Supports both HTTP (remote) and STDIO (local) configurations
 - Access resources such as the Logo Design Guide, Login Button Guide, Quickstart Setup, and full API documentation
+*/}
 
-## Getting Started
+## Installing
+
+### Cursor
+
+<span className="mt-4 block"/>
+<a href="https://cursor.com/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL21jcC5oZWxsby5jb29wIn0K" className="inline-block">
+  <img src="https://cursor.com/deeplink/mcp-install-light.svg" alt="Install MCP Server" className="border rounded-md" />
+</a>
+<span className="-mb-2 block"/>
+**Manual Install**:  
+Cursor Settings → MCP → Add new MCP Server. Use type `http` and URL `https://mcp.hello.coop/`.  
+See [Cursor guide](https://docs.cursor.com/context/mcp#installing-mcp-servers) for more information.
+
+### VSCode
+
+<span className="mt-4 block"/>
+<a href="vscode:mcp/install?%7B%22name%22%3A%22Hell%C5%8D%20Admin%22%2C%22url%22%3A%22https%3A//mcp.hello.coop%22%2C%22type%22%3A%22http%22%7D" className="inline-block">
+  <img src="https://img.shields.io/badge/Install%20on-VS%20Code-007ACC" className="h-6" alt="Install on VS Code" />
+</a>
+<span className="-mb-2 block"/>
+**Manual Install**:
+<span className="-mb-4 block" />
+```bash
+code --add-mcp '{"name":"Hellō Admin","url":"https://mcp.hello.coop","type":"http"}'
+```
+<span className="-mt-4 block" />
+See [VS Code guide](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server) for more information.
+
+
+### Claude Code
+<span className="-mb-2 block" />
+Using the Claude CLI:
+<span className="-mb-4 block" />
+```bash
+claude mcp add hello-admin http https://mcp.hello.coop/
+```
+<span className="-mt-4 block" />
+See [Claude guide](https://docs.anthropic.com/en/docs/claude-code/mcp) for more information.
+
+### Claude Desktop
+???
+
+### Gemini CLI
+???
+
+### Goose
+<span className="mt-4 block"/>
+<a href="https://block.github.io/goose/extension?cmd=http&arg=https%3A%2F%2Fmcp.hello.coop%2F&id=hello-admin&name=Hell%C5%8D%20Admin&description=Manage%20your%20Hell%C5%8D%20apps%20via%20MCP" className="inline-block">
+  <img src="https://block.github.io/goose/img/extension-install-dark.svg" className="h-7 border border-white/25 rounded-md" alt="Install in Goose" />
+</a>
+
+**Manual Install**:  
+Advanced settings → Extensions → Add custom extension and paste the [HTTP config](@ROHAN).    
+See [Goose guide](@ROHAN) for more information.
+
+### LM Studio
+<span className="mt-4 block"/>
+<a href="https://lmstudio.ai/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL21jcC5oZWxsby5jb29wIn0K">
+  <img src="https://files.lmstudio.ai/deeplink/mcp-install-light.svg" alt="Add MCP Server hello-admin to LM Studio" />
+</a>
+
+**Manual Install**:  
+Program → Install → Edit mcp.json and paste the [HTTP config](@ROHAN).  
+See [LM Studio](@ROHAN) for more information.
+
+-----------
 
 You can install the Hellō MCP server manually using a simple configuration object, or use one of the quick-install options available in select tools.
 
@@ -61,81 +125,6 @@ Use the following configurations if you're setting up the MCP server manually or
 ### Quick Installation Options
 Some tools support direct install links or commands that preconfigure the MCP server for you.
 
-<details>
-<summary>Cursor</summary>
-
-<div className="px-2 py-4">
-Click to install:
-
-<a href="https://cursor.com/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL21jcC5oZWxsby5jb29wIn0K">
-  <img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Install MCP Server" />
-</a>
-
-Or install manually via `Cursor Settings → MCP → Add new MCP Server`. Use type `http` and URL `https://mcp.hello.coop/`.
-
-</div>
-</details>
-
-<details>
-<summary>VS Code</summary>
-
-<div className="px-2 py-4">
-Click to install:
-
-<a href="vscode:mcp/install?%7B%22name%22%3A%22Hell%C5%8D%20Admin%22%2C%22url%22%3A%22https%3A//mcp.hello.coop%22%2C%22type%22%3A%22http%22%7D" className="inline-block">
-  <img src="https://img.shields.io/badge/Install%20on-VS%20Code-007ACC?logo=visualstudiocode&logoColor=white" alt="Install on VS Code" />
-</a>
-
-Or follow the [VS Code guide](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server) or run:
-
-```bash
-code --add-mcp '{"name":"Hellō Admin","url":"https://mcp.hello.coop","type":"http"}'
-```
-
-</div>
-</details>
-
-<details>
-<summary>Claude Code</summary>
-
-<div className="px-2 py-4">
-Install using the Claude CLI:
-
-```bash
-claude mcp add hello-admin http https://mcp.hello.coop/
-```
-
-</div>
-</details>
-
-<details>
-<summary>Claude Desktop</summary>
-
-<p className="px-2 py-4">Follow the MCP install [guide](https://modelcontextprotocol.io/quickstart/user), and use the HTTP Transport config.</p>
-
-</details>
-
-<details>
-<summary>Gemini CLI</summary>
-
-<p className="px-2 py-4">See the [Gemini MCP Server docs](https://github.com/google-gemini/gemini-cli/blob/main/docs/tools/mcp-server.md#configure-the-mcp-server-in-settingsjson).</p>
-
-</details>
-
-<details>
-<summary>Goose</summary>
-
-<div className="px-2 py-4">
-Click to install:
-
-<a href="https://block.github.io/goose/extension?cmd=http&arg=https%3A%2F%2Fmcp.hello.coop%2F&id=hello-admin&name=Hell%C5%8D%20Admin&description=Manage%20your%20Hell%C5%8D%20apps%20via%20MCP">
-  <img src="https://block.github.io/goose/img/extension-install-dark.svg" alt="Install in Goose" />
-</a>
-
-Or go to `Advanced settings → Extensions → Add custom extension` and enter the HTTP config manually.
-
-</div>
-</details>
 
 <details>
 <summary>LM Studio</summary>
@@ -172,6 +161,7 @@ Or go to `Program → Install → Edit mcp.json` and paste the standard config.
 Don’t see your tool listed? [File an issue](https://github.com/hellocoop/hello.dev/issues) and we’ll add support.
 
 ## Available Commands
+KEY FEATURES
 
 ### `hello_manage_app` (Core Tool)
 
@@ -203,6 +193,8 @@ This MCP server uses OAuth 2.1 for secure authentication:
 4. **Context**: All API calls return your complete developer context
 
 ## Troubleshooting
+
+PRE REQUSITIES
 
 ### Common Issues
 
