@@ -173,7 +173,7 @@ Don’t see your tool listed? [File an issue](https://github.com/hellocoop/hello
 
 ## Available Commands
 
-### Core Tool: `hello_manage_app`
+### `hello_manage_app` (Core Tool)
 
 This is the primary tool for managing Hellō applications.
 
@@ -204,21 +204,29 @@ This MCP server uses OAuth 2.1 for secure authentication:
 
 ## Troubleshooting
 
-### "Authentication required" errors
+### Common Issues
 
-* The server will automatically prompt for login when needed
-* Complete the browser-based OAuth flow when prompted
+**"Authentication required" errors:**
+- The server will automatically prompt for login when needed
+- Make sure you complete the browser-based OAuth flow
 
-### "Application not found"
+**"Application not found" errors:**
+- Use `hello_manage_app` with `action: "read"` to see your applications
+- Make sure you're using the correct `client_id`
 
-* Run `hello_manage_app` with `action: "read"` to list your apps
-* Double-check that you’re using the correct `client_id`
+**Logo upload issues:**
+- Ensure `logo_content_type` matches your image format
+- Supported formats: PNG, JPEG, GIF, WebP, APNG, SVG
+- Keep file sizes under 100KB for best performance
 
-### Logo upload issues
+### Getting Help & Contributing
 
-* Ensure `logo_content_type` matches the file type
-* Supported formats: `.png`, `.jpeg`, `.gif`, `.webp`, `.apng`, `.svg`
-* Keep file sizes under 100KB for best performance
+**We want your feedback!** This MCP server is in beta and we're actively improving it.
+
+- **Documentation**: [MCP Server Repository](https://github.com/hellocoop/MCP)
+- **Report Issues**: [GitHub Issues](https://github.com/hellocoop/MCP/issues)
+- **Contribute**: [Submit Pull Requests](https://github.com/hellocoop/MCP/pulls)
+- **Community**: [Join our Slack Community](https://hello-community.slack.com/join/shared_invite/zt-1eccnd2np-qJoOWBkHGnpxvBpCTtaH9g#/shared-invite/email)
 
 ## Security & Limitations
 
@@ -231,16 +239,6 @@ This MCP server uses OAuth 2.1 for secure authentication:
 **Current Limitations:**
 - Cannot delete applications (use [Hellō Console](https://console.hello.coop) for deletion)
 - Token requires re-authentication after 1 hour of inactivity
-
-
-## Contributing
-
-**We want your feedback!** This MCP server is in beta and we're actively improving it.
-
-* [MCP Server Docs](https://github.com/hellocoop/MCP)
-* [GitHub Issues](https://github.com/hellocoop/MCP/issues)
-* [Pull Requests](https://github.com/hellocoop/MCP/pulls)
-* [Join our Slack Community](https://hello-community.slack.com/join/shared_invite/zt-1eccnd2np-qJoOWBkHGnpxvBpCTtaH9g#/shared-invite/email)
 
 ---
 
