@@ -1,0 +1,205 @@
+import { Callout } from 'nextra/components'
+
+# Admin MCP Server (BETA)
+
+<div>
+  <img src="https://cdn.hello.coop/images/beta-label.png" alt="BETA" className="beta-label"/>
+</div>
+
+The Admin MCP server lets you create and manage your Hellō applications directly from your AI assistant,  
+including uploading logos for both light and dark themes.
+
+<Callout type="warning">
+This MCP server is currently in BETA. Help us improve the server by filing [issues or making suggestions](https://github.com/hellocoop/MCP/issues).
+</Callout>
+
+## Installing
+
+### Cursor
+
+<span className="mt-4 block"/>
+<a href="https://cursor.com/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL2FkbWluLW1jcC5oZWxsby5jb29wIn0K" className="inline-block">
+  <img src="https://cursor.com/deeplink/mcp-install-light.svg" alt="Install MCP Server" className="border rounded-md" />
+</a>
+<span className="-mb-2 block"/>
+**Manual Install**:  
+Cursor Settings → MCP → Add new MCP Server. Use type `http` and URL `https://admin-mcp.hello.coop/`.  
+See [Cursor guide](https://docs.cursor.com/context/mcp#installing-mcp-servers) for more information.
+
+### VSCode
+
+<span className="mt-4 block"/>
+<a href="vscode:mcp/install?%7B%22name%22%3A%22Hell%C5%8D%20Admin%22%2C%22url%22%3A%22https%3A//admin-mcp.hello.coop%22%2C%22type%22%3A%22http%22%7D" className="inline-block">
+  <img src="https://img.shields.io/badge/Install%20on-VS%20Code-007ACC" className="h-6" alt="Install on VS Code" />
+</a>
+<span className="-mb-2 block"/>
+**Manual Install**:
+<span className="-mb-4 block" />
+```bash
+code --add-mcp '{"name":"Hellō Admin","url":"https://admin-mcp.hello.coop","type":"http"}'
+```
+<span className="-mt-4 block" />
+See [VS Code guide](https://code.visualstudio.com/docs/copilot/chat/mcp-servers#_add-an-mcp-server) for more information.
+
+
+### Claude Code
+<span className="-mb-2 block" />
+Using the Claude CLI:
+<span className="-mb-4 block" />
+```bash
+claude mcp add hello-admin http https://admin-mcp.hello.coop/
+```
+<span className="-mt-4 block" />
+See [Claude guide](https://docs.anthropic.com/en/docs/claude-code/mcp) for more information.
+
+### Claude Desktop
+**Manual Install**:  
+Navigate to Connector Settings → Add a Custom Connector → Paste the [HTTP Transport config](#manual).  
+See [Claude Desktop Guide](https://modelcontextprotocol.io/docs/tutorials/use-remote-mcp-server) for more information.
+
+### Gemini CLI
+**Manual Install**:  
+Create `.gemini/settings.json` in your project's root directory → Add `mcpServers` block → Paste the [HTTP Transport config](#manual).  
+See [Gemini CLI Guide](https://github.com/google-gemini/gemini-cli/blob/main/docs/tools/mcp-server.md#configure-the-mcp-server-in-settingsjson) for more information.
+
+### Goose
+<span className="mt-4 block"/>
+<a href="https://block.github.io/goose/extension?cmd=http&arg=https%3A%2F%2Fadmin-mcp.hello.coop%2F&id=hello-admin&name=Hell%C5%8D%20Admin&description=Manage%20your%20Hell%C5%8D%20apps%20via%20MCP" className="inline-block">
+  <img src="https://block.github.io/goose/img/extension-install-dark.svg" className="h-7 border border-white/25 rounded-md" alt="Install in Goose" />
+</a>
+
+**Manual Install**:  
+Advanced settings → Extensions → Add custom extension and paste the [HTTP Transport config](#manual).    
+See [Example guide](https://docs.pieces.app/products/mcp/goose) for more information.
+
+### LM Studio
+<span className="mt-4 block"/>
+<a href="https://lmstudio.ai/install-mcp?name=hello-admin&config=eyJ1cmwiOiJodHRwczovL2FkbWluLW1jcC5oZWxsby5jb29wIn0K">
+  <img src="https://files.lmstudio.ai/deeplink/mcp-install-light.svg" alt="Add MCP Server hello-admin to LM Studio" />
+</a>
+
+**Manual Install**:  
+Program → Install → Edit mcp.json and paste the [HTTP Transport config](#manual).  
+See [LM Studio](https://lmstudio.ai/blog/lmstudio-v0.3.17#add-mcp-servers-to-lm-studio) for more information.
+
+### Qodo Gen
+
+**Manual Install**:  
+Open the chat panel → Connect more tools → Add new MCP → Paste the [Stdio Transport config](#manual) config.  
+See [Qodo Gen](https://docs.qodo.ai/qodo-documentation/qodo-gen/qodo-gen-chat/agentic-mode/agentic-tools-mcps#id-1.-local-mcps) for more information.
+
+---
+
+Don’t see your tool listed? [File an issue](https://github.com/hellocoop/hello.dev/issues) and we’ll add support.
+
+---
+
+### Manual
+
+**From Source**:  
+Clone the repo and follow the instructions at [hellocoop/MCP](https://github.com/hellocoop/MCP#local-development).
+
+**HTTP Transport (Remote - Recommended)**:
+```json
+{
+  "hello-admin-http": {
+    "url": "https://admin-mcp.hello.coop/",
+    "type": "http"
+  }
+}
+```
+
+**NPM Package (Local - Most compatible)**:  
+```json
+{
+  "hello-admin-stdio": {
+    "command": "npx",
+    "args": ["-y", "@hellocoop/admin-mcp@latest"],
+    "type": "stdio"
+  }
+}
+```
+
+
+## Features
+
+### `hello_manage_app`
+
+This is the primary tool for managing Hellō applications.
+
+Supported actions:
+
+* `create` – Create new applications with smart defaults
+* `read` – Retrieve application or profile details
+* `update` – Update app settings (redirect URIs, names, etc.)
+* `create_secret` – Generate OAuth client secrets
+* `update_logo_from_data` – Upload a logo using base64 data
+* `update_logo_from_url` – Upload a logo via public URL
+
+Each response includes:
+
+* Your user profile (name, email, picture)
+* Your teams and organizations, along with assigned roles
+* All apps associated with your teams
+* Current team and app state
+
+### Authentication
+
+This MCP server uses OAuth 2.1 for secure authentication:
+
+1. **OAuth Flow**: When you first use the tool, the server opens your browser
+2. **Login**: Complete the login process with your Hellō account
+3. **Token**: The server receives a 1-hour access token
+4. **Context**: All API calls return your complete developer context
+
+### Security & Limitations
+
+**Security:**
+- OAuth 2.1 industry-standard authentication
+- Short-lived tokens (1-hour expiration)
+- HTTPS-only API communication
+- Access scoped to create, read, update. Deletion actions are intentionally restricted.
+
+**Current Limitations:**
+- Cannot delete applications (use [Hellō Console](https://console.hello.coop) for deletion)
+- Token requires re-authentication after 1 hour of inactivity
+
+## Troubleshooting
+
+### Common Issues
+
+**"npx command not found" error:**
+- Install Node.js 18+ from [nodejs.org](https://nodejs.org/)
+- Verify installation: `node --version` and `npm --version`
+- On macOS/Linux, you may need to restart your terminal after installation
+
+**"MCP server not found" error:**
+- Ensure your MCP client supports the transport type (HTTP or stdio)
+- Check that the server URL or command is correctly configured
+- Verify network connectivity for HTTP transport
+
+**"Authentication required" errors:**
+- The server will automatically prompt for login when needed
+- Make sure you complete the browser-based OAuth flow
+
+**"Application not found" errors:**
+- Use `hello_manage_app` with `action: "read"` to see your applications
+- Make sure you're using the correct `client_id`
+
+**Logo upload issues:**
+- Ensure `logo_content_type` matches your image format
+- Supported formats: PNG, JPEG, GIF, WebP, APNG, SVG
+- Keep file sizes under 100KB for best performance
+
+### Getting Help & Contributing
+
+**We want your feedback!** This MCP server is in beta and we're actively improving it.
+
+- **Documentation**: [MCP Server Repository](https://github.com/hellocoop/MCP)
+- **Report Issues**: [GitHub Issues](https://github.com/hellocoop/MCP/issues)
+- **Contribute**: [Submit Pull Requests](https://github.com/hellocoop/MCP/pulls)
+- **Community**: [Join our Slack Community](https://hello-community.slack.com/join/shared_invite/zt-1eccnd2np-qJoOWBkHGnpxvBpCTtaH9g#/shared-invite/email)
+
+---
+
+For local development, testing, and advanced usage, visit the full [MCP Server GitHub repo](https://github.com/hellocoop/MCP).
