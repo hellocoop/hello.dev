@@ -85,11 +85,54 @@ turndownService.addRule('convertCardsToBullets', {
           .replace(/ExpressExpress/g, 'Express')
           .replace(/FastifyFastify/g, 'Fastify')
           .replace(/Next\.jsNext\.js/g, 'Next.js')
-          .replace(/WordPressWordPress/g, 'WordPress');
+          .replace(/WordPressWordPress/g, 'WordPress')
+          .replace(/ReactReact/g, 'React')
+          .replace(/SvelteSvelte/g, 'Svelte')
+          .replace(/Vue\.jsVue/g, 'Vue.js')
+          .replace(/SvelteKitSvelteKit/g, 'SvelteKit')
+          .replace(/RemixRemix/g, 'Remix')
+          .replace(/Nuxt\.jsNuxt/g, 'Nuxt.js');
         return `- ${cleanLink}`;
       }).join('\n') + '\n\n';
     }
     return content;
+  }
+});
+
+turndownService.addRule('convertTables', {
+  filter: 'table',
+  replacement: function (content, node) {
+    const rows = node.querySelectorAll('tr');
+    if (rows.length === 0) return '';
+    
+    let markdown = '';
+    
+    // Process each row
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const cells = row.querySelectorAll('td, th');
+      const rowData = [];
+      
+      for (let j = 0; j < cells.length; j++) {
+        const cell = cells[j];
+        // Get cell content and clean it up
+        let cellContent = cell.textContent.trim();
+        // Remove extra whitespace and newlines
+        cellContent = cellContent.replace(/\s+/g, ' ');
+        rowData.push(cellContent);
+      }
+      
+      if (i === 0) {
+        // Header row
+        markdown += `| ${rowData.join(' | ')} |\n`;
+        markdown += `| ${rowData.map(() => '---').join(' | ')} |\n`;
+      } else {
+        // Data row
+        markdown += `| ${rowData.join(' | ')} |\n`;
+      }
+    }
+    
+    return markdown + '\n';
   }
 });
 
