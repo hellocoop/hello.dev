@@ -95,7 +95,8 @@ function convertHtmlToMarkdown(htmlPath, outputPath) {
       .replace(/\n{3,}/g, '\n\n') // Remove excessive newlines
       .replace(/^\s+|\s+$/g, '') // Trim whitespace
       .replace(/\\([*_~`#])/g, '$1') // Remove unnecessary escaping
-      .replace(/\[\]\(#[^)]+\)/g, ''); // Remove anchor links from headings
+      .replace(/\[\]\(#[^)]+\)/g, '') // Remove anchor links from headings
+      .replace(/ \(opens in a new tab\)/g, ''); // Remove "(opens in a new tab)" from links
     
     // Ensure output directory exists
     const outputDir = path.dirname(outputPath);
