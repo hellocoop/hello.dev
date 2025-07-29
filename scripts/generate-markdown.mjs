@@ -70,6 +70,24 @@ turndownService.addRule('removeNavigation', {
   }
 });
 
+turndownService.addRule('removeTabs', {
+  filter: function (node) {
+    // Remove tab navigation elements
+    return node.className && (
+      node.className.includes('nx-mt-4') && 
+      node.className.includes('nx-flex') && 
+      node.className.includes('nx-w-max') && 
+      node.className.includes('nx-min-w-full') && 
+      node.className.includes('nx-border-b') && 
+      node.className.includes('nx-pb-px') &&
+      node.getAttribute('role') === 'tablist'
+    );
+  },
+  replacement: function () {
+    return '';
+  }
+});
+
 turndownService.addRule('convertCardsToBullets', {
   filter: function (node) {
     return node.className && node.className.includes('nextra-cards');
