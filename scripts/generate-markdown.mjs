@@ -55,6 +55,21 @@ turndownService.addRule('removeBreadcrumbs', {
   }
 });
 
+turndownService.addRule('removeNavigation', {
+  filter: function (node) {
+    // Remove navigation elements with specific classes that indicate prev/next navigation
+    return node.className && (
+      node.className.includes('nx-mb-8') && 
+      node.className.includes('nx-flex') && 
+      node.className.includes('nx-items-center') && 
+      node.className.includes('nx-border-t')
+    );
+  },
+  replacement: function () {
+    return '';
+  }
+});
+
 turndownService.addRule('convertCardsToBullets', {
   filter: function (node) {
     return node.className && node.className.includes('nextra-cards');
