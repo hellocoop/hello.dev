@@ -55,6 +55,20 @@ turndownService.addRule('removeBreadcrumbs', {
   }
 });
 
+turndownService.addRule('convertCardsToBullets', {
+  filter: function (node) {
+    return node.className && node.className.includes('nextra-cards');
+  },
+  replacement: function (content, node) {
+    // Convert card links to bullet points
+    const links = content.match(/\[([^\]]+)\]\(([^)]+)\)/g);
+    if (links) {
+      return links.map(link => `- ${link}`).join('\n') + '\n\n';
+    }
+    return content;
+  }
+});
+
 
 
 /**
