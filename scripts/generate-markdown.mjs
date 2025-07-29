@@ -46,6 +46,116 @@ turndownService.addRule('removeScripts', {
   }
 });
 
+turndownService.addRule('removeBreadcrumbs', {
+  filter: function (node) {
+    return node.className && node.className.includes('nextra-breadcrumb');
+  },
+  replacement: function () {
+    return '';
+  }
+});
+
+turndownService.addRule('removeNavigation', {
+  filter: function (node) {
+    // Remove navigation elements with specific classes that indicate prev/next navigation
+    return node.className && (
+      node.className.includes('nx-mb-8') && 
+      node.className.includes('nx-flex') && 
+      node.className.includes('nx-items-center') && 
+      node.className.includes('nx-border-t')
+    );
+  },
+  replacement: function () {
+    return '';
+  }
+});
+
+turndownService.addRule('removeTabs', {
+  filter: function (node) {
+    // Remove tab navigation elements
+    return node.className && (
+      node.className.includes('nx-mt-4') && 
+      node.className.includes('nx-flex') && 
+      node.className.includes('nx-w-max') && 
+      node.className.includes('nx-min-w-full') && 
+      node.className.includes('nx-border-b') && 
+      node.className.includes('nx-pb-px') &&
+      node.getAttribute('role') === 'tablist'
+    );
+  },
+  replacement: function () {
+    return '';
+  }
+});
+
+turndownService.addRule('convertCardsToBullets', {
+  filter: function (node) {
+    return node.className && node.className.includes('nextra-cards');
+  },
+  replacement: function (content, node) {
+    // Convert card links to bullet points and clean up duplicated text
+    const links = content.match(/\[([^\]]+)\]\(([^)]+)\)/g);
+    if (links) {
+      return links.map(link => {
+        // Clean up duplicated text in link labels
+        let cleanLink = link
+          .replace(/OpenIDOpenID/g, 'OpenID')
+          .replace(/ExpressExpress/g, 'Express')
+          .replace(/FastifyFastify/g, 'Fastify')
+          .replace(/Next\.jsNext\.js/g, 'Next.js')
+          .replace(/WordPressWordPress/g, 'WordPress')
+          .replace(/ReactReact/g, 'React')
+          .replace(/SvelteSvelte/g, 'Svelte')
+          .replace(/Vue\.jsVue/g, 'Vue.js')
+          .replace(/SvelteKitSvelteKit/g, 'SvelteKit')
+          .replace(/RemixRemix/g, 'Remix')
+          .replace(/Nuxt\.jsNuxt/g, 'Nuxt.js');
+        return `- ${cleanLink}`;
+      }).join('\n') + '\n\n';
+    }
+    return content;
+  }
+});
+
+turndownService.addRule('convertTables', {
+  filter: 'table',
+  replacement: function (content, node) {
+    const rows = node.querySelectorAll('tr');
+    if (rows.length === 0) return '';
+    
+    let markdown = '';
+    
+    // Process each row
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const cells = row.querySelectorAll('td, th');
+      const rowData = [];
+      
+      for (let j = 0; j < cells.length; j++) {
+        const cell = cells[j];
+        // Get cell content and clean it up
+        let cellContent = cell.textContent.trim();
+        // Remove extra whitespace and newlines
+        cellContent = cellContent.replace(/\s+/g, ' ');
+        rowData.push(cellContent);
+      }
+      
+      if (i === 0) {
+        // Header row
+        markdown += `| ${rowData.join(' | ')} |\n`;
+        markdown += `| ${rowData.map(() => '---').join(' | ')} |\n`;
+      } else {
+        // Data row
+        markdown += `| ${rowData.join(' | ')} |\n`;
+      }
+    }
+    
+    return markdown + '\n';
+  }
+});
+
+
+
 /**
  * Extract main content from HTML
  */
@@ -83,7 +193,10 @@ function convertHtmlToMarkdown(htmlPath, outputPath) {
     let cleanMarkdown = markdown
       .replace(/\n{3,}/g, '\n\n') // Remove excessive newlines
       .replace(/^\s+|\s+$/g, '') // Trim whitespace
-      .replace(/\\([*_~`#])/g, '$1'); // Remove unnecessary escaping
+      .replace(/\\([*_~`#])/g, '$1') // Remove unnecessary escaping
+      .replace(/\[\]\(#[^)]+\)/g, '') // Remove anchor links from headings
+      .replace(/ \(opens in a new tab\)/g, '') // Remove "(opens in a new tab)" from links
+
     
     // Ensure output directory exists
     const outputDir = path.dirname(outputPath);
