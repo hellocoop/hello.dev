@@ -55,6 +55,8 @@ turndownService.addRule('removeBreadcrumbs', {
   }
 });
 
+
+
 /**
  * Extract main content from HTML
  */
@@ -92,7 +94,8 @@ function convertHtmlToMarkdown(htmlPath, outputPath) {
     let cleanMarkdown = markdown
       .replace(/\n{3,}/g, '\n\n') // Remove excessive newlines
       .replace(/^\s+|\s+$/g, '') // Trim whitespace
-      .replace(/\\([*_~`#])/g, '$1'); // Remove unnecessary escaping
+      .replace(/\\([*_~`#])/g, '$1') // Remove unnecessary escaping
+      .replace(/\[\]\(#[^)]+\)/g, ''); // Remove anchor links from headings
     
     // Ensure output directory exists
     const outputDir = path.dirname(outputPath);
