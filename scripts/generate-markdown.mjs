@@ -46,6 +46,15 @@ turndownService.addRule('removeScripts', {
   }
 });
 
+turndownService.addRule('removeBreadcrumbs', {
+  filter: function (node) {
+    return node.className && node.className.includes('nextra-breadcrumb');
+  },
+  replacement: function () {
+    return '';
+  }
+});
+
 /**
  * Extract main content from HTML
  */
