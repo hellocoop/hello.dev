@@ -60,10 +60,19 @@ turndownService.addRule('convertCardsToBullets', {
     return node.className && node.className.includes('nextra-cards');
   },
   replacement: function (content, node) {
-    // Convert card links to bullet points
+    // Convert card links to bullet points and clean up duplicated text
     const links = content.match(/\[([^\]]+)\]\(([^)]+)\)/g);
     if (links) {
-      return links.map(link => `- ${link}`).join('\n') + '\n\n';
+      return links.map(link => {
+        // Clean up duplicated text in link labels
+        let cleanLink = link
+          .replace(/OpenIDOpenID/g, 'OpenID')
+          .replace(/ExpressExpress/g, 'Express')
+          .replace(/FastifyFastify/g, 'Fastify')
+          .replace(/Next\.jsNext\.js/g, 'Next.js')
+          .replace(/WordPressWordPress/g, 'WordPress');
+        return `- ${cleanLink}`;
+      }).join('\n') + '\n\n';
     }
     return content;
   }
@@ -110,7 +119,8 @@ function convertHtmlToMarkdown(htmlPath, outputPath) {
       .replace(/^\s+|\s+$/g, '') // Trim whitespace
       .replace(/\\([*_~`#])/g, '$1') // Remove unnecessary escaping
       .replace(/\[\]\(#[^)]+\)/g, '') // Remove anchor links from headings
-      .replace(/ \(opens in a new tab\)/g, ''); // Remove "(opens in a new tab)" from links
+      .replace(/ \(opens in a new tab\)/g, '') // Remove "(opens in a new tab)" from links
+
     
     // Ensure output directory exists
     const outputDir = path.dirname(outputPath);
