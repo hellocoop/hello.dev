@@ -118,15 +118,16 @@ Clone the repo and follow the instructions at [hellocoop/admin-mcp](https://gith
   }
 }
 ```
+<Callout type="info">
+You will need Node 18 installed for the local version.
+</Callout>
+
+## Supported Functionality
+
+We only add one tool to your environment, `hello_manage_app`, keeping you under any tool limits imposed by your IDE or CLI. All functionality is exposed as actions by that tool.
 
 
-## Features
-
-### `hello_manage_app`
-
-This is the primary tool for managing Hellō applications.
-
-Supported actions:
+Actions:
 
 * `create` – Create new applications with smart defaults
 * `read` – Retrieve application or profile details
@@ -142,55 +143,17 @@ Each response includes:
 * All apps associated with your teams
 * Current team and app state
 
-### Authentication
 
-This MCP server uses OAuth 2.1 for secure authentication:
-
-1. **OAuth Flow**: When you first use the tool, the server opens your browser
-2. **Login**: Complete the login process with your Hellō account
-3. **Token**: The server receives a 1-hour access token
-4. **Context**: All API calls return your complete developer context
-
-### Security & Limitations
-
-**Security:**
-- OAuth 2.1 industry-standard authentication
+## Security
 - Short-lived tokens (1-hour expiration)
-- HTTPS-only API communication
-- Access scoped to create, read, update. Deletion actions are intentionally restricted.
+- Access scoped to create, read, update. Destructive actions are intentionally restricted.
 
-**Current Limitations:**
+## Current Limitations
 - Cannot delete applications (use [Hellō Console](https://console.hello.coop) for deletion)
 - Token requires re-authentication after 1 hour of inactivity
 
-## Troubleshooting
 
-### Common Issues
-
-**"npx command not found" error:**
-- Install Node.js 18+ from [nodejs.org](https://nodejs.org/)
-- Verify installation: `node --version` and `npm --version`
-- On macOS/Linux, you may need to restart your terminal after installation
-
-**"MCP server not found" error:**
-- Ensure your MCP client supports the transport type (HTTP or stdio)
-- Check that the server URL or command is correctly configured
-- Verify network connectivity for HTTP transport
-
-**"Authentication required" errors:**
-- The server will automatically prompt for login when needed
-- Make sure you complete the browser-based OAuth flow
-
-**"Application not found" errors:**
-- Use `hello_manage_app` with `action: "read"` to see your applications
-- Make sure you're using the correct `client_id`
-
-**Logo upload issues:**
-- Ensure `logo_content_type` matches your image format
-- Supported formats: PNG, JPEG, GIF, WebP, APNG, SVG
-- Keep file sizes under 100KB for best performance
-
-### Getting Help & Contributing
+## Getting Help & Contributing
 
 **We want your feedback!** This MCP server is in beta and we're actively improving it.
 
