@@ -6,7 +6,7 @@ The Hellō Endpoint is also the OpenID Connect `redirect_uri` for your applicati
 
 ## Operations
 
-The `op` query parameter is passed to the Hellō Endpoint to indicate the operation to be performed. Valid values are `login`, `auth`, `logout`, and `invite`. 
+The `op` query parameter is passed to the Hellō Endpoint to indicate the operation to be performed. Valid values are `login`, `auth`, `logout`, `invite`, `loginURL`, and `exchange`. 
 
 ### Login
 
@@ -88,3 +88,96 @@ Starts an invite flow to `https://wallet.hello.coop/invite`. See [Invite API (BE
 ```http
 https://your-app.com/api/hellocoop?op=invite
 ```
+
+### LoginURL
+
+Returns a login URL and encrypted state for mobile applications or custom authentication flows. This operation is designed for applications that need to handle the authentication flow programmatically rather than through browser redirects.
+
+*Example:*
+
+```http
+https://your-app.com/api/hellocoop?op=loginURL
+```
+
+*Optional Parameters:*
+
+| Parameter       | Description |
+|-|-|
+| `target_uri`    | where the user will be redirected to after a successful login |
+| `scope`         | overrides the default scope to request from Hellō |
+| `login_hint`    | provide a login hint of which user to log in (email address) |
+| `domain_hint`   | provide a domain hint of the domain the user will log in at |
+| `provider_hint` | overrides the default provider hint of which providers to show |
+| `prompt`        | `login` requires fresh login; `consent` shows consent screen |
+| `nonce`         | optional nonce value for the request |
+| `redirect_uri`  | overrides the default redirect URI |
+
+*Success Response:*
+
+```json
+{
+  "url": "https://wallet.hello.coop/authorize?client_id=...&redirect_uri=...&scope=...&response_type=code&state=...",
+  "state": "encrypted_state_value"
+}
+```
+
+*Error Response:*
+
+```json
+{
+  "error": "server_error",
+  "error_description": "Missing HELLO_CLIENT_ID configuration"
+}
+```
+
+### Exchange
+
+Exchanges an authorization code and state for user authentication data. This operation is typically used by mobile applications or custom authentication flows after receiving the authorization response from the loginURL flow.
+
+*Example:*
+
+```http
+https://your-app.com/api/hellocoop?op=exchange&code=auth_code&state=encrypted_state
+```
+
+*Required Parameters:*
+
+| Parameter | Description |
+|-|-|
+| `code`    | the authorization code received from Hellō |
+| `state`   | the encrypted state value from the loginURL response |
+
+*Success Response:*
+
+```json
+{
+  "access_token": "encrypted_access_token",
+  "auth": {
+    "isLoggedIn": true,
+    "sub": "sub_vvCgtpv35lDgQpHtxmpvmnxK_2nZ",
+    "iat": 1699234659,
+    "name": "Dick Hardt",
+    "picture": "https://pictures.hello.coop/r/7a160eed-46bf-48e2-a909-161745535895.png",
+    "email": "dick.hardt@hello.coop"
+  }
+}
+```
+
+*Error Response:*
+
+```json
+{
+  "error": "invalid_request",
+  "error_description": "Missing code parameter"
+}
+```
+
+## Mobile App Flow
+
+The `loginURL` and `exchange` operations work together to enable authentication in mobile applications:
+
+1. **Request Login URL**: Call `op=loginURL` to get the authorization URL and encrypted state
+2. **User Authorization**: Present the authorization URL to the user (e.g., in a web view)
+3. **Handle Redirect**: Capture the authorization response containing the `code` parameter
+4. **Exchange Code**: Call `op=exchange` with the `code` and `state` to get user authentication data
+5. **Store Access Token**: Use the returned `access_token` for subsequent authenticated requests
