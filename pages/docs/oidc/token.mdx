@@ -1,3 +1,5 @@
+import { ExperimentalTooltip } from 'components/experimental-tooltip'
+
 # ID Token
 
 An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html) that has claims per [OpenID Connect §2](https://openid.net/specs/openid-connect-core-1_0.html#IDToken).<br/>In the following example of a raw ID Token:
@@ -8,39 +10,41 @@ An ID Token is a JSON Web Token (JWT) [RFC 7519](https://www.rfc-editor.org/rfc/
 ### Compact Format
 
 ```ansi
-[0;35meyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjIwMjQtMDctMDRUMjI6MjA6MzkuMjg2Wl8xZTAYTIzIn00[0m.[0;33mey
-Jpc3MiOiJodHRwczovL2lzc3Vlci5oZWxsby5jb29wIiwiYXVkIjoiYXBwX0hlbGxvRGV2ZWxvcGVyUGxheWdyb3VuZF9Jc
-TIiLCJub25jZSI6IjE4OTM4Nzc4ODk0MjMyMzE5NTEiLCJqdGkiOiJqdGlfd0ZHdWdpQXp1WVBxTkh2ajJuUnI2enhvX0lq
-biIsInN1YiI6IjI2NWE1NmEzLWFjMDQtNDcxYy04MzJlLTVlMTZhNzRlYjFmMSIsIm5hbWUiOiJEaWNrIEhhcmR0IiwicGl
-jdHVyZSI6Imh0dHBzOi8vcGljdHVyZXMuaGVsbG8uY29vcC9yLzdjOWFlMTkyLTM2M2MtNDA5ZS05NDVhLWYyNWU1ODMzZT
-M3NS5qcGVnIiwiZW1haWwiOiJkaWNrLmhhcmR0QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3M
-jk3MDkwNjcsImV4cCI6MTcyOTcwOTM2N30[0m.[032fNT8d0wSuHqmcaUbiKPYAusalMYJcGj8w726pE8WvfYwlDtms3tMovj7U9eGTwqQykf_tlbz
-IrJ4m6KofsriScGrm_2RAiaZTfk3srbWu21WhaLxqHhkbqu0lntNzkgVCjROv_CQ5YcsXh4L0aAJmKpkL3lVATMQSMxBUY0
-bnmDT5jKO2ldxse4WAGSYssSUy1O6YzsjcvRpL3shuTYNkx2NMrqBO2kdTEuFL3IeH8cRFI6x52w7TJKJXs0n8qRVdaul64
-URRrQrhTidVfCdFwswdrUZ3pdyhiTLlhC9Kn9Dtk5F3KVd0SEuzcb9cBJzNvV-vO-j7b-siqUJV4du3Q
+[0;35meyJhbGciOiJSUzI1NiIsInR5cCI6ImRwb3AraWRfdG9rZW4iLCJraWQiOiIyMDI1LTAxLTE1VDE2OjU2OjQ5LjY2OFpfNzM1LTFjNSJ9[0m.[0;33meyJpc3MiOiJodHRwczovL2lzc3Vlci5oZWxsby5jb29wIiwiYXVkIjoiYXBwX0hlbGxvRGV2ZWxvcGVyUGxheWdyb3VuZF9JcTIiLCJub25jZSI6ImZhMzI5NGY4LTIyMmEtNDcwMS04YmUyLWY1Y2YwZDY1NThmZSIsImp0aSI6Imp0aV9wdXNLQjFZcjhRUk9qQ0FqbGVoNU1yZDFfWmZSIiwic3ViIjoiMjY1YTU2YTMtYWMwNC00NzFjLTgzMmUtNWUxNmE3NGViMWYxIiwidGVuYW50IjoicGVyc29uYWwiLCJuYW1lIjoiRGljayBIYXJkdCIsInBpY3R1cmUiOiJodHRwczovL3BpY3R1cmVzLmhlbGxvLmNvb3AvYXZhdGFyLzFjOGNlMzZlMDczNWFhY2ViYmUyZDUxNjk0ODJjODY3P3M9MjU2LGQ9aWRlbnRpY29uIiwiZW1haWwiOiJkaWNrLmhhcmR0QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpYXQiOjE3NTUyNDkzMTQsImV4cCI6MTc1NTI0OTYxNCwiY25mIjp7Imp3ayI6eyJrdHkiOiJFQyIsImNydiI6IlAtMjU2IiwieCI6IkxBT25iQU1FRWROYS16UzFoeG9WWTVIZkp5aWFLRlNIVjVfRWJBY0lBdDQiLCJ5IjoiUDh1QkliNmYxX2VQUU13QjcwS0lVaEowV2pXdjJQQ1BLcjJwVlhpTndROCJ9fX0[0m.[032fNT8d0wSuHqmlpvNCaNaQRSH-XSXg_YDKwJfprtpkr7L2DanDUhXRZ8uAlDyOdDXJm6weEXrHiq9UQC8WGatmQ8V__jeTntPe8njID3MrfSY5jtS3AATfACC8oOqt_NPExW3noKBMjzLP50aa8JPBdu39YBnfOA78tL4K0GcCNDk9ctKf8dJktb4URnl4n7yYpJ_VCFp44bujpoxyr-SXBzZn8Zo2PY0oOApnAICiLs0iS9KhAegEP55Vo4m9Y2uER7YtIGA2S1iUwBbgx0XoFeIn4jQtMNydaksmbPqZFtAFNUKUM85KFnKAx_OMrhqEU0b3lc4kbR1Na_orr4Ucm1e-_pYk_UlOg
 ```
 
 ### Decoded ID Token
 
+Note: The following example includes the `cnf` claim that appears when the `dpop` scope is requested:
+
 ```json
 {
     "header": {
-        "alg":"RS256",
-        "typ":"JWT",
-        "kid":"2024-07-04T22:20:39.286Z_1e0-a23"
+        "alg": "RS256",
+        "typ": "dpop+id_token",
+        "kid": "2025-01-15T16:56:49.668Z_735-1c5"
     },
     "payload": {
         "iss": "https://issuer.hello.coop",
         "aud": "app_HelloDeveloperPlayground_Iq2",
-        "nonce": "1893877889423231951",
-        "jti": "jti_wFGugiAzuYPqNHvj2nRr6zxo_Ijn",
+        "nonce": "fa3294f8-222a-4701-8be2-f5cf0d6558fe",
+        "jti": "jti_pusKB1Yr8QROjCAjleh5Mrd1_ZfR",
         "sub": "265a56a3-ac04-471c-832e-5e16a74eb1f1",
+        "tenant": "personal",
         "name": "Dick Hardt",
-        "picture": "https://pictures.hello.coop/r/7c9ae192-363c-409e-945a-f25e5833e375.jpeg",
+        "picture": "https://pictures.hello.coop/avatar/1c8ce36e0735aacebbe2d5169482c867?s=256,d=identicon",
         "email": "dick.hardt@gmail.com",
         "email_verified": true,
-        "iat": 1729709067,
-        "exp": 1729709367
+        "iat": 1755249314,
+        "exp": 1755249614,
+        "cnf": {
+            "jwk": {
+                "kty": "EC",
+                "crv": "P-256",
+                "x": "LAOnbAMEEdNa-zS1hxoVY5HfJyiaKFSHV5_EbAcIAt4",
+                "y": "P8uBIb6f1_ePQMwB70KIUhJ0WjWv2PCPKr2pVXiNwQ8"
+            }
+        }
     }
 }
 ```
@@ -87,3 +91,4 @@ URRrQrhTidVfCdFwswdrUZ3pdyhiTLlhC9Kn9Dtk5F3KVd0SEuzcb9cBJzNvV-vO-j7b-siqUJV4du3Q
 |`iat`|The time the ID Token was issued in [Epoch time](https://en.wikipedia.org/wiki/Unix_time)|
 |`exp`|The time the ID Token expires.<br/>Hellō sets the expiry to be 5 minutes (300 seconds) after `iat`|
 |`tenant`|The Hellō identifier for the organization. Similar to `sub`, use this to identify the organization. Set to `personal` for personal accounts.|
+|`cnf` <ExperimentalTooltip />|Confirmation claim containing the public key bound to the ID token when using `dpop` scope.|
