@@ -1,4 +1,5 @@
 import { Callout } from 'nextra/components'
+import { ExperimentalTooltip } from 'components/experimental-tooltip'
 
 # Hellō Scopes
 
@@ -35,6 +36,8 @@ Following are the scopes currently supported by Hellō. At the top are the stand
 |`phone`|A verified `phone_number` claim. <br/>`phone_number_verified=true` will always be returned. <br/>*see note below*|
 |`picture`|A URL to a profile picture. [See FAQ 13](/faqs/#13-what-can-i-do-with-the-picture-url-i-receive) for details|
 |`profile`|equivalent to `name`, `email`, and `picture`|
+|**Experimental**|**The following scopes are currently experimental**|
+|`dpop` <ExperimentalTooltip/>|Enables key binding for ID tokens using RFC 9449 DPoP.|
 
 *NOTE: We previously returned `phone` and `phone_verified` claims and now return `phone_number` and `phone_number_verified` claims per [OIDC Standard Claims](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)*
 
