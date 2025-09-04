@@ -45,6 +45,14 @@ Defaults to `/api/hellocoop`. Change if you have a different path for the Hellō
 
 Include the vale of the Hellō cookie when calling `op=auth`. This is an encrypted value that can be used with AWS API Gateway. Details TBD.
 
+### HELLO_COOKIE_DOMAIN
+
+Set the domain for authentication cookies (e.g., `.example.com`). This enables auth cookies to work across all subdomains of the specified domain. If not set, cookies are restricted to the current host only. 
+
+**Security Note**: Only set this if you control all subdomains, as any subdomain will have access to the authentication cookies.
+
+Example: Setting `HELLO_COOKIE_DOMAIN=.mycompany.com` allows authentication to work across `app.mycompany.com`, `api.mycompany.com`, etc.
+
 ### LOGIN_EVENT_URL
 
 Details TBD.

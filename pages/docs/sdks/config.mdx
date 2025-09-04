@@ -16,6 +16,7 @@ const config = {
         loggedOut: '/logout',    // defaults to '/'
         error:     '/error'      // defaults to built in error page
     },
+    cookieDomain: '.example.com', // optional - enables auth cookies across subdomains
     loginSync,  // (params: LoginSyncParams) => Promise<LoginSyncResponse>
                 // defaults to undefined
     logoutSync, // (params: LogoutSyncParams) => Promise<LogoutSyncResponse>
@@ -31,6 +32,8 @@ module.exports = config
 - override providers recommended to users, see [API Reference | provider_hint](/docs/apis/wallet/#provider_hint)
 ### `routes`
 - override routes to redirect user on log in, log out, and error
+### `cookieDomain`
+- optional domain for auth cookies (e.g., `.example.com` for subdomains). Enables authentication cookies to work across all subdomains. If not set, cookies are restricted to the current host only. Can also be set via `HELLO_COOKIE_DOMAIN` environment variable.
 ### `loginSync`   
 - optional function called on each successful login
 ### `logoutSync`
