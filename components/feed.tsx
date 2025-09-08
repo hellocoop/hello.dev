@@ -18,11 +18,11 @@ const Feed = () => {
             const xml = new window.DOMParser().parseFromString(txt, "text/xml")
             const allPosts = xml.querySelectorAll("item")
             
-            // Filter posts with "hello.dev" category
+            // Filter posts with "Developer" category
             const filteredPosts = Array.from(allPosts).filter(post => {
                 const categories = Array.from(post.querySelectorAll("category"))
                 return categories.some(category => 
-                    category.textContent?.toLowerCase().includes('hello.dev')
+                    category.textContent?.toLowerCase().includes('Developer')
                 )
             }).slice(0, 3)
             
