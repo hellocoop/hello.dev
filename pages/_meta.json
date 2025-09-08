@@ -28,7 +28,7 @@
   "blog": {
     "title": "Blog",
     "type": "page",
-    "href": "https://blog.hello.dev/",
+    "href": "https://blog.hello.coop/",
     "newWindow": true
   },
   "console": {
