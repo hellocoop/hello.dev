@@ -22,7 +22,7 @@ const Feed = () => {
             const filteredPosts = Array.from(allPosts).filter(post => {
                 const categories = Array.from(post.querySelectorAll("category"))
                 return categories.some(category => 
-                    category.textContent?.toLowerCase().includes('Developer')
+                    category.textContent?.includes('Developer')
                 )
             }).slice(0, 3)
             
