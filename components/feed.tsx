@@ -37,6 +37,7 @@ const Feed = () => {
                     ?.replace(/<[^>]*>/g, '')   // strip HTML
                     ?.replace(/&#160;/g, ' ')    // strip out &#160;
                     ?.replace(/&#8217;/g, "'")   // strip out &#8217;
+                    ?.replace(/&#8211;/g, '-')   // strip out &#8211;
                     ?.trim(),
                 image: post.querySelector("content")?.getAttribute("url")
             }))
