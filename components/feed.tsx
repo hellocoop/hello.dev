@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import Parser from 'rss-parser';
 import styles from './feed.module.css'
 
 const Feed = () => {
-    const parser = new Parser(
-        {customFields: {
-            item: ['hashnode:coverImage']
-        }}
-    )
-    const rss = "/feed.xml"
+    const rss = "https://blog.hello.coop/feed"
     const [posts, setPosts] = useState([])
     
     useEffect(() => {
@@ -19,8 +13,30 @@ const Feed = () => {
 
     const fetchPosts = async () => {
         try {
-            const json = await parser.parseURL(rss)
-            setPosts(json.items?.slice(0, 3))
+            const res = await fetch(rss)
+            const txt = await res.text()
+            const xml = new window.DOMParser().parseFromString(txt, "text/xml")
+            const allPosts = xml.querySelectorAll("item")
+            
+            // Filter posts with "hello.dev" category
+            const filteredPosts = Array.from(allPosts).filter(post => {
+                const categories = Array.from(post.querySelectorAll("category"))
+                return categories.some(category => 
+                    category.textContent?.toLowerCase().includes('hello.dev')
+                )
+            }).slice(0, 3)
+            
+            // Convert to the format expected by the component
+            const processedPosts = filteredPosts.map(post => ({
+                title: post.querySelector("title")?.textContent,
+                link: post.querySelector("link")?.textContent,
+                guid: post.querySelector("guid")?.textContent,
+                pubDate: post.querySelector("pubDate")?.textContent,
+                contentSnippet: post.querySelector("description")?.textContent?.replace(/<[^>]*>/g, ''), // Strip HTML
+                image: post.querySelector("content")?.getAttribute("url")
+            }))
+            
+            setPosts(processedPosts)
         } catch(err){
             console.error(err)
         }
@@ -35,7 +51,7 @@ const Feed = () => {
                 {posts.map(i => (
                     <li key={i.guid}>
                         <Link href={i.link} target="_blank" className="flex flex-col md:flex-row md:items-center gap-6 group">
-                            <Image src={i['hashnode:coverImage']} alt={i.title} width={256} height={144} className="rounded-md object-cover flex-shrink-0" priority={false} />
+                            <Image src={i.image} alt={i.title} width={256} height={144} className="rounded-md object-cover flex-shrink-0" priority={false} />
                             <div>
                                 <span className="text-sm opacity-80">{i.pubDate.split(" ").slice(0, -2).join(" ")}</span>
                                 <h3 className="text-xl font-semibold my-1 group-hover:underline">{i.title}</h3>
@@ -49,7 +65,7 @@ const Feed = () => {
                 ))}
             </ul>
             {/* TBD Make link open in new tab (fix extenal link icon positioning) */}
-            <Link href="https://blog.hello.dev" className="flex items-center gap-6 group md:ml-64 md:pl-6 mt-10 text-xl hover:underline font-semibold">Read more at blog.hello.dev</Link>
+            <Link href="https://blog.hello.coop" className="flex items-center gap-6 group md:ml-64 md:pl-6 mt-10 text-xl hover:underline font-semibold">Read more at blog.hello.coop</Link>
         </>
     )
 }
