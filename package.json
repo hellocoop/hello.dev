@@ -4,7 +4,6 @@
   "description": "Hellō is an OpenID Connect Provider that simplifies user registration and login, allowing you to provide all the choices your user's may want in hours instead of days or weeks.",
   "scripts": {
     "dev": "next dev",
-    "feed": "./scripts/feed.sh",
     "build": "next build",
     "postbuild": "next-sitemap && node scripts/generate-markdown.mjs",
     "start": "next start",
