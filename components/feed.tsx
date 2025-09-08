@@ -32,7 +32,11 @@ const Feed = () => {
                 link: post.querySelector("link")?.textContent,
                 guid: post.querySelector("guid")?.textContent,
                 pubDate: post.querySelector("pubDate")?.textContent,
-                contentSnippet: post.querySelector("description")?.textContent?.replace(/<[^>]*>/g, ''), // Strip HTML
+                contentSnippet: post.querySelector("description")
+                    ?.textContent
+                    ?.replace(/<[^>]*>/g, '')   // strip HTML
+                    ?.replace(/&#160;/g, '')    // strip out &#160;
+                    ?.trim(),
                 image: post.querySelector("content")?.getAttribute("url")
             }))
             
