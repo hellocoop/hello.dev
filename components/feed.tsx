@@ -35,7 +35,8 @@ const Feed = () => {
                 contentSnippet: post.querySelector("description")
                     ?.textContent
                     ?.replace(/<[^>]*>/g, '')   // strip HTML
-                    ?.replace(/&#160;/g, '')    // strip out &#160;
+                    ?.replace(/&#160;/g, ' ')    // strip out &#160;
+                    ?.replace(/&#8217;/g, "'")   // strip out &#8217;
                     ?.trim(),
                 image: post.querySelector("content")?.getAttribute("url")
             }))
