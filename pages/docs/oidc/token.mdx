@@ -27,7 +27,7 @@ iUwBbgx0XoFeIn4jQtMNydaksmbPqZFtAFNUKUM85KFnKAx_OMrhqEU0b3lc4kbR1Na_orr4Ucm1e-_p
 
 ### Decoded ID Token
 
-Note: The following example includes the `cnf` claim that appears when the `dpop` scope is requested:
+Note: The following example includes the `cnf` claim that appears when the `bound_key` scope is requested:
 
 ```json
 {
@@ -103,4 +103,4 @@ Note: The following example includes the `cnf` claim that appears when the `dpop
 |`iat`|The time the ID Token was issued in [Epoch time](https://en.wikipedia.org/wiki/Unix_time)|
 |`exp`|The time the ID Token expires.<br/>Hellō sets the expiry to be 5 minutes (300 seconds) after `iat`|
 |`tenant`|The Hellō identifier for the organization. Similar to `sub`, use this to identify the organization. Set to `personal` for personal accounts.|
-|`cnf` <ExperimentalTooltip />|Confirmation claim containing the public key bound to the ID token when using `dpop` scope.|
+|`cnf` <ExperimentalTooltip />|Confirmation claim containing the public key bound to the ID token when using `bound_key` scope.|
