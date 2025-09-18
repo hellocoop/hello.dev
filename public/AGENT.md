@@ -1,6 +1,6 @@
 # Hello.dev - AI Agent Documentation Guide
 
-This repository contains comprehensive documentation for Hellō authentication integration. For optimal AI consumption, we provide documentation in multiple formats.
+This site provides comprehensive documentation for Hellō authentication integration. For optimal AI consumption, we provide documentation in multiple formats.
 
 ## 🤖 For AI Agents & Crawlers
 
