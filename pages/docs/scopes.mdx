@@ -1,7 +1,7 @@
 import { Callout } from 'nextra/components'
 import { ExperimentalTooltip } from 'components/experimental-tooltip'
 
-# Hellō Scopes
+# Hellō Scopes & Claims
 
 <Callout type="info" emoji="🦆">
 Explore what claims each requested scope returns with the [Hellō Playgound](https://playground.hello.dev)
@@ -25,29 +25,27 @@ When requesting multiple scopes, separate them with a space. The space will ofte
 
 Following are the scopes currently supported by Hellō. At the top are the standard OpenID Connect scopes supported by Hellō.
 
-|Scope|Description|
-|---|---|
-|`openid`|This scope is required, and the `sub` claims is always returned.<br/>If you don't want any other claims, provide just this one.|
-|`name`|Full / legal name.|
-|`nickname`|Preferred name.|
-|`given_name`|AKA First name.|
-|`family_name`|AKA Last name.|
-|`email`|A verified email address. <br/>`email_verified=true` will always be returned.|
-|`phone`|A verified `phone_number` claim. <br/>`phone_number_verified=true` will always be returned. <br/>*see note below*|
-|`picture`|A URL to a profile picture. [See FAQ 13](/faqs/#13-what-can-i-do-with-the-picture-url-i-receive) for details|
-|`profile`|equivalent to `name`, `email`, and `picture`|
-|**Experimental**|**The following scopes are currently experimental**|
-|`bound_key` <ExperimentalTooltip/>|Enables key binding for ID tokens using RFC 9449 DPoP.|
+|Scope|Claim|Description|
+|---|---|---|
+|`openid`|`sub`|This scope is required, and the `sub` claims is always returned.<br/>If you don't want any other claims, provide just this one.|
+|`name`|`name`|Full / legal name.|
+|`nickname`|`nickname`|Preferred name.|
+|`given_name`|`given_name`|AKA First name.|
+|`family_name`|`family_name`|AKA Last name.|
+|`email`|`email`, `email_verified`|A verified email address. <br/>`email_verified: true` will always be returned.|
+|`phone`|`phone_number`, `phone_number_verified`|A verified `phone_number` claim. <br/>`phone_number_verified: true` will always be returned.|
+|`picture`|`picture`|A URL to a profile picture. [See FAQ 13](/faqs/#13-what-can-i-do-with-the-picture-url-i-receive) for details|
+|`profile`|`name`, `email`, `picture`|Equivalent to `name`, `email`, and `picture` scopes.|
+|**Experimental**|**Experimental Claims**|**The following scopes are currently experimental**|
+|`bound_key` <ExperimentalTooltip/>|`cnf` (confirmation)|Enables key binding for ID tokens using<br/>[RFC 9449 DPoP](https://www.rfc-editor.org/rfc/rfc9449.html).|
 
-*NOTE: We previously returned `phone` and `phone_verified` claims and now return `phone_number` and `phone_number_verified` claims per [OIDC Standard Claims](https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)*
-
-|Hellō Scopes|Description|
-|---|---|
-|`discord`|A verified Discord username and id.|
-|`github`|A verified GitHub username and id.|
-|`gitlab`|A verified GitLab username and id.|
-|`twitter`|A verified Twitter username and id.|
-|`ethereum`|A verified ethereum address.|
+|Hellō Scopes|Claim|Description|
+|---|---|---|
+|`discord`|`discord.username`, `discord.id`|A verified Discord username and id.|
+|`github`|`github.username`, `github.id`|A verified GitHub username and id.|
+|`gitlab`|`gitlab.username`, `gitlab.id`|A verified GitLab username and id.|
+|`twitter`|`twitter.username`, `twitter.id`|A verified Twitter username and id.|
+|`ethereum`|`ethereum`|A verified ethereum address.|
 
 If the user has already provided consent to your application, they will not be prompted again to consent to the claims provided unless you include `prompt=consent` in your authorization request. This allows the user to update the profile data that they have provided you. To provide a better experience for your users with `prompt=consent`, also include `login_hint=name@domain.example`.
 
