@@ -23,16 +23,19 @@ npx @hellocoop/quickstart@latest
 
 This will open up a browser window, where you will need to login with Hellō, and then choose to create a new app, or return the `client_id`.
 
-#### Options
+### CLI Options
 
-- --provider_hint (-p) - space separated string of provider_hint 
-- --suffix (-x) - suffix to add to generated app name
-- --integration (-i) - integration name shown in console
-- --wildcard (-w) - boolean to set the wildcard domain Development Redirect URI
-- --nextjs_app_router - boolean to configure a Next.js app for App router
-- --nextjs_pages_router - boolean to configure a Next.js app for Pages router
-- --express - boolean to configure an Express app
-- --fastify - boolean to configure a Fastify app
+**Configuration Options:**
+- `--provider_hint` (`-p`) - space separated string of provider_hint 
+- `--suffix` (`-x`) - suffix to add to generated app name
+- `--integration` (`-i`) - integration name shown in console
+- `--wildcard_domain` (`-w`) - boolean to set the wildcard domain Development Redirect URI
+
+**Framework Templates:**
+- `--nextjs_app_router` - configure a Next.js app with App Router
+- `--nextjs_pages_router` - configure a Next.js app with Pages Router
+- `--express` - configure an Express app
+- `--fastify` - configure a Fastify app
 
 ## `@hellocoop/quickstart` API
 `quickstart(config)`
@@ -60,14 +63,19 @@ const config = {
 const client_id = await quickstart(config)
 ```
 
-### Options
+### API Config Options
 
 |Name|Description|
 |---|---|
 |`suffix`| String that will be appended to the suggested name (eg: John's + suffix) for an app to be created. Defaults to "Application"|
-|`integration`| Application that started Quickstart, shown in console, defaults to `quickstart`|
 |`name`| Name of the application (`suffix` param is ignored if `name` param is provided)|
-|`wildcard_domain`| a boolean value indicating if wildcard domains are enabled in Development Redirect URIs|
-|`provider_hint`| a space separated list of recommended providers per [provider_hint](/docs/apis/wallet/#provider-hint) that will be presented when logging in new users to Quickstart|
+|`integration`| Application that started Quickstart, shown in console, defaults to `quickstart`|
+|`wildcard_domain`| Boolean indicating if wildcard domains are enabled in Development Redirect URIs|
+|`provider_hint`| Space separated list of recommended providers per [provider_hint](/docs/apis/wallet/#provider-hint) that will be presented when logging in new users to Quickstart|
+|`tos_uri`| URL to Terms of Service|
+|`pp_uri`| URL to Privacy Policy|
+|`image_uri`| URL to application logo image|
+|`dark_image_uri`| URL to application logo image for dark mode|
+|`redirect_uri`| Redirect URI for the application|
 
-The options above are passed through as query parameters to the Quickstart Web App, and are the same as documented in [API Reference | Quickstart](/docs/apis/quickstart/)
+All options are passed through as query parameters to the Quickstart Web App, and are documented in [API Reference | Quickstart](/docs/apis/quickstart/)
