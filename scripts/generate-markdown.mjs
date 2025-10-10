@@ -247,6 +247,115 @@ function findHtmlFiles(dir) {
 }
 
 /**
+ * Generate llms.txt file with documentation links in list format
+ */
+function generateLLMSTxt(markdownFiles) {
+  const baseUrl = 'https://www.hello.dev/markdown/docs';
+  
+  // Define the documentation structure with descriptions
+  const docStructure = [
+    { name: 'Overview', path: 'docs.md', desc: 'Complete documentation overview' },
+    { name: 'Getting Started', path: 'docs/getting-started.md', desc: 'Quick start guide' },
+    { name: 'Comparison', path: 'docs/comparison.md', desc: 'Feature comparison with other providers' },
+    { name: 'Roadmap', path: 'docs/roadmap.md', desc: 'Development roadmap and upcoming features' },
+    { name: 'Mockin', path: 'docs/mockin.md', desc: 'Mocking and testing tools' },
+    { name: 'Quickstarts', path: 'docs/quickstarts.md', desc: 'Framework-specific integration guides' },
+    { name: 'Express.js', path: 'docs/quickstarts/express.md', desc: 'Express integration' },
+    { name: 'Fastify', path: 'docs/quickstarts/fastify.md', desc: 'Fastify integration' },
+    { name: 'Next.js', path: 'docs/quickstarts/nextjs.md', desc: 'Next.js integration' },
+    { name: 'WordPress', path: 'docs/quickstarts/wordpress.md', desc: 'WordPress integration' },
+    { name: 'APIs Overview', path: 'docs/apis.md', desc: 'API documentation overview' },
+    { name: 'Wallet API', path: 'docs/apis/wallet.md', desc: 'Wallet API reference' },
+    { name: 'Admin API', path: 'docs/apis/admin.md', desc: 'Admin API reference' },
+    { name: 'Quickstart API', path: 'docs/apis/quickstart.md', desc: 'Quickstart API reference' },
+    { name: 'Invite API', path: 'docs/apis/invite.md', desc: 'Invite API reference' },
+    { name: 'Web Client API', path: 'docs/apis/web-client.md', desc: 'Web client API reference' },
+    { name: 'OIDC Overview', path: 'docs/oidc.md', desc: 'OpenID Connect documentation' },
+    { name: 'OIDC Config', path: 'docs/oidc/config.md', desc: 'OIDC configuration' },
+    { name: 'OIDC Device Flow', path: 'docs/oidc/device.md', desc: 'Device authorization flow' },
+    { name: 'OIDC Errors', path: 'docs/oidc/errors.md', desc: 'Error handling and codes' },
+    { name: 'OIDC Request', path: 'docs/oidc/request.md', desc: 'Request parameters' },
+    { name: 'OIDC Response', path: 'docs/oidc/response.md', desc: 'Response formats' },
+    { name: 'OIDC Token', path: 'docs/oidc/token.md', desc: 'Token management' },
+    { name: 'OIDC Unsupported', path: 'docs/oidc/unsupported.md', desc: 'Unsupported features' },
+    { name: 'OIDC Verification', path: 'docs/oidc/verification.md', desc: 'Token verification' },
+    { name: 'SDKs Overview', path: 'docs/sdks.md', desc: 'SDK documentation overview' },
+    { name: 'React SDK', path: 'docs/sdks/react.md', desc: 'React SDK documentation' },
+    { name: 'Next.js SDK', path: 'docs/sdks/nextjs.md', desc: 'Next.js SDK documentation' },
+    { name: 'Express SDK', path: 'docs/sdks/express.md', desc: 'Express SDK documentation' },
+    { name: 'Fastify SDK', path: 'docs/sdks/fastify.md', desc: 'Fastify SDK documentation' },
+    { name: 'Svelte SDK', path: 'docs/sdks/svelte.md', desc: 'Svelte SDK documentation' },
+    { name: 'Vue.js SDK', path: 'docs/sdks/vue.md', desc: 'Vue.js SDK documentation' },
+    { name: 'SDK Config', path: 'docs/sdks/config.md', desc: 'SDK configuration' },
+    { name: 'SDK Environment', path: 'docs/sdks/environment.md', desc: 'Environment setup' },
+    { name: 'SDK Helper', path: 'docs/sdks/helper.md', desc: 'Helper functions' },
+    { name: 'SDK Quickstart', path: 'docs/sdks/quickstart.md', desc: 'SDK quickstart guide' },
+    { name: 'SDK FAQs', path: 'docs/sdks/faqs.md', desc: 'Frequently asked questions' },
+    { name: 'Buttons', path: 'docs/buttons.md', desc: 'Login button implementation' },
+    { name: 'Scopes', path: 'docs/scopes.md', desc: 'Available user data scopes' },
+    { name: 'Admin MCP', path: 'docs/admin-mcp.md', desc: 'Model Context Protocol server' }
+  ];
+
+  let content = `# Hello.dev - AI Agent Documentation Guide
+
+This site provides comprehensive documentation for Hellō authentication integration. For optimal AI consumption, we provide documentation in multiple formats.
+
+## 🤖 For AI Agents & Crawlers
+
+### Preferred Format: Markdown
+We provide all documentation in markdown format specifically optimized for AI consumption:
+
+**Base URL:** \`https://www.hello.dev/markdown/docs/\`
+
+## Docs
+
+`;
+
+  // Add documentation links in list format
+  docStructure.forEach(doc => {
+    content += `- [${doc.name}](${baseUrl}/${doc.path}): ${doc.desc}\n`;
+  });
+
+  content += `
+### Content Freshness
+- All markdown files are automatically generated from the latest HTML documentation
+- Content is updated whenever the source documentation changes
+- Files are regenerated via automated GitHub workflows
+
+### Alternative Formats
+- **HTML**: Available at \`/docs/\` (human-readable web format)
+- **JSON**: API specifications available through our Admin API
+- **MCP**: Live access via our Model Context Protocol server
+
+## 🔗 Related Resources
+
+- **MCP Server**: For live API access, see [MCP documentation](${baseUrl}/docs/admin-mcp.md)
+- **API Playground**: Interactive testing at [console.hello.coop](https://console.hello.coop)
+- **GitHub**: Source code at [github.com/hellocoop](https://github.com/hellocoop)
+
+## 📞 Support
+
+For questions about AI access or documentation:
+- Email: support@hello.coop
+- GitHub Issues: [hellocoop/hello.dev](https://github.com/hellocoop/hello.dev)
+
+---
+
+*This documentation is maintained by the Hello Identity Co-op and is updated automatically.*
+`;
+
+  // Write to S3 directory only
+  const s3Path = path.join(__dirname, '..', 'S3', 'llms.txt');
+  
+  try {
+    fs.writeFileSync(s3Path, content, 'utf8');
+    console.log('✓ Generated llms.txt with list format');
+  } catch (error) {
+    console.error('Error generating llms.txt:', error.message);
+  }
+}
+
+/**
  * Update AI sitemap with current timestamp
  */
 async function updateAISitemap(markdownFiles) {
@@ -365,6 +474,9 @@ async function main() {
   collectFiles(MARKDOWN_DIR);
   console.log('📊 Generated markdown files:');
   files.sort().forEach(file => console.log('   -', file));
+  
+  // Generate llms.txt file with list format
+  generateLLMSTxt(files);
   
   // Update AI sitemap with current timestamp
   await updateAISitemap(files);
