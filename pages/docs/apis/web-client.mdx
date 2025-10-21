@@ -6,7 +6,7 @@ The Hellō Endpoint is also the OpenID Connect `redirect_uri` for your applicati
 
 ## Operations
 
-The `op` query parameter is passed to the Hellō Endpoint to indicate the operation to be performed. Valid values are `login`, `auth`, `logout`, `invite`, `loginURL`, and `exchange`. 
+The `op` query parameter is passed to the Hellō Endpoint to indicate the operation to be performed. Valid values are `login`, `auth` (or `getAuth`), `logout`, `invite`, `loginURL`, and `exchange`. 
 
 ### Login
 
@@ -39,7 +39,7 @@ If there is an error response from Hello, the browser will be redirected to the 
 
 ### Auth
 
-This operation is to be called by your app and returns a JSON object containing the auth object in the encrypted cookie.
+This operation is to be called by your app and returns a JSON object containing the auth object in the encrypted cookie. The `getAuth` operation is an alias for `auth`.
 
 *Example:*
 
@@ -83,11 +83,33 @@ https://your-app.com/api/hellocoop?op=logout
 
 Starts an invite flow to `https://wallet.hello.coop/invite`. See [Invite API (BETA)](./invite) 
 
+*Required Parameters:*
+
+| Parameter | Description |
+|-|-|
+| `app_name` | Name of the application inviting the user |
+
+*Optional Parameters:*
+
+| Parameter | Description |
+|-|-|
+| `target_uri` | Where the user will be redirected after accepting the invite |
+| `prompt` | Custom invitation message |
+| `role` | Role to assign to the invited user |
+| `tenant` | Tenant identifier for multi-tenant applications |
+| `state` | Custom state parameter |
+| `redirect_uri` | Override the default redirect URI |
+
 *Example:*
 
 ```http
-https://your-app.com/api/hellocoop?op=invite
+https://your-app.com/api/hellocoop?op=invite&app_name=MyApp&target_uri=/dashboard&role=user
 ```
+
+*Error Responses:*
+
+- `401 Unauthorized` - User not logged in
+- `400 Bad Request` - Missing required parameters
 
 ### LoginURL
 
@@ -163,7 +185,7 @@ https://your-app.com/api/hellocoop?op=exchange&code=auth_code&state=encrypted_st
 }
 ```
 
-*Error Response:*
+*Error Responses:*
 
 ```json
 {
@@ -171,6 +193,72 @@ https://your-app.com/api/hellocoop?op=exchange&code=auth_code&state=encrypted_st
   "error_description": "Missing code parameter"
 }
 ```
+
+```json
+{
+  "error": "invalid_request", 
+  "error_description": "Missing state parameter"
+}
+```
+
+```json
+{
+  "error": "invalid_request",
+  "error_description": "Invalid state parameter"
+}
+```
+
+```json
+{
+  "error": "invalid_client",
+  "error_description": "Wrong ID token audience"
+}
+```
+
+```json
+{
+  "error": "invalid_request",
+  "error_description": "Wrong nonce in ID token"
+}
+```
+
+```json
+{
+  "error": "invalid_request",
+  "error_description": "The ID token has expired"
+}
+```
+
+```json
+{
+  "error": "access_denied",
+  "error_description": "loginSync denied access"
+}
+```
+
+```json
+{
+  "error": "server_error",
+  "error_description": "Failed to exchange code for tokens"
+}
+```
+
+## Additional Operations
+
+### Protocol Flows
+
+The Hellō Endpoint also handles OpenID Connect protocol flows without the `op` parameter:
+
+- **Authorization Response**: When Hellō redirects back with `code` and `state` parameters
+- **IdP Initiated Login**: When `iss`, `domain_hint`, or `login_hint` parameters are present
+- **Wildcard Console**: When `wildcard_console` parameter is present for domain registration
+
+### POST Requests
+
+The endpoint also accepts POST requests for:
+
+- **Command Processing**: When `command_token` is present in the request body
+- **Protocol Redirects**: When `iss`, `domain_hint`, or `login_hint` are present in POST body
 
 ## Mobile App Flow
 
