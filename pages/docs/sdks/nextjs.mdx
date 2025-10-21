@@ -193,10 +193,10 @@ import {
   ContinueButton, 
   LoginButton, 
   UpdateProfileButton
-} from '@hellocoop/nextjs/react'
+} from '@hellocoop/nextjs'
 ```
 
->  Note they are in `@hellocoop/nextjs/react`
+>  Note they are available from `@hellocoop/nextjs`
 
 See the [SDK Reference | React](./react/) for details.
 
@@ -210,9 +210,9 @@ import {
   HelloProvider, 
   LoggedIn, 
   LoggedOut, 
-} from '@hellocoop/nextjs/react'
+} from '@hellocoop/nextjs'
 ```
->  Note they are in `@hellocoop/nextjs/react`
+>  Note they are available from `@hellocoop/nextjs`
 
 See the [SDK Reference | React](./) for details.
 
@@ -221,7 +221,7 @@ See the [SDK Reference | React](./) for details.
 ### `useAuth()`
 
 ```javascript
-import { useAuth } from '@hellocoop/nextjs/react'
+import { useAuth } from '@hellocoop/nextjs'
 
 const {
     isLoading,      // useSWR response, true if still loading call to 
@@ -242,12 +242,12 @@ const {
 ### `logOut()`
 
 ```typescript
-import { logOut, logOutRoute } from '@hellocoop/nextjs'
+import { logOut, getLogOutRoute } from '@hellocoop/nextjs'
 ```
 
-`logOut()` - function to logout user, loads `logOutRoute`
+`logOut()` - function to logout user, loads `getLogOutRoute`
 
-`logOutRoute` - provides route to logout
+`getLogOutRoute` - provides route to logout
 
 ## Server APIs 
 <Tabs items={['App Router (Recommended)', 'Pages Router']} storageKey="nextjs_router">
@@ -295,11 +295,12 @@ Used in page routes to get the auth object.
 If you want to get the auth object from the auth cookie sever side, export `getServerSideProps()` and wrap your content in `<HelloProvider auth={auth}>`
 
 ```ts
-import { HelloProvider, LoggedIn, LoggedOut, ContinueButton } from '@hellocoop/nextjs'
-export default function MyPage = ({auth}) {
+import { HelloProvider, LoggedIn, LoggedOut, ContinueButton, getServerSideProps } from '@hellocoop/nextjs'
+
+export default function MyPage({auth}) {
     const { name } = auth
     return(
-        <HelloProvider auth={auth}> { // auth must be passed to HelloProvider }
+        <HelloProvider auth={auth}> {/* auth must be passed to HelloProvider */}
             <LoggedIn>
                 Hellō {name}
             </LoggedIn>
@@ -309,8 +310,9 @@ export default function MyPage = ({auth}) {
         </HelloProvider>
     )
 }
-// This a convenience wrapper around `getAuth()`
-export { getServerSideProps } from '@hellocoop/nextjs'
+
+// This is a convenience wrapper around `getAuth()`
+export { getServerSideProps }
 ```
 ### `loginSync()`
 
@@ -324,18 +326,19 @@ This is a callback you provide in the `pageAuth()` config that can do any logic 
 See [`callback.login`](./config#callbackloggedin) for details
 
 ```typescript filename="src/your-logged-in-logic.ts"
-import type { LoggedInParams, LoggedInResponse } from '@hellocoop/nextjs'
+import type { LoginSyncParams, LoginSyncResponse } from '@hellocoop/nextjs'
 
-export default async loggedInCallback ({ 
+export default async loginSyncCallback ({ 
         token,      // ID Token in compact, unparsed format
         payload,    // parsed ID Token payload
+        target_uri, // target URI for redirect
         req,        // NextApiRequest
         res         // NextApiResponse
-    }:LoggedInParams): Promise<LoggedInResponse> => {
+    }: LoginSyncParams): Promise<LoginSyncResponse> => {
 
     // use sub claim as user identifier
     const { sub: id } = payload
-    const user = async readUserTable(id)
+    const user = await readUserTable(id)
     const role: Role = getUserRole(id)    
     
     // auth cookie will not be set
@@ -345,7 +348,7 @@ export default async loggedInCallback ({
     const { email, name, picture } = payload
     return { 
         // add role to auth object
-        auth: { email, name, picture, role }
+        updatedAuth: { email, name, picture, role }
     }
 } 
 ```

@@ -43,7 +43,16 @@ npm i @hellocoop/helper-browser
 
 #### Browser
 ```typescript
-import { createAuthRequest, fetchToken, parseToken, validateToken } from '@hellocoop/helper-browser'
+import { 
+    createAuthRequest, 
+    fetchToken, 
+    parseToken, 
+    validateToken,
+    createInviteRequest,
+    generateChallenge,
+    verifyChallenge,
+    pkceChallenge
+} from '@hellocoop/helper-browser'
 ```
 
 ## `createAuthRequest()`
@@ -101,10 +110,74 @@ config = {
 
 returns an ID Token in the JWT compact format (a string). Note that the ID Token does not require validation as it came directly from Hellō and is bound to the provided `code_verifier` used in the request
 
+## `validateToken()` (Browser Only)
+`const response = await validateToken(config)`
+
+A helper function to validate an ID token via Hellō's introspection endpoint.
+
+```typescript
+config = {
+    token: string - The ID token to validate - REQUIRED
+    client_id: string - OAuth "client_id" parameter - REQUIRED
+    nonce?: string - The nonce used in the original request
+    wallet?: string - Alternative mock wallet host for testing
+}
+```
+
+Returns
+```typescript
+{
+    active: boolean - Whether the token is active
+    sub: string - User identifier
+    name?: string - User's name
+    email?: string - User's email
+    picture?: string - User's profile picture
+    // ... other claims from the token
+}
+```
+
 ## `parseToken()`
 `const { header, payload } = parseToken(token)`
 
 Parses the header and payload from an ID Token. Does not verify the ID Token.
+
+## PKCE Functions
+
+### `generateChallenge(code_verifier)`
+`const challenge = await generateChallenge(code_verifier)`
+
+Generates a PKCE code challenge from a code verifier using SHA256.
+
+```typescript
+code_verifier: string - The code verifier to generate challenge from - REQUIRED
+```
+
+Returns a base64url-encoded SHA256 hash of the code verifier.
+
+### `verifyChallenge(code_verifier, expectedChallenge)`
+`const isValid = await verifyChallenge(code_verifier, expectedChallenge)`
+
+Verifies that a code verifier produces the expected code challenge.
+
+```typescript
+code_verifier: string - The code verifier to verify - REQUIRED
+expectedChallenge: string - The expected code challenge - REQUIRED
+```
+
+Returns `true` if the challenges match, `false` otherwise.
+
+### `pkce()` / `pkceChallenge()`
+`const { code_verifier, code_challenge } = await pkce()`
+
+Generates a PKCE challenge pair (code verifier and code challenge).
+
+Returns
+```typescript
+{
+    code_verifier: string - The code verifier (43 characters)
+    code_challenge: string - The base64url-encoded SHA256 challenge
+}
+```
 
 ## `createInviteRequest()` (BETA)
 `const { url } = createInviteRequest(config)`
@@ -136,6 +209,59 @@ Returns
     url: URL to load in the browser to make the invite request
 }
 ```
+
+## Server-Specific Functions
+
+### `errorPage()`
+`const html = errorPage(config)`
+
+Generates an HTML error page for server-side error handling.
+
+```typescript
+config = {
+    title?: string - Page title (default: "Error")
+    message?: string - Error message to display
+    details?: string - Additional error details
+}
+```
+
+Returns HTML string for the error page.
+
+### `redirectURIBounce()`
+`const html = redirectURIBounce(config)`
+
+Generates an HTML page that redirects to a URI with bounce functionality.
+
+```typescript
+config = {
+    redirect_uri: string - The URI to redirect to - REQUIRED
+    delay?: number - Delay in milliseconds before redirect (default: 1000)
+    message?: string - Message to display during redirect
+}
+```
+
+Returns HTML string for the redirect page.
+
+### `wildcardConsole()`
+`const html = wildcardConsole(config)`
+
+Generates an HTML console page for wildcard domain handling.
+
+```typescript
+config = {
+    domain: string - The wildcard domain - REQUIRED
+    message?: string - Console message to display
+}
+```
+
+Returns HTML string for the console page.
+
+### `sameSite()`
+`const html = sameSite()`
+
+Generates an HTML page for SameSite cookie testing.
+
+Returns HTML string for the SameSite test page.
 
 ## Server Code Sample
 
@@ -195,5 +321,49 @@ try {
     // make use of user data
 } catch (err) {
     // deal with error
+}
+```
+
+## PKCE Code Sample
+
+Using PKCE for enhanced security:
+
+```typescript
+// Generate PKCE challenge pair
+const { code_verifier, code_challenge } = await pkce()
+
+// Create auth request with PKCE
+const { url, nonce } = await createAuthRequest({
+    client_id: HELLO_CLIENT_ID,
+    redirect_uri: REDIRECT_URI,
+    scope: ['openid', 'name', 'email', 'picture'],
+    response_type: 'code',
+    response_mode: 'query'
+})
+
+// Store code_verifier and nonce in session
+sessionStorage.setItem('code_verifier', code_verifier)
+sessionStorage.setItem('nonce', nonce)
+
+// Redirect user to Hellō
+window.location.href = url
+
+// After callback, exchange code for token
+const { code } = req.query
+const code_verifier = sessionStorage.getItem('code_verifier')
+
+try {
+    const token = await fetchToken({
+        client_id: HELLO_CLIENT_ID,
+        redirect_uri: REDIRECT_URI,
+        code_verifier,
+        code
+    })
+    
+    const { payload } = parseToken(token)
+    const { sub, name, email, picture } = payload
+    // Use user data
+} catch (err) {
+    // Handle error
 }
 ```

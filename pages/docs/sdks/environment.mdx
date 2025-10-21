@@ -5,6 +5,7 @@ Consult your deployment and framework documentation on how to set these the envi
 ## Required
 
 ### COOKIE_SECRET
+*or HELLO_COOKIE_SECRET*
 
 This environment variable must be set. It should be a different value for each environment such as development and production. This is the key used to encrypt and decrypt the cookies the client uses to manage state. It is a 32 byte random / 64 character hex value. You can generate a value with:
 
@@ -13,6 +14,7 @@ node -e "console.log(crypto.randomBytes(32).toString('hex'))"
 ```
 
 ### CLIENT_ID
+*or HELLO_CLIENT_ID*
 
 The `client_id` for your app from the [Hellō Developer Console](https://console.hello.coop).
 
@@ -37,13 +39,13 @@ If `HOST` is not set, the client will send a script to the browser to detect the
 
 ## Advanced
 
-### API_ROUTE
+### HELLO_API_ROUTE
 
 Defaults to `/api/hellocoop`. Change if you have a different path for the Hellō Endpoint.
 
-### COOKIE_TOKEN
+### HELLO_COOKIE_TOKEN
 
-Include the vale of the Hellō cookie when calling `op=auth`. This is an encrypted value that can be used with AWS API Gateway. Details TBD.
+Include the value of the Hellō cookie when calling `op=auth`. This is an encrypted value that can be used with AWS API Gateway. Details TBD.
 
 ### HELLO_COOKIE_DOMAIN
 
@@ -53,21 +55,33 @@ Set the domain for authentication cookies (e.g., `.example.com`). This enables a
 
 Example: Setting `HELLO_COOKIE_DOMAIN=.mycompany.com` allows authentication to work across `app.mycompany.com`, `api.mycompany.com`, etc.
 
-### LOGIN_EVENT_URL
+### HELLO_LOGGED_IN
 
-Details TBD.
+Override the path to redirect after successful login (default: `/`).
 
-### PROVIDER_HINT
+### HELLO_LOGGED_OUT
 
-Override the provider hint
+Override the path to redirect after logout (default: `/`).
 
-### SAME_SITE_STRICT
+### HELLO_ERROR
+
+Override the path to redirect on error (default: built-in error page).
+
+### HELLO_PROVIDER_HINT
+
+Override the provider hint. Space-separated list of provider hints.
+
+### HELLO_SAME_SITE_STRICT
 
 Use `same_site=strict` in the cookies set. Will cause additional redirects, and cookies will not be passed if a user links into your site from another site.
 
-### SCOPES
+### HELLO_SCOPES
 
-Override the scope requested from Hellō. 
+Override the scope requested from Hellō. Space-separated list of scopes.
+
+### HELLO_DEBUG
+
+Enable debug logging for Hellō SDK operations. 
 
 ### HELLO_*
 
@@ -81,3 +95,15 @@ Defaults to `wallet.hello.coop`. Change when using a mock server of the Wallet s
 ### HELLO_DOMAIN
 
 Defaults to `hello.coop`. Used by Hellō for development and internal testing. Will change the domain used for the Wallet, Quickstart, and Console SPAs.
+
+## Environment Variable Precedence
+
+Environment variables take precedence over `hello.config.js` values in the following order:
+
+1. `HELLO_*` prefixed environment variables (highest priority)
+2. Non-prefixed environment variables
+3. `hello.config.js` configuration values (lowest priority)
+
+For example:
+- `HELLO_CLIENT_ID` takes precedence over `CLIENT_ID`
+- `CLIENT_ID` takes precedence over `client_id` in `hello.config.js`

@@ -16,6 +16,73 @@ Mockin simplifies development. Start the login flow by clicking on the `[ ō Con
 
 You can call the `/mock` APIs while testing to change the user or claims returned, simulate errors, and provide invalid or expired tokens, allowing you to ensure your app properly handles all exceptions, improving your security posture.
 
+## Mock API
+
+The Mock API provides endpoints to control the behavior of the mock server during testing:
+
+### Available Endpoints
+
+- `GET /mock` - Get current mock configuration
+- `GET /mock/users` - List available mock users
+- `PUT /mock/user/:user` - Set active user (0-4)
+- `PUT /mock/:mock` - Configure mock behavior
+- `DELETE /mock` - Reset all mock settings
+
+### Mock Users
+
+Mockin provides 5 pre-configured users for testing:
+
+- **User 0**: John Smith (john.smith@example.com) - Basic user
+- **User 1**: Зо́я-Алёна (Zoya-Alyona@xn--bcher-kva.example.com) - International characters
+- **User 2**: AlexanderJonathan... (long names) - Edge case testing
+- **User 3**: Lewis Carroll (lewis.carroll@example.org) - Alternative domain
+- **User 4**: Dan Brown (dan.brown@example.net) - Another test user
+
+### Supported Scopes
+
+Mockin supports all standard OpenID Connect scopes plus Hellō-specific scopes:
+
+**Standard Scopes:**
+- `openid` (required)
+- `profile` (name, nickname, given_name, family_name, picture)
+- `email` (email, email_verified)
+- `phone` (phone, phone_verified)
+
+**Hellō-Specific Scopes:**
+- `ethereum` (Ethereum wallet address)
+- `discord` (Discord username and ID)
+- `github` (GitHub username and ID)
+- `gitlab` (GitLab username and ID)
+- `twitter` (Twitter username and ID)
+- `banner` (Profile banner image)
+
+### Error Simulation
+
+You can simulate various OAuth/OpenID Connect errors:
+
+**Supported Error Codes:**
+- `access_denied` - User denied access
+- `invalid_client` - Invalid client credentials
+- `invalid_grant` - Invalid authorization code
+- `invalid_request` - Malformed request
+- `invalid_scope` - Invalid scope requested
+- `server_error` - Internal server error
+- `temporarily_unavailable` - Service temporarily unavailable
+- `unauthorized_client` - Client not authorized
+- `unsupported_grant_type` - Unsupported grant type
+- `unsupported_response_type` - Unsupported response type
+
+**Supported Status Codes:**
+- `200` - Success
+- `202` - Accepted
+- `400` - Bad Request
+- `401` - Unauthorized
+- `403` - Forbidden
+- `404` - Not Found
+- `405` - Method Not Allowed
+- `500` - Internal Server Error
+- `503` - Service Unavailable
+
 ## Nodejs Usage
 
 Add mockin as a development dependency:
@@ -27,7 +94,7 @@ Run mockin
 npx @hellocoop/mockin
 ```
 <Callout type="info">
-    Your app does not need to be a Nodejs app. If you have Nodejs 18+ installed, you can run  
+    Your app does not need to be a Nodejs app. If you have Nodejs 22+ installed, you can run  
     `npx @hellocoop/mockin`
 </Callout>
 
@@ -45,14 +112,66 @@ You can use Mocking with the [Hellō Playground](https://playground.hello.dev). 
 
  and then in https://playground.hello.dev add `http://127.0.0.1:3333/authorize` as an Authorization Server. You can then play with the different parameters and see the responses returned. 
 
-You can make `curl` commands to the `/mockin` API to set mock return values. For example 
+You can make `curl` commands to the `/mock` API to set mock return values. For example:
+
+### Basic Examples
+
+**Simulate access denied error:**
+```bash
+curl -X PUT "http://127.0.0.1:3333/mock/authorize?error=access_denied"
 ```
-curl -X PUT "http://127.0.0.1:3333/mock/authorization?error=access_denied" 
+
+**Switch to a different user:**
+```bash
+curl -X PUT "http://127.0.0.1:3333/mock/user/1"
 ```
-will return the current value of MOCK and when using Playground will return the `access_denied` error as if the user had denied access.
+
+**Simulate server error:**
+```bash
+curl -X PUT "http://127.0.0.1:3333/mock/token?error=server_error&status=500"
+```
+
+**Reset all mock settings:**
+```bash
+curl -X DELETE "http://127.0.0.1:3333/mock"
+```
+
+### Advanced Examples
+
+**Simulate expired token:**
+```bash
+curl -X PUT "http://127.0.0.1:3333/mock/token?expired=true"
+```
+
+**Simulate invalid client:**
+```bash
+curl -X PUT "http://127.0.0.1:3333/mock/authorize?error=invalid_client&status=401"
+```
+
+**Get current mock configuration:**
+```bash
+curl "http://127.0.0.1:3333/mock"
+```
+
+**List available users:**
+```bash
+curl "http://127.0.0.1:3333/mock/users"
+```
+
+## OpenID Connect Endpoints
+
+Mockin implements the standard OpenID Connect endpoints:
+
+- `GET /authorize` - Authorization endpoint
+- `POST /oauth/token` - Token endpoint  
+- `POST /oauth/introspect` - Token introspection endpoint
+- `GET /oauth/userinfo` - User info endpoint
+- `POST /oauth/userinfo` - User info endpoint (POST)
+- `GET /.well-known/openid-configuration` - OpenID Connect discovery
+- `GET /jwks` - JSON Web Key Set
 
 ## Configuring Your App
-You will need to have your app configured to use the URL where Mockin is running. For example, your app will need to redirect the user to `http://127.0.0.1/3333/authorize` if you are using the Mockin defaults instead of `https://wallet.hello.coop/authorize`.
+You will need to have your app configured to use the URL where Mockin is running. For example, your app will need to redirect the user to `http://127.0.0.1:3333/authorize` if you are using the Mockin defaults instead of `https://wallet.hello.coop/authorize`.
 
 
 ## Environment Variables

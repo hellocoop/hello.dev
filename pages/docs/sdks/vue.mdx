@@ -27,10 +27,16 @@ To provide the button styling, add the below code to the `<head>` section of the
 ## Components
 
 ```typescript
-import { // only import buttons used
+import { 
     ContinueButton, 
     LoginButton, 
-    UpdateProfileButton
+    UpdateProfileButton,
+    LoggedIn,
+    LoggedOut,
+    HelloProvider,
+    useAuth,
+    logOut,
+    getLogOutRoute
 } from '@hellocoop/vue'
 ```
 
@@ -60,24 +66,152 @@ import { // only import buttons used
 
 Explore styling with the [button playground](/docs/buttons/#explorer)
 
+### Login Status Components
+
+`<LoggedIn>` - renders children only when user is logged in
+
+`<LoggedOut>` - renders children only when user is logged out
+
+```vue
+<LoggedIn>
+    <div>Welcome back!</div>
+</LoggedIn>
+<LoggedOut>
+    <ContinueButton />
+</LoggedOut>
+```
+
+### `useAuth()` Hook
+
+Hook to get authentication state and user information.
+
+```typescript
+const { auth, isLoading, isLoggedIn } = useAuth()
+
+// auth contains:
+// - isLoggedIn: boolean
+// - sub: string (user identifier)
+// - name: string
+// - email: string
+// - picture: string
+// - iat: number (issued at timestamp)
+```
+
+### Logout Functions
+
+`logOut()` - redirects to logout route
+
+`getLogOutRoute()` - returns logout route URL
+
+```vue
+<script setup>
+    import { logOut, getLogOutRoute } from '@hellocoop/vue'
+    
+    // Redirect to logout
+    function handleLogout() {
+        logOut()
+    }
+    
+    // Get logout URL for Link component
+    const logoutUrl = getLogOutRoute()
+</script>
+
+<template>
+    <button @click="handleLogout">Logout</button>
+</template>
+```
+
 ### `<HelloProvider/>`
 
-By default, clicking the Hellō button would redirect to `/api/hellocoop?op=login` endpoint with the optional properties as additional query parameters. To override this behavior, wrap your app with the `<HelloProvider/>` component and pass the `config` object as a prop to the provider.
+By default, clicking the Hellō button would redirect to `/api/hellocoop?login=true` endpoint with the optional properties as additional query parameters. To override this behavior, wrap your app with the `<HelloProvider/>` component and pass the `config` object as a prop to the provider.
+
+**Props:**
+- `auth` - Auth object (optional, for server-side rendered auth)
+- `config` - Route configuration (optional)
+
 ```vue filename="App.vue"
 <script setup>
     import { HelloProvider } from '@hellocoop/vue';
 
-    //default
+    // Default configuration
     const config = {
-        login: '/api/hellocoop?op=login'
+        login: '/api/hellocoop?login=true',
+        auth: '/api/hellocoop?auth=true',
+        logout: '/api/hellocoop?logout=true'
+    }
+    
+    // Optional: pass auth object for server-side rendered auth
+    const auth = {}
+</script>
+
+<template>
+    <HelloProvider :auth="auth" :config="config">
+        <main>
+            <LoggedIn>
+                <div>Welcome {{ auth?.name }}!</div>
+            </LoggedIn>
+            <LoggedOut>
+                <ContinueButton />
+            </LoggedOut>
+        </main>
+    </HelloProvider>
+</template>
+```
+
+## Complete Example
+
+Here's a complete example showing how to use all the components together:
+
+```vue filename="App.vue"
+<script setup>
+    import { 
+        HelloProvider,
+        LoggedIn, 
+        LoggedOut, 
+        ContinueButton, 
+        LoginButton,
+        UpdateProfileButton,
+        useAuth,
+        logOut,
+        getLogOutRoute
+    } from '@hellocoop/vue'
+    
+    // Optional: pass auth object for server-side rendered auth
+    const auth = {}
+</script>
+
+<template>
+    <HelloProvider :auth="auth">
+        <UserProfile />
+    </HelloProvider>
+</template>
+```
+
+```vue filename="UserProfile.vue"
+<script setup>
+    import { useAuth, logOut } from '@hellocoop/vue'
+    
+    const { auth, isLoading, isLoggedIn } = useAuth()
+    
+    function handleLogout() {
+        logOut()
     }
 </script>
 
 <template>
-    <HelloProvider :config="config">
-        <main> 
-        ...
-        </main>
-    </HelloProvider>
+    <div v-if="isLoading">
+        Loading...
+    </div>
+    <div v-else-if="isLoggedIn">
+        <img :src="auth.picture" :alt="auth.name" />
+        <h2>Welcome {{ auth.name }}!</h2>
+        <p>{{ auth.email }}</p>
+        <button @click="handleLogout">Logout</button>
+        <UpdateProfileButton targetURI="/profile" />
+    </div>
+    <div v-else>
+        <ContinueButton targetURI="/dashboard" />
+        <LoginButton targetURI="/dashboard" />
+    </div>
 </template>
 ```

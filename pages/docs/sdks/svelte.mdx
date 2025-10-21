@@ -27,10 +27,16 @@ To provide the button styling, add the below code to the `<head>` section of the
 ## Components
 
 ```typescript
-import { // only import buttons used
+import { 
     ContinueButton, 
     LoginButton, 
-    UpdateProfileButton
+    UpdateProfileButton,
+    LoggedIn,
+    LoggedOut,
+    HelloProvider,
+    useAuth,
+    logOut,
+    getLogOutRoute
 } from '@hellocoop/svelte'
 ```
 
@@ -59,22 +65,145 @@ import { // only import buttons used
 
 Explore styling with the [button playground](/docs/buttons/#explorer)
 
+### Login Status Components
+
+`<LoggedIn>` - renders children only when user is logged in
+
+`<LoggedOut>` - renders children only when user is logged out
+
+```svelte
+<LoggedIn>
+    <div>Welcome back!</div>
+</LoggedIn>
+<LoggedOut>
+    <ContinueButton />
+</LoggedOut>
+```
+
+### `useAuth()` Hook
+
+Hook to get authentication state and user information.
+
+```typescript
+const { auth, isLoading, isLoggedIn } = useAuth()
+
+// auth contains:
+// - isLoggedIn: boolean
+// - sub: string (user identifier)
+// - name: string
+// - email: string
+// - picture: string
+// - iat: number (issued at timestamp)
+```
+
+### Logout Functions
+
+`logOut()` - redirects to logout route
+
+`getLogOutRoute()` - returns logout route URL
+
+```svelte
+<script>
+    import { logOut, getLogOutRoute } from '@hellocoop/svelte'
+    
+    // Redirect to logout
+    function handleLogout() {
+        logOut()
+    }
+    
+    // Get logout URL for Link component
+    const logoutUrl = getLogOutRoute()
+</script>
+
+<button on:click={handleLogout}>Logout</button>
+```
+
 ### `<HelloProvider/>`
 
-By default, clicking the Hellō button would redirect to `/api/hellocoop?op=login` endpoint with the optional properties as additional query parameters. To override this behavior, wrap your app with the `<HelloProvider/>` component and pass the `config` object as a prop to the provider.
+By default, clicking the Hellō button would redirect to `/api/hellocoop?login=true` endpoint with the optional properties as additional query parameters. To override this behavior, wrap your app with the `<HelloProvider/>` component and pass the `config` object as a prop to the provider.
+
+**Props:**
+- `auth` - Auth object (optional, for server-side rendered auth)
+- `config` - Route configuration (optional)
+
 ```svelte filename="App.svelte"
 <script>
     import { HelloProvider } from '@hellocoop/svelte';
 
-    //default
+    // Default configuration
     const config = {
-        login: '/api/hellocoop?op=login'
+        login: '/api/hellocoop?login=true',
+        auth: '/api/hellocoop?auth=true',
+        logout: '/api/hellocoop?logout=true'
+    }
+    
+    // Optional: pass auth object for server-side rendered auth
+    export let auth = {}
+</script>
+
+<HelloProvider {auth} {config}>
+    <main>
+        <LoggedIn>
+            <div>Welcome {auth?.name}!</div>
+        </LoggedIn>
+        <LoggedOut>
+            <ContinueButton />
+        </LoggedOut>
+    </main>
+</HelloProvider>
+```
+
+## Complete Example
+
+Here's a complete example showing how to use all the components together:
+
+```svelte filename="App.svelte"
+<script>
+    import { 
+        HelloProvider,
+        LoggedIn, 
+        LoggedOut, 
+        ContinueButton, 
+        LoginButton,
+        UpdateProfileButton,
+        useAuth,
+        logOut,
+        getLogOutRoute
+    } from '@hellocoop/svelte'
+    
+    // Optional: pass auth object for server-side rendered auth
+    export let auth = {}
+</script>
+
+<HelloProvider {auth}>
+    <UserProfile />
+</HelloProvider>
+
+<!-- UserProfile.svelte -->
+<script>
+    import { useAuth, logOut } from '@hellocoop/svelte'
+    
+    const { auth, isLoading, isLoggedIn } = useAuth()
+    
+    function handleLogout() {
+        logOut()
     }
 </script>
 
-<HelloProvider {config}>
-    <main> 
-    ...
-    </main>
-</HelloProvider>
+{#if isLoading}
+    <div>Loading...</div>
+{:else if isLoggedIn}
+    <div>
+        <img src={auth.picture} alt={auth.name} />
+        <h2>Welcome {auth.name}!</h2>
+        <p>{auth.email}</p>
+        <button on:click={handleLogout}>Logout</button>
+        <UpdateProfileButton targetURI="/profile" />
+    </div>
+{:else}
+    <div>
+        <ContinueButton targetURI="/dashboard" />
+        <LoginButton targetURI="/dashboard" />
+    </div>
+{/if}
 ```

@@ -32,6 +32,14 @@ You load https://quickstart.hello.coop/ with the following optional query parame
 |`wildcard_domain`| a boolean value indicating if wildcard domains are enabled in Development Redirect URIs|
 |`provider_hint`| a space separated list of recommended providers per [provider_hint](/docs/apis/wallet/#provider-hint) that will be presented when logging in new users to Quickstart|
 
+### Environment Variables
+
+The Quickstart API supports the following environment variables:
+
+|Variable|Description|
+|---|---|
+|`HELLO_DOMAIN`| Override the default domain (defaults to `hello.coop`) for development and testing|
+
 ### Quickstart Response
 
 On completion, the Quickstart app will load the `response_uri` with the `client_id` query parameter set to the Hellō Client ID, or display the `client_id` on a completion page if no `response_uri` was provided. 

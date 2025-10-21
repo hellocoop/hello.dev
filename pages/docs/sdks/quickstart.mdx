@@ -32,10 +32,52 @@ This will open up a browser window, where you will need to login with Hellō, an
 - `--wildcard_domain` (`-w`) - boolean to set the wildcard domain Development Redirect URI
 
 **Framework Templates:**
+- `--nextjs` - configure a Next.js app with App Router (default)
 - `--nextjs_app_router` - configure a Next.js app with App Router
 - `--nextjs_pages_router` - configure a Next.js app with Pages Router
 - `--express` - configure an Express app
 - `--fastify` - configure a Fastify app
+
+### Framework Template Features
+
+The framework templates automatically:
+
+1. **Create `hello.config.js`** - Configuration file with the obtained `client_id`
+2. **Generate environment files** - Add `HELLO_COOKIE_SECRET` to `.env` or `.env.local`
+3. **Framework-specific setup**:
+   - **Next.js**: Creates API route files (`app/api/hellocoop/route.js` or `pages/api/hellocoop.js`)
+   - **Express/Fastify**: Sets up basic configuration structure
+
+**Example files created by `--nextjs`:**
+- `hello.config.js` - Hellō configuration
+- `app/api/hellocoop/route.js` - Next.js API route (App Router)
+- `.env.local` - Environment variables
+
+**Example files created by `--express`:**
+- `hello.config.js` - Hellō configuration  
+- `.env` - Environment variables
+
+### Default Framework Options
+
+Each framework template uses optimized default options:
+
+**Next.js defaults:**
+- `integration: 'quickstart-nextjs'`
+- `suffix: 'Next.js App'`
+- `wildcard_domain: true`
+- `provider_hint: 'google github gitlab apple-- email--'`
+
+**Express defaults:**
+- `integration: 'quickstart-express'`
+- `suffix: 'Express App'`
+- `wildcard_domain: true`
+- `provider_hint: 'google github gitlab apple-- email--'`
+
+**Fastify defaults:**
+- `integration: 'quickstart-fastify'`
+- `suffix: ' Fastify App'`
+- `wildcard_domain: true`
+- `provider_hint: 'google github gitlab apple-- email--'`
 
 ## `@hellocoop/quickstart` API
 `quickstart(config)`
@@ -79,3 +121,16 @@ const client_id = await quickstart(config)
 |`redirect_uri`| Redirect URI for the application|
 
 All options are passed through as query parameters to the Quickstart Web App, and are documented in [API Reference | Quickstart](/docs/apis/quickstart/)
+
+### Environment Variables
+
+The Quickstart CLI and API support the following environment variables:
+
+|Variable|Description|
+|---|---|
+|`HELLO_DOMAIN`| Override the default domain (defaults to `hello.coop`) for development and testing|
+
+**Example:**
+```bash
+HELLO_DOMAIN=hello.dev npx @hellocoop/quickstart@latest
+```
