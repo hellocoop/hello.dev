@@ -116,12 +116,13 @@ import {
     LoggedIn, 
     ContinueButton, 
     useAuth, 
-    getLogOutRoute 
-} from '@hellocoop/nextjs/react'
+    getLogOutRoute,
+    auth
+} from '@hellocoop/nextjs'
 
 export default async function HelloTest() {
-  const status = auth(); 
-  const { auth: {name, picture, email} } = status;
+  const status = await auth(); 
+  const { name, picture, email } = status;
 
   return (
     <>
@@ -218,7 +219,7 @@ import {
     ContinueButton, 
     useAuth, 
     getLogOutRoute 
-} from '@hellocoop/nextjs/react'
+} from '@hellocoop/nextjs'
 
 export default function HelloTest() {
   const status = useAuth(); 
@@ -335,20 +336,21 @@ Copy the following code and save it to `hello-callback.js` in your `src` folder 
 ```javascript filename="./src/hello-callback.js"
 // hello-callback.js
 module.exports = async ({ 
-    payload,    // parsed ID Token payload
     token,      // ID Token in compact, unparsed format
+    payload,    // parsed ID Token payload
+    target_uri, // target URI for redirect
     req,        // NextApiRequest
     res         // NextApiResponse
 }) => {
  
-    console.log('Callback received:',JSON.stringify(payload,null,4))
+    console.log('LoginSync received:',JSON.stringify(payload,null,4))
     // TODO
-    // lookup user from your DB wth payload.sub user identifier
+    // lookup user from your DB with payload.sub user identifier
     // create a user in DB if not found if open registration
     return({
-        // accessDenied = true, // will set auth.isLoggedIn = false
-        // isProcessed = true,  // response has been sent by callback()
-        // updatedAuth = {},    // auth object stored in cookie
+        // accessDenied: true, // will set auth.isLoggedIn = false
+        // target_uri: '/custom-redirect', // override redirect URI
+        // updatedAuth: {}, // auth object stored in cookie
     })
 }
 ```
@@ -357,16 +359,14 @@ module.exports = async ({
 
 Add the highlighted lines to your `hello.config.js` file:
 
-```javascript {1,5-7}
-import loggedIn from './src/hello-callback'
+```javascript {1,5-6}
+const loginSync = require('./src/hello-callback')
 
 const config = {
     client_id: 'YOUR_CLIENT_ID',
-    callbacks: {
-        loggedIn
-    }
+    loginSync
 }
-export default config
+module.exports = config
 ```
 
 ### Test the Callback
