@@ -61,6 +61,10 @@ See [hello.config.js](./config) for additional configuration.
 
 In your main server file add the following code:
 
+<Callout type="info">
+    You can also use default imports: `const helloAuth = require('@hellocoop/fastify')` or `import helloAuth from '@hellocoop/fastify'`
+</Callout>
+
 <Tabs items={['TypeScript', 'JavaScript']} defaultIndex="2" >
   <Tabs.Tab>
 ```typescript {2-3,5}
@@ -68,7 +72,7 @@ import fastify from 'fastify'
 import helloConfig from '../hello.config.js' // adjust path as needed
 import { helloAuth } from '@hellocoop/fastify'
 
-fastify.register(helloAuth, config)
+fastify.register(helloAuth, helloConfig)
 
 ```
   </Tabs.Tab>
@@ -76,10 +80,10 @@ fastify.register(helloAuth, config)
   <Tabs.Tab>
 ```javascript {2-3,5}
 const fastify = require('fastify')
-const { helloAuth } require('@hellocoop/fastify')
+const { helloAuth } = require('@hellocoop/fastify')
 const helloConfig = require('../hello.config.js') // adjust path as needed
 
-fastify.register(helloAuth, config)
+fastify.register(helloAuth, helloConfig)
 
 ```
   </Tabs.Tab>
@@ -116,13 +120,13 @@ name: 'Dick Hardt',
 picture: 'https://pictures.hello.coop/r/7a160eed-46bf-48e2-a909-161745535895.png',
 email: 'dick.hardt@hello.coop'
 ```
-### `res.logout()`
+### `res.clearAuth()`
 
 Clears the `hellocoop_auth` cookie.
 
 ## Middleware
 
-`import { redirect, unauthorized, setAuth } from '@hellocoop/fastify/middleware'`
+`import { redirect, unauthorized, setAuth } from '@hellocoop/fastify'`
 
 ### `redirect()`
 
@@ -130,7 +134,9 @@ Will redirect to the passed path if `isLoggedIn=false`.
 
 Example:
 ```js
-app.register(redirect('/'))`
+fastify.get('/dashboard', { preHandler: redirect('/') }, async (request, reply) => {
+    // protected route
+})
 ```
 ### `unauthorized`
 
@@ -138,7 +144,9 @@ Will return a `401` status code if `isLoggedIn=false`
 
 Example:
 ```js
-app.register( unauthorized )
+fastify.get('/api/protected', { preHandler: unauthorized }, async (request, reply) => {
+    // protected route
+})
 ```
 
 ### `setAuth`
@@ -147,7 +155,9 @@ Middleware that reads and decrypts the `hellocoop_auth` cookie and sets `req.aut
 
 Example:
 ```js
-app.register( setAuth )
+fastify.get('/profiles', { preHandler: setAuth }, async (request, reply) => {
+    // request.auth will be available
+})
 ```
 
 
