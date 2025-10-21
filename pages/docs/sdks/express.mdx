@@ -61,6 +61,10 @@ See [hello.config.js](./config) for additional configuration.
 
 In your main server file add the following code:
 
+<Callout type="info">
+    You can also use named imports: `const { helloAuth } = require('@hellocoop/express')` or `import { helloAuth } from '@hellocoop/express'`
+</Callout>
+
 <Tabs items={['TypeScript', 'JavaScript']} defaultIndex="2" >
   <Tabs.Tab>
 ```typescript {2-3,7}
@@ -79,7 +83,7 @@ app.use( helloAuth( helloConfig ) )
 ```javascript {2-3,7}
 const express = require('express')
 const helloConfig = require('./hello.config.js') // adjust path as needed
-const { helloAuth } = require('@hellocoop/express')
+const helloAuth = require('@hellocoop/express')
 
 const app = express()
 
@@ -120,14 +124,14 @@ name: 'Dick Hardt',
 picture: 'https://pictures.hello.coop/r/7a160eed-46bf-48e2-a909-161745535895.png',
 email: 'dick.hardt@hello.coop'
 ```
-### `res.logout()`
+### `res.clearAuth()`
 
 Clears the `hellocoop_auth` cookie.
 
 
 ## Middleware
 
-`import { redirect, unauthorized, setAuth } from '@hellocoop/express/middleware'`
+`import { redirect, unauthorized, setAuth } from '@hellocoop/express'`
 
 ### `redirect()`
 
@@ -135,7 +139,7 @@ Will redirect to the passed path if `isLoggedIn=false`.
 
 Example:
 ```js
-app.get('/dashboard', redirect('/'), dashboard)`
+app.get('/dashboard', redirect('/'), dashboard)
 ```
 ### `unauthorized`
 
