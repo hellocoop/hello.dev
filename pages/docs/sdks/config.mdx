@@ -6,6 +6,7 @@ A sample:
 
 ```js filename="hello.config.js"
 const loginSync = require('./path-to-your-callback-function')
+const logoutSync = require('./path-to-your-logout-callback-function')
 
 const config = {
     client_id: 'YOUR_CLIENT_ID',
@@ -17,6 +18,10 @@ const config = {
         error:     '/error'      // defaults to built in error page
     },
     cookieDomain: '.example.com', // optional - enables auth cookies across subdomains
+    sameSiteStrict: true, // optional - enables strict SameSite cookies
+    cookieToken: false, // optional - include encrypted cookie in auth response
+    logConfig: false, // optional - log configuration on startup
+    apiRoute: '/api/hellocoop', // optional - custom API route path
     loginSync,  // (params: LoginSyncParams) => Promise<LoginSyncResponse>
                 // defaults to undefined
     logoutSync, // (params: LogoutSyncParams) => Promise<LogoutSyncResponse>
@@ -34,6 +39,14 @@ module.exports = config
 - override routes to redirect user on log in, log out, and error
 ### `cookieDomain`
 - optional domain for auth cookies (e.g., `.example.com` for subdomains). Enables authentication cookies to work across all subdomains. If not set, cookies are restricted to the current host only. Can also be set via `HELLO_COOKIE_DOMAIN` environment variable.
+### `sameSiteStrict`
+- optional boolean to enable strict SameSite cookies for enhanced security. Can also be set via `HELLO_SAME_SITE_STRICT` environment variable.
+### `cookieToken`
+- optional boolean to include encrypted cookie in auth response. Can also be set via `HELLO_COOKIE_TOKEN` environment variable.
+### `logConfig`
+- optional boolean to log configuration details on startup for debugging.
+### `apiRoute`
+- optional custom API route path (default: `/api/hellocoop`). Can also be set via `HELLO_API_ROUTE` environment variable.
 ### `loginSync`   
 - optional function called on each successful login
 ### `logoutSync`
@@ -42,40 +55,98 @@ module.exports = config
 Here is how your `loginSync` function will be called if provided:
 
 ```js
-const {accessDenied, target_uri, updatedAuth} = await loginSync( { token, payload, cbReq, cbRes } )
+const {accessDenied, target_uri, updatedAuth} = await loginSync( { token, payload, target_uri, req, res } )
 ```
 
-- `accessDenied` - optional boolean returned if the user should not be logged in
-
-- `target_uri` - optional URL to override where to redirect the user
-
-- `updated_auth` - an optional object that will to extend the auth object stored in the encrypted cookie. Use this to set roles or groups or other app specific user properties you want readily available. You cannot change the `iat`, `sub`, or `isLoggedIn` values
-
+**Parameters:**
 - `token` - the [ID Token](/docs/oidc/token) in compact format
+- `payload` - the full payload of the ID Token
+- `target_uri` - the original target URI from the login request
+- `req` - Express/Fastify request object
+- `res` - Express/Fastify response object
 
-- `payload` - the full payload of the ID Token.
+**Return values:**
+- `accessDenied` - optional boolean returned if the user should not be logged in
+- `target_uri` - optional URL to override where to redirect the user
+- `updatedAuth` - an optional object that will extend the auth object stored in the encrypted cookie. Use this to set roles or groups or other app specific user properties you want readily available. You cannot change the `iat`, `sub`, or `isLoggedIn` values
 
-- `cbReq.getHeaders()` - returns the request headers
-
-- `cbRes.getHeaders()` - returns the response headers
-
-- `cbRes.setHeader( name, value | [value] )` - will set a response header
-
-- `cbRes.setCookie( name, value, options )` - will set a cookie value with options per [cookie](https://www.npmjs.com/package/cookie) `serialize`
-
+**Request/Response methods:**
+- `req.headers` - returns the request headers
+- `res.setHeader( name, value | [value] )` - will set a response header
+- `res.setCookie( name, value, options )` - will set a cookie value with options per [cookie](https://www.npmjs.com/package/cookie) `serialize`
 
 Here is how your `logoutSync` function will be called if provided:
 
 ```js
- await logoutSync( { cbReq, cbRes } )
+await logoutSync( { req, res } )
 ```
 
-- `cbReq.getHeaders()` - returns the request headers
+**Parameters:**
+- `req` - Express/Fastify request object
+- `res` - Express/Fastify response object
 
-- `cbRes.getHeaders()` - returns the response headers
+**Request/Response methods:**
+- `req.headers` - returns the request headers
+- `res.setHeader( name, value | [value] )` - will set a response header
+- `res.setCookie( name, value, options )` - will set a cookie value with options per [cookie](https://www.npmjs.com/package/cookie) `serialize`
 
-- `cbRes.setHeader( name, value | [value] )` - will set a response header
+## Environment Variables
 
-- `cbRes.setCookie( name, value, options )` - will set a cookie value with options per [cookie](https://www.npmjs.com/package/cookie) `serialize`
+All configuration options can be overridden using environment variables:
 
+### Required Environment Variables
+- `HELLO_CLIENT_ID` - OAuth client identifier (alternative to `client_id` in config)
+- `HELLO_COOKIE_SECRET` - 32-character hex string for cookie encryption (required)
 
+### Optional Environment Variables
+- `HELLO_SCOPES` - Space-separated list of scopes (alternative to `scope` in config)
+- `HELLO_PROVIDER_HINT` - Space-separated list of provider hints (alternative to `provider_hint` in config)
+- `HELLO_LOGGED_IN` - Path to redirect after login (alternative to `routes.loggedIn`)
+- `HELLO_LOGGED_OUT` - Path to redirect after logout (alternative to `routes.loggedOut`)
+- `HELLO_ERROR` - Path to redirect on error (alternative to `routes.error`)
+- `HELLO_COOKIE_DOMAIN` - Domain for auth cookies (alternative to `cookieDomain`)
+- `HELLO_SAME_SITE_STRICT` - Enable strict SameSite cookies (alternative to `sameSiteStrict`)
+- `HELLO_COOKIE_TOKEN` - Include encrypted cookie in auth response (alternative to `cookieToken`)
+- `HELLO_API_ROUTE` - Custom API route path (alternative to `apiRoute`)
+- `HELLO_DEBUG` - Enable debug logging
+- `HELLO_WALLET` - Custom Hellō wallet URL for testing
+- `HELLO_DOMAIN` - Custom Hellō domain for testing
+
+### Example Environment Configuration
+
+```bash
+# .env file
+HELLO_CLIENT_ID=your-client-id-here
+HELLO_COOKIE_SECRET=your-32-character-hex-secret-here
+HELLO_SCOPES=openid name email picture
+HELLO_PROVIDER_HINT=github gitlab
+HELLO_LOGGED_IN=/dashboard
+HELLO_LOGGED_OUT=/logout
+HELLO_ERROR=/error
+HELLO_COOKIE_DOMAIN=.example.com
+HELLO_SAME_SITE_STRICT=true
+HELLO_DEBUG=true
+```
+
+## Configuration Validation
+
+The SDK validates your configuration on startup and will log errors for:
+
+- Missing `client_id` or `HELLO_CLIENT_ID`
+- Missing `HELLO_COOKIE_SECRET`
+- Invalid `HELLO_COOKIE_SECRET` format (must be 32 hex characters)
+- Invalid route paths (must start with `/`)
+
+## TypeScript Support
+
+For TypeScript projects, you can import the configuration types:
+
+```typescript
+import type { Config } from '@hellocoop/express'
+
+const config: Config = {
+    client_id: 'your-client-id',
+    scope: ['openid', 'name', 'email'],
+    // ... other options
+}
+```
