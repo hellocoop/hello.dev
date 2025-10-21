@@ -96,35 +96,6 @@ Defaults to `wallet.hello.coop`. Change when using a mock server of the Wallet s
 
 Defaults to `hello.coop`. Used by Hellō for development and internal testing. Will change the domain used for the Wallet, Quickstart, and Console SPAs.
 
-## Complete Example
-
-Here's a complete example of all environment variables:
-
-```bash
-# Required
-HELLO_CLIENT_ID=your-client-id-here
-HELLO_COOKIE_SECRET=your-32-character-hex-secret-here
-
-# Recommended
-HOST=your-app.example.com
-
-# Advanced Configuration
-HELLO_API_ROUTE=/api/hellocoop
-HELLO_COOKIE_TOKEN=true
-HELLO_COOKIE_DOMAIN=.example.com
-HELLO_LOGGED_IN=/dashboard
-HELLO_LOGGED_OUT=/logout
-HELLO_ERROR=/error
-HELLO_PROVIDER_HINT=github gitlab
-HELLO_SAME_SITE_STRICT=true
-HELLO_SCOPES=openid name email picture
-HELLO_DEBUG=true
-
-# Development/Testing
-HELLO_WALLET=https://wallet.hello.coop
-HELLO_DOMAIN=hello.coop
-```
-
 ## Environment Variable Precedence
 
 Environment variables take precedence over `hello.config.js` values in the following order:

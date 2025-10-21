@@ -90,44 +90,6 @@ await logoutSync( { req, res } )
 - `res.setHeader( name, value | [value] )` - will set a response header
 - `res.setCookie( name, value, options )` - will set a cookie value with options per [cookie](https://www.npmjs.com/package/cookie) `serialize`
 
-## Environment Variables
-
-All configuration options can be overridden using environment variables:
-
-### Required Environment Variables
-- `HELLO_CLIENT_ID` - OAuth client identifier (alternative to `client_id` in config)
-- `HELLO_COOKIE_SECRET` - 32-character hex string for cookie encryption (required)
-
-### Optional Environment Variables
-- `HELLO_SCOPES` - Space-separated list of scopes (alternative to `scope` in config)
-- `HELLO_PROVIDER_HINT` - Space-separated list of provider hints (alternative to `provider_hint` in config)
-- `HELLO_LOGGED_IN` - Path to redirect after login (alternative to `routes.loggedIn`)
-- `HELLO_LOGGED_OUT` - Path to redirect after logout (alternative to `routes.loggedOut`)
-- `HELLO_ERROR` - Path to redirect on error (alternative to `routes.error`)
-- `HELLO_COOKIE_DOMAIN` - Domain for auth cookies (alternative to `cookieDomain`)
-- `HELLO_SAME_SITE_STRICT` - Enable strict SameSite cookies (alternative to `sameSiteStrict`)
-- `HELLO_COOKIE_TOKEN` - Include encrypted cookie in auth response (alternative to `cookieToken`)
-- `HELLO_API_ROUTE` - Custom API route path (alternative to `apiRoute`)
-- `HELLO_DEBUG` - Enable debug logging
-- `HELLO_WALLET` - Custom Hellō wallet URL for testing
-- `HELLO_DOMAIN` - Custom Hellō domain for testing
-
-### Example Environment Configuration
-
-```bash
-# .env file
-HELLO_CLIENT_ID=your-client-id-here
-HELLO_COOKIE_SECRET=your-32-character-hex-secret-here
-HELLO_SCOPES=openid name email picture
-HELLO_PROVIDER_HINT=github gitlab
-HELLO_LOGGED_IN=/dashboard
-HELLO_LOGGED_OUT=/logout
-HELLO_ERROR=/error
-HELLO_COOKIE_DOMAIN=.example.com
-HELLO_SAME_SITE_STRICT=true
-HELLO_DEBUG=true
-```
-
 ## Configuration Validation
 
 The SDK validates your configuration on startup and will log errors for:
