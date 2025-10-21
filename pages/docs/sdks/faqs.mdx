@@ -21,13 +21,22 @@ The cookies are encrypted using `aes-256-gcm` and the [`HELLO_COOKIE_SECRET`](./
 
 The options are:
 - `httpOnly: true` - prevents the browser from looking at or changing the cookies
-- `secure: true` - set when `NODE_ENV=production` which requires cookie to only be used with `https`
-- `sameSite: 'lax'` - the browser will only send the cookie to routes that are in the app's domain, but will send it will be sent from other domains that link to or redirect to that domain. We will be enabling an option to upgrade to `sameSite: strict` for those that require the higher security.
+- `secure: true` - set when `NODE_ENV=production` or `ENABLE_3P_COOKIES=true` which requires cookie to only be used with `https`
+- `sameSite: 'lax'` - the browser will only send the cookie to routes that are in the app's domain, but will send it will be sent from other domains that link to or redirect to that domain
+- `sameSite: 'strict'` - can be enabled via `HELLO_SAME_SITE_STRICT=true` for higher security
+- `sameSite: 'none'` - used when `ENABLE_3P_COOKIES=true` for third-party cookie scenarios
+- `domain` - can be set via `HELLO_COOKIE_DOMAIN` to enable cookies across subdomains
 
-The `hellocoop_oidc` cookie is further restricted to only be sent to the Hellō endpoint (default is `api/hellocop`) and a `maxAge:300` (5 minutes).
+The `hellocoop_oidc` cookie is further restricted to only be sent to the Hellō endpoint (default is `/api/hellocoop`) and a `maxAge:300` (5 minutes).
 
 OWASP has a [good explanation](https://owasp.org/www-community/SameSite) on the difference between `sameSite` being `strict` vs `lax`.
 
+### *5) What additional cookie options are available?*
+
+- **`ENABLE_3P_COOKIES=true`** - Enables third-party cookie support with `sameSite: 'none'` and `secure: true`
+- **`HELLO_SAME_SITE_STRICT=true`** - Forces `sameSite: 'strict'` for maximum security
+- **`HELLO_COOKIE_DOMAIN=.example.com`** - Enables cookies across subdomains (e.g., `.example.com` for `app.example.com`, `api.example.com`)
+- **`HELLO_COOKIE_TOKEN=true`** - Includes encrypted cookie value in auth response for API Gateway scenarios
 
 ## Redirect URI Discovery 
 
@@ -51,7 +60,7 @@ Hellō separates Redirect URIs to be either Development or Production. Only memb
 
 ### *4) What is Redirect URI Discovery?*
 
-If [`HELLO_REDIRECT_URI`](./environment/#hello_redirect_uri) has not been set, each server instance running a Hellō SDK will discover its Redirect URI on the first call to login by sending back a page with a script to read the URI the browser is running on and sending that back to the Hellō endpoint as an additional parameter, and then used to send the authorization request to Hellō. The SDK memoizes the Redirect URI for subsequent calls. This allows the SDK to learn the Redirect URI for Dynamic Previews, where the hostname is not known prior to deployment.
+If `HOST` or `HELLO_HOST` environment variables have not been set, each server instance running a Hellō SDK will discover its Redirect URI on the first call to login by sending back a page with a script to read the URI the browser is running on and sending that back to the Hellō endpoint as an additional parameter, and then used to send the authorization request to Hellō. The SDK memoizes the Redirect URI for subsequent calls. This allows the SDK to learn the Redirect URI for Dynamic Previews, where the hostname is not known prior to deployment.
 
 ### *5) What is Redirect URI Auto Config?*
 
@@ -63,6 +72,33 @@ We need the full URL for the `redirect_uri`. The server we are running may be be
 
 ### *7) Why do the SDKs default to `/api/hellocoop`?*
 
-Putting it in `api` separates the endpoint from pages. Using `hellocoop` removes conflicts with many tutorials that create a `/api/hello` path. 
+Putting it in `api` separates the endpoint from pages. Using `hellocoop` removes conflicts with many tutorials that create a `/api/hello` path.
+
+## Common Issues
+
+### *1) Cookies not working in development?*
+
+Make sure you're using `https` in development or set `ENABLE_3P_COOKIES=true` for third-party cookie scenarios. The `secure: true` option requires HTTPS in production.
+
+### *2) Cookies not working across subdomains?*
+
+Set `HELLO_COOKIE_DOMAIN=.yourdomain.com` to enable cookies across all subdomains. Only use this if you control all subdomains for security.
+
+### *3) Redirect URI discovery not working?*
+
+Ensure your server can handle the discovery script. The SDK sends a JavaScript page that reads the current URL and redirects back with the discovered URI.
+
+### *4) SameSite cookie issues?*
+
+- Use `HELLO_SAME_SITE_STRICT=true` for maximum security (may cause additional redirects)
+- Use `ENABLE_3P_COOKIES=true` for third-party scenarios (requires HTTPS)
+- Default `sameSite: 'lax'` works for most use cases
+
+### *5) Cookie encryption errors?*
+
+Ensure `HELLO_COOKIE_SECRET` is set to a 32-character hex string. Generate one with:
+```bash
+node -e "console.log(crypto.randomBytes(32).toString('hex'))"
+```
 
 
