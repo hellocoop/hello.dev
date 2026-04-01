@@ -46,7 +46,7 @@ node -e "console.log(crypto.randomBytes(32).toString('hex'))"
 ``` 
 Remember to set a unique `HELLO_COOKIE_SECRET` in each of your deployed environments.
 
-See [Environment Vars](./environment) for additional values that can be set.
+See [Environment Vars](/docs/sdks/environment) for additional values that can be set.
 
 The `.env.local` file should not be checked into your repository, and should be in your `.gitignore` file.
 
@@ -66,7 +66,7 @@ module.exports = config
 ```
 This file should be checked into your repository.
 
-See [hello.config.js](./config) for additional configuration.
+See [hello.config.js](/docs/sdks/config) for additional configuration.
 
 ### 5. API Route
 
@@ -198,7 +198,7 @@ import {
 
 >  Note they are available from `@hellocoop/nextjs`
 
-See the [SDK Reference | React](./react/) for details.
+See the [SDK Reference | React](/docs/sdks/react) for details.
 
 ## Components
 
@@ -214,7 +214,7 @@ import {
 ```
 >  Note they are available from `@hellocoop/nextjs`
 
-See the [SDK Reference | React](./) for details.
+See the [SDK Reference | React](/docs/sdks/react) for details.
 
 ## Client APIs
 
@@ -323,7 +323,7 @@ This is a callback you provide in the `pageAuth()` config that can do any logic 
 - Determine if the user has access
 - Add roles or other properties to the `auth` cookie
 
-See [`callback.login`](./config#callbackloggedin) for details
+See [`callback.login`](/docs/sdks/config#callbackloggedin) for details
 
 ```typescript filename="src/your-logged-in-logic.ts"
 import type { LoginSyncParams, LoginSyncResponse } from '@hellocoop/nextjs'
