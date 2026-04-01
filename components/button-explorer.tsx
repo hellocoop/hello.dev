@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { Pre, Tabs } from 'nextra/components'
@@ -66,8 +67,8 @@ const ButtonExplorer = () => {
                     
                     <div className='flex flex-col items-center'>
                         <span className='text-xs'>Color</span>
-                        <div className='flex gap-0.5 border border-white border-opacity-30  p-0.5 rounded-md ml-3 mt-1'>
-                            {COLORS.map(i => <button key={i} className={clsx("capitalize rounded-md px-3", color === i && "bg-blue-500")} onClick={() => setColor(i)}>{i}</button>)}
+                        <div className='flex gap-0.5 border border-white/30  p-0.5 rounded-md ml-3 mt-1'>
+                            {COLORS.map(i => <button key={i} className={clsx("capitalize rounded-md px-3 cursor-pointer", color === i && "bg-blue-500")} onClick={() => setColor(i)}>{i}</button>)}
                         </div>
                     </div>
 
@@ -76,22 +77,22 @@ const ButtonExplorer = () => {
                             <span className='text-xs'>Theme Ignore</span>
                             <span className='text-xs'>Theme Aware</span>
                         </div>
-                        <div className='flex gap-0.5 border border-white border-opacity-30  p-0.5 rounded-md mt-1'>
-                            {THEME.map(i => <button key={i} className={clsx("capitalize rounded-md px-3", theme === i && "bg-blue-500")} onClick={() => setTheme(i)}>{i.split("-")[1]}</button>)}
+                        <div className='flex gap-0.5 border border-white/30  p-0.5 rounded-md mt-1'>
+                            {THEME.map(i => <button key={i} className={clsx("capitalize rounded-md px-3 cursor-pointer", theme === i && "bg-blue-500")} onClick={() => setTheme(i)}>{i.split("-")[1]}</button>)}
                         </div>
                     </div>
 
                     <div className='flex flex-col items-center'>
                         <span className='text-xs'>Hover</span>
-                        <div className='flex gap-0.5 border border-white border-opacity-30 p-0.5 rounded-md mt-1'>
-                            {HOVER.map(i => <button key={i} className={clsx("capitalize rounded-md px-3", hover === i && "bg-blue-500")} onClick={() => setHover(i)}>{i}</button>)}
+                        <div className='flex gap-0.5 border border-white/30 p-0.5 rounded-md mt-1'>
+                            {HOVER.map(i => <button key={i} className={clsx("capitalize rounded-md px-3 cursor-pointer", hover === i && "bg-blue-500")} onClick={() => setHover(i)}>{i}</button>)}
                         </div>
                     </div>
                 </div>
-                <div className='my-2 border-l border-white border-opacity-20 p-2 flex justify-around items-center relative'>
+                <div className='my-2 border-l border-white/20 p-2 flex justify-around items-center relative'>
                     <span className='uppercase absolute -rotate-90 left-0 font-bold opacity-50' style={{fontSize: '9px'}}>State</span>
-                    <div className='flex gap-0.5 border border-white border-opacity-30  p-0.5 rounded-md ml-5'>
-                        <button className={clsx("capitalize rounded-md px-2", loading && "bg-blue-500")} onClick={() => setLoading(!loading)}>Loading</button>
+                    <div className='flex gap-0.5 border border-white/30  p-0.5 rounded-md ml-5'>
+                        <button className={clsx("capitalize rounded-md px-2 cursor-pointer", loading && "bg-blue-500")} onClick={() => setLoading(!loading)}>Loading</button>
                     </div>
                 </div>
             </div>
@@ -107,7 +108,7 @@ const ButtonExplorer = () => {
 
             <Tabs items={FRAMEWORKS}>
                 <Tabs.Tab>
-                <Pre hasCopyCode={true} style={{margin: 0}}>
+                <Pre data-copy="" style={{margin: 0}}>
                 <code data-language="html" data-theme="default">
 {`<button class="${buttonClass}">
   ō&nbsp;&nbsp;Continue with Hellō
@@ -117,7 +118,7 @@ const ButtonExplorer = () => {
                 </Tabs.Tab>
 
                 <Tabs.Tab>
-                <Pre hasCopyCode={true} style={{margin: 0}}>
+                <Pre data-copy="" style={{margin: 0}}>
                 <code data-language="jsx" data-theme="default">
 {`import { ContinueButton } from '@hellocoop/react'
   
@@ -132,7 +133,7 @@ export default function() {
                 </Tabs.Tab>
 
                 <Tabs.Tab>
-                <Pre hasCopyCode={true} style={{margin: 0}}>
+                <Pre data-copy="" style={{margin: 0}}>
                 <code data-language="html" data-theme="default">
 {`<script>
   import { ContinueButton } from '@hellocoop/svelte'
@@ -145,7 +146,7 @@ export default function() {
                 </Tabs.Tab>
 
                 <Tabs.Tab>
-                <Pre hasCopyCode={true} style={{margin: 0}}>
+                <Pre data-copy="" style={{margin: 0}}>
                 <code data-language="html" data-theme="default">
 {`<script>
   import { ContinueButton } from '@hellocoop/vue'

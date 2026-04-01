@@ -1,0 +1,11 @@
+export default {
+
+  request: 'Auth Request',
+  response: 'Auth Response',
+  device: 'Device Code Flow',
+  verification: 'Verification',
+  token: 'ID Token',
+  config: 'Configuration',
+  errors: 'Error Responses',
+  unsupported: 'Unsupported Features',
+}

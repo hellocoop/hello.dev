@@ -1,0 +1,121 @@
+@import 'nextra-theme-docs/style.css';
+@import 'tailwindcss';
+@import './explorer.css';
+
+:root {
+    --nextra-primary-hue: 212deg;
+    --nextra-primary-saturation: 100%;
+    --nextra-primary-lightness: 45%;
+    --nextra-bg: 250,250,250;
+    --nextra-content-width: 90rem;
+}
+
+.dark {
+    --nextra-primary-hue: 204deg;
+    --nextra-primary-saturation: 100%;
+    --nextra-primary-lightness: 55%;
+    --nextra-bg: 17,17,17;
+}
+
+html {
+    --nextra-navbar-height: 48px;
+    background: rgb(var(--nextra-bg));
+}
+
+::selection {
+    background: hsla(var(--nextra-primary-hue),var(--nextra-primary-saturation),var(--nextra-primary-lightness),.3);
+}
+
+.hello-about {
+    color: #303030;
+}
+
+.dark .hello-about {
+    color: #d4d4d4;
+}
+
+/* Hide folder index pages from sidebar — keep them navigable via folder title */
+.nextra-sidebar li > div > ul > li:first-child > a[href="/docs/quickstarts/"],
+.nextra-sidebar li > div > ul > li:first-child > a[href="/docs/sdks/"],
+.nextra-sidebar li > div > ul > li:first-child > a[href="/docs/apis/"],
+.nextra-sidebar li > div > ul > li:first-child > a[href="/docs/oidc/"] {
+    display: none;
+}
+
+/* Button explorer code snippets */
+section.rounded-xl pre {
+    --tw-ring-offset-shadow: none !important;
+    --tw-ring-shadow: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+}
+
+/* Add spacing above Hellō buttons after code blocks */
+.hello-container,
+button.hello-btn {
+    margin-top: 1.5rem;
+}
+
+/* Compact Pre elements inside tables */
+td pre {
+    padding: 0.75rem 0.75rem !important;
+    margin: 0 !important;
+    font-size: 0.8rem !important;
+}
+
+/* Make folder buttons navigate to their index page */
+.nextra-sidebar button[data-href="/docs/quickstarts"],
+.nextra-sidebar button[data-href="/docs/sdks"],
+.nextra-sidebar button[data-href="/docs/apis"],
+.nextra-sidebar button[data-href="/docs/oidc"] {
+    cursor: pointer;
+}
+
+/* Remove inline colors from TOC entries */
+nav.nextra-toc span[style],
+nav.nextra-toc em {
+    color: inherit !important;
+    font-style: normal;
+}
+
+.beta-label {
+    float: right;
+    width: 60px;
+    margin-top: -78px;
+}
+
+@media screen and (min-width: 900px) {
+    .beta-label {
+        width: 110px;
+        margin-top: -60px;
+    }
+}
+
+/* Homepage code snippet: wrap text, no scrollbar, compact */
+.max-w-5xl pre,
+.max-w-5xl pre *,
+.max-w-5xl pre code,
+.max-w-5xl pre code span {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-x: hidden !important;
+    text-wrap: wrap !important;
+    font-size: 0.75rem !important;
+}
+
+/* Hero image animation (moved from index.mdx style jsx) */
+#hero-img {
+    animation: float 5s infinite;
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
