@@ -2,21 +2,8 @@ import React from 'react';
 
 const GreenCheckedCircle = () => {
   return (
-    <svg
-      className="with-icon_icon__MHUeb"
-      data-testid="geist-icon"
-      fill="none"
-      height="20"  
-      shapeRendering="geometricPrecision"
-      stroke="#00FF00"  
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"  
-      viewBox="0 0 24 24"
-      width="32"  
-      style={{ color: 'currentColor', width: '20px', height: '20px' }}
-    >
-      <path d="M8 14l2.5 2.5L15.5 9M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"></path>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#22C55E" width="24" height="24" style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+      <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
     </svg>
   );
 };

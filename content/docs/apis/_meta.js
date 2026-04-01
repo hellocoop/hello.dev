@@ -1,0 +1,8 @@
+export default {
+
+  'web-client': 'Web Client',
+  wallet: 'Wallet',
+  invite: 'Invite (BETA)',
+  quickstart: 'Quickstart',
+  admin: 'Admin',
+}

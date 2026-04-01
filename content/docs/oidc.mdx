@@ -1,0 +1,24 @@
+import { Cards } from 'nextra/components'
+import {  AuthRequestIcon, AuthResponseIcon, IDTokenIcon, ConfigIcon, ErrorIcon, VerificationIcon } from '@/components/icons'
+import { ExperimentalTooltip } from '@/components/experimental-tooltip'
+
+# OpenID Connect
+
+Hellō, specifically, the Hellō Wallet, is an implementation of [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html), the same identity federation protocol used by Apple, Facebook, Google, and Microsoft. 
+
+The section of the documentation describes Hellō implementation of OpenID Connect. Hellō extensions are documented in [API Reference | Wallet](/docs/apis/wallet) and the support scope values in [Hellō Scopes](/docs/scopes).
+
+The Hellō OpenID Configuration is at [https://issuer.hello.coop/.well-known/openid-configuration](https://issuer.hello.coop/.well-known/openid-configuration).
+
+Hellō also supports [OpenID Connect Key Binding](https://github.com/dickhardt/openid-key-binding) <ExperimentalTooltip /> for cryptographically bound ID tokens using RFC 9449 DPoP. 
+
+NOTE: The Hellō Issuer is `https://issuer.hello.coop` and is NOT `https://wallet.hello.coop`. This simplifies a separation of concerns per the [Hellō Protocol]()
+
+<Cards>
+  <Cards.Card icon={<AuthRequestIcon/>} title="Auth Request" href="/docs/oidc/request/" />
+  <Cards.Card icon={<AuthResponseIcon/>} title="Auth Response" href="/docs/oidc/response/" />
+  <Cards.Card icon={<VerificationIcon/>} title="Verification" href="/docs/oidc/verification/" />
+  <Cards.Card icon={<IDTokenIcon/>} title="ID Token" href="/docs/oidc/token/" />
+  <Cards.Card icon={<ConfigIcon/>} title="Configuration" href="/docs/oidc/config/" />
+  <Cards.Card icon={<ErrorIcon/>} title="Error Responses" href="/docs/oidc/errors/" />
+</Cards>

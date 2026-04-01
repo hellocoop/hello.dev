@@ -7,23 +7,23 @@ import type { ComponentProps, CSSProperties, ReactNode } from 'react'
 
 const classes = {
   cards: cn(
-    'nextra-cards nx-mt-4 nx-gap-4 nx-grid',
-    'nx-not-prose' // for nextra-theme-docs
+    'nextra-cards x:mt-4 x:gap-4 x:grid',
+    'not-prose' // for nextra-theme-docs
   ),
   card: cn(
-    'nextra-card nx-group nx-flex nx-flex-col nx-justify-start nx-overflow-hidden nx-rounded-lg nx-border nx-border-gray-200',
-    'nx-text-current nx-no-underline dark:nx-shadow-none',
-    'hover:nx-shadow-gray-100 dark:hover:nx-shadow-none nx-shadow-gray-100',
-    'active:nx-shadow-sm active:nx-shadow-gray-200',
-    'nx-transition-all nx-duration-200 hover:nx-border-gray-300'
+    'nextra-card x:group x:flex x:flex-col x:justify-start x:overflow-hidden x:rounded-lg x:border x:border-gray-200',
+    'x:text-current x:no-underline x:dark:shadow-none',
+    'x:hover:shadow-gray-100 x:dark:hover:shadow-none x:shadow-gray-100',
+    'x:active:shadow-sm x:active:shadow-gray-200',
+    'x:transition-all x:duration-200 x:hover:border-gray-300'
   ),
   title: cn(
-    'nx-flex nx-font-semibold nx-items-start nx-gap-2 nx-p-4 nx-text-gray-700 hover:nx-text-gray-900'
+    'x:flex x:font-semibold x:items-start x:gap-2 x:p-4 x:text-gray-700 x:hover:text-gray-900'
   )
 }
 
 const arrowEl = (
-  <span className="nx-transition-transform nx-duration-75 group-hover:nx-translate-x-[2px]">
+  <span className="x:transition-transform x:duration-75 x:group-hover:translate-x-[2px]">
     →
   </span>
 )
@@ -54,7 +54,7 @@ export function Card({
         href={href}
         className={cn(
           classes.card,
-          'nx-bg-gray-100 nx-shadow dark:nx-border-neutral-700 dark:nx-bg-neutral-800 dark:nx-text-gray-50 hover:nx-shadow-lg dark:hover:nx-border-neutral-500 dark:hover:nx-bg-neutral-700'
+          'x:bg-gray-100 x:shadow x:dark:border-neutral-700 x:dark:bg-neutral-800 x:dark:text-gray-50 x:hover:shadow-lg x:dark:hover:border-neutral-500 x:dark:hover:bg-neutral-700'
         )}
         {...props}
       >
@@ -62,11 +62,11 @@ export function Card({
         <span
           className={cn(
             classes.title,
-            'dark:nx-text-gray-300 dark:hover:nx-text-gray-100'
+            'x:dark:text-gray-300 x:dark:hover:text-gray-100'
           )}
         >
           {icon}
-          <span className="nx-flex nx-gap-1">
+          <span className="x:flex x:gap-1">
             {title}
             {animatedArrow}
           </span>
@@ -80,19 +80,19 @@ export function Card({
       href={href}
       className={cn(
         classes.card,
-        'nx-bg-transparent nx-shadow-sm dark:nx-border-neutral-800 hover:nx-bg-slate-50 hover:nx-shadow-md dark:hover:nx-border-neutral-700 dark:hover:nx-bg-neutral-900'
+        'x:bg-transparent x:shadow-sm x:dark:border-neutral-800 x:hover:bg-slate-50 x:hover:shadow-md x:dark:hover:border-neutral-700 x:dark:hover:bg-neutral-900'
       )}
       {...props}
     >
       <span
         className={cn(
           classes.title,
-          'dark:nx-text-neutral-200 dark:hover:nx-text-neutral-50 nx-flex nx-flex-col nx-items-start'
+          'x:dark:text-neutral-200 x:dark:hover:text-neutral-50 x:flex x:flex-col x:items-start'
         )}
       >
         {icon}
         {title}
-        <span className="block -mt-1 opacity-60 text-sm text-left">{description}</span>
+        <span className="x:block x:-mt-1 x:opacity-60 x:text-sm x:text-left">{description}</span>
         {animatedArrow}
       </span>
     </NextLink>
