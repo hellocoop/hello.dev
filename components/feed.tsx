@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import ExternalArrow from './external-arrow'
 import styles from './feed.module.css'
 
 const Feed = () => {
@@ -61,7 +62,7 @@ const Feed = () => {
                             <Image src={i.image} alt={i.title} width={256} height={144} className="rounded-md object-cover flex-shrink-0" priority={false} />
                             <div>
                                 <span className="text-sm opacity-80">{i.pubDate.split(" ").slice(0, -2).join(" ")}</span>
-                                <h3 className="text-xl font-semibold my-1 group-hover:underline">{i.title} ↗</h3>
+                                <h3 className="text-xl font-semibold my-1 group-hover:underline">{i.title} <ExternalArrow /></h3>
                                 <p className={`${styles.description} opacity-80`}>
                                     {/* RSS trims the ō letter */}
                                     {i.contentSnippet.replaceAll('Hell ', 'Hellō')}
@@ -71,7 +72,7 @@ const Feed = () => {
                     </li>
                 ))}
             </ul>
-            <Link href="https://blog.hello.coop" target="_blank" rel="noreferrer" className="flex items-center gap-6 group md:ml-64 md:pl-6 mt-10 text-xl hover:underline font-semibold">Read more at blog.hello.coop ↗</Link>
+            <Link href="https://blog.hello.coop" target="_blank" rel="noreferrer" className="flex items-center gap-6 group md:ml-64 md:pl-6 mt-10 text-xl hover:underline font-semibold">Read more at blog.hello.coop <ExternalArrow /></Link>
         </>
     )
 }
