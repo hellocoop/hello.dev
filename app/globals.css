@@ -26,6 +26,51 @@ html {
     background: hsla(var(--nextra-primary-hue),var(--nextra-primary-saturation),var(--nextra-primary-lightness),.3);
 }
 
+/* Charcoal header */
+.nextra-navbar {
+    background: #303030 !important;
+    color: #fff;
+}
+
+.nextra-navbar a,
+.nextra-navbar button {
+    color: #d4d4d4 !important;
+}
+
+.nextra-navbar a:hover,
+.nextra-navbar button:hover {
+    color: #fff !important;
+}
+
+.nextra-navbar-blur {
+    background: #303030 !important;
+    border-bottom-color: #404040 !important;
+}
+
+.nextra-navbar .nextra-search {
+    color: #d4d4d4 !important;
+}
+
+.nextra-navbar .nextra-search input {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #d4d4d4 !important;
+}
+
+.nextra-navbar .nextra-search input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.nextra-navbar .nextra-search input:focus {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #fff !important;
+}
+
+.nextra-navbar .nextra-search kbd {
+    color: #d4d4d4 !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    background: transparent !important;
+}
+
 .hello-about {
     color: #303030;
 }
