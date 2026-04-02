@@ -5,6 +5,13 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import type { ComponentProps, CSSProperties, ReactNode } from 'react'
 
+function CardLink({ href, children, ...props }: { href: string; children: ReactNode; className?: string; [key: string]: any }) {
+  if (href.startsWith('mailto:') || href.startsWith('tel:')) {
+    return <a href={href} {...props}>{children}</a>
+  }
+  return <NextLink href={href} {...props}>{children}</NextLink>
+}
+
 const classes = {
   cards: cn(
     'nextra-cards x:mt-4 x:gap-4 x:grid',
@@ -50,7 +57,7 @@ export function Card({
 
   if (image) {
     return (
-      <NextLink
+      <CardLink
         href={href}
         className={cn(
           classes.card,
@@ -71,12 +78,12 @@ export function Card({
             {animatedArrow}
           </span>
         </span>
-      </NextLink>
+      </CardLink>
     )
   }
 
   return (
-    <NextLink
+    <CardLink
       href={href}
       className={cn(
         classes.card,
@@ -95,7 +102,7 @@ export function Card({
         <span className="x:block x:-mt-1 x:opacity-60 x:text-sm x:text-left">{description}</span>
         {animatedArrow}
       </span>
-    </NextLink>
+    </CardLink>
   )
 }
 
