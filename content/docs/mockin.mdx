@@ -170,6 +170,98 @@ Mockin implements the standard OpenID Connect endpoints:
 - `GET /.well-known/openid-configuration` - OpenID Connect discovery
 - `GET /jwks` - JSON Web Key Set
 
+## AAuth
+
+Mockin also acts as a mock **Person Server (PS)** for the [AAuth protocol](https://datatracker.ietf.org/doc/draft-hardt-aauth-protocol/) — letting you exercise agent client code (bootstrap, token issuance, R3, governance) without standing up a real wallet. All consent and approval steps auto-approve by default, so the flows are non-interactive and scriptable.
+
+The AAuth surface tracks an in-progress IETF draft. See [draft-hardt-aauth-protocol](https://datatracker.ietf.org/doc/draft-hardt-aauth-protocol/), [draft-hardt-aauth-bootstrap](https://datatracker.ietf.org/doc/draft-hardt-aauth-bootstrap/), and [draft-hardt-aauth-r3](https://datatracker.ietf.org/doc/draft-hardt-aauth-r3/) for protocol semantics.
+
+### Discovery
+
+- `GET /.well-known/aauth-person.json` — PS metadata (endpoints + jwks_uri)
+- `GET /aauth/jwks.json` — PS public keys (Ed25519, EdDSA)
+
+### Endpoints
+
+| Endpoint | Method | Purpose |
+|---|---|---|
+| `/aauth/bootstrap` | POST | Bind agent to user. `sig=hwk` for the initial ceremony, `sig=jwt` for the completion announcement. |
+| `/aauth/pending/:id` | GET / POST / DELETE | Poll a deferred response, submit clarification, or cancel. |
+| `/aauth/consent` | GET | Browser-facing consent endpoint. Mockin auto-approves and redirects to the supplied callback. |
+| `/aauth/token` | POST | Exchange a `resource_token` for an `auth_token`. Supports R3 (`r3_uri` + `r3_s256`). |
+| `/aauth/permission` | POST | Agent asks the PS for go/no-go on an action. |
+| `/aauth/audit` | POST | Fire-and-forget activity record. |
+| `/aauth/interaction` | POST | Forward an interaction (`question`, `payment`, `interaction`, `completion`) to the user via the PS. |
+
+All agent-facing endpoints require an HTTP Message Signature (RFC 9421) under the AAuth profile. `/aauth/bootstrap` (initial) accepts `sig=hwk`; the rest require `sig=jwt` with an `aa-agent+jwt` agent token in the `Signature-Key` header.
+
+### R3 (Rich Resource Requests)
+
+When a `resource_token` carries `r3_uri` + `r3_s256`, mockin:
+
+1. Fetches the document from `r3_uri`,
+2. Verifies the SHA-256 of the raw bytes matches `r3_s256` (rejects `invalid_resource_token` on mismatch),
+3. Auto-grants every operation in the document by default,
+4. Embeds `r3_uri`, `r3_s256`, and `r3_granted` on the issued `auth_token`.
+
+Override the granted/conditional split via `mock.r3_grants`. Pre-register an R3 doc by URI in `mock.trusted_servers[<rs_url>].r3_documents` to avoid network in tests.
+
+### AAuth Mock API
+
+Configure mock behaviour at runtime:
+
+- `GET /mock/aauth` — current AAuth mock config
+- `PUT /mock/aauth` — patch the config
+
+Recognized fields (all optional):
+
+| Field | Default | Effect |
+|---|---|---|
+| `auto_approve` | `true` | Pre-mark deferred entries as approved so the first poll resolves immediately |
+| `requirement` | `null` | Force a deferred path on `/aauth/token`: `interaction`, `approval`, or `clarification` |
+| `clarification` | `null` | Markdown question returned in `clarification` mode |
+| `error` | `null` | Inject an error code |
+| `error_endpoint` | `null` | Restrict `error` to a specific endpoint (`token`, `bootstrap`, `permission`) |
+| `token_lifetime` | `3600` | `exp - iat` for issued `auth_token`s |
+| `claims` | `null` | Override identity claim release on the auth_token |
+| `r3_grants` | `null` | Override `{ granted, conditional }` for R3 flows |
+| `permission` | `granted` | Flip `/aauth/permission` to `denied` |
+| `permission_reason` | `null` | Reason returned with `permission: 'denied'` |
+| `trusted_servers` | `{}` | Preload `{ metadata, jwks, r3_documents }` per server URL to skip JWKS fetches in offline tests |
+
+`DELETE /mock` resets AAuth config along with the OIDC mock state.
+
+### Identity claim release
+
+`/aauth/token` releases identity claims onto the `auth_token` from the active mock user (`/mock/user/:user`). Scopes follow Hellō conventions:
+
+- `profile` expands to `name`, `email` (+ `email_verified`), `picture`
+- `email` releases `email`, `email_verified`
+- `phone` releases `phone_number`, `phone_number_verified`
+- Per-claim scopes (`nickname`, `given_name`, `picture`, `github`, `discord`, `gitlab`, `twitter`, `ethereum`, `tenant_sub`, etc.) release the matching field from the mock user
+
+Resource scopes pass through unchanged as the `scope` claim.
+
+### Worked examples
+
+The canonical end-to-end examples are the AAuth specs in [test/aauth/](https://github.com/hellocoop/mockin/tree/main/test/aauth) — they stand up a fake agent server and resource server, mint signed tokens, and drive every endpoint via `fastify.inject()`. Use those as the reference for HTTPSig signing, agent_token / resource_token shape, and the R3 hash flow.
+
+For a manual smoke test, switch `/aauth/token` to deferred mode and run any AAuth client against it:
+
+```bash
+curl -X PUT http://127.0.0.1:3333/mock/aauth \
+  -H 'content-type: application/json' \
+  -d '{"requirement":"interaction"}'
+```
+
+The next `/aauth/token` call will return 202 with an `AAuth-Requirement` header and a pending URL. With `auto_approve=true` (the default) the first poll will resolve and return the `auth_token`.
+
+### Limitations
+
+- Auto-approve only — no real consent UI; the user is always the active mock user.
+- No durable state across restarts; pending requests and bindings live in memory.
+- Token signature checks are real (RFC 9421 + JWT signature against the issuer's JWKS) but no policy/scope-allowlist validation is enforced beyond the spec's structural checks.
+
 ## Configuring Your App
 You will need to have your app configured to use the URL where Mockin is running. For example, your app will need to redirect the user to `http://127.0.0.1:3333/authorize` if you are using the Mockin defaults instead of `https://wallet.hello.coop/authorize`.
 
