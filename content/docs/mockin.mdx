@@ -262,6 +262,119 @@ The next `/aauth/token` call will return 202 with an `AAuth-Requirement` header 
 - No durable state across restarts; pending requests and bindings live in memory.
 - Token signature checks are real (RFC 9421 + JWT signature against the issuer's JWKS) but no policy/scope-allowlist validation is enforced beyond the spec's structural checks.
 
+## Invite
+
+Mockin mirrors Hellō's invite flow so you can test how your app handles the `events_uri` Security Event Token (SET) JWT and the `initiate_login_uri` redirect for newly invited users — without standing up a real wallet, mailer, or database.
+
+### Endpoints
+
+| Endpoint | Method | Purpose |
+|---|---|---|
+| `/invite` | GET | Entry redirect from your app. Mockin creates the invitation from query params and redirects to `return_uri`; with `auto_accept` it also fires the SET inline. |
+| `/invite` | POST | Create an invitation (body: `email`, `prompt`, `client_id`, `events_uri?`, `initiate_login_uri?`, `role?`, `tenant?`, `state?`, `inviter_sub?`, `inviter_email?`). |
+| `/invite/:id` | PUT | Resend (refresh `lastEmailedAt`). |
+| `/invite/:id` | DELETE | Retract. |
+| `/user/invite` | GET | List outgoing invitations. Filter with `?inviter_sub=<sub>`. |
+| `/invitation/:id` | GET | Invitee view (sanitized). |
+| `/invitation/:id` | PUT | Accept. Returns `{ initiate_login_url }`; SET JWT is POSTed to `events_uri`. |
+| `/invitation/:id` | DELETE | Decline. |
+| `/invitation/:id/report` | POST | Abuse report. |
+
+### SET JWT
+
+When an invitation is accepted, mockin POSTs an RS256-signed Security Event Token to the `events_uri`. Same shape as production:
+
+```json
+{
+  "iss": "<mockin issuer>",
+  "aud": "<client_id>",
+  "jti": "...",
+  "iat": 1234567890,
+  "exp": 1234568190,
+  "https://hello.coop/invite/created": {
+    "inviter": "<inviter sub>",
+    "invitee": { "sub": "<invitee sub>", "email": "..." },
+    "role": "...",
+    "tenant": "...",
+    "state": "..."
+  }
+}
+```
+
+The token is signed with the OIDC RS256 key, so it verifies against the same `/jwks` your app already uses for `id_token`. Posted with `Content-Type: application/jwt`; mockin expects a `202` response from the receiver.
+
+### Mock API
+
+| Endpoint | Method | Purpose |
+|---|---|---|
+| `/mock/invite` | GET | Current config + stored invitations |
+| `/mock/invite` | PUT | Patch config |
+
+| Field | Default | Effect |
+|---|---|---|
+| `error` | `null` | Error code returned by the next request |
+| `error_endpoint` | `null` | Restrict the error to one endpoint: `create`, `accept`, `decline`, `retract`, `resend`, `invitation`, or `entry` |
+| `auto_accept` | `false` | `GET /invite` accepts inline + fires SET (single-redirect demo) |
+| `expires_in` | `604800` | Override the 7-day default expiry |
+
+`DELETE /mock` resets the invite state along with the rest of the mock config.
+
+### Curl examples
+
+**Create an invitation:**
+
+```bash
+curl -X POST http://127.0.0.1:3333/invite \
+  -H 'content-type: application/json' \
+  -d '{
+    "email": "alice@example.com",
+    "prompt": "Join the team",
+    "client_id": "demo-client",
+    "events_uri": "http://127.0.0.1:9999/events",
+    "initiate_login_uri": "http://app.local/init",
+    "role": "admin",
+    "tenant": "acme",
+    "state": "opaque-state"
+  }'
+```
+
+**Accept (fires the SET, returns `initiate_login_url`):**
+
+```bash
+curl -X PUT http://127.0.0.1:3333/invitation/<id>
+```
+
+**Single-redirect demo with `auto_accept`:**
+
+```bash
+curl -X PUT http://127.0.0.1:3333/mock/invite \
+  -H 'content-type: application/json' \
+  -d '{"auto_accept": true}'
+
+curl -i "http://127.0.0.1:3333/invite?inviter=00000000-0000-0000-0000-00000000&client_id=demo-client&prompt=Join&invitee_email=bob@example.com&events_uri=http://127.0.0.1:9999/events&return_uri=http://app.local/back"
+# 302 to http://app.local/back; SET fired to events_uri inline.
+```
+
+**Inject a scoped error:**
+
+```bash
+curl -X PUT http://127.0.0.1:3333/mock/invite \
+  -H 'content-type: application/json' \
+  -d '{"error":"invitation_expired","error_endpoint":"invitation"}'
+```
+
+**Inspect mock state:**
+
+```bash
+curl http://127.0.0.1:3333/mock/invite
+```
+
+**Reset:**
+
+```bash
+curl -X DELETE http://127.0.0.1:3333/mock
+```
+
 ## Configuring Your App
 You will need to have your app configured to use the URL where Mockin is running. For example, your app will need to redirect the user to `http://127.0.0.1:3333/authorize` if you are using the Mockin defaults instead of `https://wallet.hello.coop/authorize`.
 
