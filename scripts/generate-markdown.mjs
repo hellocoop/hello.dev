@@ -15,8 +15,8 @@ const __dirname = path.dirname(__filename);
 
 // Paths
 const OUT_DIR = path.join(__dirname, '..', 'out'); // Next.js static export directory
-const S3_DIR = path.join(__dirname, '..', 'S3'); // Current S3 build directory
-const MARKDOWN_DIR = path.join(__dirname, '..', 'S3', 'markdown', 'docs'); // Output to S3 for sync
+const DIST_DIR = path.join(__dirname, '..', 'dist'); // Static export build directory
+const MARKDOWN_DIR = path.join(__dirname, '..', 'dist', 'markdown', 'docs'); // Output to dist for deploy
 
 // Configure turndown for better markdown conversion
 const turndownService = new TurndownService({
@@ -344,11 +344,11 @@ For questions about AI access or documentation:
 *This documentation is maintained by the Hello Identity Co-op and is updated automatically.*
 `;
 
-  // Write to S3 directory only
-  const s3Path = path.join(__dirname, '..', 'S3', 'llms.txt');
+  // Write to dist directory only
+  const distPath = path.join(__dirname, '..', 'dist', 'llms.txt');
   
   try {
-    fs.writeFileSync(s3Path, content, 'utf8');
+    fs.writeFileSync(distPath, content, 'utf8');
     console.log('✓ Generated llms.txt with list format');
   } catch (error) {
     console.error('Error generating llms.txt:', error.message);
@@ -420,11 +420,11 @@ async function updateAISitemap(markdownFiles) {
 async function main() {
   console.log('🔄 Converting HTML files to Markdown...');
   
-  // Determine source directory (try both out/ and S3/)
+  // Determine source directory (try both out/ and dist/)
   let sourceDir = OUT_DIR;
-  if (!fs.existsSync(OUT_DIR) && fs.existsSync(S3_DIR)) {
-    sourceDir = S3_DIR;
-    console.log('📂 Using S3 directory as source');
+  if (!fs.existsSync(OUT_DIR) && fs.existsSync(DIST_DIR)) {
+    sourceDir = DIST_DIR;
+    console.log('📂 Using dist directory as source');
   } else if (!fs.existsSync(OUT_DIR)) {
     console.error('❌ No built files found. Run `npm run build` first.');
     process.exit(1);

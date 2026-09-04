@@ -21,8 +21,10 @@ dist
 .basement
 config.local.js
 basement_dist
-S3
 pnpm-lock.yaml
 .next
 node_modules
 out
+
+# wrangler local state
+.wrangler

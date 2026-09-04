@@ -1,0 +1,5 @@
+# Response headers for www.hello.dev (Cloudflare Workers static assets).
+# CSP mirrors the former CloudFront ResponseHeadersPolicy (CDN/cdk/lib/csp.ts).
+/*
+  Content-Security-Policy: default-src 'none'; style-src 'self' https://cdn.hello.coop 'unsafe-inline'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; img-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://plausible.io https://cdn.hello.coop; connect-src 'self' https://plausible.io https://blog.hello.coop;
+  X-Content-Type-Options: nosniff

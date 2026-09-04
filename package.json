@@ -5,12 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "pagefind --site S3 --output-path S3/_pagefind && next-sitemap && node scripts/generate-markdown.mjs",
+    "postbuild": "pagefind --site dist --output-path dist/_pagefind && next-sitemap && node scripts/generate-markdown.mjs",
     "start": "next start",
-    "test": "linkinator ./S3 --config linkinator.config.json",
+    "test": "linkinator ./dist --config linkinator.config.json",
     "pr": "./scripts/pr.sh",
     "rebase": "git pull origin main --rebase",
-    "review": "npm run rebase && npm run build && npm run test && npm run pr"
+    "review": "npm run rebase && npm run build && npm run test && npm run pr",
+    "deploy": "wrangler deploy"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "postcss": "^8.4.31",
     "tailwindcss": "^4",
     "turndown": "^7.2.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "wrangler": "^4.129.0"
   }
 }
