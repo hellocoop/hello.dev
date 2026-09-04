@@ -2,6 +2,7 @@
     "recurse": true,
     "skip": [
         "www.linkedin.com",
+        "hello-community.slack.com",
         "/js/script.hash.js",
         "github.com/hellocoop/hello.dev/*",
         "http://localhost:3000",
