@@ -1,0 +1,15 @@
+# www.hello.dev — Nextra static export served as Worker static assets.
+# `npm run build` writes the site to dist/ (Next export + Pagefind + sitemap + markdown).
+name = "www-hello-dev"
+compatibility_date = "2026-09-01"
+
+[assets]
+directory = "dist"
+# Next export emits dist/404.html
+not_found_handling = "404-page"
+# trailingSlash: true in next.config.mjs — /docs/foo redirects to /docs/foo/
+html_handling = "auto-trailing-slash"
+
+[[routes]]
+pattern = "www.hello.dev"
+custom_domain = true

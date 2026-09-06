@@ -1,0 +1,4 @@
+# Redirects for www.hello.dev (Cloudflare Workers static assets).
+# Replaces redirects.json, which was applied as S3 website redirects by the old AWS sync.
+/docs/mcp/ /docs/admin-mcp/ 301
+/docs/mcp/index.html /docs/admin-mcp/ 301

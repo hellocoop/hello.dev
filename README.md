@@ -27,3 +27,12 @@ This repo contains the source code and documentation powering [https://hello.dev
 ## License
 
 <a href="LICENSE">![CC0](https://cdn.hello.coop/images/cc-zero.svg)</a>
+## Deployment
+
+www.hello.dev is served from Cloudflare Workers as static assets (see `wrangler.toml`).
+
+- `npm run build` writes the site to `dist/` (Next static export, then Pagefind index, sitemap, and markdown/llms.txt generation).
+- Merging a PR into `main` requires the **Ready for merge** check (build + link check) and the **Cloudflare Workers** preview build to pass.
+- Cloudflare Workers Builds watches `main` and deploys on merge. Nothing deploys from GitHub Actions.
+- `public/_headers` sets the CSP; `public/_redirects` holds path redirects. Both are copied into `dist/` by the build.
+- `npm run deploy` deploys by hand with your own Cloudflare login. Normally unnecessary.
