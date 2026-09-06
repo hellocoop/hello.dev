@@ -10,9 +10,6 @@ not_found_handling = "404-page"
 # trailingSlash: true in next.config.mjs — /docs/foo redirects to /docs/foo/
 html_handling = "auto-trailing-slash"
 
-# Until the hello.dev zone is active in Cloudflare the worker is reachable on workers.dev only.
-# At cutover, restore:
-# [[routes]]
-# pattern = "www.hello.dev"
-# custom_domain = true
-workers_dev = true
+[[routes]]
+pattern = "www.hello.dev"
+custom_domain = true
